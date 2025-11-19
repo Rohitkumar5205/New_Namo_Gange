@@ -14,8 +14,7 @@ const sliderImages = [
 ];
 
 const HomeSlider = () => {
-  const sliderRef = React.useRef<Slider | null>(null);
-
+  const sliderRef = React.useRef<any>(null);
   const settings = {
     dots: false,
     infinite: true,

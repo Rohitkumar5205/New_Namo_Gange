@@ -1,8 +1,17 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
+import { Suspense } from "react";
 
-export default function ReviewPage() {
+export default function ReviewPageWrapper() {
+  return (
+    <Suspense fallback={<div className="p-10 text-center">Loading...</div>}>
+      <ReviewPage />
+    </Suspense>
+  );
+}
+
+function ReviewPage() {
   const params = useSearchParams();
   const router = useRouter();
 
