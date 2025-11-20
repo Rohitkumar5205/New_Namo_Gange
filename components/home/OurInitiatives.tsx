@@ -226,56 +226,34 @@ const OurInitiatives = () => {
           </span>
         </motion.h2>
 
-        {/* ========== Cards Grid ========== */}
+        {/* GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
           {initiatives.map((item, i) => (
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: i * 0.05 }}
-              viewport={{ once: true }}
-              whileHover={{
-                y: -6,
-                scale: 1.03,
-                boxShadow: "0 12px 25px rgba(30,126,211,0.15)",
-              }}
-              className="relative bg-white rounded-2xl shadow-md hover:shadow-2xl border border-gray-100 hover:border-[#1e7ed3]/40 transition-all duration-500 p-4 flex flex-col items-center text-center"
+              className="bg-white rounded shadow-md border border-gray-100 hover:border-[#0C55A0]/40 transition p-4 flex flex-col items-center text-center"
             >
-              {/* Decorative Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#f36b2a]/10 to-[#1e7ed3]/10 opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-2xl -z-10"></div>
-
-              {/* Logo/Image */}
-              <div className="w-full h-24 md:h-28 lg:h-28 mx-auto mb-5 flex items-center justify-center  bg-gray-50 shadow-inner overflow-hidden">
+              {/* Image */}
+              <div className="w-full h-28 mb-4 flex items-center justify-center bg-gradient-to-tr from-[#DF562C]/10 to-[#0C55A0]/10 shadow-inner overflow-hidden">
                 <Image
                   src={item.image}
                   alt={item.title}
-                  width={100}
-                  height={100}
-                  className="w-18 h-18  md:w-20 md:h-20 lg:w-22 lg:h-22 object-contain hover:scale-110 transition-transform duration-700 ease-in-out"
+                  className="object-contain w-auto h-auto"
                 />
               </div>
 
-              {/* Title */}
-              {/* <h3 className="text-base font-normal text-gray-900 mb-3 hover:text-[#1e7ed3] transition-colors duration-300">
-                {item.title}
-              </h3> */}
-
               {/* Description */}
-              <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-4">
+              <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-4">
                 {item.description}
               </p>
-              {/* Read More Button */}
-              <Link href={item.link}>
-                <button
-                  className="mt-4 relative overflow-hidden px-4 py-1 text-sm text-white font-normal 
-               shadow-md bg-[#0C55A0] cursor-pointer
-               hover:bg-sky-700 hover:shadow-lg transition-all duration-300"
-                >
-                  Read More...
+
+              {/* Button */}
+              <Link href={item.link} className="w-full">
+                <button className="w-full px-3 py-1.5 text-sm bg-[#0C55A0] text-white rounded hover:bg-sky-600 transition">
+                  Read More
                 </button>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

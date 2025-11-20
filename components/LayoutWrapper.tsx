@@ -50,7 +50,7 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
         <div
           ref={topRef}
           className={`
-            w-full bg-white shadow-sm border-b
+            w-full bg-white shadow-sm 
             transition-transform duration-300
             ${hideTop ? "-translate-y-full" : "translate-y-0"}
           `}
@@ -76,7 +76,7 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
       <main
         className="flex-1 w-full transition-all duration-300"
         style={{
-          paddingTop: topHeight + 40, // TopBar + Navbar
+          paddingTop: topHeight + 42, // TopBar + Navbar
         }}
       >
         {children}

@@ -83,7 +83,7 @@ const MokshaVoyage = () => {
             <Image
               src={Moksha}
               alt="About Namo Gange Trust"
-              className="w-full h-52 md:h-96 object-cover hover:scale-105 transition-transform duration-700 ease-in-out"
+              className="w-full md:h-96 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
             />
           </div>
 

@@ -26,10 +26,10 @@ const NAV_ITEMS: NavItem[] = [
   {
     label: "OBJECTIVES",
     dropdown: [
-      { label: "Health & Wellness", href: "/health" },
-      { label: "Nature & Environment", href: "/nature" },
-      { label: "Culture & Sanskriti", href: "/culture" },
-      { label: "Women & Empowerment", href: "/women" },
+      { label: "Health & Wellness", href: "/objectives/health" },
+      { label: "Nature & Environment", href: "/objectives/nature" },
+      { label: "Culture & Sanskriti", href: "/objectives/culture" },
+      { label: "Women & Empowerment", href: "/objectives/women" },
     ],
   },
   { label: "INITIATIVES", href: "/initiatives" },
@@ -107,7 +107,7 @@ const NavBar: React.FC = () => {
 
               {/* DESKTOP DROPDOWN */}
               {item.dropdown && (
-                <div className="absolute left-0 mt-0 w-48 bg-white text-gray-800 rounded-md shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                <div className="absolute left-0 mt-0 w-50 bg-white text-gray-800 rounded-md shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
                   {item.dropdown.map((drop) => (
                     <button
                       key={drop.label}

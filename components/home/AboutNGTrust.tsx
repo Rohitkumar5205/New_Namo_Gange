@@ -72,7 +72,7 @@ const AboutNGTrust = () => {
             <Image
               src={AboutNGTrust3}
               alt="About Namo Gange Trust"
-              className="w-full h-50 md:h-80 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
+              className="w-full  md:h-80 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
             />
           </div>
 
@@ -100,7 +100,7 @@ const AboutNGTrust = () => {
               <Image
                 src={MissionImg}
                 alt="Mission - Namo Gange Trust"
-                className="w-full h-52 md:h-80 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
+                className="w-full  md:h-80 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
               />
             </div>
             <div className="absolute -inset-3 bg-gradient-to-r from-[#DF562C]/20 via-transparent to-[#1e7ed3]/20 blur-2xl rounded -z-10 opacity-70"></div>
@@ -126,7 +126,7 @@ const AboutNGTrust = () => {
               peace, and harmony without boundaries of caste, creed, or color.
             </p>
             <Link href="/joinAsVolunteer">
-            <button
+              <button
                 className="relative overflow-hidden px-4 py-1 md:px-6 md:py-2 lg:px-6 lg:py-2 text-xs md:text-sm lg:text-sm text-white font-medium 
                    shadow-md bg-[#DF562C] hover:bg-orange-600
                   hover:shadow-lg transition-all duration-300"
@@ -151,7 +151,7 @@ const AboutNGTrust = () => {
               <Image
                 src={VisionImg}
                 alt="Vision - Namo Gange Trust"
-                className="w-full h-60 md:h-80 object-cover hover:scale-105 transition-transform duration-700 ease-in-out"
+                className="w-full md:h-80 object-cover hover:scale-105 transition-transform duration-700 ease-in-out"
               />
             </div>
             <div className="absolute -inset-3 bg-gradient-to-l from-[#DF562C]/20 via-transparent to-[#1e7ed3]/20 blur-2xl rounded -z-10 opacity-70"></div>
@@ -159,7 +159,7 @@ const AboutNGTrust = () => {
 
           {/* LEFT TEXT */}
           <div className="flex-1">
-          <h2 className="text-[1rem] md:text-xl lg:text-xl font-semibold text-gray-900 mb-2 md:mb-6 lg:mb-6 leading-tight">
+            <h2 className="text-[1rem] md:text-xl lg:text-xl font-semibold text-gray-900 mb-2 md:mb-6 lg:mb-6 leading-tight">
               OUR{" "}
               <span className="bg-gradient-to-r from-[#DF562C] to-[#1e7ed3] bg-clip-text text-transparent">
                 VISION
@@ -195,7 +195,7 @@ const AboutNGTrust = () => {
               </motion.button>
             </Link> */}
             <Link href="/joinAsVolunteer">
-            <button
+              <button
                 className="relative overflow-hidden px-4 py-1 md:px-6 md:py-2 lg:px-6 lg:py-2 text-xs md:text-sm lg:text-sm text-white font-medium 
                    shadow-md bg-[#DF562C] hover:bg-orange-600
                   hover:shadow-lg transition-all duration-300"

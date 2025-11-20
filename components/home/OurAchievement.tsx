@@ -83,8 +83,8 @@ const OurAchievement = () => {
               } items-center gap-5 md:gap-10 lg:gap-10`}
             >
               {/* Image Section */}
-              <div className="flex-1 relative group">
-                {/* Gradient glow */}
+              {/* <div className="flex-1 relative group">
+           
                 <div className="absolute -inset-2 bg-gradient-to-r from-[#f36b2a]/30 to-[#1e7ed3]/30 rounded blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
 
                 <div className="overflow-hidden rounded shadow-lg bg-white/50 backdrop-blur-sm border border-gray-100 transition-all duration-700 group-hover:shadow-2xl">
@@ -92,6 +92,18 @@ const OurAchievement = () => {
                     src={activity.image}
                     alt={activity.title}
                     className="object-fit w-full h-54 md:h-75  transform group-hover:scale-103 transition-transform duration-700 ease-in-out"
+                  />
+                </div>
+              </div> */}
+              <div className="flex-1 relative group w-full">
+                {/* Gradient glow */}
+                <div className="absolute -inset-2 bg-gradient-to-r from-[#f36b2a]/30 to-[#1e7ed3]/30 rounded blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+
+                <div className="overflow-hidden rounded shadow-lg bg-white/50 backdrop-blur-sm border border-gray-100 transition-all duration-700 group-hover:shadow-2xl w-full">
+                  <Image
+                    src={activity.image}
+                    alt={activity.title}
+                    className="w-full h-auto object-cover group-hover:scale-103 transition-transform duration-700 ease-in-out"
                   />
                 </div>
               </div>
