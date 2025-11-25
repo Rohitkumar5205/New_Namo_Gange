@@ -11,9 +11,9 @@ export default function MokshaSewaPage() {
       {/* ================= BANNER ================= */}
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/ourActivities/ourActivities5.jpg')" }}
+        style={{ backgroundImage: "url('/home/career.jpeg')" }}
       >
-        <div className="bg-black/60 py-12 md:py-20">
+        <div className="bg-black/20 py-12 md:py-20">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <h2 className="text-2xl md:text-3xl font-semibold text-white">
               Our <span className="text-[#DF562C]">Career</span>

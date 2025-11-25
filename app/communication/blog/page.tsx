@@ -19,14 +19,13 @@ export default function BlogPage() {
 
   return (
     <div className="bg-gray-50 min-h-screen ">
-      
       {/* biner  */}
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/ourActivities/ourActivities5.jpg')" }}
+        style={{ backgroundImage: "url('/home/blog.jpeg')" }}
       >
         {/* Overlay */}
-        <div className="bg-black/60 w-full h-full py-10 md:py-16">
+        <div className="bg-black/20 w-full h-full py-10 md:py-16">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <h2 className="text-xl md:text-2xl font-medium text-white">Blog</h2>
             <p className="text-sm md:text-base text-white mt-1">
@@ -40,11 +39,10 @@ export default function BlogPage() {
             </p>
           </div>
         </div>
-       
       </div>
 
       <div className="py-8">
-      <h1 className="text-lg md:text-xl lg:text-xl font-medium text-center mb-6 ">
+        <h1 className="text-lg md:text-xl lg:text-xl font-medium text-center mb-6 ">
           Our Activities & Events
         </h1>
         {/* 🔍 SEARCH BAR */}

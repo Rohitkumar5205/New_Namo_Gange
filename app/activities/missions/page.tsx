@@ -87,16 +87,19 @@ const page = () => {
       {/* ------------------ BANNER ------------------ */}
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/ourActivities/ourActivities5.jpg')" }}
+        style={{ backgroundImage: "url('/home/mission_banner.jpg')" }}
       >
-        <div className="bg-black/60 w-full h-full py-10 md:py-16">
+        <div className="bg-black/30 w-full h-full py-10 md:py-16">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <h2 className="text-xl md:text-2xl font-medium text-white">
               Missions
             </h2>
 
             <p className="text-sm md:text-base text-white mt-1">
-              <Link href="/" className="text-[#DF562C] font-medium hover:underline">
+              <Link
+                href="/"
+                className="text-[#DF562C] font-medium hover:underline"
+              >
                 Home
               </Link>{" "}
               - Missions
@@ -115,10 +118,10 @@ const page = () => {
         </h2>
 
         <p className="w-full  pb-6 text-sm md:text-[15px] text-gray-700 leading-relaxed">
-          Our missions are dedicated to uplifting communities through sustainable
-          development, cultural preservation, health awareness, and holistic
-          well-being. Each mission is crafted with purpose, compassion, and a
-          deep commitment to transforming society.
+          Our missions are dedicated to uplifting communities through
+          sustainable development, cultural preservation, health awareness, and
+          holistic well-being. Each mission is crafted with purpose, compassion,
+          and a deep commitment to transforming society.
         </p>
       </div>
 
@@ -127,14 +130,14 @@ const page = () => {
         {missions.map((item, i) => (
           <div
             key={i}
-            className="group bg-white rounded-xl shadow-md p-4 border border-gray-200 hover:shadow-xl hover:-translate-y-1 transition-all"
+            className="group bg-white p-4 rounded shadow-sm border border-gray-200 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
           >
             {/* Image */}
-            <div className="w-full h-28 mb-4 flex items-center justify-center bg-gradient-to-tr from-[#DF562C]/10 to-[#0C55A0]/10 rounded-lg overflow-hidden">
+            <div className="w-full h-32 bg-gray-50 rounded flex items-center justify-center overflow-hidden mb-4">
               <Image
                 src={item.image}
                 alt={item.title}
-                className="object-contain w-[60%] group-hover:scale-105 transition"
+                className="object-contain w-[60%] group-hover:scale-102 transition"
               />
             </div>
 
@@ -144,7 +147,10 @@ const page = () => {
             </p>
 
             {/* Read More */}
-            <Link href={item.link} className="flex items-center justify-center gap-2 text-[#0C55A0] hover:gap-3 transition text-sm font-medium">
+            <Link
+              href={item.link}
+              className="flex items-center justify-center gap-2 text-[#0C55A0] hover:gap-3 transition text-sm font-medium"
+            >
               Read More <ArrowRight size={15} />
             </Link>
           </div>
