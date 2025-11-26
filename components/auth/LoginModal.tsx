@@ -100,6 +100,18 @@ export default function LoginModal() {
             >
               Send OTP
             </button>
+            {/* 👉 CREATE ACCOUNT LINK (Add this after Login Button) */}
+            <div className="mt-5 text-center text-sm">
+              <p className="text-gray-600">
+                Don’t have an account?{" "}
+                <Link
+                  href="/auth/singup"
+                  className="text-[#DF562C] font-semibold hover:underline"
+                >
+                  Create Account
+                </Link>
+              </p>
+            </div>
           </motion.div>
         )}
 

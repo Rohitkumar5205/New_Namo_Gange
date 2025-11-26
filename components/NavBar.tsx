@@ -124,13 +124,7 @@ const NavBar: React.FC = () => {
           <div className="w-[10%] items-center justify-center bg-[#DF562C]">
             <button
               onClick={() => router.push("/donate")}
-              className="
-        flex items-center gap-2 px-10 h-11 
-        bg-[#DF562C] 
-        text-white text-base font-semibold 
-        hover:bg-[#c44b22] 
-        transition rounded-none
-      "
+              className="flex items-center gap-2 px-10 h-11 bg-[#DF562C] text-white text-base font-semibold hover:bg-[#c44b22] transition rounded-none "
             >
               DONATE
               <span className="text-white text-lg">🤝🏻</span>

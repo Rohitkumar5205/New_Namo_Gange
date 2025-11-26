@@ -35,7 +35,7 @@ export default function VideoGallery() {
     <section className="bg-gray-50 ">
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/home/video.jpeg')" }}
+        style={{ backgroundImage: "url('/home/video2.jpg')" }}
       >
         {/* Overlay */}
         <div className="bg-black/30 w-full h-full py-10 md:py-16">
