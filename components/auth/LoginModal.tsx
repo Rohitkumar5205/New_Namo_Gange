@@ -14,6 +14,10 @@ export default function LoginModal() {
   const [mobile, setMobile] = useState("");
   const [otp, setOtp] = useState(["", "", "", ""]);
 
+  // ⭐ ADD THIS — user type state
+  const [userType, setUserType] = useState("volunteer");
+  // volunteer | member | corporator
+
   // OTP Change Handling
   const handleOtpChange = (value: string, index: number) => {
     if (!/^[0-9]?$/.test(value)) return;
@@ -59,16 +63,55 @@ export default function LoginModal() {
           <X size={22} />
         </Link>
 
-        {/* ------------ LOGO (Centered Top) ------------ */}
-        <div className="flex flex-col items-center mb-6">
+        {/* ------------ LOGO + HEADING ------------ */}
+        <div className="flex flex-col items-center mb-4">
           <img
             src="/logo.png"
             alt="Logo"
-            className="w-56 h-30 object-contain  "
+            className="w-56 h-30 object-contain"
           />
           <h2 className="text-xl font-bold text-[#DF562C] mt-2">
             Login With OTP
           </h2>
+        </div>
+
+        {/* ⭐ ADDED USER TYPE RADIO BUTTONS */}
+        <div className="flex justify-center gap-6 mb-4 text-sm font-medium">
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="userType"
+              value="volunteer"
+              checked={userType === "volunteer"}
+              onChange={(e) => setUserType(e.target.value)}
+              className="accent-[#DF562C]"
+            />
+            Volunteer
+          </label>
+
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="userType"
+              value="member"
+              checked={userType === "member"}
+              onChange={(e) => setUserType(e.target.value)}
+              className="accent-[#DF562C]"
+            />
+            Member
+          </label>
+
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="userType"
+              value="corporator"
+              checked={userType === "corporator"}
+              onChange={(e) => setUserType(e.target.value)}
+              className="accent-[#DF562C]"
+            />
+            Corporator
+          </label>
         </div>
 
         {/* ------------ STEP 1: MOBILE ------------ */}
@@ -100,18 +143,21 @@ export default function LoginModal() {
             >
               Send OTP
             </button>
-            {/* 👉 CREATE ACCOUNT LINK (Add this after Login Button) */}
-            <div className="mt-5 text-center text-sm">
-              <p className="text-gray-600">
-                Don’t have an account?{" "}
-                <Link
-                  href="/auth/singup"
-                  className="text-[#DF562C] font-semibold hover:underline"
-                >
-                  Create Account
-                </Link>
-              </p>
-            </div>
+
+            {/* ⭐ SHOW ONLY IF CORPORATOR SELECTED */}
+            {userType === "corporator" && (
+              <div className="mt-5 text-center text-sm">
+                <p className="text-gray-600">
+                  Don’t have an account?{" "}
+                  <Link
+                    href="/auth/singup"
+                    className="text-[#DF562C] font-semibold hover:underline"
+                  >
+                    Create Account
+                  </Link>
+                </p>
+              </div>
+            )}
           </motion.div>
         )}
 

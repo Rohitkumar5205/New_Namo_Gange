@@ -884,7 +884,7 @@ const MemberRegistrationForm = () => {
               />
             </div>
 
-            <h4 className="text-lg font-semibold">Become a Volunteer</h4>
+            <h4 className="text-lg font-semibold">Become a Membership</h4>
 
             <p className="text-sm leading-relaxed mt-2 text-blue-100">
               Join <span className="font-semibold">Namo Gange Mission</span>

@@ -3,7 +3,6 @@ import { User, Phone, Mail, Calendar, MapPin } from "lucide-react";
 
 const VolunteerRegistrationForm = () => {
   return (
-    // Outer container for layout: Stacked on Mobile, 4/5 + 1/5 on Desktop
     <div className="w-full flex flex-col md:flex-row gap-6 p-4 md:p-8 max-w-8xl mx-auto">
       {/* ================= 1. FORM SECTION (80% on Desktop) ================= */}
       <div className="w-full md:w-[75%] bg-white p-6 rounded-lg shadow-lg order-2 md:order-1">
@@ -319,48 +318,7 @@ const VolunteerRegistrationForm = () => {
                   {/* Add city options here */}
                 </select>
               </div>
-              {/* <div>
-                <label className="text-sm font-normal">
-                  Street No. <span className="text-red-500">*</span>
-                </label>
 
-                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                  <input
-                    type="text"
-                    placeholder="Enter street number"
-                    className="w-full px-2 py-1 text-sm outline-none text-gray-700"
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="text-sm font-normal">
-                  Tehsil / District <span className="text-red-500">*</span>
-                </label>
-
-                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                  <input
-                    type="text"
-                    placeholder="Enter tehsil or district"
-                    className="w-full px-2 py-1 text-sm outline-none text-gray-700"
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="text-sm font-normal">
-                  Post Office <span className="text-red-500">*</span>
-                </label>
-
-                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                  <input
-                    type="text"
-                    placeholder="Enter post office"
-                    className="w-full px-2 py-1 text-sm outline-none text-gray-700"
-                    required
-                  />
-                </div>
-              </div> */}
               <div>
                 <label className="text-sm font-normal">
                   Pin Code <span className="text-red-500">*</span>
