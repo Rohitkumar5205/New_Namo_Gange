@@ -49,358 +49,963 @@ const VolunteerRegistrationForm = () => {
             </div>
           </div>
           {/* ---------------- NAME FIELDS ---------------- */}
-          <div className="grid md:grid-cols-3 gap-4">
-            <div>
-              <label className="text-sm font-normal">
-                First Name <span className="text-red-500">*</span>
-              </label>
-              <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                <User size={18} className="text-gray-500" />
-                <input
-                  type="text"
-                  placeholder="Enter your first name"
-                  className="
-                    w-full px-2 py-1.5 text-sm outline-none 
-                    placeholder:text-gray-500
-                  "
-                  required
-                />
-              </div>
-            </div>
+          <div className="w-full">
+            <h4 className="text-center text-gray-800 text-[15px] font-medium">
+              Volunteer Personal Information
+            </h4>
+            <hr className="w-full border-t-1 border-gray-300 mt-2 mb-3" />
+            <div className="grid md:grid-cols-5 gap-4">
+              <div className="">
+                <label className="text-sm font-normal">
+                  Select Title <span className="text-red-500">*</span>
+                </label>
 
-            <div>
-              <label className="text-sm font-normal">
-                Last Name <span className="text-red-500">*</span>
-              </label>
-              <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                <User size={18} className="text-gray-500" />
-                <input
-                  type="text"
-                  placeholder="Enter your last name"
-                  className="
-                    w-full px-2 py-1.5 text-sm outline-none
-                    placeholder:text-gray-500
-                  "
-                  required
-                />
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <select
+                    className="
+          w-full px-2 py-1 text-sm outline-none bg-white text-gray-700
+        "
+                    required
+                  >
+                    <option value="">Select title</option>
+                    <option value="mr">Mr.</option>
+                    <option value="mrs">Mrs.</option>
+                    <option value="miss">Miss</option>
+                    <option value="dr">Dr.</option>
+                  </select>
+                </div>
               </div>
-            </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Applicant's Name <span className="text-red-500">*</span>
+                </label>
 
-            <div>
-              <label className="text-sm font-normal">
-                Mobile No. <span className="text-red-500">*</span>
-              </label>
-              <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                <Phone size={18} className="text-gray-500" />
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <User size={18} className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Enter applicant's name"
+                    className="w-full px-2 py-1 text-sm outline-none placeholder:text-gray-500"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Surname <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <User size={18} className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Enter Surname"
+                    className="w-full px-2 py-1 text-sm outline-none placeholder:text-gray-500"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Father's Name <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <User size={18} className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Enter father's name"
+                    className="w-full px-2 py-1 text-sm outline-none placeholder:text-gray-500"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Gender <span className="text-red-500">*</span>
+                </label>
+
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <select
+                    className="w-full px-2 py-1 text-sm outline-none bg-white text-gray-700"
+                    required
+                  >
+                    <option value="">Select gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Qualification <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <User size={18} className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Enter qualification"
+                    className="w-full px-2 py-1 text-sm outline-none placeholder:text-gray-500"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Occupation <span className="text-red-500">*</span>
+                </label>
+
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <select
+                    className="w-full px-2 py-1 text-sm outline-none bg-white text-gray-700"
+                    required
+                  >
+                    <option value="">Select occupation</option>
+                    <option value="business">Business</option>
+                    <option value="job">Job</option>
+                    <option value="student">Student</option>
+                    <option value="self_employed">Self Employed</option>
+                    <option value="unemployed">Unemployed</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Organisation Type <span className="text-red-500">*</span>
+                </label>
+
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <select
+                    className="w-full px-2 py-1 text-sm outline-none bg-white text-gray-700"
+                    required
+                  >
+                    <option value="">Select organisation type</option>
+                    <option value="government">Government</option>
+                    <option value="private">Private</option>
+                    <option value="ngo">NGO</option>
+                    <option value="trust">Trust</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Designation <span className="text-red-500">*</span>
+                </label>
+
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <select
+                    className="w-full px-2 py-1 text-sm outline-none bg-white text-gray-700"
+                    required
+                  >
+                    <option value="">Select designation</option>
+                    <option value="manager">Manager</option>
+                    <option value="executive">Executive</option>
+                    <option value="director">Director</option>
+                    <option value="assistant">Assistant</option>
+                    <option value="team_lead">Team Lead</option>
+                    <option value="officer">Officer</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Date of Birth <span className="text-red-500">*</span>
+                </label>
+
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <input
+                    type="date"
+                    className="w-full px-2 py-1 text-sm outline-none text-gray-700"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Mobile No. <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <Phone size={18} className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Enter 10-digit mobile number"
+                    className="w-full px-2 py-1 text-sm outline-none"
+                    maxLength={10}
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">Alternate No.</label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <Phone size={18} className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Enter 10-digit mobile number"
+                    className="w-full px-2 py-1 text-sm outline-none"
+                    maxLength={10}
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Email Address <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <Mail size={18} className="text-gray-500" />
+                  <input
+                    type="email"
+                    placeholder="Enter your email address"
+                    className="w-full px-2 py-1 text-sm outline-none"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Aadhar / ID Proof No. <span className="text-red-500">*</span>
+                </label>
+
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <input
+                    type="text"
+                    placeholder="Enter Aadhar / ID number"
+                    className="w-full px-2 py-1 text-sm outline-none text-gray-700"
+                    maxLength={16}
+                    required
+                  />
+                </div>
+              </div>
+              <div className="">
+                <label className="text-sm font-normal">
+                  Address / House No. <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <MapPin size={18} className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Enter your complete address"
+                    className="w-full px-2 py-1 text-sm outline-none"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Country <span className="text-red-500">*</span>
+                </label>
+                <select className="border px-2 py-1 text-sm w-full mt-1 focus:border-[#DF562C] focus:ring-[#DF562C] outline-none">
+                  <option value="">Select your country</option>
+                  {/* Add country options here */}
+                </select>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  State <span className="text-red-500">*</span>
+                </label>
+                <select className="border px-2 py-1 text-sm w-full mt-1 focus:border-[#DF562C] focus:ring-[#DF562C] outline-none">
+                  <option value="">Select your state</option>
+                  {/* Add state options here */}
+                </select>
+              </div>
+
+              <div>
+                <label className="text-sm font-normal">
+                  City <span className="text-red-500">*</span>
+                </label>
+                <select className="border px-2 py-1 text-sm w-full mt-1 focus:border-[#DF562C] focus:ring-[#DF562C] outline-none">
+                  <option value="">Select your city</option>
+                  {/* Add city options here */}
+                </select>
+              </div>
+              {/* <div>
+                <label className="text-sm font-normal">
+                  Street No. <span className="text-red-500">*</span>
+                </label>
+
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <input
+                    type="text"
+                    placeholder="Enter street number"
+                    className="w-full px-2 py-1 text-sm outline-none text-gray-700"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Tehsil / District <span className="text-red-500">*</span>
+                </label>
+
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <input
+                    type="text"
+                    placeholder="Enter tehsil or district"
+                    className="w-full px-2 py-1 text-sm outline-none text-gray-700"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Post Office <span className="text-red-500">*</span>
+                </label>
+
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <input
+                    type="text"
+                    placeholder="Enter post office"
+                    className="w-full px-2 py-1 text-sm outline-none text-gray-700"
+                    required
+                  />
+                </div>
+              </div> */}
+              <div>
+                <label className="text-sm font-normal">
+                  Pin Code <span className="text-red-500">*</span>
+                </label>
                 <input
                   type="text"
-                  placeholder="Enter 10-digit mobile number"
-                  className="w-full px-2 py-1.5 text-sm outline-none"
-                  maxLength={10}
-                  required
+                  placeholder="Enter pin code"
+                  className="border px-2 py-1 text-sm w-full mt-1 focus:border-[#DF562C] outline-none"
                 />
               </div>
             </div>
           </div>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <label className="text-sm font-normal">
-                Email Address <span className="text-red-500">*</span>
-              </label>
-              <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                <Mail size={18} className="text-gray-500" />
-                <input
-                  type="email"
-                  placeholder="Enter your email address"
-                  className="w-full px-2 py-1.5 text-sm outline-none"
-                  required
-                />
+          {/* Emergency Details */}
+          <div className="w-full">
+            <h4 className="text-center text-gray-800 text-[15px] font-medium">
+              Emergency Details
+            </h4>
+            <hr className="w-full border-t-1 border-gray-300 mt-2 mb-3" />
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <label className="text-sm font-normal">
+                  Relation <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <MapPin size={18} className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Enter your relation"
+                    className="w-full px-2 py-1 text-sm outline-none"
+                    required
+                  />
+                </div>
               </div>
-            </div>
-            <div>
-              <label className="text-sm font-normal">
-                Address <span className="text-red-500">*</span>
-              </label>
-              <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                <MapPin size={18} className="text-gray-500" />
-                <input
-                  type="text"
-                  placeholder="Enter your complete address"
-                  className="w-full px-2 py-1.5 text-sm outline-none"
-                  required
-                />
+              <div>
+                <label className="text-sm font-normal">
+                  Emergency Contact <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <Phone size={18} className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Enter 10-digit mobile number"
+                    className="w-full px-2 py-1 text-sm outline-none"
+                    maxLength={10}
+                    required
+                  />
+                </div>
               </div>
             </div>
           </div>
-          {/* ---------------- COUNTRY / STATE / CITY ---------------- */}
-          <div className="grid md:grid-cols-3 gap-4">
-            <div>
-              <label className="text-sm font-normal">
-                Country <span className="text-red-500">*</span>
-              </label>
-              <select className="border px-2 py-1.5 text-sm w-full mt-1 focus:border-[#DF562C] focus:ring-[#DF562C] outline-none">
-                <option value="">Select your country</option>
-                {/* Add country options here */}
-              </select>
-            </div>
+          {/* Initiatives Of Namo Gange Trust */}
+          <div className="w-full">
+            <h4 className="text-center text-gray-800 text-[15px] font-medium">
+              Initiatives Of Namo Gange Trust
+            </h4>
 
-            <div>
-              <label className="text-sm font-normal">
-                State <span className="text-red-500">*</span>
-              </label>
-              <select className="border px-2 py-1.5 text-sm w-full mt-1 focus:border-[#DF562C] focus:ring-[#DF562C] outline-none">
-                <option value="">Select your state</option>
-                {/* Add state options here */}
-              </select>
-            </div>
+            <hr className="w-full border-t-1 border-gray-300 mt-2 mb-4" />
 
-            <div>
-              <label className="text-sm font-normal">
-                City <span className="text-red-500">*</span>
-              </label>
-              <select className="border px-2 py-1.5 text-sm w-full mt-1 focus:border-[#DF562C] focus:ring-[#DF562C] outline-none">
-                <option value="">Select your city</option>
-                {/* Add city options here */}
-              </select>
+            <div className="grid md:grid-cols-4 gap-3 text-sm">
+              {/* Radio Options */}
+              {[
+                {
+                  label: "Meri Beti Mera Abhiman",
+                  value: "meri_beti_mera_abhiman",
+                },
+                {
+                  label: "Bachchon Ki Rangshala",
+                  value: "bachchon_ki_rangshala",
+                },
+                { label: "Ayuryujam", value: "ayuryujam" },
+                {
+                  label: "Arogya Film Festival",
+                  value: "arogya_film_festival",
+                },
+                {
+                  label: "The Grand Master Of Yoga",
+                  value: "the_grand_master_of_yoga",
+                },
+                { label: "Arogya Sangoshthi", value: "arogya_sangoshthi" },
+                { label: "The Yogshalajobs.com", value: "the_yogshalajobs" },
+                {
+                  label: "Shrimad Bhagwat Katha",
+                  value: "shrimad_bhagwat_katha",
+                },
+                {
+                  label: "Swachh Bharat Sankalp",
+                  value: "swachh_bharat_sankalp",
+                },
+                {
+                  label: "Indian Folk & Tribal Art",
+                  value: "indian_folk_and_tribal_art",
+                },
+                { label: "Others, if any", value: "others" },
+              ].map((item, i) => (
+                <label
+                  key={i}
+                  className="flex items-center gap-2 cursor-pointer transition"
+                >
+                  <input
+                    type="checkbox"
+                    name="initiative"
+                    value={item.value}
+                    className="accent-[#DF562C]"
+                    required
+                  />
+                  {item.label}
+                </label>
+              ))}
             </div>
           </div>
-          {/* ---------------- PINCODE + DOB + GENDER ---------------- */}
-          <div className="grid md:grid-cols-3 gap-4">
-            <div>
-              <label className="text-sm font-normal">
-                Pin Code <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Enter pin code"
-                className="border px-2 py-1.5 text-sm w-full mt-1 focus:border-[#DF562C] outline-none"
-              />
-            </div>
+          {/* Area Of Contribution And Support */}
+          <div className="w-full">
+            <h4 className="text-center text-gray-800 text-[15px] font-medium">
+              Area Of Contribution And Support
+            </h4>
 
-            <div>
-              <label className="text-sm font-normal">
-                Date of Birth <span className="text-red-500">*</span>
-              </label>
-              <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                <Calendar size={18} className="text-gray-500" />
-                <input
-                  type="date"
-                  className="w-full px-2 py-1.5 text-sm outline-none text-gray-700"
-                />
-              </div>
-            </div>
+            <hr className="w-full border-t-1 border-gray-300 mt-2 mb-4" />
 
-            <div>
-              <label className="text-sm font-normal">
-                Gender <span className="text-red-500">*</span>
-              </label>
-              <select className="border px-2 py-1.5 text-sm w-full mt-1 focus:border-[#DF562C] focus:ring-[#DF562C] outline-none">
-                <option value="">Select gender</option>
-                <option>Male</option>
-                <option>Female</option>
-                <option>Other</option>
-              </select>
-            </div>
-          </div>
-          {/* ---------------- OBJECTIVES ---------------- */}
-          <div>
-            <h3 className="font-medium text-[15px] mb-1">
-              In which of our objectives you'd like to work?{" "}
-              <span className="text-red-500">*</span>
+            <h3 className="font-medium text-sm text-gray-700 mb-2">
+              Volunteering For <span className="text-red-500">*</span>
             </h3>
+            <div className="grid md:grid-cols-4 gap-3 text-sm">
+              <label className="flex items-center gap-2 cursor-pointer ">
+                <input
+                  type="radio"
+                  name="vtype"
+                  value="7_days"
+                  className="accent-[#DF562C]"
+                  required
+                />
+                7 Days in a Month
+              </label>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 text-sm gap-3">
-              <label className="flex items-center gap-2">
-                <input type="checkbox" className="accent-[#DF562C]" /> Health &
-                Wellness
+              <label className="flex items-center gap-2 cursor-pointer ">
+                <input
+                  type="radio"
+                  name="vtype"
+                  value="15_days"
+                  className="accent-[#DF562C]"
+                />
+                15 Days in a Month
               </label>
-              <label className="flex items-center gap-2">
-                <input type="checkbox" className="accent-[#DF562C]" /> Woman
-                Empowerment
+
+              <label className="flex items-center gap-2 cursor-pointer ">
+                <input
+                  type="radio"
+                  name="vtype"
+                  value="weekends"
+                  className="accent-[#DF562C]"
+                />
+                Weekends
               </label>
-              <label className="flex items-center gap-2">
-                <input type="checkbox" className="accent-[#DF562C]" /> Nature &
+
+              <label className="flex items-center gap-2 cursor-pointer ">
+                <input
+                  type="radio"
+                  name="vtype"
+                  value="specific_events"
+                  className="accent-[#DF562C]"
+                />
+                Specific Events & Campaigns
+              </label>
+            </div>
+            <h3 className="font-medium text-sm text-gray-700 py-2">
+              Networking For <span className="text-red-500">*</span>
+            </h3>
+            <div className="grid md:grid-cols-4 gap-3 text-sm">
+              <label className="flex items-center gap-2 cursor-pointer ">
+                <input
+                  type="radio"
+                  name="networking"
+                  value="ngt_membership"
+                  className="accent-[#DF562C]"
+                  required
+                />
+                NGT Membership
+              </label>
+
+              <label className="flex items-center gap-2 cursor-pointer ">
+                <input
+                  type="radio"
+                  name="networking"
+                  value="partnership"
+                  className="accent-[#DF562C]"
+                />
+                Partnership
+              </label>
+
+              <label className="flex items-center gap-2 cursor-pointer ">
+                <input
+                  type="radio"
+                  name="networking"
+                  value="associations"
+                  className="accent-[#DF562C]"
+                />
+                Associations
+              </label>
+
+              <label className="flex items-center gap-2 cursor-pointer ">
+                <input
+                  type="radio"
+                  name="networking"
+                  value="awareness_drives"
+                  className="accent-[#DF562C]"
+                />
+                Awareness Drives
+              </label>
+            </div>
+            <h3 className="font-medium text-sm text-gray-700 py-2">
+              Area Of Interest <span className="text-red-500">*</span>
+            </h3>
+            <div className="grid md:grid-cols-4 gap-3 text-sm">
+              <label className="flex items-center gap-2 cursor-pointer ">
+                <input
+                  type="radio"
+                  name="interest"
+                  value="health_education"
+                  className="accent-[#DF562C]"
+                  required
+                />
+                Health & Education
+              </label>
+
+              <label className="flex items-center gap-2 cursor-pointer ">
+                <input
+                  type="radio"
+                  name="interest"
+                  value="art_culture"
+                  className="accent-[#DF562C]"
+                />
+                Art & Culture
+              </label>
+
+              <label className="flex items-center gap-2 cursor-pointer ">
+                <input
+                  type="radio"
+                  name="interest"
+                  value="environment"
+                  className="accent-[#DF562C]"
+                />
                 Environment
               </label>
-              <label className="flex items-center gap-2">
-                <input type="checkbox" className="accent-[#DF562C]" /> Kala
-                Sanskriti
+
+              <label className="flex items-center gap-2 cursor-pointer ">
+                <input
+                  type="radio"
+                  name="interest"
+                  value="women_empowerment"
+                  className="accent-[#DF562C]"
+                />
+                Women Empowerment
               </label>
             </div>
-          </div>
-          {/* ---------------- SPECIAL SKILL ---------------- */}
-          <div>
-            <label className="font-medium text-[15px]">
-              Special Skill (Optional)
-            </label>
-            <textarea
-              rows={2}
-              placeholder="Mention any special skill you have..."
-              className="border text-sm p-3 w-full mt-1 focus:border-[#DF562C] outline-none"
-            />
-          </div>
-          {/* ---------------- CONTRIBUTION AREA ---------------- */}
-          <div>
-            <h3 className="font-normal text-[15px] mb-1">
-              Which of the following areas would you like to contribute?{" "}
-              <span className="text-red-500">*</span>
+            <h3 className="font-medium text-sm text-gray-700 py-2">
+              Monetary Support <span className="text-red-500">*</span>
             </h3>
+            <div className="grid md:grid-cols-4 gap-3 text-sm">
+              {/* Donation */}
+              <label className="flex items-center gap-2 cursor-pointer ">
+                <input
+                  type="radio"
+                  name="monetary_support"
+                  value="donation"
+                  className="accent-[#DF562C]"
+                  required
+                />
+                Donation
+              </label>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 text-sm gap-2 mt-1">
-              {/* Added flex items-center gap-2 for better alignment */}
-              <label className="flex items-center gap-2">
-                <input type="checkbox" className="accent-[#DF562C]" /> Health
-                Camp
+              {/* Charity */}
+              <label className="flex items-center gap-2 cursor-pointer ">
+                <input
+                  type="radio"
+                  name="monetary_support"
+                  value="charity"
+                  className="accent-[#DF562C]"
+                />
+                Charity
               </label>
-              <label className="flex items-center gap-2">
-                <input type="checkbox" className="accent-[#DF562C]" />{" "}
-                Organizational Networking
+
+              {/* Sponsorships */}
+              <label className="flex items-center gap-2 cursor-pointer ">
+                <input
+                  type="radio"
+                  name="monetary_support"
+                  value="sponsorships"
+                  className="accent-[#DF562C]"
+                />
+                Sponsorships
               </label>
-              <label className="flex items-center gap-2">
-                <input type="checkbox" className="accent-[#DF562C]" /> Fund
-                Raising
-              </label>
-              <label className="flex items-center gap-2">
-                <input type="checkbox" className="accent-[#DF562C]" /> Campaign
-              </label>
-              <label className="flex items-center gap-2">
-                <input type="checkbox" className="accent-[#DF562C]" />{" "}
-                Organisational Surveys
-              </label>
-              <label className="flex items-center gap-2">
-                <input type="checkbox" className="accent-[#DF562C]" /> Graphic
-                Design
-              </label>
-              <label className="flex items-center gap-2">
-                <input type="checkbox" className="accent-[#DF562C]" /> Event
-                Management
-              </label>
-              <label className="flex items-center gap-2">
-                <input type="checkbox" className="accent-[#DF562C]" /> Media
-                Management
-              </label>
-              <label className="flex items-center gap-2">
-                <input type="checkbox" className="accent-[#DF562C]" /> Social
-                Media/Blogging
-              </label>
-              <label className="flex items-center gap-2">
-                <input type="checkbox" className="accent-[#DF562C]" /> Research
-                Support
-              </label>
-              <label className="flex items-center gap-2">
-                <input type="checkbox" className="accent-[#DF562C]" /> Add
-                Volunteer Networking
-              </label>
-              <label className="flex items-center gap-2">
-                <input type="checkbox" className="accent-[#DF562C]" /> Others
+
+              {/* Fund Raising Activities */}
+              <label className="flex items-center gap-2 cursor-pointer ">
+                <input
+                  type="radio"
+                  name="monetary_support"
+                  value="fund_raising_activities"
+                  className="accent-[#DF562C]"
+                />
+                Fund Raising Activities
               </label>
             </div>
           </div>
-          {/* ---------------- WORK DAYS ---------------- */}
-          <div>
-            <h3 className="font-normal text-[15px] mb-1">
-              How many days can you work with us in a week?{" "}
-              <span className="text-red-500">*</span>
-            </h3>
+          {/* Area Of Contribution And Support */}
+          <div className="w-full">
+            <h4 className="text-center text-gray-800 text-[15px] font-medium">
+              Name Of Two References
+            </h4>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 text-sm gap-2 mt-1">
-              <label className="flex items-center gap-2">
-                <input type="radio" name="days" className="accent-[#DF562C]" />{" "}
-                01 Day
-              </label>
-              <label className="flex items-center gap-2">
-                <input type="radio" name="days" className="accent-[#DF562C]" />{" "}
-                02 Days
-              </label>
-              <label className="flex items-center gap-2">
-                <input type="radio" name="days" className="accent-[#DF562C]" />{" "}
-                03 Days
-              </label>
-              <label className="flex items-center gap-2">
-                <input type="radio" name="days" className="accent-[#DF562C]" />{" "}
-                04 Days
-              </label>
-              <label className="flex items-center gap-2">
-                <input type="radio" name="days" className="accent-[#DF562C]" />{" "}
-                05 Days
-              </label>
-              <label className="flex items-center gap-2">
-                <input type="radio" name="days" className="accent-[#DF562C]" />{" "}
-                Only Weekends
-              </label>
+            <hr className="w-full border-t-1 border-gray-300 mt-2 mb-4" />
+            <div className="grid md:grid-cols-3 gap-3 text-sm">
+              <div>
+                <label className="text-sm font-normal">
+                  Name <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <User size={18} className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Enter name"
+                    className="w-full px-2 py-1 text-sm outline-none placeholder:text-gray-500"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Mobile No. <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <Phone size={18} className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Enter 10-digit mobile number"
+                    className="w-full px-2 py-1 text-sm outline-none"
+                    maxLength={10}
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Email Id <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <Mail size={18} className="text-gray-500" />
+                  <input
+                    type="email"
+                    placeholder="Enter your email address"
+                    className="w-full px-2 py-1 text-sm outline-none"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Name <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <User size={18} className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Enter name"
+                    className="w-full px-2 py-1 text-sm outline-none placeholder:text-gray-500"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Mobile No. <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <Phone size={18} className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Enter 10-digit mobile number"
+                    className="w-full px-2 py-1 text-sm outline-none"
+                    maxLength={10}
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Email Id <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <Mail size={18} className="text-gray-500" />
+                  <input
+                    type="email"
+                    placeholder="Enter your email address"
+                    className="w-full px-2 py-1 text-sm outline-none"
+                    required
+                  />
+                </div>
+              </div>
             </div>
           </div>
-          {/* ---------------- KNOW ABOUT US ---------------- */}
-          <div>
-            <h3 className="font-normal text-[15px] mb-1">
-              How did you come to know about us?{" "}
-              <span className="text-red-500">*</span>
-            </h3>
+          {/* Volunteer Information */}
+          <div className="w-full">
+            <h4 className="text-center text-gray-800 text-[15px] font-medium">
+              Volunteer Information
+            </h4>
+            <hr className="w-full border-t-1 border-gray-300 mt-2 mb-4" />
+            <div className="grid md:grid-cols-3 gap-3 text-sm">
+              <div>
+                <label className="text-sm font-normal">
+                  Area Of Region <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <User size={18} className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Enter name"
+                    className="w-full px-2 py-1 text-sm outline-none placeholder:text-gray-500"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Report To <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <Phone size={18} className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Enter Report To"
+                    className="w-full px-2 py-1 text-sm outline-none"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Designation <span className="text-red-500">*</span>
+                </label>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 text-sm gap-2">
-              <label className="flex items-center gap-2">
-                <input type="radio" name="know" className="accent-[#DF562C]" />{" "}
-                Namo Gange Trust Website
-              </label>
-              <label className="flex items-center gap-2">
-                <input type="radio" name="know" className="accent-[#DF562C]" />{" "}
-                Email Referral
-              </label>
-              <label className="flex items-center gap-2">
-                <input type="radio" name="know" className="accent-[#DF562C]" />{" "}
-                Staff Volunteer Reference
-              </label>
-              <label className="flex items-center gap-2">
-                <input type="radio" name="know" className="accent-[#DF562C]" />{" "}
-                Advertisements
-              </label>
-              <label className="flex items-center gap-2">
-                <input type="radio" name="know" className="accent-[#DF562C]" />{" "}
-                Through Events
-              </label>
-              <label className="flex items-center gap-2">
-                <input type="radio" name="know" className="accent-[#DF562C]" />{" "}
-                Social Media (Facebook etc.)
-              </label>
-              <label className="flex items-center gap-2">
-                <input type="radio" name="know" className="accent-[#DF562C]" />{" "}
-                Others
-              </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <select
+                    className="w-full px-2 py-1 text-sm outline-none bg-white text-gray-700"
+                    required
+                  >
+                    <option value="">Select designation</option>
+                    <option value="manager">Manager</option>
+                    <option value="executive">Executive</option>
+                    <option value="director">Director</option>
+                    <option value="assistant">Assistant</option>
+                    <option value="team_lead">Team Lead</option>
+                    <option value="officer">Officer</option>
+                  </select>
+                </div>
+              </div>
             </div>
           </div>
-          {/* ---------------- COMMENTS ---------------- */}
-          <div>
-            <label className="font-normal text-[15px]">
-              Message or Comments <span className="text-red-500">*</span>
-            </label>
-            <textarea
-              rows={3}
-              placeholder="Write your comments or message here..."
-              className="border w-full p-3 mt-1 focus:border-[#DF562C] outline-none"
-            />
+          {/* Volunteer Bank Details */}
+          <div className="w-full">
+            <h4 className="text-center text-gray-800 text-[15px] font-medium">
+              Volunteer Bank Details
+            </h4>
+            <hr className="w-full border-t-1 border-gray-300 mt-2 mb-4" />
+            <div className="grid md:grid-cols-3 gap-3 text-sm">
+              <div>
+                <label className="text-sm font-normal">
+                  Bank Name <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <User size={18} className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Enter your bank name"
+                    className="w-full px-2 py-1 text-sm outline-none placeholder:text-gray-500"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Account No <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <Phone size={18} className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Enter account no"
+                    className="w-full px-2 py-1 text-sm outline-none"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  IFSC Code <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <Phone size={18} className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Enter ifsc code"
+                    className="w-full px-2 py-1 text-sm outline-none"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
           </div>
-          {/* ---------------- CAPTCHA ---------------- */}
-          <div>
-            <h3 className="font-normal text-[15px]">Complete reCAPTCHA</h3>
+          {/* Volunteer Business Details */}
+          <div className="w-full">
+            <h4 className="text-center text-gray-800 text-[15px] font-medium">
+              Volunteer Business Details
+            </h4>
+            <hr className="w-full border-t-1 border-gray-300 mt-2 mb-4" />
+            <div className="grid md:grid-cols-4 gap-3 text-sm">
+              <div>
+                <label className="text-sm font-normal">
+                  Company Name <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <User size={18} className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Enter your company name"
+                    className="w-full px-2 py-1 text-sm outline-none placeholder:text-gray-500"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Address <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <Phone size={18} className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Enter address"
+                    className="w-full px-2 py-1 text-sm outline-none"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Country <span className="text-red-500">*</span>
+                </label>
+                <select className="border px-2 py-1 text-sm w-full mt-1 focus:border-[#DF562C] focus:ring-[#DF562C] outline-none">
+                  <option value="">Select your country</option>
+                  {/* Add country options here */}
+                </select>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  State <span className="text-red-500">*</span>
+                </label>
+                <select className="border px-2 py-1 text-sm w-full mt-1 focus:border-[#DF562C] focus:ring-[#DF562C] outline-none">
+                  <option value="">Select your state</option>
+                  {/* Add state options here */}
+                </select>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  City <span className="text-red-500">*</span>
+                </label>
+                <select className="border px-2 py-1 text-sm w-full mt-1 focus:border-[#DF562C] focus:ring-[#DF562C] outline-none">
+                  <option value="">Select your city</option>
+                  {/* Add city options here */}
+                </select>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Pin Code <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter pin code"
+                  className="border px-2 py-1 text-sm w-full mt-1 focus:border-[#DF562C] outline-none"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Designation <span className="text-red-500">*</span>
+                </label>
 
-            <div className="border p-2 w-64 bg-gray-50 mt-1">
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <select
+                    className="w-full px-2 py-1 text-sm outline-none bg-white text-gray-700"
+                    required
+                  >
+                    <option value="">Select designation</option>
+                    <option value="manager">Manager</option>
+                    <option value="executive">Executive</option>
+                    <option value="director">Director</option>
+                    <option value="assistant">Assistant</option>
+                    <option value="team_lead">Team Lead</option>
+                    <option value="officer">Officer</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-normal">
+                  Contant No. <span className="text-red-500">*</span>
+                </label>
+                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <Phone size={18} className="text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Enter 10-digit contant number"
+                    className="w-full px-2 py-1 text-sm outline-none"
+                    maxLength={10}
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Upload Profile Picture */}
+          <div className="w-full">
+            <h4 className="text-center text-gray-800 text-[15px] font-medium">
+              Upload Profile Picture
+            </h4>
+
+            <hr className="w-full border-t-1 border-gray-300 mt-2 mb-4" />
+
+            <div className="flex items-center border px-3 py-1  bg-white focus-within:border-[#DF562C] transition-colors">
               <input
-                type="checkbox"
-                className="mr-2 accent-[#DF562C] text-base text-normal"
-              />{" "}
-              I'm not a robot
+                type="file"
+                accept="image/*"
+                className="w-full text-sm text-gray-700 file:mr-4 file:py-1 file:px-4
+                  file:border-0 file:text-sm file:bg-gray-100
+                 file:text-gray-700 file:cursor-pointer cursor-pointer"
+                required
+              />
             </div>
           </div>
           {/* ---------------- BUTTONS ---------------- */}
           <div className="flex gap-4 pt-2">
             {" "}
             {/* Added pt-4 for spacing above buttons */}
-            <button className="bg-[#063D8E] border border-[#063D8E] hover:bg-sky-600 text-white px-6 py-1.5 text-base font-normal  transition-colors">
+            <button className="bg-[#063D8E] border border-[#063D8E] hover:bg-sky-600 text-white px-6 py-1 text-base font-normal  transition-colors">
               Register Now
             </button>
             <button
               type="button"
-              className="px-6 py-1.5 font-normal border border-[#DF562C] bg-[#DF562C] hover:bg-red-600 text-white text-sm transition-colors"
+              className="px-6 py-1 font-normal border border-[#DF562C] bg-[#DF562C] hover:bg-red-600 text-white text-sm transition-colors"
             >
               Cancel
             </button>

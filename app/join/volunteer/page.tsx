@@ -7,7 +7,7 @@ const page = () => {
     <div>
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/home/volunteer.jpg')" }}
+        style={{ backgroundImage: "url('/home/volunteer.png')" }}
       >
         {/* Overlay */}
         <div className="bg-black/30 w-full h-full py-10 md:py-16">
@@ -22,7 +22,7 @@ const page = () => {
               >
                 Home
               </Link>{" "}
-              - VOLUNTEER REGISTRATION
+              - Volunteer Registration
             </p>
           </div>
         </div>
