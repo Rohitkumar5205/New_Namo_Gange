@@ -376,7 +376,9 @@ const VolunteerRegistrationForm = () => {
             </h4>
 
             <hr className="w-full border-t-1 border-gray-300 mt-2 mb-4" />
-
+            <h3 className="font-medium text-sm text-gray-700 mb-2">
+                Aviral Ganga <span className="text-red-500">*</span>
+              </h3>
             <div className="grid md:grid-cols-4 gap-3 text-sm">
               {/* Radio Options */}
               {[

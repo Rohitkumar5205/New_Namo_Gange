@@ -17,7 +17,7 @@ const sliderImages = [
   // "/home/b4.jpg",
   "/home/b5.jpg",
   "/home/b6.jpg",
-  "/home/b7.jpg",
+  // "/home/b7.jpg",
 ];
 
 const HomeSlider = () => {

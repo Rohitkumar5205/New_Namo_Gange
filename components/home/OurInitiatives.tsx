@@ -228,25 +228,40 @@ const OurInitiatives = () => {
           {initiatives.map((item, i) => (
             <div
               key={i}
-              className="bg-white rounded shadow-md border border-gray-100 hover:border-[#0C55A0]/40 transition p-4 flex flex-col items-center text-center"
+              className="group bg-white rounded-xl shadow-sm border border-gray-200 
+                 hover:shadow-lg hover:border-blue-500/40 transition-all duration-300 
+                 p-5 flex flex-col items-center text-center"
             >
-              {/* Image */}
-              <div className="w-full h-28 mb-4 flex items-center justify-center bg-gradient-to-tr from-[#DF562C]/10 to-[#0C55A0]/10 shadow-inner overflow-hidden">
+              {/* Image Section */}
+              <div
+                className="w-full h-28 mb-4 flex items-center justify-center 
+                      rounded-md bg-gray-50
+                      overflow-hidden shadow-inner"
+              >
                 <Image
                   src={item.image}
                   alt={item.title}
-                  className="object-contain w-auto h-auto"
+                  className="object-contain max-h-24 w-auto transition-transform duration-300
+                     group-hover:scale-105"
                 />
               </div>
 
               {/* Description */}
-              <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-4">
+              <h3 className="text-gray-800 font-semibold text-sm mb-2 line-clamp-2">
+                {item.title}
+              </h3>
+
+              <p className="text-gray-600 text-xs leading-relaxed mb-4 line-clamp-4">
                 {item.description}
               </p>
 
               {/* Button */}
-              <Link href={item.link} className="w-full">
-                <button className="w-full px-3 py-1.5 text-sm bg-[#0C55A0] text-white rounded hover:bg-sky-600 transition">
+              <Link href={item.link} className="w-full mt-auto">
+                <button
+                  className="w-full px-3 py-1.5 text-sm font-medium rounded
+                     bg-[#0C55A0] text-white shadow-sm 
+                     hover:bg-[#0a4786] active:scale-95 transition-all"
+                >
                   Read More
                 </button>
               </Link>

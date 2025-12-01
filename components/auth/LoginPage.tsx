@@ -1,0 +1,215 @@
+"use client";
+
+import { useState } from "react";
+import { Phone } from "lucide-react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { showSuccess, showError } from "@/utils/toast";
+
+export default function LoginPage() {
+  const router = useRouter();
+
+  const [step, setStep] = useState<"mobile" | "otp">("mobile");
+  const [mobile, setMobile] = useState("");
+  const [otp, setOtp] = useState(["", "", "", ""]);
+  const [userType, setUserType] = useState("volunteer");
+
+  const handleOtpChange = (value: string, index: number) => {
+    if (!/^[0-9]?$/.test(value)) return;
+
+    const updated = [...otp];
+    updated[index] = value;
+    setOtp(updated);
+
+    if (value && index < 3) {
+      document.getElementById(`otp-${index + 1}`)?.focus();
+    }
+  };
+
+  const allOtpFilled = otp.join("").length === 4;
+
+  const handleSendOtp = () => {
+    if (mobile.length !== 10) {
+      showError("Please enter a valid 10-digit mobile number");
+      return;
+    }
+    setStep("otp");
+  };
+
+  const handleLogin = () => {
+    if (!allOtpFilled) return;
+
+    showSuccess("Login Successfully");
+    router.push("/");
+  };
+
+  return (
+    <div className=" w-full flex ">
+      {/* ---------------- LEFT WELCOME PANEL ---------------- */}
+      <div
+        className="
+        hidden lg:flex w-1/2 items-center justify-center 
+        bg-gray-50
+        text-gray-700 p-12 relative overflow-hidden
+      "
+      >
+        {/* Soft radial glow */}
+        {/* <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" /> */}
+
+        <div className="relative z-10 max-w-lg">
+          <h1 className="text-5xl font-extrabold leading-tight drop-shadow-md">
+            Welcome Back
+          </h1>
+
+          <p className="mt-4 text-lg text-gray/90">
+            Login to continue your journey of creating a better community.
+            Access tools, connect, collaborate and manage civic responsibilities
+            effortlessly.
+          </p>
+
+          <img
+            src="/logo.png"
+            alt="Logo"
+            className="w-72 mt-12 opacity-95 drop-shadow-xl rounded-xl"
+          />
+        </div>
+      </div>
+
+      {/* ---------------- RIGHT LOGIN PANEL ---------------- */}
+      <div className="flex-1 flex items-center justify-center bg-white  p-6 sm:p-10">
+        <div
+          className="
+            w-full max-w-md p-8 rounded-2xl 
+            bg-white/90 backdrop-blur-xl 
+            shadow-[0_8px_30px_rgb(0,0,0,0.08)]
+            border border-white/40
+          "
+        >
+          <h2 className="text-3xl font-bold text-center text-[#DF562C] tracking-wide">
+            Login With OTP
+          </h2>
+
+          {/* User Type */}
+          <div className="flex justify-center gap-6 mt-6 text-sm font-medium text-gray-700">
+            {["volunteer", "member", "corporator"].map((type) => (
+              <label
+                key={type}
+                className="flex items-center gap-2 cursor-pointer hover:text-[#DF562C] transition"
+              >
+                <input
+                  type="radio"
+                  name="userType"
+                  value={type}
+                  checked={userType === type}
+                  onChange={(e) => setUserType(e.target.value)}
+                  className="accent-[#DF562C] cursor-pointer"
+                />
+                {type.charAt(0).toUpperCase() + type.slice(1)}
+              </label>
+            ))}
+          </div>
+
+          {/* ---------------- STEP 1: MOBILE ---------------- */}
+          {step === "mobile" && (
+            <div className="mt-6">
+              <label className="text-sm font-medium text-gray-600">
+                Mobile Number
+              </label>
+
+              <div className="flex items-center mt-2 border rounded-md bg-white px-3 py-1.5 shadow-sm">
+                <Phone className="text-gray-400 w-4 h-4" />
+
+                <input
+                  type="text"
+                  maxLength={10}
+                  value={mobile}
+                  onChange={(e) =>
+                    setMobile(e.target.value.replace(/[^0-9]/g, ""))
+                  }
+                  placeholder="Enter your mobile number"
+                  className="w-full p-1 outline-none text-sm bg-transparent"
+                />
+              </div>
+
+              <button
+                onClick={handleSendOtp}
+                className="w-full mt-6 bg-[#DF562C] hover:bg-red-600
+                text-white py-2 rounded font-semibold shadow-md 
+                hover:opacity-90 transition active:scale-95"
+              >
+                Send OTP
+              </button>
+
+              {userType === "corporator" && (
+                <div className="mt-5 text-center text-sm">
+                  <p className="text-gray-600">
+                    Don’t have an account?{" "}
+                    <Link
+                      href="/auth/singup"
+                      className="text-[#DF562C] font-semibold hover:underline"
+                    >
+                      Create Account
+                    </Link>
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ---------------- STEP 2: OTP ---------------- */}
+          {step === "otp" && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="mt-6"
+            >
+              <p className="text-sm text-center text-gray-600">
+                OTP sent to <strong>{mobile}</strong>
+              </p>
+
+              <div className="flex justify-center gap-4 mt-6">
+                {otp.map((digit, index) => (
+                  <input
+                    key={index}
+                    id={`otp-${index}`}
+                    maxLength={1}
+                    value={digit}
+                    onChange={(e) => handleOtpChange(e.target.value, index)}
+                    className="
+                      w-14 h-14 text-center text-xl font-bold rounded-md
+                      border border-gray-300 bg-white shadow-sm
+                      focus:border-[#DF562C] outline-none
+                    "
+                  />
+                ))}
+              </div>
+
+              <button
+                className="mt-4 text-sm text-[#DF562C] font-medium hover:underline block mx-auto"
+                onClick={() => setStep("mobile")}
+              >
+                Change Mobile Number
+              </button>
+
+              <button
+                onClick={handleLogin}
+                disabled={!allOtpFilled}
+                className={`
+                  w-full mt-6 py-3 rounded-md font-semibold shadow-md transition
+                  ${
+                    allOtpFilled
+                      ? "bg-gradient-to-r from-[#DF562C] to-[#c1471f] text-white hover:opacity-90"
+                      : "bg-gray-300 text-gray-600 cursor-not-allowed"
+                  }
+                `}
+              >
+                Login
+              </button>
+            </motion.div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
