@@ -30,14 +30,48 @@ const MemberRegistrationForm = () => {
         </div>
       </div>
 
-      <div className="w-full flex flex-col md:flex-row gap-6 p-4 md:p-8 max-w-8xl mx-auto">
-        {/* ================= 1. FORM SECTION (80% on Desktop) ================= */}
-        <div className="w-full md:w-[75%] bg-white p-6 rounded-lg shadow-lg order-2 md:order-1">
-          {/* <h2 className="text-xl font-medium text-gray-800 mb-4">
-            Membership Registration Form
-          </h2> */}
+      <div className="w-full p-4 md:p-8 max-w-8xl mx-auto">
+        <h2 className="text-lg text-center md:text-xl font-medium text-gray-900 mb-2">
+          Membership Registration
+        </h2>
+        <div className="flex justify-center w-full">
+          <div
+            className="
+      w-full 
+      py-4
+      relative 
+      overflow-hidden
+      text-center
+    "
+          >
+            {/* Decorative Top Accent Line */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
-          <form className="space-y-4">
+            <p className="text-gray-700 text-sm md:text-[15px] leading-relaxed font-normal">
+              Becoming a Member is not just a registration — it is a heartfelt
+              commitment to stand with a mission that serves humanity, protects
+              nature, and uplifts society at every level. As a valued member,
+              you become an integral part of a growing community that believes
+              in compassion, collective responsibility, and meaningful action.
+              Your involvement strengthens initiatives that support education,
+              healthcare, environmental conservation, women empowerment, youth
+              guidance, and the preservation of our nation’s spiritual and
+              cultural heritage. Every contribution you make — whether through
+              time, skills, resources, or awareness — creates a ripple of
+              positive transformation that touches lives far beyond what can be
+              seen.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-6 md:mb-4 px-4 md:px-8">
+        {/* ================= 1. FORM SECTION (80% on Desktop) ================= */}
+        <div
+          className="w-full md:w-[75%] bg-white p-6 rounded-lg 
+     shadow-[0_0_20px_rgba(0,0,0,0.1)] order-2 md:order-1"
+        >
+          <form className="space-y-2">
             {/* =================== HEADING =================== */}
             <div>
               <h2 className="text-lg font-medium text-gray-800">
@@ -59,11 +93,9 @@ const MemberRegistrationForm = () => {
                     Select Title <span className="text-red-500">*</span>
                   </label>
 
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <div className="flex items-center border px-3 mt-1 rounded rounded focus-within:border-[#DF562C] transition-colors">
                     <select
-                      className="
-          w-full px-2 py-1 text-sm outline-none bg-white text-gray-700
-        "
+                      className="w-full px-2 py-1 text-sm  outline-none bg-white text-gray-700"
                       required
                     >
                       <option value="">Select title</option>
@@ -79,8 +111,7 @@ const MemberRegistrationForm = () => {
                     Applicant's Name <span className="text-red-500">*</span>
                   </label>
 
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                    <User size={18} className="text-gray-500" />
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <input
                       type="text"
                       placeholder="Enter applicant's name"
@@ -93,8 +124,7 @@ const MemberRegistrationForm = () => {
                   <label className="text-sm font-normal">
                     Surname <span className="text-red-500">*</span>
                   </label>
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                    <User size={18} className="text-gray-500" />
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <input
                       type="text"
                       placeholder="Enter Surname"
@@ -107,8 +137,7 @@ const MemberRegistrationForm = () => {
                   <label className="text-sm font-normal">
                     Father's Name <span className="text-red-500">*</span>
                   </label>
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                    <User size={18} className="text-gray-500" />
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <input
                       type="text"
                       placeholder="Enter father's name"
@@ -122,7 +151,7 @@ const MemberRegistrationForm = () => {
                     Gender <span className="text-red-500">*</span>
                   </label>
 
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <select
                       className="w-full px-2 py-1 text-sm outline-none bg-white text-gray-700"
                       required
@@ -138,8 +167,7 @@ const MemberRegistrationForm = () => {
                   <label className="text-sm font-normal">
                     Qualification <span className="text-red-500">*</span>
                   </label>
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                    <User size={18} className="text-gray-500" />
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <input
                       type="text"
                       placeholder="Enter qualification"
@@ -153,7 +181,7 @@ const MemberRegistrationForm = () => {
                     Occupation <span className="text-red-500">*</span>
                   </label>
 
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <select
                       className="w-full px-2 py-1 text-sm outline-none bg-white text-gray-700"
                       required
@@ -172,7 +200,7 @@ const MemberRegistrationForm = () => {
                     Organisation Type <span className="text-red-500">*</span>
                   </label>
 
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <select
                       className="w-full px-2 py-1 text-sm outline-none bg-white text-gray-700"
                       required
@@ -191,7 +219,7 @@ const MemberRegistrationForm = () => {
                     Designation <span className="text-red-500">*</span>
                   </label>
 
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <select
                       className="w-full px-2 py-1 text-sm outline-none bg-white text-gray-700"
                       required
@@ -211,7 +239,7 @@ const MemberRegistrationForm = () => {
                     Date of Birth <span className="text-red-500">*</span>
                   </label>
 
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <input
                       type="date"
                       className="w-full px-2 py-1 text-sm outline-none text-gray-700"
@@ -223,8 +251,7 @@ const MemberRegistrationForm = () => {
                   <label className="text-sm font-normal">
                     Mobile No. <span className="text-red-500">*</span>
                   </label>
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                    <Phone size={18} className="text-gray-500" />
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <input
                       type="text"
                       placeholder="Enter 10-digit mobile number"
@@ -236,8 +263,7 @@ const MemberRegistrationForm = () => {
                 </div>
                 <div>
                   <label className="text-sm font-normal">Alternate No.</label>
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                    <Phone size={18} className="text-gray-500" />
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <input
                       type="text"
                       placeholder="Enter 10-digit mobile number"
@@ -251,8 +277,7 @@ const MemberRegistrationForm = () => {
                   <label className="text-sm font-normal">
                     Email Address <span className="text-red-500">*</span>
                   </label>
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                    <Mail size={18} className="text-gray-500" />
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <input
                       type="email"
                       placeholder="Enter your email address"
@@ -267,7 +292,7 @@ const MemberRegistrationForm = () => {
                     <span className="text-red-500">*</span>
                   </label>
 
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <input
                       type="text"
                       placeholder="Enter Aadhar / ID number"
@@ -281,8 +306,7 @@ const MemberRegistrationForm = () => {
                   <label className="text-sm font-normal">
                     Address / House No. <span className="text-red-500">*</span>
                   </label>
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                    <MapPin size={18} className="text-gray-500" />
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <input
                       type="text"
                       placeholder="Enter your complete address"
@@ -295,7 +319,7 @@ const MemberRegistrationForm = () => {
                   <label className="text-sm font-normal">
                     Country <span className="text-red-500">*</span>
                   </label>
-                  <select className="border px-2 py-1 text-sm w-full mt-1 focus:border-[#DF562C] focus:ring-[#DF562C] outline-none">
+                  <select className="border rounded px-2 py-1 text-sm w-full mt-1 focus:border-[#DF562C] focus:ring-[#DF562C] outline-none">
                     <option value="">Select your country</option>
                     {/* Add country options here */}
                   </select>
@@ -304,7 +328,7 @@ const MemberRegistrationForm = () => {
                   <label className="text-sm font-normal">
                     State <span className="text-red-500">*</span>
                   </label>
-                  <select className="border px-2 py-1 text-sm w-full mt-1 focus:border-[#DF562C] focus:ring-[#DF562C] outline-none">
+                  <select className="border rounded px-2 py-1 text-sm w-full mt-1 focus:border-[#DF562C] focus:ring-[#DF562C] outline-none">
                     <option value="">Select your state</option>
                     {/* Add state options here */}
                   </select>
@@ -314,53 +338,12 @@ const MemberRegistrationForm = () => {
                   <label className="text-sm font-normal">
                     City <span className="text-red-500">*</span>
                   </label>
-                  <select className="border px-2 py-1 text-sm w-full mt-1 focus:border-[#DF562C] focus:ring-[#DF562C] outline-none">
+                  <select className="border px-2 rounded py-1 text-sm w-full mt-1 focus:border-[#DF562C] focus:ring-[#DF562C] outline-none">
                     <option value="">Select your city</option>
                     {/* Add city options here */}
                   </select>
                 </div>
-                {/* <div>
-                <label className="text-sm font-normal">
-                  Street No. <span className="text-red-500">*</span>
-                </label>
 
-                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                  <input
-                    type="text"
-                    placeholder="Enter street number"
-                    className="w-full px-2 py-1 text-sm outline-none text-gray-700"
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="text-sm font-normal">
-                  Tehsil / District <span className="text-red-500">*</span>
-                </label>
-
-                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                  <input
-                    type="text"
-                    placeholder="Enter tehsil or district"
-                    className="w-full px-2 py-1 text-sm outline-none text-gray-700"
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="text-sm font-normal">
-                  Post Office <span className="text-red-500">*</span>
-                </label>
-
-                <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                  <input
-                    type="text"
-                    placeholder="Enter post office"
-                    className="w-full px-2 py-1 text-sm outline-none text-gray-700"
-                    required
-                  />
-                </div>
-              </div> */}
                 <div>
                   <label className="text-sm font-normal">
                     Pin Code <span className="text-red-500">*</span>
@@ -368,7 +351,7 @@ const MemberRegistrationForm = () => {
                   <input
                     type="text"
                     placeholder="Enter pin code"
-                    className="border px-2 py-1 text-sm w-full mt-1 focus:border-[#DF562C] outline-none"
+                    className="border px-2 py-1 rounded text-sm w-full mt-1 focus:border-[#DF562C] outline-none"
                   />
                 </div>
                 {/* Blood Group */}
@@ -377,7 +360,7 @@ const MemberRegistrationForm = () => {
                     Blood Group <span className="text-red-500">*</span>
                   </label>
 
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <select
                       name="blood_group"
                       className="w-full px-2 py-1.5 text-sm outline-none bg-white text-gray-700"
@@ -410,13 +393,12 @@ const MemberRegistrationForm = () => {
                 Emergency Details
               </h4>
               <hr className="w-full border-t-1 border-gray-300 mt-2 mb-3" />
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid md:grid-cols-4 gap-4">
                 <div>
                   <label className="text-sm font-normal">
                     Relation <span className="text-red-500">*</span>
                   </label>
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                    <MapPin size={18} className="text-gray-500" />
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <input
                       type="text"
                       placeholder="Enter your relation"
@@ -429,8 +411,7 @@ const MemberRegistrationForm = () => {
                   <label className="text-sm font-normal">
                     Emergency Contact <span className="text-red-500">*</span>
                   </label>
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                    <Phone size={18} className="text-gray-500" />
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <input
                       type="text"
                       placeholder="Enter 10-digit mobile number"
@@ -523,7 +504,8 @@ const MemberRegistrationForm = () => {
               <h3 className="font-medium text-sm text-gray-700 mb-2">
                 Volunteering For <span className="text-red-500">*</span>
               </h3>
-              <div className="grid md:grid-cols-4 gap-3 text-sm">
+              <hr className="w-full border-t-1 border-gray-300" />
+              <div className="grid md:grid-cols-4 gap-3 text-sm mt-1">
                 <label className="flex items-center gap-2 cursor-pointer ">
                   <input
                     type="radio"
@@ -568,7 +550,8 @@ const MemberRegistrationForm = () => {
               <h3 className="font-medium text-sm text-gray-700 py-2">
                 Networking For <span className="text-red-500">*</span>
               </h3>
-              <div className="grid md:grid-cols-4 gap-3 text-sm">
+              <hr className="w-full border-t-1 border-gray-300" />
+              <div className="grid md:grid-cols-4 gap-3 text-sm mt-1">
                 <label className="flex items-center gap-2 cursor-pointer ">
                   <input
                     type="radio"
@@ -613,7 +596,8 @@ const MemberRegistrationForm = () => {
               <h3 className="font-medium text-sm text-gray-700 py-2">
                 Area Of Interest <span className="text-red-500">*</span>
               </h3>
-              <div className="grid md:grid-cols-4 gap-3 text-sm">
+              <hr className="w-full border-t-1 border-gray-300" />
+              <div className="grid md:grid-cols-4 gap-3 text-sm mt-1">
                 <label className="flex items-center gap-2 cursor-pointer ">
                   <input
                     type="radio"
@@ -658,7 +642,8 @@ const MemberRegistrationForm = () => {
               <h3 className="font-medium text-sm text-gray-700 py-2">
                 Monetary Support <span className="text-red-500">*</span>
               </h3>
-              <div className="grid md:grid-cols-4 gap-3 text-sm">
+              <hr className="w-full border-t-1 border-gray-300" />
+              <div className="grid md:grid-cols-4 gap-3 text-sm mt-1">
                 {/* Donation */}
                 <label className="flex items-center gap-2 cursor-pointer ">
                   <input
@@ -712,13 +697,12 @@ const MemberRegistrationForm = () => {
               </h4>
 
               <hr className="w-full border-t-1 border-gray-300 mt-2 mb-4" />
-              <div className="grid md:grid-cols-3 gap-3 text-sm">
+              <div className="grid md:grid-cols-4 gap-3 text-sm">
                 <div>
                   <label className="text-sm font-normal">
                     Name <span className="text-red-500">*</span>
                   </label>
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                    <User size={18} className="text-gray-500" />
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <input
                       type="text"
                       placeholder="Enter name"
@@ -731,8 +715,7 @@ const MemberRegistrationForm = () => {
                   <label className="text-sm font-normal">
                     Mobile No. <span className="text-red-500">*</span>
                   </label>
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                    <Phone size={18} className="text-gray-500" />
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <input
                       type="text"
                       placeholder="Enter 10-digit mobile number"
@@ -746,8 +729,7 @@ const MemberRegistrationForm = () => {
                   <label className="text-sm font-normal">
                     Email Id <span className="text-red-500">*</span>
                   </label>
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                    <Mail size={18} className="text-gray-500" />
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <input
                       type="email"
                       placeholder="Enter your email address"
@@ -756,12 +738,13 @@ const MemberRegistrationForm = () => {
                     />
                   </div>
                 </div>
+              </div>
+              <div className="grid md:grid-cols-4 gap-3 text-sm mt-2">
                 <div>
                   <label className="text-sm font-normal">
                     Name <span className="text-red-500">*</span>
                   </label>
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                    <User size={18} className="text-gray-500" />
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <input
                       type="text"
                       placeholder="Enter name"
@@ -774,8 +757,7 @@ const MemberRegistrationForm = () => {
                   <label className="text-sm font-normal">
                     Mobile No. <span className="text-red-500">*</span>
                   </label>
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                    <Phone size={18} className="text-gray-500" />
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <input
                       type="text"
                       placeholder="Enter 10-digit mobile number"
@@ -789,8 +771,7 @@ const MemberRegistrationForm = () => {
                   <label className="text-sm font-normal">
                     Email Id <span className="text-red-500">*</span>
                   </label>
-                  <div className="flex items-center border px-3 mt-1 focus-within:border-[#DF562C] transition-colors">
-                    <Mail size={18} className="text-gray-500" />
+                  <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <input
                       type="email"
                       placeholder="Enter your email address"
@@ -802,14 +783,14 @@ const MemberRegistrationForm = () => {
               </div>
             </div>
             {/* Upload Profile Picture */}
-            <div className="w-full">
+            <div className="w-full ">
               <h4 className="text-center text-gray-800 text-[15px] font-medium">
                 Upload Profile Picture
               </h4>
 
               <hr className="w-full border-t-1 border-gray-300 mt-2 mb-4" />
 
-              <div className="flex items-center border px-3 py-1  bg-white focus-within:border-[#DF562C] transition-colors">
+              <div className="flex md:w-[50%] items-center rounded border px-3 py-1  bg-white focus-within:border-[#DF562C] transition-colors">
                 <input
                   type="file"
                   accept="image/*"
@@ -824,12 +805,12 @@ const MemberRegistrationForm = () => {
             <div className="flex gap-4 pt-2">
               {" "}
               {/* Added pt-4 for spacing above buttons */}
-              <button className="bg-[#063D8E] border border-[#063D8E] hover:bg-sky-600 text-white px-6 py-1 text-base font-normal  transition-colors">
+              <button className="bg-[#063D8E] rounded border border-[#063D8E] hover:bg-sky-600 text-white px-6 py-1 text-base font-normal  transition-colors">
                 Register Now
               </button>
               <button
                 type="button"
-                className="px-6 py-1 font-normal border border-[#DF562C] bg-[#DF562C] hover:bg-red-600 text-white text-sm transition-colors"
+                className="px-6 py-1 font-normal rounded border border-[#DF562C] bg-[#DF562C] hover:bg-red-600 text-white text-sm transition-colors"
               >
                 Cancel
               </button>
@@ -840,7 +821,7 @@ const MemberRegistrationForm = () => {
         {/* ================= 2. DATA/SIDEBAR SECTION (20% on Desktop) ================= */}
         <div className="w-full md:w-[25%] space-y-6 order-1 md:order-2  self-start sticky top-4">
           {/* NEED HELP BOX */}
-          <div className="bg-white shadow-md shadow-lg rounded p-5 text-center">
+          <div className="bg-white shadow-[0_0_20px_rgba(0,0,0,0.1)] rounded p-5 text-center">
             <div className="flex justify-center mb-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -875,7 +856,7 @@ const MemberRegistrationForm = () => {
           </div>
 
           {/* VOLUNTEER CTA */}
-          <div className="bg-[#2d70c8] rounded shadow-md p-5 text-center text-white">
+          <div className="bg-[#2d70c8] rounded shadow-[0_0_20px_rgba(0,0,0,0.1)] p-5 text-center text-white">
             <div className="flex justify-center mb-3">
               <img
                 src="/home/volunteer-icons.png"
