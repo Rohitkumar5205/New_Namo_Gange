@@ -1,27 +1,53 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import axiosClient from "@/lib/axiosClient";
+import Link from "next/link";
 
-const sliderImages = [
-  "/home/banner1.jpg",
-  // "/home/bann2.jpg",
-  // "/home/bann3.jpg",
-  // "/home/banner2.jpg",
-  // "/home/banner3.jpg",
-  "/home/b1.jpg",
-  // "/home/b2.jpg",
-  // "/home/b3.jpg",
-  // "/home/b4.jpg",
-  "/home/b5.jpg",
-  "/home/b6.jpg",
-  // "/home/b7.jpg",
-];
+interface Banner {
+  image: string;
+  title: string;
+  link: string;
+}
 
 const HomeSlider = () => {
+  const [banners, setBanners] = useState<Banner[]>([]);
+
+  useEffect(() => {
+    const fetchSliderImages = async () => {
+      try {
+        const res = await axiosClient.get("/banner");
+
+        console.log("🔥 Full API Response:", res.data);
+
+        const activeBanners = res.data?.banners?.filter(
+          (b: any) => b.status === "Active"
+        );
+
+        const formatted = activeBanners?.map((b: any) => ({
+          image: b.image,
+          title: b.title,
+          link: b.link,
+        }));
+
+        console.log("🖼 Final Banner List:", formatted);
+
+        if (Array.isArray(formatted) && formatted.length > 0) {
+          setBanners(formatted);
+        }
+      } catch (error) {
+        console.error("❌ Slider API Error:", error);
+      }
+    };
+
+    fetchSliderImages();
+  }, []);
+
   const sliderRef = React.useRef<any>(null);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -73,32 +99,62 @@ const HomeSlider = () => {
 
       {/* MAIN SLIDER */}
       <Slider ref={sliderRef} {...settings}>
-        {sliderImages.map((img, i) => (
+        {banners.map((item, i) => (
           <div key={i}>
-            <div className="relative w-full h-[220] md:h-[550px] lg:h-[535px]">
+            <div className="relative w-full h-[220px] md:h-[550px] lg:h-[535px]">
               <Image
-                src={img}
+                src={item.image}
                 alt={`slide-${i}`}
                 fill
                 sizes="100vw"
                 priority
-                className="object-fit"
+                className="object-cover"
               />
+
+              {/* TITLE OVERLAY — per slide */}
+              <div className="absolute bottom-40 right-6 md:right-20 z-30 flex flex-col gap-3 max-w-xl">
+                {/* Title */}
+                <h2 className="text-white text-lg md:text-3xl font-bold leading-snug drop-shadow-xl">
+                  {item.title}
+                </h2>
+
+                {/* Donate Button */}
+                <Link
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+    inline-block
+    px-5 py-1 md:px-6 md:py-1.5
+    text-sm md:text-base 
+    font-semibold 
+    text-white 
+    bg-[#DF562C] 
+    rounded
+    shadow-md 
+    hover:bg-orange-600 
+    hover:shadow-lg 
+    transition-all 
+    duration-300
+  "
+                >
+                  Donate Now
+                </Link>
+              </div>
             </div>
           </div>
         ))}
       </Slider>
 
       {/* (OPTIONAL) TEXT OVERLAY — uncomment if needed */}
-      {/* 
-      <div className="absolute right-6 bottom-10 md:right-16 md:bottom-16 z-30 max-w-xl">
-        <h2 className="text-white text-xl md:text-4xl font-bold leading-snug drop-shadow-xl">
+
+      {/* <div className="absolute right-5 top-30 md:right-16 md:bottom-16 z-30 max-w-xl">
+        <h2 className="text-white text-xl md:text-3xl font-bold leading-snug drop-shadow-xl">
           WOULD YOU CARE TO SPARE JUST ONE DAY’S WORTH OF{" "}
           <span className="text-yellow-400">EARNING OR TIME</span> AND
           CONTRIBUTE TO SOCIAL IMPACT?
         </h2>
-      </div> 
-      */}
+      </div> */}
 
       {/* ORANGE CARD SECTION BELOW SLIDER */}
       <div className="relative bottom-0 md:bottom-10  left-1/2 -translate-x-1/2 w-full max-w-7xl px-2 md:px-4 z-30">
