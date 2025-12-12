@@ -102,7 +102,7 @@ const CultureSanskriti = () => {
         style={{ backgroundImage: "url('/objectives/culture1.jpg')" }}
       >
         {/* Overlay */}
-        <div className="bg-black/30 w-full h-full py-10 md:py-16">
+        <div className="bg-black/30 w-full h-full md:h-[250px] py-10 md:py-16">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
               Culture <span className="">Sanskriti</span>

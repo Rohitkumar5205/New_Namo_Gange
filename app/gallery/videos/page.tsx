@@ -38,7 +38,7 @@ export default function VideoGallery() {
         style={{ backgroundImage: "url('/home/video2.jpg')" }}
       >
         {/* Overlay */}
-        <div className="bg-black/30 w-full h-full py-10 md:py-16">
+        <div className="bg-black/30 w-full h-full md:h-[250px] py-10 md:py-16">
           <div className="w-full px-4 text-center">
             <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
               Videos{" "}

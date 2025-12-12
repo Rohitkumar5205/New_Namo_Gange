@@ -10,7 +10,7 @@ const AcharyaJagdishji = () => {
         style={{ backgroundImage: "url('/about/aboutus.jpg')" }}
       >
         {/* Overlay */}
-        <div className="bg-black/20 w-full h-full flex items-center py-10 md:py-16">
+        <div className="bg-black/20 w-full h-full md:h-[250px] flex items-center py-10 md:py-16">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <h2 className="text-xl md:text-3xl font-semibold text-white">
               Acharya <span className="">Jagdishji Maharaj</span>

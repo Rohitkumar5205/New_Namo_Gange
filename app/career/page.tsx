@@ -13,7 +13,7 @@ export default function MokshaSewaPage() {
         className="w-full bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/banner/career.png')" }}
       >
-        <div className="bg-black/20 py-12 md:py-20">
+        <div className="bg-black/20 py-12 md:h-[250px] md:py-20">
           <div className="w-full px-4 text-center">
             <h2 className="text-2xl md:text-2xl font-medium uppercase text-white">
               Our <span className="text-[#DF562C]">Career</span>

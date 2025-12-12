@@ -45,7 +45,7 @@ export default function EventCategoryPage() {
         style={{ backgroundImage: "url('/ourActivities/ourActivities5.jpg')" }}
       >
         {/* Overlay */}
-        <div className="bg-black/60 w-full h-full py-10 md:py-16">
+        <div className="bg-black/60 w-full h-full py-10 md:h-[250px] md:py-16">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
               {title}

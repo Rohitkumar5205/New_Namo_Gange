@@ -10,7 +10,7 @@ export default function DonatePage() {
         className="w-full bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/home/donation.jpg')" }}
       >
-        <div className="bg-black/30 w-full h-full py-10 md:py-16">
+        <div className="bg-black/30 w-full h-full md:h-[250px] py-10 md:py-16">
           <div className="max-w-7xl mx-auto text-center">
             <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
               Donate

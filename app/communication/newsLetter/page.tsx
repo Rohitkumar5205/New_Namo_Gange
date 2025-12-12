@@ -60,7 +60,7 @@ export default function NewsletterPage() {
         className="w-full bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/home/Newsletter.jpg')" }}
       >
-        <div className="bg-black/20 w-full h-full py-14">
+        <div className="bg-black/20 w-full h-full md:h-[250px] py-14">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <h2 className="text-2xl font-semibold text-white">Newsletter</h2>
             <p className="text-white mt-1">
