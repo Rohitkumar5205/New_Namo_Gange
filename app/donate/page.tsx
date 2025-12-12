@@ -48,9 +48,9 @@ export default function DonatePage() {
           Your contribution plays a powerful role in transforming lives and
           supporting those who rely on our compassionate services. Through our
           initiatives such as
-          <span className="font-semibold text-[#DF562C]"> Ann Seva</span>, which
+          <span className="font-semibold text-[#DF562C]"> Ann Sewa</span>, which
           provides nutritious meals to the hungry, and
-          <span className="font-semibold text-[#0C55A0]"> Moksha Seva</span>,
+          <span className="font-semibold text-[#0C55A0]"> Moksha Sewa</span>,
           which offers dignified last-rites support to underprivileged families,
           we strive to bring relief, comfort, and hope to communities in need.
           Every donation—big or small—helps extend kindness, humanity, and

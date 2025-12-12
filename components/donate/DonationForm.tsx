@@ -6,15 +6,15 @@ const donationOptions: Record<
   string,
   { label: string; amount: number | "custom" }[]
 > = {
-  "Ann Seva": [
+  "Ann Sewa": [
     { label: "₹101 – One Meal", amount: 101 },
     { label: "₹501 – Food Package", amount: 501 },
-    { label: "₹1100 – Full Ann Seva", amount: 1100 },
+    { label: "₹1100 – Full Ann Sewa", amount: 1100 },
     { label: "Custom Amount", amount: "custom" },
   ],
-  "Moksha Seva": [
+  "Moksha Sewa": [
     { label: "₹2100 – Last Rites Support", amount: 2100 },
-    { label: "₹5100 – Complete Moksha Seva", amount: 5100 },
+    { label: "₹5100 – Complete Moksha Sewa", amount: 5100 },
     { label: "₹11000 – Premium Moksha Support", amount: 11000 },
     { label: "Custom Amount", amount: "custom" },
   ],
@@ -29,7 +29,7 @@ interface DonationFormData {
   state: string;
   city: string;
   address: string;
-  sevaType: string;
+  SewaType: string;
   donationPackage: string;
   amount: string;
   pan: string;
@@ -46,7 +46,7 @@ const initialForm: DonationFormData = {
   state: "",
   city: "",
   address: "",
-  sevaType: "",
+  SewaType: "",
   donationPackage: "",
   amount: "",
   pan: "",
@@ -75,10 +75,10 @@ export default function DonationForm() {
     }
 
     // When SEWA changes
-    if (name === "sevaType") {
+    if (name === "SewaType") {
       setForm((prev) => ({
         ...prev,
-        sevaType: value,
+        SewaType: value,
         donationPackage: "",
         amount: "",
       }));
@@ -87,7 +87,7 @@ export default function DonationForm() {
 
     // When PACKAGE changes → auto-set amount
     if (name === "donationPackage") {
-      const selected = donationOptions[form.sevaType]?.find(
+      const selected = donationOptions[form.SewaType]?.find(
         (pkg) => pkg.label === value
       );
 
@@ -118,7 +118,7 @@ export default function DonationForm() {
           <h2 className="text-lg md:text-xl font-medium text-center mb-6 underline underline-offset-4">
             Support Through{" "}
             <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
-              Ann Seva / Moksha Seva
+              Ann Sewa / Moksha Sewa
             </span>
           </h2>
 
@@ -201,16 +201,16 @@ export default function DonationForm() {
             <div>
               <label className="text-sm font-medium">Choose Sewa *</label>
               <select
-                name="sevaType"
+                name="SewaType"
                 required
-                value={form.sevaType}
+                value={form.SewaType}
                 onChange={handleChange}
                 className="w-full border rounded px-3 py-2 mt-1 text-sm 
              focus:outline-none focus:ring-0 focus:border-gray-400"
               >
                 <option value="">Select Sewa</option>
-                <option>Ann Seva</option>
-                <option>Moksha Seva</option>
+                <option>Ann Sewa</option>
+                <option>Moksha Sewa</option>
               </select>
             </div>
 
@@ -220,14 +220,14 @@ export default function DonationForm() {
               <select
                 name="donationPackage"
                 required
-                disabled={!form.sevaType}
+                disabled={!form.SewaType}
                 value={form.donationPackage}
                 onChange={handleChange}
                 className="w-full border rounded px-3 py-2 mt-1 text-sm disabled:bg-gray-100"
               >
                 <option value="">Select Package</option>
-                {form.sevaType &&
-                  donationOptions[form.sevaType].map((pkg, i) => (
+                {form.SewaType &&
+                  donationOptions[form.SewaType].map((pkg, i) => (
                     <option key={i} value={pkg.label}>
                       {pkg.label}
                     </option>

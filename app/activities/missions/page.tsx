@@ -38,11 +38,11 @@ const missions: Mission[] = [
     link: "/missions/indo-himalayan-expo",
   },
   {
-    title: "Anna Seva",
+    title: "Anna Sewa",
     image: ourIni12,
     description:
       "Feeding the needy with compassion — a mission rooted in selfless service.",
-    link: "/missions/anna-seva",
+    link: "/missions/anna-sewa",
   },
   {
     title: "NGT Farms",

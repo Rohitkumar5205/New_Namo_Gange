@@ -301,7 +301,7 @@ const MemberRegistrationForm = () => {
                 </div>
                 <div className="">
                   <label className="text-sm font-normal">
-                    Address / House No. <span className="text-red-500">*</span>
+                    Address <span className="text-red-500">*</span>
                   </label>
                   <div className="flex items-center border px-3 mt-1 rounded focus-within:border-[#DF562C] transition-colors">
                     <input

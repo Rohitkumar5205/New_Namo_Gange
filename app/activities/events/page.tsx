@@ -28,10 +28,10 @@ const initiatives = [
     slug: "indo-himalayan-expo",
   },
   {
-    title: "Anna Seva",
+    title: "Anna Sewa",
     img: ourIni12,
     desc: "Serving nutritious meals with love, compassion, and dignity to the needy.",
-    slug: "anna-seva",
+    slug: "anna-sewa",
   },
   {
     title: "NGT Farms",

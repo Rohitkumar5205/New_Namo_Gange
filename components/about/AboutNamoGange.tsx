@@ -73,16 +73,15 @@ const AboutNamoGange = () => {
           </div>
         </div>
       </div>
-      <div className="w-full px-2 md:px-8 lg:px-8">
+      <div className="w-full px-2 md:px-6 lg:px-6">
         <div className="w-full mt-4 text-center">
-          <h1 className="text-sm md:text-xl font-medium  mb-3">
+          <h1 className="text-sm md:text-xl font-medium">
             About <span className="text-[#DF562C]">Namo Gange</span>
           </h1>
 
-          <p className="italic text-sm md:text-[15px] max-w-3xl mx-auto text-gray-700">
-            “Through Health & Wellness, Kala & Sanskriti, Women Empowerment,
-            Moksha Sewa, Ann Seva, Health Camps, and Cleaned the Ganga River —
-            we strive to heal, inspire, and transform communities.”
+          <p className="italic text-sm md:text-[15px] w-full text-gray-700">
+            “We serve communities through wellness, culture, women empowerment,
+            compassionate service, and environmental care.”
           </p>
         </div>
         <div className=" w-full  h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
@@ -98,16 +97,6 @@ const AboutNamoGange = () => {
             Sharma, Shri Dinesh Rathore, Shri Ravi Malla, Shri Ved Priya Pandey,
             Shri Rajesh Aggarwal, and Shri Anoop Sharma, the trust was founded
             on <span className="font-medium">30th March 2015</span>.
-          </p>
-
-          <p className="text-sm md:text-[15px] text-gray-700">
-            The <span className="font-medium text-[#DF562C]">Namo Gange</span>{" "}
-            Trust is proudly registered under the Government of India’s portal
-            <span className="font-medium"> "NGO Darpan"</span>, which functions
-            under
-            <span className="font-medium"> NITI Aayog</span> (National
-            Institution for Transforming India). This registration affirms our
-            commitment to transparency, service, and social welfare.
           </p>
         </div>
 

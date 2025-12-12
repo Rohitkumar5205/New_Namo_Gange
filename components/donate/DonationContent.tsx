@@ -16,8 +16,8 @@ const DonationContent = () => {
       </h2>
 
       <p className="text-gray-600 text-sm leading-relaxed text-center mb-6">
-        Your contribution helps us serve the needy, support Ann Seva, Moksha
-        Seva, and uplift countless lives with dignity, compassion, and care.
+        Your contribution helps us serve the needy, support Ann Sewa, Moksha
+        Sewa, and uplift countless lives with dignity, compassion, and care.
       </p>
 
       {/* Info Cards */}
@@ -27,7 +27,7 @@ const DonationContent = () => {
             <HeartHandshake size={20} />
           </div>
           <p className="text-sm text-gray-700 leading-relaxed">
-            <span className="font-semibold">Ann Seva:</span> Providing fresh,
+            <span className="font-semibold">Ann Sewa:</span> Providing fresh,
             nutritious food to the poor, homeless, and needy individuals every
             single day.
           </p>
@@ -38,7 +38,7 @@ const DonationContent = () => {
             <HandCoins size={20} />
           </div>
           <p className="text-sm text-gray-700 leading-relaxed">
-            <span className="font-semibold">Moksha Seva:</span> Helping families
+            <span className="font-semibold">Moksha Sewa:</span> Helping families
             perform final rites with dignity, care, and complete spiritual
             assistance.
           </p>

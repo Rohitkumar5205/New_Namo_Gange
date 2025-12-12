@@ -43,12 +43,12 @@ export default function LatestNewsPage() {
 
     {
       id: 3,
-      title: "JEEV SEVA MAHA SEVA – Shree Krishnayan Desi Gauraksha",
+      title: "JEEV SEWA MAHA SEWA – Shree Krishnayan Desi Gauraksha",
       date: "20 March 2023",
       publisher: "Kailasa Entertainment",
       img: "/newsUpdate/news2.jpg",
       logo: "/logo.png",
-      desc: `The JEEV SEVA MAHA SEVA event celebrating Shree Krishnayan Desi Gauraksha brought together devotees, 
+      desc: `The JEEV SEWA MAHA SEWA event celebrating Shree Krishnayan Desi Gauraksha brought together devotees, 
       cow protectors, and cultural enthusiasts in an inspiring gathering dedicated to Gaumata. Organized in 
       collaboration with Kailasa Entertainment, the event highlighted the importance of Indian values, 
       compassion towards animals, and the spiritual significance of cow service. Visitors experienced devotional 

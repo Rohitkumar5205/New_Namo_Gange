@@ -22,7 +22,15 @@ interface NavItem {
 // ------------ FIXED MENU ITEMS ------------
 const NAV_ITEMS: NavItem[] = [
   { label: "HOME", href: "/" },
-  { label: "ABOUT US", href: "/about" },
+  // { label: "ABOUT US", href: "/about" },
+  {
+    label: "ABOUT US",
+    dropdown: [
+      { label: "About Us", href: "/about/aboutUs" },
+      { label: "Acharya Jagdishji", href: "/about/acharyaJagdishji" },
+      { label: "Trust Bodies", href: "/about/trustBodies" },
+    ],
+  },
   {
     label: "OUR OBJECTIVES",
     dropdown: [
@@ -50,13 +58,7 @@ const NAV_ITEMS: NavItem[] = [
     ],
   },
   // { label: "MOKSHA SEWA", href: "/mokshaSewa" },
-  // {
-  //   label: "SEWA",
-  //   dropdown: [
-  //     { label: "Moksha Sewa", href: "/sewa/mokshaSewa" },
-  //     { label: "Ann Sewa", href: "/sewa/annSewa" },
-  //   ],
-  // },
+
   {
     label: "MEDIA",
     dropdown: [

@@ -11,16 +11,16 @@ import OurActivities3 from "@/public/ourActivities/ourActivities3.jpg";
 
 const activities = [
   {
-    title: "Ann Seva",
-    text: `Ann Seva is one of our most sacred initiatives — a living expression of compassion, generosity, and service. 
+    title: "Ann Sewa",
+    text: `Ann Sewa is one of our most sacred initiatives — a living expression of compassion, generosity, and service. 
     Through this humble act, we aim to serve nutritious meals and provide care to the underprivileged, regardless of caste, creed, or background. 
-    Beyond food, Ann Seva carries the message of equality and dignity for all. Each meal symbolizes our collective responsibility to ensure that no one sleeps hungry. 
+    Beyond food, Ann Sewa carries the message of equality and dignity for all. Each meal symbolizes our collective responsibility to ensure that no one sleeps hungry. 
     Our volunteers tirelessly prepare and distribute meals with devotion, fostering an atmosphere of kindness and humanity in every corner of society.
     
     This initiative also helps strengthen community bonds by encouraging people to contribute their time, resources, and love in service of those in need. 
-    Ann Seva acts as a bridge between hearts, reminding us that true spirituality lies in serving others selflessly. 
+    Ann Sewa acts as a bridge between hearts, reminding us that true spirituality lies in serving others selflessly. 
     Through regular food drives, festival-based distributions, and school outreach programs, we strive to create an environment where compassion becomes a natural way of life. 
-    As more individuals join hands with us, Ann Seva continues to grow as a beacon of hope, nurturing kindness and spreading the joy of giving across communities. 
+    As more individuals join hands with us, Ann Sewa continues to grow as a beacon of hope, nurturing kindness and spreading the joy of giving across communities. 
     It teaches us that when we serve food with respect and empathy, we nourish not only bodies but souls as well.`,
     image: OurActivities1,
   },

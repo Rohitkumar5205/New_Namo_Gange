@@ -37,11 +37,11 @@ const initiatives: Initiative[] = [
     link: "/initiatives/himalayan-expo",
   },
   {
-    title: "Anna Seva",
+    title: "Anna Sewa",
     image: ourIni12,
     description:
       "A noble initiative providing food to the needy, promoting the value of selfless service and compassion.",
-    link: "/initiatives/anna-seva",
+    link: "/initiatives/anna-sewa",
   },
   {
     title: "NGT Farms",
