@@ -7,14 +7,14 @@ import Moksha from "@/public/home/gangaji.jpg";
 
 const MokshaVoyage = () => {
   return (
-    <section className="relative mt-3 py-2 md:py-4 lg:py-4 bg-gradient-to-b from-white via-gray-50 to-[#f8fafc] overflow-hidden">
-      <div className="w-full px-2 md:px-6 lg:px-6 flex flex-col md:flex-row items-center gap-12">
+    <section className="relative py-1 md:py-2 lg:py-2 bg-gradient-to-b from-white via-gray-50 to-[#f8fafc] overflow-hidden">
+      <div className="w-full px-2 md:px-12  lg:px-12 flex flex-col md:flex-row items-center gap-12">
         {/* ================= LEFT SIDE TEXT ================= */}
         <div className="flex-1">
           <h2 className="text-[1rem] text-center md:text-xl lg:text-xl font-semibold text-gray-900 mb-6 leading-tight">
             Moksha{" "}
             <span className="bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] bg-clip-text text-transparent">
-              Voyage
+              Sewa
             </span>
           </h2>
 

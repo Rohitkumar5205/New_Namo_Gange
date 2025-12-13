@@ -208,8 +208,8 @@ const initiatives: Initiative[] = [
 
 const OurInitiatives = () => {
   return (
-    <section className="relative py-4 md:py-6 bg-white overflow-hidden">
-      <div className="w-full px-2 md:px-6 lg:px-6 text-center">
+    <section className="relative py-1.5 md:py-3 px-2 md:px-12  lg:px-12  bg-white overflow-hidden">
+      <div className="w-full text-center">
         {/* ========== Section Header ========== */}
         <h2 className="text-lg md:text-xl font-semibold text-gray-900">
           Our{" "}
@@ -249,13 +249,13 @@ const OurInitiatives = () => {
         </div>
 
         {/* GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-6 gap-2">
           {initiatives.map((item, i) => (
             <div
               key={i}
               className="group bg-white rounded-xl shadow-sm border border-gray-200 
                  hover:shadow-lg hover:border-blue-500/40 transition-all duration-300 
-                 p-5 flex flex-col items-center text-center"
+                 p-3 flex flex-col items-center text-center"
             >
               {/* Image Section */}
               <div

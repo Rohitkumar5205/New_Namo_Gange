@@ -50,7 +50,7 @@ const objectives = [
 const ObjectiveOfTrust = () => {
   return (
     <section className="relative py-4 md:py-8 lg:py-8 bg-gradient-to-b from-white via-gray-50 to-[#f8fafc] overflow-hidden">
-      <div className="w-full mx-auto px-2 md:px-6 lg:px-6 md:px-0  lg:px-0 text-center">
+      <div className="w-full mx-auto px-2 md:px-12 lg:px-12 text-center">
         {/* Section Header */}
         <h2 className="text-[1rem] md:text-xl lg:text-xl font-semibold text-gray-900 mb-3">
           Objective of{" "}
@@ -86,11 +86,11 @@ const ObjectiveOfTrust = () => {
         </div>
 
         {/* Objective Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-1 px-4">
           {objectives.map((item, i) => (
             <div
               key={i}
-              className="bg-white  rounded-xl border border-gray-200  shadow-sm  hover:shadow-xl transition-all p-6 flex flex-col items-center text-center "
+              className="bg-white  rounded-xl border border-gray-200  shadow-sm  hover:shadow-xl transition-all p-3 flex flex-col items-center text-center "
             >
               {/* Icon */}
               <div className=" w-24 h-24  md:w-28 md:h-28 flex items-center justify-center  rounded-full bg-gray-50   border border-gray-200 shadow-inner  mb-4 ">
@@ -107,7 +107,7 @@ const ObjectiveOfTrust = () => {
               </h3>
 
               {/* Description */}
-              <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-4">
+              <p className="text-gray-600 text-sm leading-relaxed mb-4 text-justify line-clamp-4">
                 {item.description}
               </p>
 

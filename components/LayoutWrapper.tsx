@@ -3,6 +3,7 @@ import { useEffect, useState, ReactNode, useRef } from "react";
 import Footer from "./Footer";
 import TopBar from "./TopBar";
 import NavBar from "./NavBar";
+import SuperTopBar from  "./SuperTopBar"
 
 interface LayoutWrapperProps {
   children: ReactNode;
@@ -55,6 +56,7 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
             ${hideTop ? "-translate-y-full" : "translate-y-0"}
           `}
         >
+          <SuperTopBar/>
           <TopBar />
         </div>
 

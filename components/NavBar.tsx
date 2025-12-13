@@ -89,8 +89,8 @@ const NavBar: React.FC = () => {
     <>
       {/* ======================= DESKTOP ======================= */}
       <nav className="hidden md:block bg-[#063D8E] text-white shadow">
-        <div className="w-full flex items-center justify-between h-11 text-sm font-normal">
-          <div className="w-[90%] flex items-center justify-between pr-2">
+        <div className="w-full flex items-center justify-between h-11 text-sm px-12 font-normal">
+          <div className="flex w-full items-center justify-between">
             {NAV_ITEMS.map((item) => (
               <div key={item.label} className="relative group ">
                 {/* MAIN DESKTOP BUTTON */}
@@ -131,7 +131,7 @@ const NavBar: React.FC = () => {
             ))}
           </div>
 
-          <div className="w-[10%] items-center justify-center bg-[#DF562C]">
+          <div className="items-center justify-center bg-[#DF562C]">
             <button
               onClick={() => router.push("/donate")}
               className="flex items-center gap-2 px-10 h-11 bg-[#DF562C] text-white text-base font-semibold hover:bg-[#c44b22] transition rounded-none "

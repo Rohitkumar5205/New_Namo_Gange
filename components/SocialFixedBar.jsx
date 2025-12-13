@@ -5,7 +5,7 @@ import { Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
 
 export default function SocialFixedBar() {
   return (
-    <div className="hidden md:flex fixed right-3 bottom-5 z-50 flex-col gap-4">
+    <div className="hidden md:flex fixed right-3 top-1/2 -translate-y-1/2 z-50 flex-col gap-4">
       {/* FACEBOOK */}
       <SocialIcon
         label="Facebook"

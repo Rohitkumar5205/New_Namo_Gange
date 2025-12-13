@@ -37,8 +37,8 @@ const newsData = [
 
 const NewsUpdate = () => {
   return (
-    <section className="w-full relative py-4 md:py-6 bg-gray-50 overflow-hidden">
-      <div className="w-full px-4 md:px-6 lg:px-6">
+    <section className="w-full relative py-1.5 md:py-3 bg-gray-50 overflow-hidden">
+      <div className="w-full px-4 md:px-12 lg:px-12">
         {/* Section Header */}
         <div className="text-center mb-4">
           <h2 className="text-[1rem] md:text-xl lg:text-xl font-semibold text-gray-900 mb-2">
@@ -76,7 +76,7 @@ const NewsUpdate = () => {
         </div>
 
         {/* News Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 px-4">
           {newsData.map((item, i) => (
             <motion.div
               key={item.id}
@@ -99,7 +99,7 @@ const NewsUpdate = () => {
               </div>
 
               {/* Content */}
-              <div className="p-6 text-left">
+              <div className="p-4 text-left">
                 {/* Date */}
                 <div className="flex items-center gap-2 text-[#f36b2a] text-xs md:text-sm lg:text-sm mb-2">
                   <CalendarDays className="w-4 h-4" />
@@ -107,13 +107,13 @@ const NewsUpdate = () => {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-sm md:text-lg lg:text-lg font-medium text-gray-900 mb-3 line-clamp-2 hover:text-[#1e7ed3] transition-colors duration-300">
+                <h3 className="text-sm md:text-lg lg:text-lg font-medium text-gray-900 mb-2 line-clamp-2 hover:text-[#1e7ed3] transition-colors duration-300">
                   {item.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-gray-600 text-justisy text-xs md:text-sm mb-3 line-clamp-4 leading-relaxed">
-                  {item.description} 
+                <p className="text-gray-600 text-justisy text-xs md:text-sm line-clamp-4 leading-relaxed">
+                  {item.description}
                 </p>
 
                 <button

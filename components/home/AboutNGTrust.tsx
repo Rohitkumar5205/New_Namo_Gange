@@ -13,8 +13,8 @@ const AboutNGTrust = () => {
     "text-gray-700 text-[13px] md:text-[14px] leading-relaxed font-normal text-justify";
 
   return (
-    <section className="relative py-4 md:py-6 bg-gradient-to-b from-white via-gray-50 to-[#f8fafc] overflow-hidden">
-      <div className="w-full px-4 md:px-6 lg:px-6 flex flex-col md:flex-row items-center gap-5 md:gap-10 lg:gap-10">
+    <section className="relative py-1.5 md:py-3 px-4 md:px-12 lg:px-12 bg-gradient-to-b from-white via-gray-50 to-[#f8fafc] overflow-hidden">
+      <div className="w-full  flex flex-col md:flex-row items-center gap-5 md:gap-10 lg:gap-10">
         {/* ================= LEFT SIDE TEXT ================= */}
         <div className="flex-1">
           <h2 className="text-[1rem] md:text-xl lg:text-xl font-semibold text-gray-900 mb-4 leading-tight">
@@ -87,7 +87,7 @@ const AboutNGTrust = () => {
       </div>
 
       {/* ================== MISSION SECTION ================== */}
-      <div className="w-full px-4 lg:px-6 mt-2">
+      <div className="w-full  mt-2">
         <div className="flex flex-col md:flex-row items-center gap-5 md:gap-10 lg:gap-10">
           <div className="flex-1 relative">
             <div className="overflow-hidden rounded shadow-lg hover:shadow-2xl transition-all duration-500">

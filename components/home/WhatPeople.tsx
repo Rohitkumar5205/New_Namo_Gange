@@ -110,10 +110,10 @@ const WhatPeople = () => {
 
   return (
     <section className="w-full relative py-4 md:py-6  overflow-hidden">
-      <div className="w-full px-2 md:px-6 lg:px-6 text-center">
+      <div className="w-full px-2 md:px-12  lg:px-12 text-center">
         {/* ===== Section Header ===== */}
-        <h2 className="text-lg md:text-xl lg:text-xl font-semibold text-gray-900">
-          <span className="bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] bg-clip-text text-transparent">
+        <h2 className="text-lg md:text-xl lg:text-xl font-semibold mb-2 text-gray-900">
+          <span className="bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] bg-clip-text  text-transparent">
             Testimonials
           </span>
         </h2>
@@ -164,7 +164,7 @@ const WhatPeople = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
               viewport={{ once: true }}
-              className="px-3"
+              className="px-2"
             >
               <div
                 className="relative bg-white rounded-2xl border border-gray-100 shadow-md 

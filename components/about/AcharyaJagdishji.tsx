@@ -32,7 +32,7 @@ const AcharyaJagdishji = () => {
       {/* </div> */}
 
       {/* ---------- MAIN CONTENT ------------- */}
-      <div className="w-full px-2 md:px-6 lg:px-6">
+      <div className="w-full px-2 md:px-12  lg:px-12">
         <div className="w-full mt-4 text-center">
           <h1 className="text-sm md:text-xl font-medium">
             Acharya <span className="text-[#DF562C]">Jagdishji Maharaj</span>

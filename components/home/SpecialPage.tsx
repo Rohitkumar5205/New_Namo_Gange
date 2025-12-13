@@ -16,7 +16,7 @@ const fadeUp = {
 
 export default function SpecialPage() {
   return (
-    <section className="relative w-full h-auto pt-16 pb-20 md:pb-0 md:h-[70vh] overflow-hidden flex items-center justify-center text-white">
+    <section className="relative w-full h-auto pt-16 pb-20 md:pb-0 md:h-[60vh] overflow-hidden flex items-center justify-center text-white">
       {/* BACKGROUND IMAGE */}
       <motion.div
         initial={{ scale: 1.05 }}

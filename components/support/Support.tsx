@@ -170,7 +170,7 @@ const Support = () => {
     form.message;
 
   return (
-    <section className="w-full px-2 md:px-6 lg:px-6 relative py-4 md:py-6 overflow-hidden">
+    <section className="w-full px-2 md:px-12  lg:px-12 relative py-4 md:py-6 overflow-hidden">
       <div className=" w-full lg:px-0">
         {/* Header */}
         <h2 className="text-xl md:text-2xl font-medium text-gray-900 mb-1 text-center">

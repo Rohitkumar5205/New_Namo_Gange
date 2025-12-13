@@ -57,7 +57,7 @@ const HomeSlider = () => {
     dots: false,
     infinite: true,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 3000,
     speed: 800,
     fade: true,
     slidesToShow: 1,
@@ -69,7 +69,7 @@ const HomeSlider = () => {
   return (
     <div className="relative w-full overflow-hidden">
       {/* LEFT ARROW */}
-      <button
+      {/* <button
         onClick={() => sliderRef.current?.slickPrev()}
         className="
           absolute left-3 md:left-6 
@@ -83,10 +83,10 @@ const HomeSlider = () => {
         "
       >
         <ChevronLeft size={24} className="text-gray-700" />
-      </button>
+      </button> */}
 
       {/* RIGHT ARROW */}
-      <button
+      {/* <button
         onClick={() => sliderRef.current?.slickNext()}
         className="
           absolute right-3 md:right-6 
@@ -100,7 +100,7 @@ const HomeSlider = () => {
         "
       >
         <ChevronRight size={24} className="text-gray-700" />
-      </button>
+      </button> */}
 
       {/* MAIN SLIDER */}
       <Slider ref={sliderRef} {...settings}>
@@ -146,7 +146,7 @@ const HomeSlider = () => {
       </Slider>
 
       {/* ORANGE CARD SECTION BELOW SLIDER */}
-      <div className="relative bottom-0 md:bottom-10  left-1/2 -translate-x-1/2 w-full px-2 md:px-6 z-30">
+      <div className="relative bottom-0 md:bottom-10  left-1/2 -translate-x-1/2 w-full px-2 md:px-12 z-30">
         <div className="bg-[#DF562C] text-white grid grid-cols-1 md:grid-cols-3 rounded-xs overflow-hidden">
           {/* 1 — CSR HEADS */}
           <div className="px-2 py-2 md:px-4 md:py-4 lg:px-4 lg:py-4 border-b md:border-b-0 md:border-r border-white/40 flex gap-4">

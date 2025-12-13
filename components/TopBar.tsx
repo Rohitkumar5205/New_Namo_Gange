@@ -27,7 +27,7 @@ const TopBar: React.FC = () => {
 
   return (
     <div className="hidden sm:block w-full bg-white shadow-sm">
-      <div className="w-full flex flex-col md:flex-row items-center md:items-center justify-between  px-6 py-0.5 gap-4 ">
+      <div className="w-full flex flex-col md:flex-row items-center md:items-center justify-between p-2 md:px-12 py-0.5 gap-4 ">
         {/* ================= LOGO ================= */}
         <div className="flex justify-center md:justify-start w-full md:w-auto">
           <Image

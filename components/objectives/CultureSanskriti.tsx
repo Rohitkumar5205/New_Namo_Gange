@@ -120,7 +120,7 @@ const CultureSanskriti = () => {
           </div>
         </div>
       </div>
-      <div className="w-full px-2 md:px-6 lg:px-6 text-center">
+      <div className="w-full px-2 md:px-12  lg:px-12 text-center">
         {/* HEADER */}
 
         <div className="">

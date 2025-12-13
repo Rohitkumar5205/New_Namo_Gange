@@ -15,7 +15,7 @@ function WhatsappSVG(props) {
 /* MAIN COMPONENT */
 export default function FloatingContactWidget() {
   return (
-    <div className="hidden md:flex fixed left-2 bottom-24 z-50 flex-col gap-4">
+    <div className="hidden md:flex fixed left-1 top-1/2 -translate-y-1/2 z-50 flex-col gap-4">
       {/* Mail */}
       <SocialIcon
         label="Mail_Us"
@@ -87,8 +87,8 @@ function SocialIcon({
         className="rounded-full bg-white/90 backdrop-blur-sm shadow-xl border border-gray-200 
                    flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300"
         style={{
-          width: size + 18,
-          height: size + 18,
+          width: size + 16,
+          height: size + 16,
         }}
       >
         <Icon

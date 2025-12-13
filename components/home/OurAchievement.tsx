@@ -63,8 +63,8 @@ const activities = [
 
 const OurAchievement = () => {
   return (
-    <section className="w-full relative py-4 md:py-6 bg-gray-50 overflow-hidden">
-      <div className=" px-4 lg:px-6 md:px-6">
+    <section className="w-full relative py-1.5 md:py-3 bg-gray-50 overflow-hidden">
+      <div className=" px-2 lg:px-12 md:px-12">
         {/* Header */}
         <h2 className="text-lg md:text-xl lg:text-xl font-semibold text-center text-gray-900 mb-4">
           Our{" "}
@@ -79,7 +79,7 @@ const OurAchievement = () => {
             {/* Decorative Top Accent Line */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
-            <p className="text-gray-700 text-sm md:text-[15px] text-justify leading-relaxed font-normal mb-3">
+            <p className="text-gray-700 text-sm md:text-[15px] text-justify leading-relaxed font-normal">
               Each milestone achieved by our Trust is a step toward creating a
               more compassionate and environmentally balanced society. Our
               initiatives continue to grow with the collective support of
