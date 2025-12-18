@@ -12,57 +12,83 @@ import ourIni7 from "@/public/OurInitiatives/ourIni7.png";
 import ourIni8 from "@/public/OurInitiatives/ourIni8.png";
 import ourIni9 from "@/public/OurInitiatives/ourIni9.png";
 
-interface Initiative {
+/* ================= TYPES ================= */
+interface PastEvent {
+  id: number;
   title: string;
-  image: StaticImageData | string;
-  description: string;
+  image: string;
+  fromDate: string;
+  toDate: string;
   link: string;
 }
 
-const initiatives: Initiative[] = [
+/* ================= DATA ================= */
+const events: PastEvent[] = [
   {
-    title: "International Council of AYUSH (ICOA)",
-    image: ourIni1,
-    description:
-      "The International Council of AYUSH (ICOA) has played a vital role in promoting traditional Indian systems of medicine across the globe. Through conferences, collaborations, and policy dialogues, ICOA has strengthened awareness and acceptance of Ayurveda, Yoga, Naturopathy, Unani, Siddha, and Homeopathy as holistic healthcare solutions rooted in ancient wisdom.",
-    link: "/initiatives/icoa",
+    id: 1,
+    title: "India Health Expo 2026",
+    image: "/event/arogya.jpg",
+    fromDate: "2026-08-21",
+    toDate: "2026-08-23",
+    link: "/events/india-health-expo-2026",
   },
   {
-    title: "Ministry of AYUSH Collaboration",
-    image: ourIni2,
-    description:
-      "In association with the Ministry of AYUSH, this initiative supported the national mission of integrating Ayurveda and traditional healthcare practices into mainstream wellness. The collaboration focused on awareness programs, public health outreach, and strengthening trust in natural and preventive healthcare systems.",
-    link: "/initiatives/ayush",
+    id: 2,
+    title: "Yogshala Wellness Summit",
+    image: "/event/arogya.jpg",
+    fromDate: "2025-03-10",
+    toDate: "2025-03-12",
+    link: "/events/yogshala-wellness",
   },
   {
-    title: "Arogya Mantra",
-    image: ourIni3,
-    description:
-      "Arogya Mantra emerged as a holistic health awareness platform aimed at educating communities about preventive healthcare, balanced living, and natural wellness practices. Through workshops, seminars, and public engagement, this initiative encouraged individuals to adopt healthier lifestyles rooted in Indian traditions.",
-    link: "/initiatives/arogya-mantra",
+    id: 3,
+    title: "Ganga Safai Abhiyan",
+    image: "/event/arogya.jpg",
+    fromDate: "2025-06-05",
+    toDate: "2025-06-05",
+    link: "/events/ganga-safai",
   },
   {
-    title: "Yogshala Expo 2024",
-    image: ourIni4,
-    description:
-      "Yogshala Expo 2024 brought together wellness experts, yoga practitioners, healthcare brands, and conscious communities under one roof. The event served as a global platform for promoting yoga, natural therapies, and sustainable health solutions, fostering meaningful dialogue and collaboration.",
-    link: "/initiatives/yogshala-expo",
+    id: 4,
+    title: "Arogya Mantra Health Camp",
+    image: "/event/arogya.jpg",
+    fromDate: "2025-04-18",
+    toDate: "2025-04-20",
+    link: "/events/arogya-mantra-camp",
   },
   {
-    title: "Yogshala Expo 2025",
-    image: ourIni5,
-    description:
-      "The 8th edition of the Yogshala International Health Expo expanded the vision of holistic wellness by showcasing innovations in healthcare, yoga, Ayurveda, and lifestyle management. The expo strengthened global connections and reinforced the importance of integrative health for a balanced future.",
-    link: "/initiatives/yogshala2025",
+    id: 5,
+    title: "Organic & Natural Expo",
+    image: "/event/arogya.jpg",
+    fromDate: "2025-09-12",
+    toDate: "2025-09-14",
+    link: "/events/organic-expo",
   },
   {
-    title: "Swachh Bharat Sankalp",
-    image: ourIni6,
-    description:
-      "Swachh Bharat Sankalp focused on promoting cleanliness, hygiene awareness, and environmental responsibility across communities. Through awareness drives, public participation, and grassroots engagement, the initiative reinforced the idea that a clean environment is the foundation of a healthy and dignified society.",
-    link: "/initiatives/swachh-bharat",
+    id: 6,
+    title: "International Yoga Day Celebration",
+    image: "/event/arogya.jpg",
+    fromDate: "2025-06-21",
+    toDate: "2025-06-21",
+    link: "/events/international-yoga-day",
+  },
+  {
+    id: 7,
+    title: "Ayurveda Awareness Program",
+    image: "/event/arogya.jpg",
+    fromDate: "2025-07-08",
+    toDate: "2025-07-09",
+    link: "/events/ayurveda-awareness",
   },
 ];
+
+/* ================= HELPERS ================= */
+const formatDate = (date: string) =>
+  new Date(date).toLocaleDateString("en-IN", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
 
 const PastEvent = () => {
   return (
@@ -120,43 +146,35 @@ const PastEvent = () => {
         </p>
 
         {/* GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-6">
-          {initiatives.map((item, i) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {events.map((item) => (
             <div
-              key={i}
-              className="group relative bg-white rounded-2xl border border-gray-200 
-                 shadow-sm hover:shadow-xl transition-all duration-300
-                 overflow-hidden flex flex-col"
+              key={item.id}
+              className="bg-white rounded-xl border border-gray-200 shadow-sm
+              hover:shadow-xl transition-all overflow-hidden flex flex-col"
             >
-              {/* Top Accent */}
-              <div className="h-1 w-full bg-gradient-to-r from-[#DF562C] to-[#0C55A0]" />
-
-              {/* Image */}
-              <div className="flex items-center justify-center h-32 bg-gray-50 p-4">
-                <Image
+              <div className=" flex items-center justify-center bg-gray-50 ">
+                <img
                   src={item.image}
                   alt={item.title}
-                  className="object-contain max-h-32 transition-transform duration-300 group-hover:scale-105"
+                  className="object-cover hover:scale-103 transition-transform rounded-xl p-2 md:p-4"
                 />
               </div>
 
-              {/* Content */}
-              <div className="p-5 flex flex-col flex-1 text-center">
-                <h3 className="text-sm font-semibold text-gray-900 mb-2">
+              <div className="text-center flex flex-col flex-1">
+                <h5 className="text-sm md:text-[15px] font-medium text-gray-900 mb-2">
                   {item.title}
-                </h3>
+                </h5>
 
-                <p className="text-xs text-gray-600 leading-relaxed mb-4 line-clamp-4">
-                  {item.description}
+                <p className="text-sm text-gray-600 mb-4">
+                  {formatDate(item.fromDate)} – {formatDate(item.toDate)}
                 </p>
 
-                {/* Button */}
-                <Link href={item.link} className="mt-auto">
-                  <button
-                    className="w-full py-1.5 text-sm font-medium rounded-md
-                       bg-[#0C55A0] text-white shadow
-                       hover:bg-[#0a4786] transition-all"
-                  >
+                <Link
+                  href={item.link}
+                  className="mt-auto px-2 pb-2 md:px-5 md:pb-4"
+                >
+                  <button className="w-full py-1.5 text-sm font-medium  rounded-md bg-[#0C55A0] text-white hover:bg-[#0a4786] transition">
                     View Details
                   </button>
                 </Link>
