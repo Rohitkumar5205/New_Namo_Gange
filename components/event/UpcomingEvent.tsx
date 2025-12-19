@@ -13,8 +13,6 @@ const activities = [
     title: "5th Organic Expo",
     text: `Organic Expo is India’s leading platform for brands and businesses driving the organic and sustainable revolution. This is the ideal showcase for certified organic product manufacturers, natural food and beverage brands, eco-fashion and textile producers, clean beauty and wellness companies, agri-tech innovators, herbal and ayurvedic product makers, green startups, NGOs, and government initiatives aligned with eco-conscious goals.
 
-    If your offerings support a healthier planet and lifestyle — from organic farming solutions to sustainable consumer goods — this is your opportunity to connect with B2B buyers, conscious consumers, wellness professionals, retailers, and decision-makers. Exhibitors gain unmatched visibility, lead generation, and brand trust in a market that’s rapidly evolving toward green choices. Organic Expo is India’s leading platform for brands and businesses driving the organic and sustainable revolution. This is the ideal showcase for certified organic product manufacturers, natural food and beverage brands, eco-fashion and textile producers, clean beauty and wellness companies, agri-tech innovators, herbal and ayurvedic product makers, green startups, NGOs, and government initiatives aligned with eco-conscious goals.
-
     If your offerings support a healthier planet and lifestyle — from organic farming solutions to sustainable consumer goods — this is your opportunity to connect with B2B buyers, conscious consumers, wellness professionals, retailers, and decision-makers.`,
     image: OurActivities1,
     link: "https://organicexpo.namogangewellness.com/",
@@ -22,7 +20,7 @@ const activities = [
 
   {
     title: "16th Arogya Sangoshthi",
-    text: `Arogya Sangoshthi promote wisdom of East. The aim of our Arogya Sangoshthi is to provide a common platform for researchers, academician, scholars, professionals, and young researchers and aspirants to discuss and present their views and vision on emerging issues related to lifestyle disorders and the role of the Indian system of medicine to cure & prevention. Our aim is to make the AYUSH system popular by organizing and conducting activities like seminars, conferences, health workshops, health exhibitions, health shows, health camps, health pavilions, etc. As every event is tailored to the needs of its instigator, our aim is to provide conceptual knowledge and the latest updates. Arogya Sangoshthi promote wisdom of East. The aim of our Arogya Sangoshthi is to provide a common platform for researchers, academician, scholars, professionals, and young researchers and aspirants to discuss and present their views and vision on emerging issues related to lifestyle disorders and the role of the Indian system of medicine to cure & prevention. Our aim is to make the AYUSH system popular by organizing and conducting activities like seminars, conferences, health workshops, health exhibitions, health shows, health camps, health pavilions, etc. As every event is tailored to the needs of its instigator, our aim is to provide conceptual knowledge and the latest updates. Namo Gange Trust organizes seminars and conferences with every aspect of preparing and running their aims, objectives, and their outcomes.`,
+    text: `Arogya Sangoshthi promote wisdom of East. The aim of our Arogya Sangoshthi is to provide a common platform for researchers, academician, scholars, professionals, and young researchers and aspirants to discuss and present their views and vision on emerging issues related to lifestyle disorders and the role of the Indian system of medicine to cure & prevention. Our aim is to make the AYUSH system popular by organizing and conducting activities like seminars, conferences, health workshops, health exhibitions, health shows, health camps, health pavilions, etc.`,
     image: OurActivities2,
     link: "https://sangoshthi.namogange.org/",
   },
@@ -30,10 +28,7 @@ const activities = [
   {
     title: "9th Health & Wellness",
     text: `Experience the future of healthcare at India Health 2025, proudly presented by the organizers of Arab Health, one of the world’s most influential healthcare exhibitions. Scheduled to take place from August 21–23, 2026, at the iconic Bharat Mandapam, New Delhi (formerly Pragati Maidan), this landmark event brings together the brightest minds, leading innovators, and key decision-makers from across the global healthcare ecosystem.
-
-    India Health 2025 offers an immersive platform to explore cutting-edge medical technologies, digital health solutions, advanced diagnostics, healthcare infrastructure, and patient-centric innovations that are shaping the future of healthcare delivery. Engage directly with industry leaders, policymakers, researchers, clinicians, and technology pioneers through insightful conferences, live demonstrations, expert-led sessions, and knowledge-sharing forums.
-    
-    More than just a trade exhibition, India Health 2025 serves as a global hub for collaboration, learning, and strategic partnerships. It fosters meaningful dialogue, encourages innovation-driven growth, and empowers stakeholders to address emerging healthcare challenges together. From startups to multinational corporations, from healthcare professionals to investors, the event creates unparalleled opportunities to network, exchange ideas, and drive impactful change.`,
+`,
     image: OurActivities3,
     link: "https://ihwe.namogangewellness.com/",
   },
@@ -118,7 +113,7 @@ const UpcomingEvent = () => {
                   <Image
                     src={activity.image}
                     alt={activity.title}
-                    className="w-full h-auto md:h-[450] object-fit group-hover:scale-103 transition-transform duration-700 ease-in-out"
+                    className="w-full h-auto md:h-[300] object-fit group-hover:scale-103 transition-transform duration-700 ease-in-out"
                   />
                 </div>
               </div>
