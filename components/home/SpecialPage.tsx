@@ -25,7 +25,7 @@ export default function SpecialPage() {
         className="absolute inset-0 z-10"
       >
         <Image
-          src="/home/we.jpg"
+          src="/home/how_we.png"
           alt="NGO food distribution"
           fill
           priority

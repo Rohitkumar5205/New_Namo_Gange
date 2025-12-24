@@ -106,7 +106,7 @@ const HomeSlider = () => {
       <Slider ref={sliderRef} {...settings}>
         {banners.map((item, i) => (
           <div key={i}>
-            <div className="relative w-full h-[220px] md:h-[550px] lg:h-[535px]">
+            <div className="relative w-full h-[220px] md:h-[515px]">
               <Image
                 src={item.image}
                 alt={`slide-${i}`}
@@ -117,9 +117,9 @@ const HomeSlider = () => {
               />
 
               {/* TITLE OVERLAY — per slide */}
-              <div className="absolute bottom-40 right-6 md:right-20 z-30 flex flex-col gap-3 max-w-xl">
+              <div className="absolute bottom-25 right-6 md:right-12 z-30 flex flex-col justify-center items-end text-justify gap-3 max-w-xl">
                 {/* Title */}
-                <h2 className="text-white text-lg md:text-3xl font-bold leading-snug drop-shadow-xl">
+                <h2 className="text-gray-100 text-lg md:text-4xl font-medium leading-snug drop-shadow-xl">
                   {item.title}
                 </h2>
 
@@ -128,7 +128,7 @@ const HomeSlider = () => {
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block px-5 py-1 md:px-6 md:py-1.5 text-sm md:text-base font-semibold text-white  bg-[#DF562C]  rounded shadow-md hover:bg-orange-600  hover:shadow-lg transition-all  duration-300 "
+                  className="inline-block w-fit px-5 py-1 md:px-6 md:py-1.5 text-sm md:text-base font-semibold text-white  bg-[#DF562C]  rounded shadow-md hover:bg-orange-600  hover:shadow-lg transition-all  duration-300 "
                 >
                   Donate Now
                 </Link>
@@ -149,13 +149,13 @@ const HomeSlider = () => {
       <div className="relative bottom-0 md:bottom-10  left-1/2 -translate-x-1/2 w-full px-2 md:px-12 z-30">
         <div className="bg-[#DF562C] text-white grid grid-cols-1 md:grid-cols-3 rounded-xs overflow-hidden">
           {/* 1 — CSR HEADS */}
-          <div className="px-2 py-2 md:px-4 md:py-4 lg:px-4 lg:py-4 border-b md:border-b-0 md:border-r border-white/40 flex gap-4">
+          <div className="px-2 py-1 md:px-4 md:py-2 lg:px-4 lg:py-2 border-b md:border-b-0 md:border-r border-white/40 flex gap-4">
             <div className="text-2xl md:text-4xl lg:text-4xl">🤝</div>
             <div>
               <h3 className="font-medium text-sm  lg:text-lg md:text-lg">
                 FOR CSR HEADS
               </h3>
-              <p className="text-xs md:text-sm lg:text-sm mt-2 leading-relaxed">
+              <p className="text-xs md:text-sm lg:text-sm mt-1 leading-relaxed">
                 Join us to work with genuine trusted NGOs and CSR veterans
                 across India to ensure maximum impact for your CSR budget.
               </p>
@@ -163,13 +163,13 @@ const HomeSlider = () => {
           </div>
 
           {/* 2 — NGOs */}
-          <div className="px-2 py-2 md:px-4 md:py-4 lg:px-4 lg:py-4 border-b md:border-b-0 md:border-r border-white/40 flex gap-4">
+          <div className="px-2 py-1 md:px-4 md:py-2 lg:px-4 lg:py-2 border-b md:border-b-0 md:border-r border-white/40 flex gap-4">
             <div className="text-2xl md:text-4xl lg:text-4xl">💰</div>
             <div>
               <h3 className="font-medium text-sm  lg:text-lg md:text-lg">
                 FOR NGOs
               </h3>
-              <p className="text-xs md:text-sm lg:text-sm mt-2 leading-relaxed">
+              <p className="text-xs md:text-sm lg:text-sm mt-1 leading-relaxed">
                 Register with us to build capacity, fundraising support and
                 access to professional experts for almost free.
               </p>
@@ -177,13 +177,13 @@ const HomeSlider = () => {
           </div>
 
           {/* 3 — DONORS + VOLUNTEERS */}
-          <div className="px-2 py-2 md:px-4 md:py-4 lg:px-4 lg:py-4 flex gap-4">
+          <div className="px-2 py-1 md:px-4 md:py-2 lg:px-4 lg:py-2 flex gap-4">
             <div className="text-2xl md:text-4xl lg:text-4xl">😊</div>
             <div>
               <h3 className="ont-medium text-sm  lg:text-lg md:text-lg">
                 FOR DONORS/VOLUNTEERS
               </h3>
-              <p className="text-xs md:text-sm lg:text-sm mt-2 leading-relaxed">
+              <p className="text-xs md:text-sm lg:text-sm mt-1 leading-relaxed">
                 Contribute #OneDayForFuture in donation or your time to support
                 NGOs and make the World a sustainable abode for all.
               </p>

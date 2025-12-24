@@ -86,18 +86,18 @@ const ObjectiveOfTrust = () => {
         </div>
 
         {/* Objective Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-1 px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2">
           {objectives.map((item, i) => (
             <div
               key={i}
               className="bg-white  rounded-xl border border-gray-200  shadow-sm  hover:shadow-xl transition-all p-3 flex flex-col items-center text-center "
             >
               {/* Icon */}
-              <div className=" w-24 h-24  md:w-28 md:h-28 flex items-center justify-center  rounded-full bg-gray-50   border border-gray-200 shadow-inner  mb-4 ">
+              <div className="flex items-center justify-center  rounded-full bg-gray-50   border border-gray-200 shadow-inner  mb-4 ">
                 <Image
                   src={item.image}
                   alt={item.title}
-                  className="w-14 h-14 md:w-16 md:h-16 object-contain"
+                  className="w-14 h-14 md:w-32 md:h-32 object-contain"
                 />
               </div>
 
@@ -114,7 +114,7 @@ const ObjectiveOfTrust = () => {
               {/* Read More Button */}
               <Link href={item.link}>
                 <button className=" px-5 py-1.5 text-sm font-medium text-white rounded bg-[#0C55A0] hover:bg-[#08467c] transition shadow-sm ">
-                  Read More
+                  Read More...
                 </button>
               </Link>
             </div>

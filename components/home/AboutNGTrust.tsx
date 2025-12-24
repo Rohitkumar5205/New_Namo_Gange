@@ -3,9 +3,9 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import AboutNGTrust3 from "@/public/home/we.jpg";
+import AboutNGTrust3 from "@/public/home/how_we.png";
 import MissionImg from "@/public/home/mission1.jpg";
-import VisionImg from "@/public/home/vision1.jpg";
+import VisionImg from "@/public/home/our_vision.png";
 
 const AboutNGTrust = () => {
   // ✅ ONLY FOR THIS SECTION – COMMON P STYLE

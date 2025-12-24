@@ -57,22 +57,28 @@ export default function LoginPage() {
         {/* Soft radial glow */}
         {/* <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" /> */}
 
-        <div className="relative z-10 max-w-lg">
-          <h1 className="text-5xl font-extrabold leading-tight drop-shadow-md">
+        <div className="relative z-10 max-w-lg text-center">
+          <h1 className="text-4xl font-semibold leading-tight drop-shadow-md">
             Welcome Back
           </h1>
 
-          <p className="mt-4 text-lg text-gray/90">
-            Login to continue your journey of creating a better community.
-            Access tools, connect, collaborate and manage civic responsibilities
-            effortlessly.
+          <p className="mt-2 text-sm text-gray/90">
+            Sign in to access your dashboard and continue contributing toward a
+            stronger, more connected community.
           </p>
 
-          <img
-            src="/logo.png"
-            alt="Logo"
-            className="w-72 mt-12 opacity-95 drop-shadow-xl rounded-xl"
-          />
+          <div className="flex justify-center mt-4">
+            <img
+              src="/logo.png"
+              alt="Organization Logo"
+              className="w-56 opacity-95 drop-shadow-xl rounded-xl"
+            />
+          </div>
+
+          <p className="mt-4 text-sm text-gray/90 leading-relaxed">
+            Manage initiatives, collaborate with your team, track progress, and
+            make a meaningful impact—all from one secure platform.
+          </p>
         </div>
       </div>
 
@@ -86,13 +92,21 @@ export default function LoginPage() {
             border border-white/40
           "
         >
-          <h2 className="text-3xl font-bold text-center text-[#DF562C] tracking-wide">
+          {/* <h2 className="text-3xl font-bold text-center text-[#DF562C] tracking-wide">
             Login With OTP
-          </h2>
+          </h2> */}
+          <h1 className="text-3xl font-semibold text-center text-[#DF562C] tracking-wide leading-tight drop-shadow-md">
+  Secure Login
+</h1>
+
+<p className="mt-2 text-sm text-gray-600 text-center">
+  Log in to securely access your account and manage your data with confidence.
+</p>
+
 
           {/* User Type */}
           <div className="flex justify-center gap-6 mt-6 text-sm font-medium text-gray-700">
-            {["volunteer", "member", "corporator"].map((type) => (
+            {["volunteer", "member", "associate"].map((type) => (
               <label
                 key={type}
                 className="flex items-center gap-2 cursor-pointer hover:text-[#DF562C] transition"
@@ -141,7 +155,7 @@ export default function LoginPage() {
                 Send OTP
               </button>
 
-              {userType === "corporator" && (
+              {userType === "associate" && (
                 <div className="mt-5 text-center text-sm">
                   <p className="text-gray-600">
                     Don’t have an account?{" "}

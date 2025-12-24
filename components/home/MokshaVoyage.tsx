@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Moksha from "@/public/home/gangaji.jpg";
+import Moksha from "@/public/home/moksha_sewa.png";
 
 const MokshaVoyage = () => {
   return (

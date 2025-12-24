@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Mail, Phone, User } from "lucide-react";
 
@@ -20,18 +21,20 @@ const SuperTopBar = () => {
 
         {/* RIGHT : Login Buttons */}
         <div className="flex items-center gap-3">
-          <button className="flex items-center gap-1 px-3 py-1 rounded-full border border-gray-600 text-xs font-medium hover:bg-gray-700 transition">
+          <button className="flex items-center gap-1 px-3 py-1 rounded-xl border border-[#DF562C] text-[#DF562C] hover:text-white text-xs font-medium hover:bg-[#DF562C] transition">
             <User size={14} />
-            Login
+            Volunteer Login
           </button>
 
-          {/* <button className="px-3 py-1 rounded-full border border-yellow-500 text-yellow-400 text-xs hover:bg-yellow-500 hover:text-black transition">
-            Partner Login
+          <button className="flex items-center gap-1 px-3 py-1 rounded-xl border border-[#0CACE3] text-[#0CACE3] text-xs hover:bg-[#0CACE3] hover:text-white transition">
+            <User size={14} />
+            Member Login
           </button>
 
-          <button className="px-3 py-1 rounded-full border border-green-500 text-green-400 text-xs hover:bg-green-500 hover:text-black transition">
-            Corporate Login
-          </button> */}
+          <button className="flex items-center gap-1 px-3 py-1 rounded-xl border border-[#0C55A0] text-white text-xs hover:bg-[#0C55A0] hover:text-white transition">
+            <User size={14} />
+            Associate Login
+          </button>
         </div>
       </div>
     </div>

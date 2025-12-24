@@ -5,8 +5,8 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 import OurActivities1 from "@/public/ourActivities/ourActivities5.jpg";
-import OurActivities2 from "@/public/ourActivities/ourActivities2.jpg";
-import OurActivities3 from "@/public/ourActivities/ourActivities3.jpg";
+import OurActivities2 from "@/public/ourActivities/swach_bharat.png";
+import OurActivities3 from "@/public/ourActivities/health_check.png";
 // import OurActivities4 from "@/public/ourActivities/ourActivities4.jpg";
 
 const activities = [

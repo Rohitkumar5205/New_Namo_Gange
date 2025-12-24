@@ -259,14 +259,14 @@ const OurInitiatives = () => {
             >
               {/* Image Section */}
               <div
-                className="w-full h-28 mb-4 flex items-center justify-center 
+                className="w-full mb-4 flex items-center justify-center 
                       rounded-md bg-gray-50
                       overflow-hidden shadow-inner"
               >
                 <Image
                   src={item.image}
                   alt={item.title}
-                  className="object-contain max-h-24 w-auto transition-transform duration-300
+                  className="object-contain h-16 w-16 md:h-30 md:w-30 w-auto transition-transform duration-300
                      group-hover:scale-105"
                 />
               </div>

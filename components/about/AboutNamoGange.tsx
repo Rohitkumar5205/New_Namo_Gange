@@ -52,7 +52,7 @@ const AboutNamoGange = () => {
       {/* Header */}
       <div
         className="w-full bg-cover bg-center bg-no-repeat "
-        style={{ backgroundImage: "url('/about/aboutus.jpg')" }}
+        style={{ backgroundImage: "url('/about/about1.jpg')" }}
       >
         {/* Overlay */}
         <div className="bg-black/20 w-full h-full md:h-[250px] flex items-center py-10 md:py-16">
@@ -66,7 +66,7 @@ const AboutNamoGange = () => {
                 href="/"
                 className="text-[#DF562C] font-medium hover:underline"
               >
-                Home md:h-[250px]
+                Home
               </Link>{" "}
               - About Us
             </p>
