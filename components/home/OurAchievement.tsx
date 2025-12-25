@@ -4,10 +4,11 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-import OurActivities1 from "@/public/ourActivities/ourActivities5.jpg";
-import OurActivities2 from "@/public/ourActivities/swach_bharat.png";
-import OurActivities3 from "@/public/ourActivities/health_check.png";
-// import OurActivities4 from "@/public/ourActivities/ourActivities4.jpg";
+import OurActivities1 from "@/public/ourActivities/ann_sewa.jpg";
+import OurActivities2 from "@/public/ourActivities/swachh_bharat.jpg";
+import OurActivities3 from "@/public/ourActivities/health_check.jpg";
+import NGT from "@/public/ourActivities/NGT_farms.jpg";
+import Meri_Beti from "@/public/ourActivities/meri_beti.jpg";
 
 const activities = [
   {
@@ -51,7 +52,7 @@ const activities = [
     It stands as a voice against discrimination and social bias.
     
     By nurturing respect and pride for daughters, we aim to build a more inclusive and progressive society.`,
-    image: OurActivities3,
+    image: Meri_Beti,
   },
 
   {
@@ -62,7 +63,7 @@ const activities = [
     The program also strengthens rural livelihoods and food security.
     
     NGT Farms represents our commitment to nurturing the land while ensuring a sustainable future for coming generations.`,
-    image: OurActivities3,
+    image: NGT,
   },
 ];
 

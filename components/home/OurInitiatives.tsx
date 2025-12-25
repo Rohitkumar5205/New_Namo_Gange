@@ -2,12 +2,12 @@
 import React from "react";
 import Image, { StaticImageData } from "next/image"; // ✅ import StaticImageData
 import Link from "next/link";
-import ourIni1 from "@/public/OurInitiatives/ourIni1.png";
+import ourIni1 from "@/public/objectives/moksha.png";
 import ourIni2 from "@/public/OurInitiatives/ourIni2.png";
 import ourIni3 from "@/public/OurInitiatives/ourIni3.png";
 import ourIni4 from "@/public/OurInitiatives/ourIni4.png";
 import ourIni5 from "@/public/OurInitiatives/ourIni5.png";
-import ourIni6 from "@/public/OurInitiatives/ourIni6.png";
+// import ourIni6 from "@/public/OurInitiatives/ourIni6.png";
 import ourIni7 from "@/public/OurInitiatives/ourIni7.png";
 import ourIni8 from "@/public/OurInitiatives/ourIni8.png";
 import ourIni9 from "@/public/OurInitiatives/ourIni9.png";
@@ -25,7 +25,8 @@ import ourIni20 from "@/public/OurInitiatives/ourIni20.png";
 import ourIni21 from "@/public/OurInitiatives/ourIni21.png";
 import ourIni22 from "@/public/OurInitiatives/ourIni22.png";
 import ourIni23 from "@/public/OurInitiatives/ourIni23.png";
-import ourIni24 from "@/public/OurInitiatives/ourIni6.png";
+import ourIni24 from "@/public/OurInitiatives/Yogshala_Clinic.png";
+import ourIni25 from "@/public/OurInitiatives/9IHWE.png";
 
 // ✅ Fixed Interface Type
 interface Initiative {
@@ -128,7 +129,7 @@ const initiatives: Initiative[] = [
     link: "/initiatives/farms",
   },
   {
-    title: "Grand Master of Yoga",
+    title: "The Grand Master of Yoga",
     image: ourIni15,
     description:
       "An सम्मान initiative recognizing global yoga masters for preserving, teaching, and spreading the ancient science of yoga.",
@@ -142,7 +143,7 @@ const initiatives: Initiative[] = [
     link: "/initiatives/sangoshti",
   },
   {
-    title: "Rangshala",
+    title: "Bachchan Ki Rangshala",
     image: ourIni17,
     description:
       "A cultural platform celebrating Indian theatre, folk arts, music, and drama to preserve and promote traditional creativity.",
@@ -198,8 +199,8 @@ const initiatives: Initiative[] = [
     link: "/initiatives/fitness",
   },
   {
-    title: "International Health & Wellness",
-    image: ourIni24,
+    title: "9IHWE Expo",
+    image: ourIni25,
     description:
       "Comprehensive wellness programs designed for communities and corporates to promote stress-free and balanced living.",
     link: "/initiatives/wellness",
