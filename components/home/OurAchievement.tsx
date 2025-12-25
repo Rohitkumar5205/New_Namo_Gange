@@ -12,51 +12,56 @@ import OurActivities3 from "@/public/ourActivities/health_check.png";
 const activities = [
   {
     title: "Ann Sewa",
-    text: `Ann Sewa is one of our most sacred initiatives — a living expression of compassion, generosity, and service. 
-    Through this humble act, we aim to serve nutritious meals and provide care to the underprivileged, regardless of caste, creed, or background. 
-    Beyond food, Ann Sewa carries the message of equality and dignity for all. Each meal symbolizes our collective responsibility to ensure that no one sleeps hungry. 
-    Our volunteers tirelessly prepare and distribute meals with devotion, fostering an atmosphere of kindness and humanity in every corner of society.
+    text: `Ann Sewa is one of our most sacred initiatives, reflecting the values of compassion, dignity, and selfless service.
+    Through this program, we provide nutritious meals to the underprivileged, ensuring that hunger never becomes a barrier to human dignity.
+    Each meal served carries the message of equality, care, and shared responsibility toward society.
+    Our dedicated volunteers prepare and distribute food with devotion, creating an atmosphere of kindness and humanity.
     
-    This initiative also helps strengthen community bonds by encouraging people to contribute their time, resources, and love in service of those in need. 
-    Ann Sewa acts as a bridge between hearts, reminding us that true spirituality lies in serving others selflessly. 
-    Through regular food drives, festival-based distributions, and school outreach programs, we strive to create an environment where compassion becomes a natural way of life. 
-    As more individuals join hands with us, Ann Sewa continues to grow as a beacon of hope, nurturing kindness and spreading the joy of giving across communities. 
-    It teaches us that when we serve food with respect and empathy, we nourish not only bodies but souls as well.`,
+    Ann Sewa also strengthens community bonds by encouraging collective participation and reminding us that true service begins with feeding those in need.`,
     image: OurActivities1,
   },
 
   {
-    title: "Ganga Nadi ko Saaf Karvaya",
-    text: `The Ganga River, revered as the lifeline of India and a sacred symbol of purity, has been facing 
-    unprecedented ecological challenges due to rapid urbanization and industrial waste. 
-    Through our “Clean Ganga Initiative,” we are uniting citizens, saints, students, and environmental experts 
-    to restore her divine flow. From riverbank cleaning drives to large-scale awareness campaigns, 
-    our movement seeks not only to purify the water but also to rekindle the spiritual connection between humanity and nature. 
-    Each action taken under this project echoes our belief that protecting the Ganga is protecting life itself.
+    title: "Swachh Bharat Sankalp",
+    text: `Swachh Bharat Sankalp is our commitment toward building a cleaner, healthier, and more responsible society.
+    Through cleanliness drives, awareness campaigns, and community participation, we promote the importance of hygiene and environmental care.
+    This initiative inspires citizens to take ownership of public spaces and adopt sustainable waste management practices.
+    Each effort contributes to a cleaner nation and a healthier future.
     
-    Our volunteers conduct regular cleanliness drives, promote responsible waste management, and collaborate with local authorities 
-    to implement sustainable eco-friendly solutions. By engaging youth and school communities, we encourage future generations 
-    to become guardians of the environment. This mission also includes workshops, tree plantations, and cultural programs 
-    that highlight the importance of preserving our rivers. Through collective effort, dialogue, and devotion, we aim to restore 
-    the timeless purity of Maa Ganga. As awareness spreads and participation increases, this initiative continues to inspire 
-    thousands to take responsibility for nature, strengthening the message that a cleaner Ganga ensures a healthier nation.`,
+    By collaborating with local communities and volunteers, we work to transform cleanliness into a shared social responsibility.`,
     image: OurActivities2,
   },
 
   {
     title: "Health Camps",
-    text: `Our Health Camps stand as a pillar of hope for those with limited access to healthcare. 
-    By organizing free medical check-ups, awareness programs, and wellness workshops, we bridge the gap between medical resources and rural communities. 
-    Experienced doctors, ayurvedic practitioners, and healthcare volunteers collaborate to provide holistic treatment — balancing physical, mental, and spiritual well-being. 
-    From addressing chronic illnesses to promoting preventive healthcare, these camps ensure that good health becomes a shared right, not a privilege. 
-    Each camp is a step towards building a healthier, happier, and more aware society.
+    text: `Our Health Camps serve as a vital support system for communities with limited access to medical care.
+    We organize free health check-ups, wellness sessions, and awareness programs to promote preventive healthcare.
+    Qualified doctors, ayurvedic experts, and volunteers work together to address physical, mental, and holistic well-being.
+    These camps aim to make quality healthcare accessible and inclusive.
     
-    In addition to medical support, our camps focus on spreading knowledge about nutrition, hygiene, yoga, and natural healing practices. 
-    We conduct special sessions for women, children, and senior citizens, ensuring that vulnerable groups receive timely care and guidance. 
-    Mobile health units also reach remote areas where medical services are scarce, bringing essential treatments directly to the community. 
-    With a compassionate approach, our teams encourage people to adopt healthier lifestyles and seek regular health checkups. 
-    These efforts not only improve individual well-being but also promote a culture of wellness within the society. 
-    Through continuous service and dedication.`,
+    Along with treatment, we spread awareness about nutrition, hygiene, yoga, and healthy lifestyle practices.`,
+    image: OurActivities3,
+  },
+
+  {
+    title: "Meri Beti Mera Abhiman",
+    text: `Meri Beti Mera Abhiman is a heartfelt initiative dedicated to empowering girls and celebrating their role in society.
+    Through awareness programs and community engagement, we promote education, confidence, and equal opportunities for every girl child.
+    The initiative encourages families to support their daughters’ dreams and aspirations.
+    It stands as a voice against discrimination and social bias.
+    
+    By nurturing respect and pride for daughters, we aim to build a more inclusive and progressive society.`,
+    image: OurActivities3,
+  },
+
+  {
+    title: "NGT Farms",
+    text: `NGT Farms focuses on promoting sustainable agriculture and environmentally responsible farming practices.
+    Through this initiative, we support organic farming, soil conservation, and eco-friendly cultivation methods.
+    Farmers are encouraged to adopt natural techniques that protect both health and the environment.
+    The program also strengthens rural livelihoods and food security.
+    
+    NGT Farms represents our commitment to nurturing the land while ensuring a sustainable future for coming generations.`,
     image: OurActivities3,
   },
 ];
@@ -73,9 +78,7 @@ const OurAchievement = () => {
           </span>
         </h2>
         <div className="flex justify-center w-full mb-6">
-          <div
-            className=" w-full py-6 relative overflow-hidden text-center"
-          >
+          <div className=" w-full py-6 relative overflow-hidden text-center">
             {/* Decorative Top Accent Line */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
@@ -111,7 +114,7 @@ const OurAchievement = () => {
                   <Image
                     src={activity.image}
                     alt={activity.title}
-                    className="w-full h-auto object-cover group-hover:scale-103 transition-transform duration-700 ease-in-out"
+                    className="w-full md:h-78 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
                   />
                 </div>
               </div>
@@ -127,11 +130,10 @@ const OurAchievement = () => {
 
                 {/* <Link href="/"> */}
                 <button
-                  className=" relative overflow-hidden px-4 py-1 rounded md:py-1.5 lg:py-1.5 text-xs md:text-sm lg:text-sm text-white font-medium 
-                     shadow-md bg-[#DF562C] hover:bg-orange-600
+                  className=" relative overflow-hidden px-4 py-1 rounded md:py-1.5 lg:py-1.5 text-xs md:text-sm lg:text-sm text-white bg-[#0C55A0] hover:bg-[#08467c]
                     hover:shadow-lg transition-all duration-300"
                 >
-                  Donate Now
+                  Read More...
                 </button>
                 {/* </Link> */}
               </div>
