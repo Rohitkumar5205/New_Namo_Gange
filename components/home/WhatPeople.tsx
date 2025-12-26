@@ -207,7 +207,7 @@ const WhatPeople = () => {
                     src={person.image}
                     alt={person.name}
                     fill
-                    className="object-cover transition-transform duration-700 hover:scale-110"
+                    className="object-cover transition-transform duration-700 hover:scale-105"
                   />
                 </div>
 
