@@ -1,13 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { ChevronDown, ChevronUp, Home, X } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronUp,
+  Home,
+  X,
+} from "lucide-react";
 import logo from "@/public/logo.png";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import axiosClient from "@/lib/axiosClient";
 
-// ------------ FIXED INTERFACE ------------
+/* ================= TYPES ================= */
 interface DropdownItem {
   label: string;
   href: string;
@@ -19,36 +24,18 @@ interface NavItem {
   dropdown?: DropdownItem[];
 }
 
-// ------------ FIXED MENU ITEMS ------------
+/* ================= STATIC NAV ITEMS ================= */
 const NAV_ITEMS: NavItem[] = [
   { label: "HOME", href: "/" },
   { label: "ABOUT US", href: "/about" },
-  // {
-  //   label: "ABOUT US",
-  //   dropdown: [
-  //     { label: "About Us", href: "/about/aboutUs" },
-  //     { label: "Acharya Jagdishji", href: "/about/acharyaJagdishji" },
-  //     { label: "Trust Bodies", href: "/about/trustBodies" },
-  //   ],
-  // },
+
   {
     label: "OBJECTIVES",
-    dropdown: [
-      { label: "Health & Wellness", href: "/objectives/health" },
-      { label: "Nature & Environment", href: "/objectives/nature" },
-      { label: "Culture & Sanskriti", href: "/objectives/culture" },
-      { label: "Women & Empowerment", href: "/objectives/women" },
-      { label: "Moksha Sewa", href: "/objectives/mokshaSewa" },
-    ],
+    dropdown: [], // 🔥 API se fill hoga
   },
+
   { label: "INITIATIVES", href: "/initiatives" },
-  // {
-  //   label: "ACTIVITIES",
-  //   dropdown: [
-  //     { label: "Our Events", href: "/activities/events" },
-  //     { label: "Our Missions", href: "/activities/missions" },
-  //   ],
-  // },
+
   {
     label: "EVENTS",
     dropdown: [
@@ -83,11 +70,39 @@ const NavBar: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
-  // Navigate + Close Sidebar
+  // 🔥 OBJECTIVES API STATE
+  const [objectiveDropdown, setObjectiveDropdown] = useState<DropdownItem[]>([]);
+
+  /* ================= FETCH OBJECTIVES ================= */
+  useEffect(() => {
+    const fetchObjectives = async () => {
+      try {
+        const res = await axiosClient.get("/objectives");
+
+        if (res.data && Array.isArray(res.data.data)) {
+          const list = res.data.data
+            .filter((item: any) => item.status === "Active")
+            .map((item: any) => ({
+              label: item.title,
+              href: `/objectives/${item.slug}`,
+            }));
+
+          setObjectiveDropdown(list);
+        }
+      } catch (error) {
+        console.error("❌ Objectives API Error:", error);
+      }
+    };
+
+    fetchObjectives();
+  }, []);
+
+  /* ================= NAVIGATE ================= */
   const handleNavigate = (href: string, label: string) => {
     setActive(label);
     router.push(href);
-    setMobileOpen(false); // close sidebar
+    setMobileOpen(false);
+    setOpenDropdown(null);
   };
 
   return (
@@ -97,31 +112,32 @@ const NavBar: React.FC = () => {
         <div className="w-full flex items-center justify-between h-11 text-sm px-12 font-normal">
           <div className="flex w-full items-center justify-between">
             {NAV_ITEMS.map((item) => (
-              <div key={item.label} className="relative group ">
-                {/* MAIN DESKTOP BUTTON */}
+              <div key={item.label} className="relative group">
+                {/* MAIN BUTTON */}
                 <button
                   onClick={() => {
                     if (item.href) handleNavigate(item.href, item.label);
                     else setActive(item.label);
                   }}
-                  className={`
-                  flex items-center gap-1 px-2 py-3 transition
-                  ${
-                    active === item.label
-                      ? "bg-[#DF562C] text-white"
-                      : "hover:text-gray-200"
-                  }
-                `}
+                  className={`flex items-center gap-1 px-2 py-3 transition
+                    ${
+                      active === item.label
+                        ? "bg-[#DF562C] text-white"
+                        : "hover:text-gray-200"
+                    }`}
                 >
                   {item.label === "HOME" && <Home size={16} />}
                   {item.label}
                   {item.dropdown && <ChevronDown size={14} />}
                 </button>
 
-                {/* DESKTOP DROPDOWN */}
+                {/* DROPDOWN */}
                 {item.dropdown && (
                   <div className="absolute left-0 mt-0 w-50 bg-white text-gray-800 rounded shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-                    {item.dropdown.map((drop) => (
+                    {(item.label === "OBJECTIVES"
+                      ? objectiveDropdown
+                      : item.dropdown
+                    ).map((drop) => (
                       <button
                         key={drop.label}
                         onClick={() => handleNavigate(drop.href, drop.label)}
@@ -136,13 +152,13 @@ const NavBar: React.FC = () => {
             ))}
           </div>
 
+          {/* DONATE BUTTON */}
           <div className="items-center justify-center bg-[#DF562C]">
             <button
               onClick={() => router.push("/donate")}
-              className="flex items-center gap-2 px-10 h-11 bg-[#DF562C] text-white text-base font-semibold hover:bg-[#c44b22] transition rounded-none "
+              className="flex items-center gap-2 px-10 h-11 bg-[#DF562C] text-white text-base font-semibold hover:bg-[#c44b22] transition"
             >
-              DONATE
-              <span className="text-white text-lg">🤝🏻</span>
+              DONATE <span className="text-lg">🤝🏻</span>
             </button>
           </div>
         </div>
@@ -153,7 +169,6 @@ const NavBar: React.FC = () => {
         <div className="flex items-center justify-between px-4 py-3">
           <Image src={logo} width={120} alt="logo" />
 
-          {/* HAMBURGER */}
           <button onClick={() => setMobileOpen(true)}>
             <div className="space-y-1.5">
               <span className="block w-7 h-1 bg-black"></span>
@@ -166,7 +181,7 @@ const NavBar: React.FC = () => {
         {mobileOpen && (
           <div className="fixed inset-0 bg-black/40 z-50">
             <div className="w-[80%] bg-white h-full shadow-lg p-5 overflow-y-auto">
-              {/* TOP BAR */}
+              {/* HEADER */}
               <div className="flex justify-between items-center mb-4">
                 <Image src={logo} width={120} alt="logo" />
                 <button onClick={() => setMobileOpen(false)}>
@@ -174,17 +189,17 @@ const NavBar: React.FC = () => {
                 </button>
               </div>
 
-              {/* MENU LIST */}
+              {/* MENU */}
               <div className="flex flex-col gap-2 text-[#063D8E] font-medium text-[13px]">
                 {NAV_ITEMS.map((item) => (
                   <div key={item.label}>
                     <button
-                      className={`
-                        w-full flex items-center justify-between px-4 py-1
+                      className={`w-full flex items-center justify-between px-4 py-1
                         ${
-                          active === item.label ? "bg-[#DF562C] text-white" : ""
-                        }
-                      `}
+                          active === item.label
+                            ? "bg-[#DF562C] text-white"
+                            : ""
+                        }`}
                       onClick={() => {
                         if (item.href) handleNavigate(item.href, item.label);
                         if (item.dropdown)
@@ -193,7 +208,7 @@ const NavBar: React.FC = () => {
                           );
                       }}
                     >
-                      <span className="flex  items-center gap-2">
+                      <span className="flex items-center gap-2">
                         {item.label === "HOME" && <Home size={16} />}
                         {item.label}
                       </span>
@@ -207,21 +222,22 @@ const NavBar: React.FC = () => {
                     </button>
 
                     {/* MOBILE DROPDOWN */}
-                    {item.dropdown && openDropdown === item.label && (
-                      <div className="ml-6 flex flex-col gap-1 mt-1 font-normal text-[12px] text-[#063D8E]">
-                        {item.dropdown.map((drop) => (
-                          <button
-                            key={drop.label}
-                            onClick={() =>
-                              handleNavigate(drop.href, drop.label)
-                            }
-                            className="text-left py-1 hover:text-[#DF562C]"
-                          >
-                            {drop.label}
-                          </button>
-                        ))}
-                      </div>
-                    )}
+                    {item.dropdown &&
+                      openDropdown === item.label &&
+                      (item.label === "OBJECTIVES"
+                        ? objectiveDropdown
+                        : item.dropdown
+                      ).map((drop) => (
+                        <button
+                          key={drop.label}
+                          onClick={() =>
+                            handleNavigate(drop.href, drop.label)
+                          }
+                          className="ml-6 block text-left py-1 text-[12px] hover:text-[#DF562C]"
+                        >
+                          {drop.label}
+                        </button>
+                      ))}
                   </div>
                 ))}
               </div>
