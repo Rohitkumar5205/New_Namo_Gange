@@ -8,6 +8,7 @@ import OurInitiatives from "@/components/home/OurInitiatives";
 import SpecialPage from "@/components/home/SpecialPage";
 import WhatPeople from "@/components/home/WhatPeople";
 import React from "react";
+import LatestVideos from "@/components/home/LatestVideos";
 
 const page = () => {
   return (
@@ -19,7 +20,8 @@ const page = () => {
       <OurInitiatives />
       <WhatPeople />
       <OurAchievement />
-      <SpecialPage />
+      {/* <SpecialPage /> */}
+      <LatestVideos />
       <NewsUpdate />
     </div>
   );

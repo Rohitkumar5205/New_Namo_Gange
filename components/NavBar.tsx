@@ -22,17 +22,17 @@ interface NavItem {
 // ------------ FIXED MENU ITEMS ------------
 const NAV_ITEMS: NavItem[] = [
   { label: "HOME", href: "/" },
-  // { label: "ABOUT US", href: "/about" },
+  { label: "ABOUT US", href: "/about" },
+  // {
+  //   label: "ABOUT US",
+  //   dropdown: [
+  //     { label: "About Us", href: "/about/aboutUs" },
+  //     { label: "Acharya Jagdishji", href: "/about/acharyaJagdishji" },
+  //     { label: "Trust Bodies", href: "/about/trustBodies" },
+  //   ],
+  // },
   {
-    label: "ABOUT US",
-    dropdown: [
-      { label: "About Us", href: "/about/aboutUs" },
-      { label: "Acharya Jagdishji", href: "/about/acharyaJagdishji" },
-      { label: "Trust Bodies", href: "/about/trustBodies" },
-    ],
-  },
-  {
-    label: "OUR OBJECTIVES",
+    label: "OBJECTIVES",
     dropdown: [
       { label: "Health & Wellness", href: "/objectives/health" },
       { label: "Nature & Environment", href: "/objectives/nature" },
@@ -41,7 +41,7 @@ const NAV_ITEMS: NavItem[] = [
       { label: "Moksha Sewa", href: "/objectives/mokshaSewa" },
     ],
   },
-  { label: "OUR INITIATIVES", href: "/initiatives" },
+  { label: "INITIATIVES", href: "/initiatives" },
   // {
   //   label: "ACTIVITIES",
   //   dropdown: [
@@ -59,7 +59,7 @@ const NAV_ITEMS: NavItem[] = [
   {
     label: "COMMUNICATION",
     dropdown: [
-      { label: "Newsletters", href: "/communication/newsLetter" },
+      { label: "News Letters", href: "/communication/newsLetter" },
       { label: "Our Blogs", href: "/communication/blog" },
       { label: "Resent Updates", href: "/communication/latestNews" },
     ],

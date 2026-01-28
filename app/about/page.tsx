@@ -1,13 +1,11 @@
 import AboutJoin from "@/components/about/AboutJoin";
 import AboutNamoGange from "@/components/about/AboutNamoGange";
-import AcharyaJagdishji from "@/components/about/AcharyaJagdishji";
 import React from "react";
 
 const page = () => {
   return (
     <div>
       <AboutNamoGange />
-      <AcharyaJagdishji/>
       <AboutJoin />
     </div>
   );
