@@ -1,213 +1,34 @@
 "use client";
-import React from "react";
-import Image, { StaticImageData } from "next/image"; // ✅ import StaticImageData
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import ourIni1 from "@/public/objectives/moksha.png";
-import ourIni2 from "@/public/OurInitiatives/ourIni2.png";
-import ourIni3 from "@/public/OurInitiatives/ourIni3.png";
-import ourIni4 from "@/public/OurInitiatives/ourIni4.png";
-import ourIni5 from "@/public/OurInitiatives/ourIni5.png";
-// import ourIni6 from "@/public/OurInitiatives/ourIni6.png";
-import ourIni7 from "@/public/OurInitiatives/ourIni7.png";
-import ourIni8 from "@/public/OurInitiatives/ourIni8.png";
-import ourIni9 from "@/public/OurInitiatives/ourIni9.png";
-import ourIni10 from "@/public/OurInitiatives/ourIni10.png";
-import ourIni11 from "@/public/OurInitiatives/ourIni11.png";
-import ourIni12 from "@/public/OurInitiatives/ourIni12.png";
-import ourIni13 from "@/public/OurInitiatives/ourIni13.png";
-import ourIni14 from "@/public/OurInitiatives/NGF.png";
-import ourIni15 from "@/public/OurInitiatives/ourIni15.png";
-import ourIni16 from "@/public/OurInitiatives/ourIni16.png";
-import ourIni17 from "@/public/OurInitiatives/ourIni17.png";
-import ourIni18 from "@/public/OurInitiatives/ourIni18.png";
-import ourIni19 from "@/public/OurInitiatives/ourIni19.png";
-import ourIni20 from "@/public/OurInitiatives/ourIni20.png";
-import ourIni21 from "@/public/OurInitiatives/ourIni21.png";
-import ourIni22 from "@/public/OurInitiatives/ourIni22.png";
-import ourIni23 from "@/public/OurInitiatives/ourIni23.png";
-import ourIni24 from "@/public/OurInitiatives/Yogshala_Clinic.png";
-import ourIni25 from "@/public/OurInitiatives/9IHWE.png";
+import { apiService, InitiativeFromAPI } from "@/lib/apiService";
 
 // ✅ Fixed Interface Type
 interface Initiative {
   title: string;
-  image: StaticImageData | string; // <---- FIXED HERE
-  description: string;
+  image: string;
+  desc: string;
   link: string;
 }
 
-const initiatives: Initiative[] = [
-  {
-    title: "Moksha Sewa",
-    image: ourIni1,
-    description:
-      "A spiritual service initiative dedicated to supporting last rites, dignity in departure, and compassionate care for souls on their final journey.",
-    link: "/initiatives/icoa",
-  },
-  {
-    title: "Meri Beti Mera Abhiman",
-    image: ourIni2,
-    description:
-      "An empowering social movement that celebrates girl children, promotes education, and upholds dignity, equality, and self-respect for daughters.",
-    link: "/initiatives/ayush",
-  },
-  {
-    title: "Arogya Mantra",
-    image: ourIni3,
-    description:
-      "A national health awareness platform spreading knowledge of Ayurveda, yoga, and holistic living for a healthier and balanced lifestyle.",
-    link: "/initiatives/arogya-mantra",
-  },
-  {
-    title: "The Yogshala Expo",
-    image: ourIni4,
-    description:
-      "An international wellness expo bringing together yoga, Ayurveda, healthcare experts, and innovators to inspire conscious living.",
-    link: "/initiatives/yogshala-expo",
-  },
-  {
-    title: "The Yogshala Jobs",
-    image: ourIni5,
-    description:
-      "A career and employment initiative connecting skilled wellness professionals with opportunities in yoga, health, and holistic industries.",
-    link: "/initiatives/yogshala2025",
-  },
-  {
-    title: "Swachh Bharat Sankalp",
-    image: ourIni7,
-    description:
-      "A cleanliness and sanitation drive supporting the Swachh Bharat Mission through public awareness, participation, and responsible action.",
-    link: "/initiatives/swachh-bharat",
-  },
-  {
-    title: "ICA",
-    image: ourIni8,
-    description:
-      "Indian Contemporary Art platform promoting creativity, cultural heritage, and artistic expression through exhibitions and events.",
-    link: "/initiatives/ica",
-  },
-  {
-    title: "Acharya Ji",
-    image: ourIni9,
-    description:
-      "A spiritual guidance initiative offering teachings, wisdom, and inner awareness to help individuals walk the path of peace and self-realization.",
-    link: "/initiatives/acharya",
-  },
-  {
-    title: "Aviral Ganga",
-    image: ourIni10,
-    description:
-      "A sacred mission focused on preserving the uninterrupted flow and purity of River Ganga through awareness, action, and community participation.",
-    link: "/initiatives/aviral-ganga",
-  },
-  {
-    title: "Arogya Film Festival",
-    image: ourIni11,
-    description:
-      "A unique film festival highlighting stories of health, wellness, yoga, and Ayurveda through impactful cinema and creative storytelling.",
-    link: "/initiatives/film-festival",
-  },
-  {
-    title: "Indo Himalayan Expo",
-    image: ourIni12,
-    description:
-      "An international platform showcasing Himalayan culture, wellness, trade, tourism, and sustainable development opportunities.",
-    link: "/initiatives/himalayan-expo",
-  },
-  {
-    title: "Anna Sewa",
-    image: ourIni13,
-    description:
-      "A humanitarian food service initiative ensuring nourishment for the needy while promoting compassion, sharing, and selfless service.",
-    link: "/initiatives/anna-Sewa",
-  },
-  {
-    title: "NGT Farms",
-    image: ourIni14,
-    description:
-      "A sustainable agriculture initiative supporting organic farming, rural empowerment, and eco-friendly cultivation practices.",
-    link: "/initiatives/farms",
-  },
-  {
-    title: "The Grand Master of Yoga",
-    image: ourIni15,
-    description:
-      "An सम्मान initiative recognizing global yoga masters for preserving, teaching, and spreading the ancient science of yoga.",
-    link: "/initiatives/grandmaster",
-  },
-  {
-    title: "Arogya Sangoshti",
-    image: ourIni16,
-    description:
-      "A knowledge-sharing forum bringing together Ayurvedic scholars and experts to discuss innovations in natural healing systems.",
-    link: "/initiatives/sangoshti",
-  },
-  {
-    title: "Bachchan Ki Rangshala",
-    image: ourIni17,
-    description:
-      "A cultural platform celebrating Indian theatre, folk arts, music, and drama to preserve and promote traditional creativity.",
-    link: "/initiatives/rangshala",
-  },
-  {
-    title: "Ayush Mitra",
-    image: ourIni18,
-    description:
-      "A youth-driven volunteer initiative encouraging community participation in promoting wellness, yoga, and preventive healthcare.",
-    link: "/initiatives/ayushmitra",
-  },
-  {
-    title: "Vaidhyashala",
-    image: ourIni19,
-    description:
-      "An Ayurveda revival initiative supporting traditional practitioners and making natural treatments accessible and affordable.",
-    link: "/initiatives/vaidyashala",
-  },
-  {
-    title: "Global Eco-Tech Expo",
-    image: ourIni20,
-    description:
-      "A global exhibition platform promoting eco-friendly technologies, sustainability, and innovative solutions for a greener future.",
-    link: "/initiatives/ecotech",
-  },
-  {
-    title: "Ayush Abhinandanam",
-    image: ourIni21,
-    description:
-      "An honor and recognition initiative celebrating excellence in Ayurveda, yoga, wellness, and holistic health sciences.",
-    link: "/initiatives/abhinandan",
-  },
-  {
-    title: "MP Development Expo",
-    image: ourIni22,
-    description:
-      "A development-focused expo highlighting Madhya Pradesh’s culture, industry, investment, and wellness opportunities.",
-    link: "/initiatives/mp-development",
-  },
-  {
-    title: "Shrimad Bhagwat Katha",
-    image: ourIni23,
-    description:
-      "Spiritual discourses sharing divine wisdom from Shrimad Bhagwat to inspire devotion, morality, and inner transformation.",
-    link: "/initiatives/katha",
-  },
-  {
-    title: "The Yogshala Clinic",
-    image: ourIni24,
-    description:
-      "A wellness clinic integrating yoga therapy and modern fitness practices to promote balance, vitality, and holistic health.",
-    link: "/initiatives/fitness",
-  },
-  {
-    title: "9IHWE Expo",
-    image: ourIni25,
-    description:
-      "Comprehensive wellness programs designed for communities and corporates to promote stress-free and balanced living.",
-    link: "/initiatives/wellness",
-  },
-];
-
 const OurInitiatives = () => {
+  const [initiativeList, setInitiativeList] = useState<Initiative[]>([]);
+
+  useEffect(() => {
+    const fetchInitiatives = async () => {
+      try {
+        const data = await apiService.getInitiatives();
+        setInitiativeList(data);
+      }
+      catch (error) {
+        console.error("Error fetching initiatives:", error);
+      }
+    };
+
+    fetchInitiatives();
+  }, []);
+
   return (
     <section className="relative py-1.5 md:py-3 px-2 md:px-12  lg:px-12  bg-white overflow-hidden">
       <div className="w-full text-center">
@@ -293,7 +114,7 @@ const OurInitiatives = () => {
         </div> */}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {initiatives.map((item, i) => (
+          {initiativeList.map((item, i) => (
             <div
               key={i}
               className="
@@ -307,6 +128,8 @@ const OurInitiatives = () => {
                 <Image
                   src={item.image}
                   alt={item.title}
+                  width={100}
+                  height={100}
                   className="
             object-contain h-16 md:h-34 md:w-34 w-auto
             transition-transform duration-300
@@ -322,7 +145,7 @@ const OurInitiatives = () => {
                 </h3>
 
                 <p className="text-gray-600 text-xs md:text-[13px] leading-relaxed line-clamp-3 mb-4">
-                  {item.description}
+                  {item.desc}
                 </p>
 
                 {/* CTA */}

@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import axiosClient from "@/lib/axiosClient";
 import Link from "next/link";
+import { apiService } from "@/lib/apiService";
 
 interface Banner {
   image: string;
@@ -20,30 +20,32 @@ const HomeSlider = () => {
   useEffect(() => {
     const fetchSliderImages = async () => {
       try {
-        const res = await axiosClient.get("/banner");
+        // const res = await axiosClient.get("/banner");
 
-        console.log("🔥 Full API Response:", res.data);
+        // console.log("🔥 Full API Response:", res.data);
 
         // ✅ SAFELY extract banners array
-        const bannersList = res?.data?.data || [];
+        // const bannersList = res?.data?.data || [];
 
-        // ✅ ONLY Active status filter
-        const activeBanners = bannersList.filter(
-          (b: any) => b.status === "Active"
-        );
+        // // ✅ ONLY Active status filter
+        // const activeBanners = bannersList.filter(
+        //   (b: any) => b.status === "Active"
+        // );
 
-        console.log("✅ Only Active Banners:", activeBanners);
+        // console.log("✅ Only Active Banners:", activeBanners);
 
-        // ✅ Format for slider
-        const formatted = activeBanners.map((b: any) => ({
-          image: b.image,
-          title: b.title,
-          link: b.link,
-        }));
+        // // ✅ Format for slider
+        // const formatted = activeBanners.map((b: any) => ({
+        //   image: b.image,
+        //   title: b.title,
+        //   link: b.link,
+        // }));
 
-        console.log("🖼 Final Banner List (Formatted):", formatted);
+        // console.log("🖼 Final Banner List (Formatted):", formatted);
 
-        setBanners(formatted);
+        // setBanners(formatted);
+        const bannersData = await apiService.getActiveBanners();
+        setBanners(bannersData);
       } catch (error) {
         console.error("❌ Slider API Error:", error);
       } finally {
