@@ -42,7 +42,7 @@ const NewsUpdate = () => {
         {/* Section Header */}
         <div className="text-center mb-4">
           <h2 className="text-[1rem] md:text-xl lg:text-xl font-semibold text-gray-900 mb-2">
-            News{" "}
+            Blogs{" "}
             <span className="bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] bg-clip-text text-transparent">
               Updates
             </span>
