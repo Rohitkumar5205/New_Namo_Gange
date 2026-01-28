@@ -1,12 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { CalendarDays, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import News1 from "@/public/newsUpdate/newsUpdate1.jpg";
 import News3 from "@/public/newsUpdate/news3.jpg";
 import News2 from "@/public/newsUpdate/news1.jpg";
+import axiosClient from "@/lib/axiosClient";
 
 const newsData = [
   {
@@ -36,6 +37,48 @@ const newsData = [
 ];
 
 const NewsUpdate = () => {
+  const [blogs, setBlogs] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const res = await axiosClient.get("/blog");
+        if (res.data && Array.isArray(res.data.data)) {
+          const parser = new DOMParser();
+          const fetchedData = res.data.data
+            .filter((item: any) => item.status === "Active")
+            .sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+            .slice(0, 3)
+            .map((item: any) => {
+              let description = item.description || "";
+              const decoded = parser.parseFromString(description, "text/html");
+              description = decoded.body.textContent || "";
+              return {
+                id: item._id,
+                title: item.title,
+                image: item.image,
+                description: description.replace(/<[^>]+>/g, ""),
+                date: new Date(item.createdAt).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })
+              };
+            });
+          setBlogs(fetchedData);
+          console.log(fetchedData, "🔥 Blogs Data");
+
+        }
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
   return (
     <section className="w-full relative py-1.5 md:py-3 bg-gray-50 overflow-hidden">
       <div className="w-full px-4 md:px-12 lg:px-12">
@@ -77,7 +120,7 @@ const NewsUpdate = () => {
 
         {/* News Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 px-4">
-          {newsData.map((item, i) => (
+          {blogs.map((item, i) => (
             <motion.div
               key={item.id}
               initial={{ opacity: 0, y: 40 }}
@@ -92,6 +135,8 @@ const NewsUpdate = () => {
                 <Image
                   src={item.image}
                   alt={item.title}
+                  width={100}
+                  height={100}
                   className="w-full h-32 md:h-50 lg:h-58 object-cover transition-transform duration-700 ease-in-out hover:scale-110"
                 />
                 {/* Gradient Overlay */}
@@ -116,13 +161,13 @@ const NewsUpdate = () => {
                   {item.description}
                 </p>
 
-                <button
+                {/* <button
                   className="mt-4 relative rounded overflow-hidden px-6 py-1 md:py-1.5 lg:py-1.5 text-xs md:text-sm lg:text-sm text-white font-normal 
                shadow-md bg-[#0C55A0] cursor-pointer
                hover:bg-sky-700 hover:shadow-lg transition-all duration-300"
                 >
                   Learn More...
-                </button>
+                </button> */}
               </div>
             </motion.div>
           ))}

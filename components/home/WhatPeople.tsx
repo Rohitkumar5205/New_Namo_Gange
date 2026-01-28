@@ -1,101 +1,102 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Slider from "react-slick";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import axiosClient from "@/lib/axiosClient";
 // ==== Import Images ====
-import Person1 from "@/public/people/people1.jpg";
-import Person2 from "@/public/people/people2.jpg";
-import Person3 from "@/public/people/people3.jpg";
-import Person4 from "@/public/people/people4.jpg";
-import Person5 from "@/public/people/people5.jpg";
-import Person6 from "@/public/people/people6.jpg";
-import Person7 from "@/public/people/people7.jpg";
-import Person8 from "@/public/people/people8.jpg";
-import Person9 from "@/public/people/people9.jpg";
-import Person10 from "@/public/people/people10.jpg";
-import Person11 from "@/public/people/people11.jpg";
-import Person12 from "@/public/people/people12.jpg";
+// import Person1 from "@/public/people/people1.jpg";
+// import Person2 from "@/public/people/people2.jpg";
+// import Person3 from "@/public/people/people3.jpg";
+// import Person4 from "@/public/people/people4.jpg";
+// import Person5 from "@/public/people/people5.jpg";
+// import Person6 from "@/public/people/people6.jpg";
+// import Person7 from "@/public/people/people7.jpg";
+// import Person8 from "@/public/people/people8.jpg";
+// import Person9 from "@/public/people/people9.jpg";
+// import Person10 from "@/public/people/people10.jpg";
+// import Person11 from "@/public/people/people11.jpg";
+// import Person12 from "@/public/people/people12.jpg";
 
-const people = [
-  {
-    name: "Dr. Jaideep Arya",
-    title:
-      "This visionary initiative holds a bright future and deserves to be promoted and embraced in every corner of India.",
-    image: Person1,
-  },
-  {
-    name: "Dr. Ishwar V. Basavaraddi",
-    title:
-      "An excellent and inspiring initiative. My sincere best wishes for its continued growth, success, and positive impact.",
-    image: Person2,
-  },
-  {
-    name: "Dr. Vachaspati",
-    title:
-      "The Namo Gange Trust is performing truly divine service by spreading awareness rooted in spirituality, culture, and values.",
-    image: Person3,
-  },
-  {
-    name: "Sandeep Marwah",
-    title:
-      "It is a pleasure and an honour to be associated with such noble work that contributes meaningfully to society.",
-    image: Person4,
-  },
-  {
-    name: "Khyati Nayak",
-    title:
-      "A remarkable platform dedicated to spreading awareness about holistic living, wellness, and conscious lifestyles.",
-    image: Person5,
-  },
-  {
-    name: "Dr. Preeti Chhabra",
-    title:
-      "Excellent initiative! I truly look forward to seeing this meaningful mission expand and touch lives across India.",
-    image: Person6,
-  },
-  {
-    name: "Satya Sharma",
-    title:
-      "Namo Gange offers exceptional opportunities for individuals to serve humanity with compassion and purpose.",
-    image: Person7,
-  },
-  {
-    name: "Padma Shri Bharat Bhushan",
-    title:
-      "I had an incredible and enriching experience that beautifully blended timeless traditions with modern perspectives.",
-    image: Person8,
-  },
-  {
-    name: "Wafa-El-Hedeny",
-    title:
-      "The Yogshala is a wonderful global initiative promoting wellness, harmony, and a balanced way of life.",
-    image: Person9,
-  },
-  {
-    name: "Dr. Sambit Patra",
-    title:
-      "I am honoured to be part of this inspiring mission dedicated to spiritual awareness and national upliftment.",
-    image: Person10,
-  },
-  {
-    name: "Shripad Yesso Naik",
-    title:
-      "My heartfelt greetings and best wishes for this remarkable national initiative with a powerful social vision.",
-    image: Person11,
-  },
-  {
-    name: "Dr. Harsh Vardhan",
-    title:
-      "My sincere congratulations and best wishes to the entire Namo Gange family for their commendable efforts.",
-    image: Person12,
-  },
-];
+
+// const people = [
+//   {
+//     name: "Dr. Jaideep Arya",
+//     title:
+//       "This visionary initiative holds a bright future and deserves to be promoted and embraced in every corner of India.",
+//     image: Person1,
+//   },
+//   {
+//     name: "Dr. Ishwar V. Basavaraddi",
+//     title:
+//       "An excellent and inspiring initiative. My sincere best wishes for its continued growth, success, and positive impact.",
+//     image: Person2,
+//   },
+//   {
+//     name: "Dr. Vachaspati",
+//     title:
+//       "The Namo Gange Trust is performing truly divine service by spreading awareness rooted in spirituality, culture, and values.",
+//     image: Person3,
+//   },
+//   {
+//     name: "Sandeep Marwah",
+//     title:
+//       "It is a pleasure and an honour to be associated with such noble work that contributes meaningfully to society.",
+//     image: Person4,
+//   },
+//   {
+//     name: "Khyati Nayak",
+//     title:
+//       "A remarkable platform dedicated to spreading awareness about holistic living, wellness, and conscious lifestyles.",
+//     image: Person5,
+//   },
+//   {
+//     name: "Dr. Preeti Chhabra",
+//     title:
+//       "Excellent initiative! I truly look forward to seeing this meaningful mission expand and touch lives across India.",
+//     image: Person6,
+//   },
+//   {
+//     name: "Satya Sharma",
+//     title:
+//       "Namo Gange offers exceptional opportunities for individuals to serve humanity with compassion and purpose.",
+//     image: Person7,
+//   },
+//   {
+//     name: "Padma Shri Bharat Bhushan",
+//     title:
+//       "I had an incredible and enriching experience that beautifully blended timeless traditions with modern perspectives.",
+//     image: Person8,
+//   },
+//   {
+//     name: "Wafa-El-Hedeny",
+//     title:
+//       "The Yogshala is a wonderful global initiative promoting wellness, harmony, and a balanced way of life.",
+//     image: Person9,
+//   },
+//   {
+//     name: "Dr. Sambit Patra",
+//     title:
+//       "I am honoured to be part of this inspiring mission dedicated to spiritual awareness and national upliftment.",
+//     image: Person10,
+//   },
+//   {
+//     name: "Shripad Yesso Naik",
+//     title:
+//       "My heartfelt greetings and best wishes for this remarkable national initiative with a powerful social vision.",
+//     image: Person11,
+//   },
+//   {
+//     name: "Dr. Harsh Vardhan",
+//     title:
+//       "My sincere congratulations and best wishes to the entire Namo Gange family for their commendable efforts.",
+//     image: Person12,
+//   },
+// ];
 const PrevArrow = ({ onClick }: any) => (
   <button
     onClick={onClick}
@@ -115,10 +116,48 @@ const NextArrow = ({ onClick }: any) => (
     <ChevronRight size={18} />
   </button>
 );
+interface Testimonial {
+  _id: string;
+  name: string;
+  image: string;
+  desc: string;
+  link: string;
+}
 
 const WhatPeople = () => {
   const sliderRef = useRef<any>(null);
-
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [loading, setLoading] = useState(true);
+  const people = testimonials;
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const res = await axiosClient.get("/testimonials");
+        if (res.data && Array.isArray(res.data.data)) {
+          const parser = new DOMParser();
+          const fetchedData = res.data.data
+            .filter((item: any) => item.status === "Active")
+            .map((item: any) => {
+              let description = item.desc || "";
+              const decoded = parser.parseFromString(description, "text/html");
+              description = decoded.body.textContent || "";
+              return {
+                name: item.name,
+                image: item.image,
+                desc: description.replace(/<[^>]+>/g, ""),
+              };
+            });
+          setTestimonials(fetchedData);
+          console.log(fetchedData, "🔥 Testimonials Data");
+        }
+      } catch (error) {
+        console.error("Error fetching testimonials:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchTestimonials();
+  }, []);
   const sliderSettings = {
     dots: false,
     infinite: true,
@@ -204,7 +243,10 @@ const WhatPeople = () => {
                 {/* ✅ FIXED IMAGE */}
                 <div className="relative w-full h-56 mb-4 overflow-hidden rounded-md">
                   <Image
-                    src={person.image}
+                    src={person.image?.startsWith("http")
+                      ? person.image
+                      : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${person.image}`
+                    }
                     alt={person.name}
                     fill
                     className="object-cover transition-transform duration-700 hover:scale-105"
@@ -216,7 +258,7 @@ const WhatPeople = () => {
                 </h3>
 
                 <p className="text-gray-600 text-sm leading-relaxed text-center line-clamp-3">
-                  {person.title}
+                  {person.desc}
                 </p>
               </div>
             </motion.div>

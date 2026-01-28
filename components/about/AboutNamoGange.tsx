@@ -1,11 +1,12 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Heart, BookOpen, HandHeart, Leaf, Users } from "lucide-react";
 import Link from "next/link";
 import AboutNGTrust from "../home/AboutNGTrust";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
+import axiosClient from "@/lib/axiosClient";
 import OurActivities1 from "@/public/ourActivities/ann_sewa.jpg";
 import OurActivities2 from "@/public/ourActivities/swachh_bharat.jpg";
 import OurActivities3 from "@/public/ourActivities/health_check.jpg";
@@ -70,6 +71,38 @@ const activities = [
 ];
 
 const AboutNamoGange = () => {
+  const [trustBodies, setTrustBodies] = useState<any[]>(activities);
+
+  React.useEffect(() => {
+    const fetchTrustBodies = async () => {
+      try {
+        const res = await axiosClient.get("/trust-bodies");
+        if (res.data && Array.isArray(res.data.data)) {
+          const parser = new DOMParser();
+          const fetchedData = res.data.data
+            .filter((item: any) => item.status === "Active")
+            .map((item: any) => {
+              let description = item.description || "";
+              const decoded = parser.parseFromString(description, "text/html");
+              description = decoded.body.textContent || "";
+              return {
+                title: item.name,
+                text: description,
+                image: item.image,
+              };
+            });
+          if (fetchedData.length > 0) {
+            setTrustBodies(fetchedData);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching trust bodies:", error);
+      }
+    };
+
+    fetchTrustBodies();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800">
       {/* Header */}
@@ -157,12 +190,11 @@ const AboutNamoGange = () => {
         </p>
 
         <div className="space-y-2 md:space-y-2 py-2 md:py-6">
-          {activities.map((activity, i) => (
+          {trustBodies.map((activity, i) => (
             <div
               key={i}
-              className={`flex flex-col w-full ${
-                i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
-              } items-center gap-5 md:gap-10 lg:gap-10`}
+              className={`flex flex-col w-full ${i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
+                } items-center gap-5 md:gap-10 lg:gap-10`}
             >
               <div className="flex w-full md:w-[30%] relative group ">
                 {/* Gradient glow */}
@@ -170,7 +202,15 @@ const AboutNamoGange = () => {
 
                 <div className="overflow-hidden rounded shadow-lg bg-white/50 backdrop-blur-sm border border-gray-100 transition-all duration-700 group-hover:shadow-2xl w-full">
                   <Image
-                    src={activity.image}
+                    src={
+                      typeof activity.image === "string"
+                        ? activity.image.startsWith("http")
+                          ? activity.image
+                          : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${activity.image}`
+                        : activity.image
+                    }
+                    width={500}
+                    height={300}
                     alt={activity.title}
                     className="w-full  object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
                   />

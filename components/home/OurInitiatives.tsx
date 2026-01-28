@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { apiService, InitiativeFromAPI } from "@/lib/apiService";
+import axiosClient from "@/lib/axiosClient";
 
 // ✅ Fixed Interface Type
 interface Initiative {
@@ -18,8 +19,25 @@ const OurInitiatives = () => {
   useEffect(() => {
     const fetchInitiatives = async () => {
       try {
-        const data = await apiService.getInitiatives();
-        setInitiativeList(data);
+        const res = await axiosClient.get("/initiatives");
+        if (res.data && Array.isArray(res.data.data)) {
+          const parser = new DOMParser();
+          const fetchedData = res.data.data
+            .filter((item: any) => item.status === "Active")
+            .sort((a: any, b: any) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+            .map((item: any) => {
+              let description = item.desc || "";
+              const decoded = parser.parseFromString(description, "text/html");
+              description = decoded.body.textContent || "";
+              return {
+                title: item.title,
+                image: item.image,
+                desc: description.replace(/<[^>]+>/g, ""),
+                link: item.slug ? `/initiatives/${item.slug}` : "#",
+              };
+            });
+          setInitiativeList(fetchedData);
+        }
       }
       catch (error) {
         console.error("Error fetching initiatives:", error);
