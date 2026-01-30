@@ -15,6 +15,7 @@ interface Objective {
   _id: string;
   title: string;
   image: string;
+  logo: string;
   description: string;
   link: string;
 }
@@ -33,7 +34,7 @@ const ObjectiveOfTrust = () => {
             .map((item: any) => ({
               _id: item._id,
               title: item.title,
-              image: item.image,
+              logo: item.logo,
               description: item.desc,
               link: item.slug ? `/objectives/${item.slug}` : "#",
             }));
@@ -114,10 +115,11 @@ const ObjectiveOfTrust = () => {
                 {/* Icon */}
                 <div className="flex items-center justify-center  rounded-full bg-gray-50   border border-gray-200 shadow-inner  mb-4 ">
                   <Image
-                    src={
-                      item?.image?.startsWith("http")
-                        ? item.image
-                        : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${item.image}`
+                    src={typeof item.logo === "string" ?
+                      item?.logo?.startsWith("http")
+                        ? item.logo
+                        : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${item.logo}`
+                      : item.image
                     }
                     alt={item.title}
                     width={100}
