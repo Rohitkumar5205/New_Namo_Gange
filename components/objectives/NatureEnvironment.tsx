@@ -187,9 +187,10 @@ const NatureEnvironment = () => {
                       overflow-hidden shadow-inner"
               >
                 <Image
-                  src={item.image?.startsWith("http")
+                  src={typeof item.image === "string" ? item.image?.startsWith("http")
                     ? item.image
                     : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${item.image}`
+                    : item.image
                   }
                   width={100}
                   height={100}

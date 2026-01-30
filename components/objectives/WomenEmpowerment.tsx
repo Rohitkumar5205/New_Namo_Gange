@@ -177,10 +177,11 @@ const WomenEmpowerment = () => {
                       overflow-hidden shadow-inner"
               >
                 <Image
-                  src={
+                  src={typeof item.image === "string" ?
                     item.image?.startsWith("http")
                       ? item.image
                       : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${item.image}`
+                    : item.image
                   }
                   alt={item.title}
                   width={100}
