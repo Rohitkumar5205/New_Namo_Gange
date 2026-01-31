@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import axiosClient from "@/lib/axiosClient";
+import Link from "next/link";
 const news = [
   {
     id: 1,
@@ -169,7 +170,31 @@ export default function LatestNewsPage() {
   });
 
   return (
-    <div className="w-full bg-gray-50 px-8">
+    <div >
+      <div
+        className="w-full bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/home/Newsletter.jpg')" }}
+      >
+        {/* Overlay */}
+        <div className="bg-black/30 w-full h-full md:h-[250px] py-10 md:py-16">
+          <div className="max-w-7xl mx-auto px-4 text-center">
+            <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
+              Latest News
+            </h2>
+            <p className="text-sm md:text-base text-white mt-1">
+              <Link
+                href="/"
+                className="text-[#DF562C] font-medium hover:underline"
+              >
+                Home
+              </Link>{" "}
+              - Latest News
+            </p>
+          </div>
+        </div>
+      </div>
+
+<div className="w-full bg-gray-50 px-8">
       {/* ---------- HEADING ---------- */}
       <h2 className="text-lg md:text-xl font-semibold  text-center rounded text-gray-900 pt-2">
         Latest News and <span className="text-[#7a0d0d]">Updates</span>
@@ -181,6 +206,20 @@ export default function LatestNewsPage() {
       </p>
 
       <div className=" w-full  h-1 mt-2 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
+      <div>
+           <p className="text-gray-700 leading-relaxed text-sm md:text-[15px] mt-2">
+             Acharya Jagdishji Maharaj is a revered spiritual guide whose life
+             and teachings continue to inspire countless individuals on the path
+             of inner awakening and self-realization. Blessed by the divine grace
+             of
+             <strong> Maa Gange and Lord Krishna</strong>, he embodies a rare
+             harmony of spiritual wisdom, compassion, and disciplined living.
+             Renowned as a profound philosopher and an eloquent Bhagwat
+             Kathavachak, Acharya Ji has dedicated his life to spreading the
+             timeless values of Sanatan Dharma through wisdom-filled discourses
+             and soulful storytelling.
+           </p>
+         </div>
 
       {/* ---------- FILTERS ---------- */}
       <div className="w-full flex flex-col md:flex-row justify-between gap-4 mt-2">
@@ -191,7 +230,9 @@ export default function LatestNewsPage() {
         >
           <option value="">Publisher Wise</option>
           {publishers.map((pub: any) => (
-            <option key={pub._id} value={pub.name}>{pub.name}</option>
+            <option key={pub._id} value={pub.name}>
+              {pub.name}
+            </option>
           ))}
         </select>
 
@@ -265,6 +306,7 @@ export default function LatestNewsPage() {
       {filteredNews.length === 0 && (
         <p className="text-center text-gray-600 mt-10">No results found...</p>
       )}
+      </div>
     </div>
   );
 }

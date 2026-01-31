@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-
+import Link from "next/link";
 interface SupportFormData {
   name: string;
   email: string;
@@ -170,7 +170,30 @@ const Support = () => {
     form.message;
 
   return (
-    <section className="w-full px-2 md:px-12  lg:px-12 relative py-4 md:py-6 overflow-hidden">
+    <section >
+       <div
+        className="w-full  bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/banner/support.png')" }}
+      >
+        {/* Overlay */}
+        <div className="bg-black/20 w-full h-full md:h-[250px] py-10 md:py-16">
+          <div className="max-w-7xl mx-auto px-4 text-center">
+            <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
+              Our Support
+            </h2>
+            <p className="text-sm md:text-base text-white mt-1">
+              <Link
+                href="/"
+                className="text-[#DF562C] font-medium hover:underline"
+              >
+                Home
+              </Link>{" "}
+              - Our Support
+            </p>
+          </div>
+        </div>
+      </div>
+<div className="w-full px-2 md:px-12  lg:px-12 relative py-4 md:py-6 overflow-hidden">
       <div className=" w-full lg:px-0">
         {/* Header */}
         <h2 className="text-xl md:text-2xl font-medium text-gray-900 mb-1 text-center">
@@ -517,6 +540,7 @@ const Support = () => {
           </div>
         </div>
       )}
+</div>
     </section>
   );
 };
