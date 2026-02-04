@@ -52,7 +52,7 @@ const Career = () => {
     <>
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/banner/career.png')" }}
+        style={{ backgroundImage: "url('/career/career.jpeg')" }}
       >
         <div className="bg-black/20 py-12 md:h-[250px] md:py-20">
           <div className="w-full px-4 text-center">

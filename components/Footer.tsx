@@ -37,8 +37,8 @@ export default function Footer() {
             {[
               { name: "Home", link: "/" },
               { name: "About Us", link: "/about" },
-              { name: "Events", link: "/events" },
-              { name: "Gallery", link: "/gallery" },
+              { name: "Events", link: "/event/upcoming" },
+              { name: "Gallery", link: "/gallery/photos" },
               { name: "Contact", link: "/contact" },
             ].map((item, i) => (
               <li key={i} className="hover:text-[#DF562C] transition">
@@ -59,14 +59,14 @@ export default function Footer() {
 
           <ul className="space-y-2 text-sm">
             {[
-              "Health & Wellness ",
-              "Nature & Environment",
-              "Culture & Sanskriti",
-              "Women Empowerment",
-              "Moksha Sewa",
-            ].map((text, i) => (
+              { name: "Health & Wellness", slug: "health-wellness" },
+              { name: "Nature & Environment", slug: "nature-environment" },
+              { name: "Culture & Sanskriti", slug: "kala-sanskriti" },
+              { name: "Women Empowerment", slug: "women-empowerment" },
+              { name: "Moksha Sewa", slug: "moksha-sewa" },
+            ].map((item, i) => (
               <li key={i} className="hover:text-[#1e7ed3] transition">
-                {text}
+                <Link href={`/objectives/${item.slug}`}>{item.name}</Link>
                 <hr className="mt-2 border-gray-600" />
               </li>
             ))}
