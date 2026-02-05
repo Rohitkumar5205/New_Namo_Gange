@@ -202,7 +202,7 @@ const Support = () => {
               Our Support
             </span>
           </h2>
-          <p className="text-gray-600 text-[13px] md:text-sm italic leading-relaxed">
+          <p className="text-gray-600 text-[13px] md:text-sm text-center italic leading-relaxed">
             “We extend our support through wellness initiatives, cultural
             upliftment, women empowerment, compassionate service, and the
             protection of our environment.”
@@ -228,236 +228,301 @@ const Support = () => {
             </div>
           </div>
         </div>
-        <h1 className="text-center text-sm md:text-xl text-normal md:font-medium mb-2">
-          Please Complete the Support Form
-        </h1>
-        <div className="w-full bg-white border border-gray-200 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-2 lg:px-6 lg:py-5 md:p-10">
-          {/* ========== FORM GRID START ========== */}
-          <form
-            // onSubmit={handleSubmit}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3"
+
+        <div className="flex flex-col lg:flex-row gap-2 md:gap-8 bg-gray-50 py-2 md:py-4 px-4 rounded">
+          {/* ================= LEFT INFO PANEL ================= */}
+          <div
+            className="
+    w-full lg:w-[45%]
+    rounded-2xl
+    bg-gradient-to-br from-[#0C55A0] via-[#0b4f96] to-[#08467c]
+    text-white
+    p-7 lg:p-10
+    flex flex-col justify-between
+    shadow-lg
+  "
           >
-            {/* Full Name (col 1) */}
-            <div className="flex flex-col ">
-              <label className="text-sm font-medium text-gray-600 mb-1">
-                Full Name <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                name="name"
-                value={form.name}
-                onChange={handleChange}
-                required
-                className="border rounded px-3 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
-                placeholder="Enter your full name"
-              />
+            <div>
+              <h3 className="text-lg lg:text-2xl font-medium md:font-semibold mb-4 tracking-wide">
+                Support Our Mission
+              </h3>
+
+              <p className="text-sm md:text-[15px] leading-relaxed text-white/95 mb-4">
+                By submitting this form, you step into a purpose-driven journey
+                dedicated to compassion, responsibility, and service to
+                humanity. Your involvement enables us to design, implement, and
+                scale initiatives that create meaningful and sustainable impact
+                at the grassroots level.
+              </p>
+
+              <p className="text-sm md:text-[15px] leading-relaxed text-white/90 mb-5">
+                Every contribution—whether through time, skills, resources, or
+                strategic partnerships—strengthens our collective mission.
+                Together, we work toward empowering communities, uplifting
+                lives, and fostering long-term social transformation guided by
+                ethical values and shared responsibility.
+              </p>
+
+              <ul className="space-y-3 text-sm md:text-[15px] text-white/95">
+                <li className="flex gap-3">
+                  <span>✔</span>
+                  <span>
+                    Volunteer in social, environmental, and humanitarian
+                    initiatives
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span>✔</span>
+                  <span>
+                    Contribute professional skills, expertise, or mentorship
+                    support
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span>✔</span>
+                  <span>
+                    Support programs through donations, resources, or funding
+                    assistance
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span>✔</span>
+                  <span>
+                    Partner with us for long-term, high-impact community
+                    development
+                  </span>
+                </li>
+              </ul>
             </div>
 
-            {/* Email (col 2) */}
-            <div className="flex flex-col">
-              <label className="text-sm font-medium text-gray-600 mb-1">
-                Email Id<span className="text-red-500">*</span>
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={form.email}
-                onChange={handleChange}
-                required
-                disabled={isEmailVerified}
-                className={`border rounded px-3 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none ${
-                  isEmailVerified ? "bg-gray-100" : ""
-                }`}
-                placeholder="Enter your email"
-              />
-            </div>
+            {/* <p className="mt-8 text-xs md:text-sm text-white/70 border-t border-white/20 pt-4 leading-relaxed">
+    * All information shared through this form is kept strictly confidential
+    and is used solely for coordination, communication, and engagement related
+    to our initiatives.
+  </p> */}
+          </div>
 
-            {/* Phone (col 4) */}
-            <div className="flex flex-col">
-              <label className="text-sm font-medium text-gray-600 mb-1">
-                Mobile Number <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="tel"
-                name="phone"
-                maxLength={10}
-                value={form.phone}
-                onChange={handlePhoneChange} // Use the number-only handler
-                required
-                disabled={isPhoneVerified}
-                className={`border rounded px-3 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none ${
-                  isPhoneVerified ? "bg-gray-100" : ""
-                }`}
-                placeholder="10-digit mobile number"
-              />
-            </div>
+          {/* ================= RIGHT FORM PANEL ================= */}
+          <div
+            className="
+      w-full lg:w-[55%]
+      bg-white
+      border border-gray-200
+      rounded-2xl
+      shadow-[0_10px_40px_rgba(0,0,0,0.08)]
+      p-5 md:p-7 lg:p-9
+    "
+          >
+            <form className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2 md:gap-4">
+              {/* FORM TITLE */}
+              <div className="lg:col-span-3 mb-2 text-center">
+                <h2 className="text-base md:text-xl font-medium text-gray-800">
+                  Support Form
+                </h2>
+                <p className="text-xs md:text-sm text-gray-500 mt-1 border-t border-gray-200 pt-2">
+                  Fields marked with <span className="text-red-500">*</span> are
+                  required
+                </p>
+              </div>
 
-            {/* Gender */}
-            <div className="flex flex-col">
-              <label className="text-sm font-medium text-gray-600 mb-1">
-                Gender <span className="text-red-500">*</span>
-              </label>
-              <select
-                name="gender"
-                value={form.gender}
-                onChange={handleChange}
-                required
-                className="border rounded px-3 py-1.5 text-sm bg-white focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
-              >
-                <option value="">Select gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
+              {/* Full Name */}
+              <div className="flex flex-col">
+                <label className="text-sm font-medium text-gray-600 mb-1">
+                  Full Name <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  required
+                  className="border rounded-md px-3 py-1 md:py-1.5 text-sm focus:border-[#1e7ed3] outline-none"
+                  placeholder="Enter your full name"
+                />
+              </div>
 
-            {/* Age Group */}
-            <div className="flex flex-col">
-              <label className="text-sm font-medium text-gray-600 mb-1">
-                DOB <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="date"
-                name="ageGroup"
-                value={form.ageGroup}
-                onChange={handleChange}
-                required
-                className="border rounded px-3 py-1.5 text-sm bg-white focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
-              />
-            </div>
+              {/* Email */}
+              <div className="flex flex-col">
+                <label className="text-sm font-medium text-gray-600 mb-1">
+                  Email ID <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                  disabled={isEmailVerified}
+                  className={`border rounded-md px-3 py-1 md:py-1.5 text-sm focus:border-[#1e7ed3] outline-none ${
+                    isEmailVerified ? "bg-gray-100" : ""
+                  }`}
+                  placeholder="Enter your email"
+                />
+              </div>
 
-            {/* Support Type */}
-            <div className="flex flex-col">
-              <label className="text-sm font-medium text-gray-600 mb-1">
-                Support Type <span className="text-red-500">*</span>
-              </label>
-              <select
-                name="supportType"
-                value={form.supportType}
-                onChange={handleChange}
-                required
-                className="border rounded px-3 py-1.5 text-sm bg-white focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
-              >
-                <option value="">Select support type</option>
-                <option value="Volunteer">Volunteer</option>
-                <option value="Donation">Donation</option>
-                <option value="Partnership">Partnership</option>
-                <option value="Awareness">Awareness</option>
-                <option value="Service">Service</option>
-              </select>
-            </div>
+              {/* Mobile */}
+              <div className="flex flex-col">
+                <label className="text-sm font-medium text-gray-600 mb-1">
+                  Mobile Number <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  maxLength={10}
+                  value={form.phone}
+                  onChange={handlePhoneChange}
+                  required
+                  disabled={isPhoneVerified}
+                  className={`border rounded-md px-3 py-1 md:py-1.5 text-sm focus:border-[#1e7ed3] outline-none ${
+                    isPhoneVerified ? "bg-gray-100" : ""
+                  }`}
+                  placeholder="10-digit mobile number"
+                />
+              </div>
 
-            {/* Address */}
-            <div className="flex flex-col md:col-span-2 lg:col-span-2">
-              <label className="text-sm font-medium text-gray-600 mb-1">
-                Full Address <span className="text-red-500">*</span>
-              </label>
-              <textarea
-                name="address"
-                value={form.address}
-                onChange={handleChange}
-                required
-                rows={1}
-                className="border rounded px-3 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
-                placeholder="Enter your complete address"
-              />
-            </div>
+              {/* Gender */}
+              <div className="flex flex-col">
+                <label className="text-sm font-medium text-gray-600 mb-1">
+                  Gender <span className="text-red-500">*</span>
+                </label>
+                <select
+                  name="gender"
+                  value={form.gender}
+                  onChange={handleChange}
+                  required
+                  className="border rounded-md px-3 py-1 md:py-1.5 text-sm bg-white outline-none"
+                >
+                  <option value="">Select gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
 
-            {/* State */}
-            <div className="flex flex-col">
-              <label className="text-sm font-medium text-gray-600 mb-1">
-                State <span className="text-red-500">*</span>
-              </label>
-              <select
-                name="state"
-                value={form.state}
-                onChange={handleChange}
-                required
-                className="border rounded px-3 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none bg-white"
-              >
-                <option value="">Select State</option>
-                <option value="Uttar Pradesh">Uttar Pradesh</option>
-                <option value="Delhi">Delhi</option>
-                <option value="Haryana">Haryana</option>
-                {/* ... other states */}
-              </select>
-            </div>
+              {/* DOB */}
+              <div className="flex flex-col">
+                <label className="text-sm font-medium text-gray-600 mb-1">
+                  DOB <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="date"
+                  name="ageGroup"
+                  value={form.ageGroup}
+                  onChange={handleChange}
+                  required
+                  className="border rounded-md px-3 py-1 md:py-1.5 text-sm bg-white outline-none"
+                />
+              </div>
 
-            {/* City */}
-            <div className="flex flex-col">
-              <label className="text-sm font-medium text-gray-600 mb-1">
-                City <span className="text-red-500">*</span>
-              </label>
-              <select
-                name="city"
-                value={form.city}
-                onChange={handleChange}
-                required
-                className="border rounded px-3 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none bg-white"
-              >
-                <option value="">Select City</option>
+              {/* Address */}
+              <div className="flex flex-col">
+                <label className="text-sm font-medium text-gray-600 mb-1">
+                  Full Address <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="address"
+                  value={form.address}
+                  onChange={handleChange}
+                  required
+                  className="border rounded-md px-3 py-1 md:py-1.5 text-sm outline-none"
+                  placeholder="Enter your complete address"
+                />
+              </div>
 
-                {/* Common Cities */}
-                <option value="Delhi">Delhi</option>
-                <option value="Noida">Noida</option>
-                {/* ... other cities */}
-              </select>
-            </div>
+              {/* State */}
+              <div className="flex flex-col">
+                <label className="text-sm font-medium text-gray-600 mb-1">
+                  State <span className="text-red-500">*</span>
+                </label>
+                <select
+                  name="state"
+                  value={form.state}
+                  onChange={handleChange}
+                  required
+                  className="border rounded-md px-3 py-1 md:py-1.5 text-sm bg-white outline-none"
+                >
+                  <option value="">Select State</option>
+                  <option value="Uttar Pradesh">Uttar Pradesh</option>
+                  <option value="Delhi">Delhi</option>
+                  <option value="Haryana">Haryana</option>
+                </select>
+              </div>
 
-            {/* Contribution */}
-            <div className="flex flex-col ">
-              <label className="text-sm font-medium text-gray-600 mb-1">
-                Preferred Contribution <span className="text-red-500">*</span>
-              </label>
-              <select
-                name="contribution"
-                value={form.contribution}
-                onChange={handleChange}
-                required
-                className="border rounded px-3 py-1.5 text-sm bg-white focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
-              >
-                <option value="">Choose contribution</option>
-                <option value="Time">Time (Volunteering)</option>
-                <option value="Skills">Skills / Services</option>
-                <option value="Financial">Financial Contribution</option>
-                <option value="Resources">Resources Support</option>
-              </select>
-            </div>
+              {/* City */}
+              <div className="flex flex-col">
+                <label className="text-sm font-medium text-gray-600 mb-1">
+                  City <span className="text-red-500">*</span>
+                </label>
+                <select
+                  name="city"
+                  value={form.city}
+                  onChange={handleChange}
+                  required
+                  className="border rounded-md px-3 py-1 md:py-1.5 text-sm bg-white outline-none"
+                >
+                  <option value="">Select City</option>
+                  <option value="Delhi">Delhi</option>
+                  <option value="Noida">Noida</option>
+                </select>
+              </div>
 
-            {/* Message */}
-            <div className="flex flex-col md:col-span-2 lg:col-span-4">
-              <label className="text-sm font-medium text-gray-600 mb-1">
-                Message / Reason to Support{" "}
-                <span className="text-red-500">*</span>
-              </label>
-              <textarea
-                name="message"
-                value={form.message}
-                onChange={handleChange}
-                required
-                rows={4}
-                className="border rounded px-3 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
-                placeholder="Write your message"
-              />
-            </div>
+              {/* Contribution */}
+              <div className="flex flex-col">
+                <label className="text-sm font-medium text-gray-600 mb-1">
+                  Preferred Contribution <span className="text-red-500">*</span>
+                </label>
+                <select
+                  name="contribution"
+                  value={form.contribution}
+                  onChange={handleChange}
+                  required
+                  className="border rounded-md px-3 py-1 md:py-1.5 text-sm bg-white outline-none"
+                >
+                  <option value="">Choose contribution</option>
+                  <option value="Time">Time (Volunteering)</option>
+                  <option value="Skills">Skills / Services</option>
+                  <option value="Financial">Financial Contribution</option>
+                  <option value="Resources">Resources Support</option>
+                </select>
+              </div>
 
-            {/* Submit - Disabled until both are verified */}
-            <div className="md:col-span-2 mt-2 lg:col-span-5 flex justify-center">
-              <button
-                type="submit"
-                onClick={handleInitialSubmit}
-                disabled={!isFormComplete}
-                className={`px-8 py-1.5 font-medium text-sm md:text-[15px] lg:text-[15px] rounded-md shadow transition duration-200 ${
-                  !isFormComplete
-                    ? "bg-gray-400 text-gray-700 cursor-not-allowed"
-                    : "bg-[#0C55A0] hover:bg-[#08467c] text-white"
-                }`}
-              >
-                Submit Support Form
-              </button>
-            </div>
-          </form>
+              {/* Message */}
+              <div className="flex flex-col md:col-span-3 lg:col-span-3">
+                <label className="text-sm font-medium text-gray-600 mb-1">
+                  Message / Reason to Support{" "}
+                  <span className="text-red-500">*</span>
+                </label>
+                <textarea
+                  name="message"
+                  value={form.message}
+                  onChange={handleChange}
+                  required
+                  rows={3}
+                  className="border rounded-md px-3 py-1 md:py-1.5 text-sm outline-none"
+                  placeholder="Write your message"
+                />
+              </div>
+
+              {/* Submit */}
+              <div className="lg:col-span-3 flex justify-center mt-4">
+                <button
+                  type="submit"
+                  onClick={handleInitialSubmit}
+                  disabled={!isFormComplete}
+                  className={`px-12 py-1 md:py-1.5 text-sm md:text-[15px] font-medium rounded-md shadow transition ${
+                    !isFormComplete
+                      ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+                      : "bg-[#0C55A0] hover:bg-[#08467c] text-white"
+                  }`}
+                >
+                  Submit Support Form
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
+
         {showOtpModal && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
             <div className="bg-white w-[90%] md:w-[400px] rounded-xl p-6 shadow-xl">
