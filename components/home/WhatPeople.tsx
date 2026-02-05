@@ -8,94 +8,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axiosClient from "@/lib/axiosClient";
-// ==== Import Images ====
-// import Person1 from "@/public/people/people1.jpg";
-// import Person2 from "@/public/people/people2.jpg";
-// import Person3 from "@/public/people/people3.jpg";
-// import Person4 from "@/public/people/people4.jpg";
-// import Person5 from "@/public/people/people5.jpg";
-// import Person6 from "@/public/people/people6.jpg";
-// import Person7 from "@/public/people/people7.jpg";
-// import Person8 from "@/public/people/people8.jpg";
-// import Person9 from "@/public/people/people9.jpg";
-// import Person10 from "@/public/people/people10.jpg";
-// import Person11 from "@/public/people/people11.jpg";
-// import Person12 from "@/public/people/people12.jpg";
 
-// const people = [
-//   {
-//     name: "Dr. Jaideep Arya",
-//     title:
-//       "This visionary initiative holds a bright future and deserves to be promoted and embraced in every corner of India.",
-//     image: Person1,
-//   },
-//   {
-//     name: "Dr. Ishwar V. Basavaraddi",
-//     title:
-//       "An excellent and inspiring initiative. My sincere best wishes for its continued growth, success, and positive impact.",
-//     image: Person2,
-//   },
-//   {
-//     name: "Dr. Vachaspati",
-//     title:
-//       "The Namo Gange Trust is performing truly divine service by spreading awareness rooted in spirituality, culture, and values.",
-//     image: Person3,
-//   },
-//   {
-//     name: "Sandeep Marwah",
-//     title:
-//       "It is a pleasure and an honour to be associated with such noble work that contributes meaningfully to society.",
-//     image: Person4,
-//   },
-//   {
-//     name: "Khyati Nayak",
-//     title:
-//       "A remarkable platform dedicated to spreading awareness about holistic living, wellness, and conscious lifestyles.",
-//     image: Person5,
-//   },
-//   {
-//     name: "Dr. Preeti Chhabra",
-//     title:
-//       "Excellent initiative! I truly look forward to seeing this meaningful mission expand and touch lives across India.",
-//     image: Person6,
-//   },
-//   {
-//     name: "Satya Sharma",
-//     title:
-//       "Namo Gange offers exceptional opportunities for individuals to serve humanity with compassion and purpose.",
-//     image: Person7,
-//   },
-//   {
-//     name: "Padma Shri Bharat Bhushan",
-//     title:
-//       "I had an incredible and enriching experience that beautifully blended timeless traditions with modern perspectives.",
-//     image: Person8,
-//   },
-//   {
-//     name: "Wafa-El-Hedeny",
-//     title:
-//       "The Yogshala is a wonderful global initiative promoting wellness, harmony, and a balanced way of life.",
-//     image: Person9,
-//   },
-//   {
-//     name: "Dr. Sambit Patra",
-//     title:
-//       "I am honoured to be part of this inspiring mission dedicated to spiritual awareness and national upliftment.",
-//     image: Person10,
-//   },
-//   {
-//     name: "Shripad Yesso Naik",
-//     title:
-//       "My heartfelt greetings and best wishes for this remarkable national initiative with a powerful social vision.",
-//     image: Person11,
-//   },
-//   {
-//     name: "Dr. Harsh Vardhan",
-//     title:
-//       "My sincere congratulations and best wishes to the entire Namo Gange family for their commendable efforts.",
-//     image: Person12,
-//   },
-// ];
 const PrevArrow = ({ onClick }: any) => (
   <button
     onClick={onClick}
@@ -157,22 +70,34 @@ const WhatPeople = () => {
     };
     fetchTestimonials();
   }, []);
+
   const sliderSettings = {
     dots: false,
     infinite: true,
     speed: 600,
-    slidesToShow: 5,
-    slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3500,
     pauseOnHover: false,
     arrows: true,
-    prevArrow: <PrevArrow />,
-    nextArrow: <NextArrow />,
+
+    slidesToShow: 5,
+    slidesToScroll: 1,
+
     responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 3 } },
-      { breakpoint: 768, settings: { slidesToShow: 2 } },
-      { breakpoint: 480, settings: { slidesToShow: 1 } },
+      {
+        breakpoint: 1024, // tablet & below
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 768, // mobile
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
     ],
   };
 
@@ -221,23 +146,29 @@ const WhatPeople = () => {
         </div>
 
         {/* ===== Slider ===== */}
-        <Slider ref={sliderRef} {...sliderSettings}>
+        <Slider ref={sliderRef}  {...sliderSettings}>
           {people.map((person, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.05 }}
+              transition={{ duration: 0.4 }}
               viewport={{ once: true }}
               className="px-2"
             >
               <div
-                className="relative bg-white rounded-2xl border border-gray-100 shadow-md 
-                p-4 flex flex-col items-center overflow-hidden
-                hover:-translate-y-2 hover:shadow-2xl transition-all duration-500"
+                className="
+          bg-white
+          rounded-2xl
+          border border-gray-100
+          shadow-md
+          p-4
+          flex flex-col items-center
+          transition-all duration-500
+        "
               >
-                {/* ✅ FIXED IMAGE */}
-                <div className="relative w-full h-56  overflow-hidden rounded-md">
+                {/* IMAGE */}
+                <div className="relative w-full h-56 rounded-md overflow-hidden">
                   <Image
                     src={
                       person.image?.startsWith("http")
@@ -246,15 +177,17 @@ const WhatPeople = () => {
                     }
                     alt={person.name}
                     fill
-                    className="object-fit transition-transform duration-700 hover:scale-105"
+                    className="object-fit md:object-cover"
                   />
                 </div>
 
-                <h3 className="py-1 md:py-2 text-sm md:text-base font-medium text-gray-900 text-center">
+                {/* NAME */}
+                <h3 className="mt-2 text-sm font-medium text-gray-900 text-center">
                   {person.name}
                 </h3>
 
-                <p className="text-gray-600 text-xs md:text-sm text-justify leading-relaxed text-center line-clamp-3">
+                {/* DESC */}
+                <p className="text-xs text-gray-600 text-center line-clamp-3">
                   {person.desc}
                 </p>
               </div>

@@ -229,7 +229,7 @@ const Support = () => {
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-2 md:gap-8 bg-gray-50 py-2 md:py-4 px-4 rounded">
+        <div className="flex flex-col lg:flex-row gap-2 md:gap-8 bg-gray-50 py-2 md:py-4 px-2 md:px-4 rounded">
           {/* ================= LEFT INFO PANEL ================= */}
           <div
             className="
@@ -237,7 +237,7 @@ const Support = () => {
     rounded-2xl
     bg-gradient-to-br from-[#0C55A0] via-[#0b4f96] to-[#08467c]
     text-white
-    p-7 lg:p-10
+    p-4 lg:p-10
     flex flex-col justify-between
     shadow-lg
   "
@@ -247,7 +247,7 @@ const Support = () => {
                 Support Our Mission
               </h3>
 
-              <p className="text-sm md:text-[15px] leading-relaxed text-white/95 mb-4">
+              <p className="text-xs md:text-[15px] leading-relaxed text-white/95 mb-4">
                 By submitting this form, you step into a purpose-driven journey
                 dedicated to compassion, responsibility, and service to
                 humanity. Your involvement enables us to design, implement, and
@@ -255,7 +255,7 @@ const Support = () => {
                 at the grassroots level.
               </p>
 
-              <p className="text-sm md:text-[15px] leading-relaxed text-white/90 mb-5">
+              <p className="text-xs md:text-[15px] leading-relaxed text-white/90 mb-5">
                 Every contribution—whether through time, skills, resources, or
                 strategic partnerships—strengthens our collective mission.
                 Together, we work toward empowering communities, uplifting
@@ -263,7 +263,7 @@ const Support = () => {
                 ethical values and shared responsibility.
               </p>
 
-              <ul className="space-y-3 text-sm md:text-[15px] text-white/95">
+              <ul className="space-y-3 text-xs md:text-[15px] text-white/95">
                 <li className="flex gap-3">
                   <span>✔</span>
                   <span>
@@ -310,7 +310,7 @@ const Support = () => {
       border border-gray-200
       rounded-2xl
       shadow-[0_10px_40px_rgba(0,0,0,0.08)]
-      p-5 md:p-7 lg:p-9
+      p-4 md:p-7 lg:p-9
     "
           >
             <form className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2 md:gap-4">

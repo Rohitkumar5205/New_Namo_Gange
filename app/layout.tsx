@@ -8,7 +8,10 @@ const inter = Inter({ subsets: ["latin"] });
 
 // RootLayout is a Server Component by default
 import ToastProvider from "./providers/ToastProvider";
-
+export const metadata = {
+  title: "Namo Gange – Official Website",
+  description: "Clean Ganga, Green India",
+};
 export default function RootLayout({
   children,
 }: {
