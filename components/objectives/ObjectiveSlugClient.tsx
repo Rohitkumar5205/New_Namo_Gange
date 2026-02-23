@@ -60,12 +60,12 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
             (item: any) =>
               item.status === "Active" &&
               item.objective_catagory &&
-              toSlug(item.objective_catagory) === slug
+              toSlug(item.objective_catagory) === slug,
           )
           .map((item: any) => {
             const decoded = parser.parseFromString(
               item.desc || "",
-              "text/html"
+              "text/html",
             );
 
             return {
@@ -83,7 +83,7 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
         const data2 = res2?.data?.data || [];
 
         const matchedObjective = data2.find(
-          (item: any) => item.status === "Active" && item.slug === slug
+          (item: any) => item.status === "Active" && item.slug === slug,
         );
 
         setObjective(matchedObjective || null);
@@ -125,7 +125,10 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
               >
                 Home
               </Link>{" "}
-              - {slug?.replace(/-/g, " ")}
+              -{" "}
+              {slug
+                ?.replace(/-/g, " ")
+                .replace(/\b\w/g, (char) => char.toUpperCase())}
             </p>
           </div>
         </div>
@@ -133,9 +136,11 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
 
       {/* ================= CONTENT ================= */}
       <div className="w-full px-2 md:px-12 lg:px-12 text-center">
-        <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
-          {slug?.replace(/-/g, " ")}
-        </h2>
+        <h1 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
+          {slug
+            ?.replace(/-/g, " ")
+            .replace(/\b\w/g, (char) => char.toUpperCase())}
+        </h1>
 
         <p className="text-gray-600 text-[13px] md:text-sm italic leading-relaxed">
           “The embodies the spirit of selfless service, guiding individuals

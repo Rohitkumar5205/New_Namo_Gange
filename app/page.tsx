@@ -9,6 +9,23 @@ import SpecialPage from "@/components/home/SpecialPage";
 import WhatPeople from "@/components/home/WhatPeople";
 import React from "react";
 import LatestVideos from "@/components/home/LatestVideos";
+import { getSeo } from "@/lib/getSeo";
+
+export async function generateMetadata() {
+  const seo = await getSeo("/");
+
+  if (!seo) return {};
+
+  return {
+    title: seo.metaTitle,
+    description: seo.metaDescription,
+    keywords: seo.metaKeywords,
+    openGraph: {
+      title: seo.metaTitle,
+      description: seo.metaDescription,
+    },
+  };
+}
 
 const page = () => {
   return (
@@ -28,3 +45,4 @@ const page = () => {
 };
 
 export default page;
+g

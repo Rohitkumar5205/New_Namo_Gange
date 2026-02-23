@@ -71,7 +71,7 @@ const activities = [
 ];
 
 const AboutNamoGange = () => {
-  const [trustBodies, setTrustBodies] = useState<any[]>(activities);
+  const [trustBodies, setTrustBodies] = useState<any[]>([]);
 
   React.useEffect(() => {
     const fetchTrustBodies = async () => {

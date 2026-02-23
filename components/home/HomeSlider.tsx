@@ -24,7 +24,7 @@ const HomeSlider = () => {
         const bannersList = res?.data?.data || [];
 
         const activeBanners = bannersList.filter(
-          (b: any) => b.status === "Active"
+          (b: any) => b.status === "Active",
         );
 
         const formatted = activeBanners.map((b: any) => ({
@@ -71,7 +71,7 @@ const HomeSlider = () => {
               <div key={i}>
                 <div className="relative w-full h-[190px] md:h-[530px]">
                   <Link
-                    href={item.link}
+                    href={item.link || "#"}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="absolute inset-0 z-10"

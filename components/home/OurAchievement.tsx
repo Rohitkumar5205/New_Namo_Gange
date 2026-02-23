@@ -69,7 +69,7 @@ const activities = [
 ];
 
 const OurAchievement = () => {
-  const [achievements, setAchievements] = useState<any[]>(activities);
+  const [achievements, setAchievements] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -83,7 +83,7 @@ const OurAchievement = () => {
             .sort(
               (a: any, b: any) =>
                 new Date(a.createdAt).getTime() -
-                new Date(b.createdAt).getTime()
+                new Date(b.createdAt).getTime(),
             )
             .map((item: any) => {
               let description = item.desc || "";
