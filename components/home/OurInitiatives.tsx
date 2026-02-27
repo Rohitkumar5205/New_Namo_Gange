@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { apiService, InitiativeFromAPI } from "@/lib/apiService";
 import axiosClient from "@/lib/axiosClient";
+import { motion } from "framer-motion";
 
 // ✅ Fixed Interface Type
 interface Initiative {
@@ -14,7 +15,7 @@ interface Initiative {
   image_alt?: string;
 }
 
-const   OurInitiatives = () => {
+const OurInitiatives = () => {
   const [initiativeList, setInitiativeList] = useState<Initiative[]>([]);
 
   useEffect(() => {
@@ -28,7 +29,7 @@ const   OurInitiatives = () => {
             .sort(
               (a: any, b: any) =>
                 new Date(a.createdAt).getTime() -
-                new Date(b.createdAt).getTime()
+                new Date(b.createdAt).getTime(),
             )
             .map((item: any) => {
               let description = item.desc || "";
@@ -42,7 +43,7 @@ const   OurInitiatives = () => {
                 link: item.slug ? `/initiatives/${item.slug}` : "#",
               };
             });
-            console.log("setInitiativeList...",fetchedData)
+          console.log("setInitiativeList...", fetchedData);
           setInitiativeList(fetchedData);
         }
       } catch (error) {
@@ -53,7 +54,7 @@ const   OurInitiatives = () => {
     fetchInitiatives();
   }, []);
 
-   const stripHtmlTags = (html: string = ""): string => {
+  const stripHtmlTags = (html: string = ""): string => {
     if (typeof window === "undefined") return html;
     const doc = new DOMParser().parseFromString(html, "text/html");
     return doc.body.textContent || "";
@@ -63,19 +64,32 @@ const   OurInitiatives = () => {
     <section className="relative py-1.5 md:py-3 px-2 md:px-12  lg:px-12  bg-white overflow-hidden">
       <div className="w-full text-center">
         {/* ========== Section Header ========== */}
-        <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
-          Our{" "}
-          <span className="bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] bg-clip-text text-transparent">
-            Initiatives
-          </span>
-        </h2>
-        <p className="text-gray-600 text-[13px] md:text-sm italic leading-relaxed">
-          “Creating positive change through service, awareness, and sustainable
-          community development.”
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
+            Our{" "}
+            <span className="bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] bg-clip-text text-transparent">
+              Initiatives
+            </span>
+          </h2>
+          <p className="text-gray-600 text-[13px] md:text-sm italic leading-relaxed">
+            “Creating positive change through service, awareness, and
+            sustainable community development.”
+          </p>
+        </motion.div>
 
-        <div className="flex justify-center w-full mt-2">
-          <div className="w-full  bg-white py-6 relative overflow-hidden text-cente ">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="flex justify-center w-full mt-2"
+        >
+          <div className="w-full  bg-white py-6 relative overflow-hidden text-center">
             <div className="absolute top-1 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
             <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
               Our initiatives focus on creating meaningful change through
@@ -96,12 +110,33 @@ const   OurInitiatives = () => {
               spiritually enriched world.
             </p>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-3">
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-3"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.1, delayChildren: 0.3 },
+            },
+          }}
+        >
           {initiativeList.map((item, i) => (
-            <div
+            <motion.div
               key={i}
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.5, ease: "easeOut" },
+                },
+              }}
+              whileHover={{ y: -8, transition: { duration: 0.3 } }}
               className="
         group relative bg-white rounded-2xl border border-gray-200
         shadow-sm hover:shadow-xl transition-all duration-300
@@ -137,20 +172,22 @@ const   OurInitiatives = () => {
                 <Link href={item.link} className="mt-auto">
                   <div
                     className="
-              w-full text-center py-1 md:py-1.5 rounded-lg
+              relative w-full text-center py-1 md:py-1 rounded-lg overflow-hidden
              text-xs md:text-sm font-medium text-[#0C55A0]
               border border-[#0C55A0]/30
-              hover:bg-[#0C55A0] hover:text-white
-              transition-all duration-300
+              group/btn cursor-pointer transition-all duration-300 hover:border-[#0C55A0]
             "
                   >
-                    Explore →
+                    <span className="relative text-xs z-10 transition-colors duration-300 group-hover/btn:text-white">
+                      Explore →
+                    </span>
+                    <div className="absolute inset-y-0 left-0 w-0 bg-[#0C55A0] transition-all duration-500 ease-out group-hover/btn:w-full" />
                   </div>
                 </Link>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import Image from "next/image";
 import Link from "next/link";
 import axiosClient from "@/lib/axiosClient";
+import { motion } from "framer-motion";
 
 interface Banner {
   image: string;
@@ -66,35 +67,53 @@ const HomeSlider = () => {
             <div className="w-12 h-12 border-4 border-gray-300 border-t-[#DF562C] rounded-full animate-spin" />
           </div>
         ) : (
-          <Slider ref={sliderRef} {...settings}>
-            {banners.map((item, i) => (
-              <div key={i}>
-                <div className="relative w-full h-[190px] md:h-[530px]">
-                  <Link
-                    href={item.link || "#"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute inset-0 z-10"
-                  >
-                    <Image
-                      src={item.image}
-                      alt={`slide-${i}`}
-                      fill
-                      priority
-                      sizes="100vw"
-                      className="object-cover"
-                    />
-                  </Link>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+          >
+            <Slider ref={sliderRef} {...settings}>
+              {banners.map((item, i) => (
+                <div key={i}>
+                  <div className="relative w-full h-[190px] md:h-[530px] overflow-hidden">
+                    <Link
+                      href={item.link || "#"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute inset-0 z-10"
+                    >
+                      <motion.div
+                        className="w-full h-full"
+                        initial={{ scale: 1 }}
+                        animate={{ scale: 1.1 }}
+                        transition={{
+                          duration: 12,
+                          repeat: Infinity,
+                          repeatType: "mirror",
+                          ease: "easeInOut",
+                        }}
+                      >
+                        <Image
+                          src={item.image}
+                          alt={`slide-${i}`}
+                          fill
+                          priority
+                          sizes="100vw"
+                          className="object-cover"
+                        />
+                      </motion.div>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
 
-            {banners.length === 0 && (
-              <div className="flex items-center justify-center w-full h-[190px] md:h-[530px]">
-                <p className="text-gray-500">No active banners found</p>
-              </div>
-            )}
-          </Slider>
+              {banners.length === 0 && (
+                <div className="flex items-center justify-center w-full h-[190px] md:h-[530px]">
+                  <p className="text-gray-500">No active banners found</p>
+                </div>
+              )}
+            </Slider>
+          </motion.div>
         )}
       </div>
 
@@ -105,10 +124,10 @@ const HomeSlider = () => {
             grid grid-cols-1 md:grid-cols-3
             rounded-md
             overflow-hidden
-            bg-[#DF562C]/70
+             bg-gradient-to-r from-orange-100/50 via-cyan-100/50 to-blue-100/50
             shadow-md
             border border-white/30
-            text-gray-900
+            text-gray-700
           "
         >
           {/* CSR HEADS */}
@@ -119,7 +138,7 @@ const HomeSlider = () => {
                 <h3 className="font-semibold text-[13px] md:text-[15px] uppercase tracking-wide">
                   For CSR Heads
                 </h3>
-                <p className="text-xs md:text-sm text-medium text-white">
+                <p className="text-xs md:text-sm text-medium ">
                   Join us to work with trusted NGOs and experienced CSR leaders
                   across India to ensure transparent governance and maximum
                   social impact.
@@ -136,7 +155,7 @@ const HomeSlider = () => {
                 <h3 className="font-semibold text-[13px] md:text-[15px] uppercase tracking-wide">
                   For NGOs
                 </h3>
-                <p className="text-xs md:text-sm text-white">
+                <p className="text-xs md:text-sm ">
                   Register with us to enhance capacity, receive fundraising
                   support, and access professional expertise at minimal cost.
                 </p>
@@ -152,7 +171,7 @@ const HomeSlider = () => {
                 <h3 className="font-semibold text-[13px] md:text-[15px] uppercase tracking-wide">
                   For Donors & Volunteers
                 </h3>
-                <p className="text-xs md:text-sm text-white">
+                <p className="text-xs md:text-sm ">
                   Contribute your time or resources through #OneDayForFuture and
                   support verified NGOs working toward a sustainable world.
                 </p>

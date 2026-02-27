@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { ChevronDown, ChevronUp, X } from "lucide-react";
 import logo from "@/public/logo.png";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import axiosClient from "@/lib/axiosClient";
 import Link from "next/link";
 import { FaBars } from "react-icons/fa";
@@ -56,12 +56,13 @@ const NAV_ITEMS: NavItem[] = [
 
 const NavBar: React.FC = () => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const [active, setActive] = useState("HOME");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [objectiveDropdown, setObjectiveDropdown] = useState<DropdownItem[]>(
-    []
+    [],
   );
 
   /* ================= FETCH OBJECTIVES ================= */
@@ -76,7 +77,7 @@ const NavBar: React.FC = () => {
               .map((i: any) => ({
                 label: i.title,
                 href: `/objectives/${i.slug}`,
-              }))
+              })),
           );
         }
       } catch (e) {
@@ -85,6 +86,36 @@ const NavBar: React.FC = () => {
     };
     fetchObjectives();
   }, []);
+
+  /* ================= SYNC ACTIVE STATE WITH URL ================= */
+  useEffect(() => {
+    const findActiveItem = () => {
+      if (pathname === "/") {
+        return "HOME";
+      }
+
+      // Reverse to check deeper paths first (e.g., /event/upcoming before /event)
+      for (const item of [...NAV_ITEMS].reverse()) {
+        const itemsToCheck =
+          item.label === "OBJECTIVES" ? objectiveDropdown : item.dropdown;
+
+        if (
+          itemsToCheck &&
+          itemsToCheck.some((d) => pathname.startsWith(d.href))
+        ) {
+          return item.label;
+        }
+
+        if (item.href && pathname.startsWith(item.href)) {
+          return item.label;
+        }
+      }
+      return null;
+    };
+
+    const activeLabel = findActiveItem();
+    if (activeLabel) setActive(activeLabel);
+  }, [pathname, objectiveDropdown]);
 
   /* ================= NAVIGATE ================= */
   const handleNavigate = (href: string, label: string) => {
@@ -199,7 +230,7 @@ const NavBar: React.FC = () => {
                         if (item.href) handleNavigate(item.href, item.label);
                         if (item.dropdown)
                           setOpenDropdown(
-                            openDropdown === item.label ? null : item.label
+                            openDropdown === item.label ? null : item.label,
                           );
                       }}
                     >

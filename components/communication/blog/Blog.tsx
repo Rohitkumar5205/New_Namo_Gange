@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Search, MessageCircle } from "lucide-react";
 import axiosClient from "@/lib/axiosClient";
+import { motion } from "framer-motion";
 
 interface Blog {
   _id: string;
@@ -78,43 +79,71 @@ const Blog = () => {
       {/* ================= BANNER ================= */}
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/home/blog.jpeg')" }}
+        style={{
+          backgroundImage: "url('/home/blog.jpeg')",
+          backgroundAttachment: "fixed",
+        }}
       >
-        <div className="bg-black/20 w-full h-full md:h-[250px] py-10 md:py-16">
-          <div className="max-w-7xl mx-auto px-4 text-center">
-            <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
+        <div className="bg-black/40 w-full h-full md:h-[250px] py-10 md:py-16 backdrop-blur-[2px]">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="max-w-7xl mx-auto px-4 text-center"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold text-white uppercase tracking-wider drop-shadow-lg">
               Our Blogs
             </h2>
-            <p className="text-sm md:text-base text-white mt-1">
+            <p className="text-sm md:text-lg text-white mt-2 font-light tracking-wide">
               <Link
                 href="/"
-                className="text-[#DF562C] font-medium hover:underline"
+                className="text-[#DF562C] font-medium hover:text-orange-400 transition-colors"
               >
                 Home
               </Link>{" "}
               - Blogs
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* ================= CONTENT ================= */}
-      <div className="w-full px-2 md:px-12 lg:px-12 text-center">
-        <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight mt-2">
-          Our{" "}
-          <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
-            Blogs
-          </span>
-        </h2>
+      <div className="w-full px-4 md:px-12 lg:px-12 py-8 md:py-12 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-xl md:text-3xl font-bold text-gray-900 leading-tight mt-2">
+            Our{" "}
+            <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
+              Blogs
+            </span>
+          </h2>
 
-        <p className="text-gray-600 py-1 text-[13px] md:text-sm italic leading-relaxed">
-          "Each event reflects our mission to uplift society through
-          spirituality, health, culture, and community empowerment."
-        </p>
+          <p className="text-gray-600 py-2 text-sm md:text-base italic leading-relaxed">
+            "Each event reflects our mission to uplift society through
+            spirituality, health, culture, and community empowerment."
+          </p>
+        </motion.div>
 
-        <div className="w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
-        <div>
-          <p className="text-gray-700 leading-relaxed text-sm md:text-[15px] mt-2">
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full mt-2 mb-6"
+        />
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          viewport={{ once: true }}
+        >
+          <p className="text-gray-700 leading-relaxed text-sm md:text-base text-justify mt-2 mb-8">
             Acharya Jagdishji Maharaj is a revered spiritual guide whose life
             and teachings continue to inspire countless individuals on the path
             of inner awakening and self-realization. Blessed by the divine grace
@@ -126,11 +155,17 @@ const Blog = () => {
             timeless values of Sanatan Dharma through wisdom-filled discourses
             and soulful storytelling.
           </p>
-        </div>
+        </motion.div>
 
         {/* ================= SEARCH ================= */}
-        <div className="w-full flex justify-end mt-2">
-          <div className="relative w-full md:w-[20%] lg:w-[20%] ">
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="w-full flex justify-end mt-4 mb-6"
+        >
+          <div className="relative w-full md:w-[30%] lg:w-[25%] group">
             <input
               value={search}
               onChange={(e) => {
@@ -139,15 +174,15 @@ const Blog = () => {
               }}
               type="text"
               placeholder="Search here..."
-              className="w-full pl-12 pr-4 px-4 py-1 rounded-lg border border-gray-300
-            shadow-sm focus:border-[#0C55A0] text-sm md:text-base"
+              className="w-full pl-12 pr-4 px-4 py-2 rounded-full border border-gray-300
+            shadow-sm focus:border-[#0C55A0] focus:ring-2 focus:ring-[#0C55A0]/20 text-sm md:text-base transition-all duration-300 outline-none"
             />
             <Search
               size={20}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-hover:text-[#0C55A0] transition-colors"
             />
           </div>
-        </div>
+        </motion.div>
 
         {/* ================= BLOG GRID ================= */}
         {loading && (
@@ -158,14 +193,35 @@ const Blog = () => {
           <p className="text-center text-gray-500 mt-6">No blogs found.</p>
         )}
 
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 mt-2 md:mt-4">
+        <motion.div
+          className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mt-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.15 },
+            },
+          }}
+        >
           {currentBlogs.map((blog) => (
-            <div
+            <motion.div
               key={blog._id}
-              className="bg-white rounded-md shadow-md hover:shadow-xl transition overflow-hidden"
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.5, ease: "easeOut" },
+                },
+              }}
+              whileHover={{ y: -10, transition: { duration: 0.3 } }}
+              className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col relative"
             >
               {/* IMAGE */}
-              <div className="relative w-full h-30 md:h-48">
+              <div className="relative w-full h-48 md:h-56 overflow-hidden">
                 <Image
                   src={
                     blog.image?.startsWith("http")
@@ -174,49 +230,57 @@ const Blog = () => {
                   }
                   alt={blog?.image_alt || blog.title}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
 
-                <span className="absolute top-3 left-3 bg-[#7a0d0d] text-white text-xs px-3 py-1 rounded-full shadow">
+                <span className="absolute top-3 left-3 bg-[#DF562C] text-white text-xs font-bold px-3 py-1 rounded-full shadow-md uppercase tracking-wide">
                   {blog.category}
                 </span>
               </div>
 
               {/* CONTENT */}
-              <div className="p-4 text-left">
-                <div className="text-xs text-gray-600 flex justify-between">
-                  <span>{blog.author || "Krishnayan Team"}</span>
-                  <span className="flex items-center gap-1">
+              <div className="p-5 text-left flex flex-col flex-1">
+                <div className="text-xs text-gray-500 flex justify-between items-center mb-3 font-medium">
+                  <span className="bg-gray-100 px-2 py-1 rounded text-gray-600">
+                    {blog.author || "Krishnayan Team"}
+                  </span>
+                  <span className="flex items-center gap-1 text-gray-400">
                     <MessageCircle size={14} /> 0
                   </span>
                 </div>
 
-                <h1 className="text-gray-900 font-normal text-sm md:text-base mb-1 line-clamp-1">
+                <h1 className="text-gray-900 font-bold text-lg mb-2 line-clamp-2 group-hover:text-[#0C55A0] transition-colors">
                   {blog.title}
                 </h1>
 
-                <p className="text-gray-600 text-xs md:text-[13px] leading-relaxed line-clamp-3 mb-4">
+                <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 mb-4 flex-1 text-justify">
                   {stripHtmlTags(blog.description)}
                 </p>
 
                 <Link
                   href={`/communication/blog/${blog.slug}`}
-                  className="inline-block mt-1 md:mt-2 text-xs font-medium text-[#7a0d0d] hover:underline tracking-wide"
+                  className="mt-auto inline-block"
                 >
-                  READ MORE →
+                  <span className="text-sm font-semibold text-[#DF562C] hover:text-[#0C55A0] flex items-center gap-1 transition-colors group/link">
+                    READ MORE{" "}
+                    <span className="transition-transform group-hover/link:translate-x-1">
+                      →
+                    </span>
+                  </span>
                 </Link>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* ================= PAGINATION ================= */}
-        <div className="flex justify-center gap-2 py-2 md:py-6">
+        <div className="flex justify-center gap-3 py-8 md:py-10">
           <button
             disabled={currentPage === 1}
             onClick={() => setCurrentPage((p) => p - 1)}
-            className="w-6 h-6 md:w-9 md:h-9 flex items-center justify-center rounded-full 
-  bg-white border hover:bg-gray-100 disabled:opacity-40"
+            className="w-10 h-10 flex items-center justify-center rounded-full 
+  bg-white border border-gray-200 text-gray-600 hover:bg-[#0C55A0] hover:text-white hover:border-[#0C55A0] transition-all duration-300 disabled:opacity-50 disabled:hover:bg-white disabled:hover:text-gray-600 shadow-sm"
           >
             ‹
           </button>
@@ -225,11 +289,11 @@ const Blog = () => {
             <button
               key={i}
               onClick={() => setCurrentPage(i + 1)}
-              className={`w-6 h-6 md:w-9 md:h-9 flex items-center justify-center rounded-full font-medium transition-all
+              className={`w-10 h-10 flex items-center justify-center rounded-full font-medium transition-all duration-300 shadow-sm
       ${
         currentPage === i + 1
-          ? "bg-[#0C55A0] text-white text-xs md:text-sm shadow-md"
-          : "bg-white border hover:bg-gray-100 text-xs md:text-sm"
+          ? "bg-[#0C55A0] text-white border border-[#0C55A0] scale-110"
+          : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 hover:border-gray-300"
       }`}
             >
               {i + 1}
@@ -239,8 +303,8 @@ const Blog = () => {
           <button
             disabled={currentPage === totalPages || totalPages === 1}
             onClick={() => setCurrentPage((p) => p + 1)}
-            className="w-6 h-6 md:w-9 md:h-9 flex items-center justify-center rounded-full 
-  bg-white border hover:bg-gray-100 disabled:opacity-40"
+            className="w-10 h-10 flex items-center justify-center rounded-full 
+  bg-white border border-gray-200 text-gray-600 hover:bg-[#0C55A0] hover:text-white hover:border-[#0C55A0] transition-all duration-300 disabled:opacity-50 disabled:hover:bg-white disabled:hover:text-gray-600 shadow-sm"
           >
             ›
           </button>

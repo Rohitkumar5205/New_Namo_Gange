@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import axiosClient from "@/lib/axiosClient";
+import { motion } from "framer-motion";
 
 interface EventType {
   title: string;
@@ -100,30 +101,44 @@ const UpcomingEvent = () => {
       {/* ----------- STATIC DESIGN SAME ----------- */}
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/home/events.jpg')" }}
+        style={{
+          backgroundImage: "url('/home/events.jpg')",
+          backgroundAttachment: "fixed",
+        }}
       >
-        <div className="bg-black/30 w-full h-full md:h-[250px] py-10 md:py-16">
-          <div className="max-w-7xl mx-auto text-center">
-            <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
+        <div className="bg-black/40 w-full h-full md:h-[250px] py-10 md:py-16 backdrop-blur-[2px]">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="max-w-7xl mx-auto text-center"
+          >
+            <h2 className="text-2xl md:text-4xl font-bold text-white uppercase tracking-wider drop-shadow-lg">
               Upcoming Events
             </h2>
 
-            <p className="text-sm md:text-base text-white mt-1">
+            <p className="text-sm md:text-lg text-white mt-2 font-light tracking-wide">
               <Link
                 href="/"
-                className="text-[#DF562C] font-medium hover:underline"
+                className="text-[#DF562C] font-medium hover:text-orange-400 transition-colors"
               >
                 Home
               </Link>{" "}
               - Upcoming Events
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
 
       <div className="w-full px-2 md:px-12  lg:px-12 py-1.5 md:py-3  text-center">
         {/* HEADER */}
-        <div className="">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
           <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
             <span>
               Explore Our{" "}
@@ -132,14 +147,28 @@ const UpcomingEvent = () => {
               </span>
             </span>
           </h2>
-          <p className="text-gray-600 text-[13px] md:text-sm italic leading-relaxed">
+          <p className="text-gray-600 text-[13px] md:text-sm italic leading-relaxed mt-1">
             "Our events are rooted in spirituality and service, bringing
             together health, culture, nature, and community for collective
             upliftment."
           </p>
-        </div>
-        <div className=" w-full  h-1 mt-2 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
-        <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal py-1 md:py-2">
+        </motion.div>
+
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+          className=" w-full  h-1 mt-2 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full"
+        />
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal py-2 md:py-4"
+        >
           Our upcoming events are thoughtfully curated to inspire positive
           change and meaningful participation across communities. Each event is
           guided by our vision of nurturing spiritual well-being, promoting
@@ -148,11 +177,11 @@ const UpcomingEvent = () => {
           programs and cultural celebrations to environmental initiatives and
           spiritual gatherings, every event offers a platform to learn, connect,
           and contribute.
-        </p>
+        </motion.p>
         {/* STATIC HEADER SAME */}
 
         {/* Activities List */}
-        <div className="space-y-2 md:space-y-4">
+        <div className="space-y-6 md:space-y-12 py-4">
           {loading ? (
             <div className="text-gray-500 py-6">Loading events...</div>
           ) : upcomingEvents.length === 0 ? (
@@ -161,18 +190,29 @@ const UpcomingEvent = () => {
             </div>
           ) : (
             upcomingEvents.map((activity, i) => (
-              <div
+              <motion.div
                 key={i}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: true, margin: "-50px" }}
                 className={`relative flex flex-col ${
                   i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
-                } items-center p-2 rounded-xl gap-5 md:gap-10 lg:gap-10
-                bg-white border border-transparent shadow-sm transition-all duration-500
-                hover:shadow-xl hover:border-[#0C55A0]/30`}
+                } items-center p-4 md:p-6 rounded-2xl gap-6 md:gap-12 lg:gap-16
+                bg-white border border-gray-100 shadow-lg transition-all duration-500
+                hover:shadow-2xl group overflow-hidden`}
               >
-                <div className="flex-1 relative group w-full">
-                  <div className="absolute -inset-2 bg-gradient-to-r from-[#f36b2a]/30 to-[#1e7ed3]/30 rounded blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+                {/* Decorative background blob */}
+                <div
+                  className={`absolute top-0 ${
+                    i % 2 === 0 ? "right-0" : "left-0"
+                  } w-64 h-64 bg-gradient-to-br from-orange-100/50 to-blue-100/50 rounded-full blur-3xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700`}
+                />
 
-                  <div className="overflow-hidden rounded shadow-lg bg-white/50 backdrop-blur-sm border border-gray-100 transition-all duration-700 group-hover:shadow-2xl w-full">
+                <div className="flex-1 relative w-full">
+                  <div className="absolute -inset-3 bg-gradient-to-r from-[#f36b2a]/20 to-[#1e7ed3]/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+
+                  <div className="relative overflow-hidden rounded-xl shadow-md bg-white border border-gray-100 transition-all duration-700 group-hover:shadow-xl w-full aspect-video">
                     <Image
                       src={
                         activity.image?.startsWith("http")
@@ -182,17 +222,20 @@ const UpcomingEvent = () => {
                       alt={activity.image_alt || activity.title}
                       width={800}
                       height={500}
-                      className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                      className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
                     />
+                    {/* Shine Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                   </div>
                 </div>
 
                 <div className="flex-1 text-center md:text-left">
-                  <h3 className="text-gray-900 font-normal md:font-medium text-sm md:text-base md:mb-1 line-clamp-1">
+                  <h3 className="text-gray-900 font-bold text-lg md:text-2xl mb-3 relative inline-block">
                     {activity.title}
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#DF562C] transition-all duration-500 group-hover:w-full"></span>
                   </h3>
 
-                  <p className="text-gray-700 text-justify text-xs md:text-sm lg:text-sm leading-relaxed mb-2 md:mb-6">
+                  <p className="text-gray-600 text-justify text-sm md:text-base leading-relaxed mb-6">
                     {stripHtmlTags(activity.text)}
                   </p>
 
@@ -202,17 +245,22 @@ const UpcomingEvent = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <button
-                        className="relative overflow-hidden px-4 py-1 rounded md:py-1.5 lg:py-1.5 text-xs md:text-sm lg:text-sm text-white font-medium 
-                        shadow-md bg-[#0C55A0] cursor-pointer
-                        hover:bg-sky-700 hover:shadow-lg transition-all duration-300"
+                      <div
+                        className="relative overflow-hidden inline-flex items-center justify-center px-6 py-2 rounded-lg text-sm font-medium text-white bg-[#0C55A0] 
+                        shadow-md hover:shadow-lg transition-all duration-300 group/btn"
                       >
-                        Learn More...
-                      </button>
+                        <span className="relative z-10 flex items-center gap-2">
+                          Learn More{" "}
+                          <span className="transition-transform group-hover/btn:translate-x-1">
+                            →
+                          </span>
+                        </span>
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#DF562C] to-[#f89a36] opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
+                      </div>
                     </Link>
                   )}
                 </div>
-              </div>
+              </motion.div>
             ))
           )}
         </div>

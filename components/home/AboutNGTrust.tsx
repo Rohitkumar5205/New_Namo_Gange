@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import axiosClient from "@/lib/axiosClient";
+import { motion } from "framer-motion";
 
 interface AboutNGT {
   _id: string;
@@ -68,7 +69,13 @@ const AboutNGTrust = () => {
             } items-center gap-5 md:gap-10 lg:gap-10 mb-8`}
           >
             {/* TEXT SIDE */}
-            <div className="flex-1">
+            <motion.div
+              initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="flex-1"
+            >
               <h2 className="text-sm md:text-lg lg:text-lg font-medium text-gray-900 mb-2 leading-tight">
                 {item.title}
               </h2>
@@ -84,12 +91,18 @@ const AboutNGTrust = () => {
                   </button>
                 </Link>
               )}
-            </div>
+            </motion.div>
 
             {/* IMAGE SIDE */}
-            <div className="flex-1 relative">
+            <motion.div
+              initial={{ opacity: 0, x: isEven ? 50 : -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="flex-1 relative"
+            >
               {item.image && (
-                <div className="overflow-hidden rounded shadow-lg md:mt-6 hover:shadow-xl transition-all duration-500">
+                <div className="overflow-hidden rounded shadow-lg md:mt-6 hover:shadow-xl transition-all duration-500 group relative">
                   <Image
                     src={
                       item.image.startsWith("http")
@@ -101,13 +114,15 @@ const AboutNGTrust = () => {
                     alt={item.image_alt || item.title}
                     width={600}
                     height={400}
-                    className="w-full md:h-85 object-cover hover:scale-105 transition-transform duration-700 ease-in-out"
+                    className="w-full md:h-85 object-cover transform transition-transform duration-700 ease-in-out group-hover:scale-105"
                   />
+                  {/* Shine Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                 </div>
               )}
 
               <div className="absolute -inset-3 bg-gradient-to-r from-[#DF562C]/20 via-transparent to-[#1e7ed3]/20 blur-2xl rounded-3xl -z-10 opacity-70"></div>
-            </div>
+            </motion.div>
           </div>
         );
       })}

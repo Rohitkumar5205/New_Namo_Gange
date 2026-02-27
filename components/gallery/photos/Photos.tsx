@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import axiosClient from "@/lib/axiosClient";
+import { motion } from "framer-motion";
 
 interface CategoryItem {
   _id: string;
@@ -42,110 +43,174 @@ const photos = () => {
     fetchCategories();
   }, []);
   return (
-    <section className="w-full bg-gray-50">
+    <section className="w-full bg-gray-50 min-h-screen">
       {/* ================= HERO ================= */}
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/home/image1.jpg')" }}
+        style={{
+          backgroundImage: "url('/home/image1.jpg')",
+          backgroundAttachment: "fixed",
+        }}
       >
-        <div className="bg-black/20 w-full h-full md:h-[250px] py-10 md:py-16">
-          <div className="w-full px-4 text-center">
-            <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
+        <div className="bg-black/40 w-full h-full md:h-[250px] py-10 md:py-16 backdrop-blur-[2px]">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="w-full px-4 text-center"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold text-white uppercase tracking-wider drop-shadow-lg">
               Photos Gallery
             </h2>
-            <p className="text-sm md:text-base text-white mt-1">
+            <p className="text-sm md:text-lg text-white mt-2 font-light tracking-wide">
               <Link
                 href="/"
-                className="text-[#DF562C] font-medium hover:underline"
+                className="text-[#DF562C] font-medium hover:text-orange-400 transition-colors"
               >
                 Home
               </Link>{" "}
               - Photos Gallery
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* ================= CONTENT ================= */}
-      <div className="w-full relative py-1.5 md:py-3 px-2 md:px-12  lg:px-12 text-center">
-        <div className="text-center">
-          <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
+      <div className="w-full relative py-8 md:py-12 px-4 md:px-12 lg:px-12 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <h2 className="text-xl md:text-3xl font-bold text-gray-900 leading-tight">
             Our Photos{" "}
             <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
               & Gallery
             </span>
           </h2>
-          <p className="text-gray-600 text-[13px] md:text-sm italic leading-relaxed">
+          <p className="text-gray-600 text-sm md:text-base italic leading-relaxed mt-2">
             "Our activities and events bring communities together through
             culture, spirituality, health awareness, and meaningful social
             service."
           </p>
-        </div>
+        </motion.div>
 
-        <div className="w-full h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
-        <div>
-          <p className="text-gray-700 leading-relaxed text-sm md:text-[15px] mt-2">
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="w-full h-1 mt-4 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full"
+        />
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          viewport={{ once: true }}
+        >
+          <p className="text-gray-700 leading-relaxed text-sm md:text-base text-justify mt-4 mb-8 font-normal">
             Acharya Jagdishji Maharaj is a revered spiritual guide whose life
             and teachings continue to inspire countless individuals on the path
             of inner awakening and self-realization. Blessed by the divine grace
             of
-            <strong> Maa Gange and Lord Krishna</strong>, he embodies a rare
-            harmony of spiritual wisdom, compassion, and disciplined living.
-            Renowned as a profound philosopher and an eloquent Bhagwat
-            Kathavachak, Acharya Ji has dedicated his life to spreading the
-            timeless values of Sanatan Dharma through wisdom-filled discourses
-            and soulful storytelling.
+            <strong className="text-[#DF562C]">
+              {" "}
+              Maa Gange and Lord Krishna
+            </strong>
+            , he embodies a rare harmony of spiritual wisdom, compassion, and
+            disciplined living. Renowned as a profound philosopher and an
+            eloquent Bhagwat Kathavachak, Acharya Ji has dedicated his life to
+            spreading the timeless values of Sanatan Dharma through
+            wisdom-filled discourses and soulful storytelling.
           </p>
-        </div>
+        </motion.div>
 
         {/* ================= GRID ================= */}
-        <div className="w-full py-2 md:py-4 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-6 ">
+        <motion.div
+          className="w-full py-4 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.1 },
+            },
+          }}
+        >
           {/* ===== LOADING ===== */}
           {loading &&
             Array.from({ length: 8 }).map((_, i) => (
               <div
                 key={i}
-                className="bg-white shadow-md rounded overflow-hidden animate-pulse"
+                className="bg-white shadow-md rounded-2xl overflow-hidden animate-pulse border border-gray-100"
               >
                 <div className="w-full h-56 bg-gray-200" />
-                <div className="px-4 py-3 bg-gray-100">
+                <div className="px-4 py-4 bg-white">
                   <div className="h-4 bg-gray-300 rounded w-3/4 mb-2" />
                   <div className="h-3 bg-gray-300 rounded w-1/2" />
                 </div>
               </div>
             ))}
-          {/* category-image  */}
           {/* ===== DATA ===== */}
           {!loading &&
             categories.map((cat) => (
-              <Link
+              <motion.div
                 key={cat?.slug}
-                href={`/gallery/photos/${cat?.slug}`}
-                className="group block bg-white shadow-md hover:shadow-lg rounded overflow-hidden transition"
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.5, ease: "easeOut" },
+                  },
+                }}
+                whileHover={{ y: -10, transition: { duration: 0.3 } }}
+                className="h-full"
               >
-                <div className="relative">
-                  <Image
-                    src={
-                      cat.image?.startsWith("http")
-                        ? cat.image
-                        : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${cat.image}`
-                    }
-                    alt={cat?.image_alt || cat.title}
-                    width={400}
-                    height={300}
-                    className="w-full h-56 object-cover transition-transform duration-300"
-                  />
-                </div>
+                <Link
+                  href={`/gallery/photos/${cat?.slug}`}
+                  className="group block bg-white shadow-lg hover:shadow-2xl rounded-2xl overflow-hidden transition-all duration-300 border border-gray-100 h-full flex flex-col relative"
+                >
+                  {/* Shine Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
 
-                <div className="flex justify-between items-center px-4 py-2 bg-gray-100 text-gray-700 text-sm">
-                  <p className="font-medium">{cat.title}</p>
-                  <p className="flex items-center gap-1">
-                    📅 {new Date(cat.createdAt).toLocaleDateString("en-GB")}
-                  </p>
-                </div>
-              </Link>
+                  <div className="relative overflow-hidden h-56">
+                    <Image
+                      src={
+                        cat.image?.startsWith("http")
+                          ? cat.image
+                          : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${cat.image}`
+                      }
+                      alt={cat?.image_alt || cat.title}
+                      width={400}
+                      height={300}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
+                  </div>
+
+                  <div className="flex flex-col justify-between p-4 bg-white flex-1 relative z-20">
+                    <p className="font-bold text-gray-800 text-lg mb-1 group-hover:text-[#DF562C] transition-colors line-clamp-1 text-left">
+                      {cat.title}
+                    </p>
+                    <p className="flex items-center gap-2 text-xs text-gray-500 font-medium">
+                      <span>📅</span>{" "}
+                      {new Date(cat.createdAt).toLocaleDateString("en-GB", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </p>
+                  </div>
+                </Link>
+              </motion.div>
             ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

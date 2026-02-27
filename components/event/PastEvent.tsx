@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 import axiosClient from "@/lib/axiosClient";
 
@@ -91,30 +92,44 @@ const PastEvent = () => {
       {/* ------------------ BANNER ------------------ */}
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/home/events.jpg')" }}
+        style={{
+          backgroundImage: "url('/home/events.jpg')",
+          backgroundAttachment: "fixed",
+        }}
       >
-        <div className="bg-black/30 w-full h-full md:h-[250px] py-10 md:py-16">
-          <div className="max-w-7xl mx-auto text-center">
-            <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
+        <div className="bg-black/40 w-full h-full md:h-[250px] py-10 md:py-16 backdrop-blur-[2px]">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="max-w-7xl mx-auto text-center"
+          >
+            <h2 className="text-2xl md:text-4xl font-bold text-white uppercase tracking-wider drop-shadow-lg">
               Past Events
             </h2>
 
-            <p className="text-sm md:text-base text-white mt-1">
+            <p className="text-sm md:text-lg text-white mt-2 font-light tracking-wide">
               <Link
                 href="/"
-                className="text-[#DF562C] font-medium hover:underline"
+                className="text-[#DF562C] font-medium hover:text-orange-400 transition-colors"
               >
                 Home
               </Link>{" "}
               - Past Events
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
 
-      <div className="w-full px-2 md:px-12  lg:px-12 text-center">
+      <div className="w-full px-4 md:px-12 lg:px-12 text-center py-6 md:py-10">
         {/* HEADER */}
-        <div className="">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
           <h2 className="text-sm text-center md:text-lg lg:text-lg mt-1 font-medium text-gray-900 leading-tight">
             <span>
               Explore Our{" "}
@@ -123,14 +138,28 @@ const PastEvent = () => {
               </span>
             </span>
           </h2>
-          <p className="text-gray-600 text-[13px] md:text-sm italic leading-relaxed">
+          <p className="text-gray-600 text-[13px] md:text-sm italic leading-relaxed mt-1">
             "Each past event stands as a milestone of our commitment to service,
             spirituality, and community upliftment—creating lasting impact
             across health, culture, and environmental awareness."
           </p>
-        </div>
-        <div className=" w-full  h-1 md:mt-2 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
-        <p className="text-gray-700 py-1 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
+        </motion.div>
+
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+          className=" w-full  h-1 md:mt-2 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full"
+        />
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="text-gray-700 py-4 text-xs md:text-[15px] text-justify leading-relaxed font-normal"
+        >
           Our past events stand as meaningful milestones in our journey of
           service and social commitment. Each initiative reflects our dedication
           to spiritual well-being, healthy living, cultural preservation,
@@ -138,60 +167,83 @@ const PastEvent = () => {
           and cultural celebrations to environmental drives and spiritual
           gatherings, these events have brought people together to learn, serve,
           and create lasting positive impact across society.
-        </p>
+        </motion.p>
 
         {/* GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 py-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.1 },
+            },
+          }}
+        >
           {pastEvents.map((item) => (
-            <div
+            <motion.div
               key={item.id}
-              className="bg-white rounded-xl border border-gray-200 shadow-sm
-              hover:shadow-xl transition-all overflow-hidden flex flex-col"
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.5, ease: "easeOut" },
+                },
+              }}
+              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+              className="group bg-white rounded-2xl border border-gray-200 shadow-md
+              hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col relative"
             >
-              <div className=" flex items-center justify-center bg-gray-50 ">
+              {/* Shine Effect */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-white/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
+
+              <div className="relative w-full h-48 overflow-hidden bg-gray-100">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="object-cover hover:scale-103 transition-transform rounded-xl p-2 md:p-4"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
               </div>
 
-              <div className="text-center flex flex-col flex-1">
-                <h5 className="font-normal text-sm md:text-base text-gray-900 mb-2">
+              <div className="p-4 text-center flex flex-col flex-1">
+                <h5 className="font-bold text-sm md:text-base text-gray-900 mb-2 line-clamp-2 group-hover:text-[#DF562C] transition-colors">
                   {item.title}
                 </h5>
 
-                <p className="text-sm text-gray-600 mb-3 md:mb-4">
+                <p className="text-xs text-gray-500 mb-4 font-medium">
                   {formatDate(item.fromDate)} – {formatDate(item.toDate)}
                 </p>
 
                 {item.link && (
                   <Link
                     href={item.link}
-                    className="mt-auto px-2 pb-2 md:px-5 md:pb-4 flex justify-center md:block"
+                    className="mt-auto w-full flex justify-center"
                   >
-                    <button
+                    <div
                       className="
-      w-1/2 md:w-full
-      md:py-1.5
-      py-1
-      text-xs md:text-sm
-      font-medium
-      rounded-md
-      bg-[#0C55A0]
-      text-white
-      hover:bg-[#0a4786]
-      transition
-    "
+                        relative overflow-hidden w-full py-2 text-sm font-medium rounded-lg
+                        bg-[#0C55A0] text-white shadow-md group/btn cursor-pointer
+                        hover:shadow-lg transition-all duration-300
+                      "
                     >
-                      View Details
-                    </button>
+                      <span className="relative z-10 flex items-center justify-center gap-2">
+                        View Details{" "}
+                        <span className="transition-transform group-hover/btn:translate-x-1">
+                          →
+                        </span>
+                      </span>
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#DF562C] to-[#f89a36] opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
+                    </div>
                   </Link>
                 )}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

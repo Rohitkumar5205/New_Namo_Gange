@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Slider from "react-slick";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axiosClient from "@/lib/axiosClient";
@@ -89,11 +89,17 @@ const WhatPeople = () => {
     responsive: [
       {
         breakpoint: 1024,
-        settings: { slidesToShow: 2 },
+        settings: {
+          slidesToShow: 2,
+          infinite: testimonials.length > 2,
+        },
       },
       {
         breakpoint: 768,
-        settings: { slidesToShow: 1 },
+        settings: {
+          slidesToShow: 1,
+          infinite: testimonials.length > 1,
+        },
       },
     ],
   };
@@ -102,22 +108,35 @@ const WhatPeople = () => {
     <section className="w-full relative py-2 md:py-6 overflow-hidden">
       <div className="w-full px-2 md:px-12 lg:px-12 text-center">
         {/* HEADER */}
-        <h2 className="text-sm md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
-          <span className="bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] bg-clip-text text-transparent">
-            Testimonials
-          </span>
-        </h2>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-sm md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
+            <span className="bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] bg-clip-text text-transparent">
+              Testimonials
+            </span>
+          </h2>
 
-        <p className="text-[13px] md:text-[15px] text-medium text-gray-800 italic py-1">
-          “Creating positive change through service, awareness, and sustainable
-          community development.”
-        </p>
+          <p className="text-[13px] md:text-[15px] text-medium text-gray-800 italic py-1">
+            “Creating positive change through service, awareness, and
+            sustainable community development.”
+          </p>
+        </motion.div>
 
         {/* TOP CONTENT BLOCK SAME AS BEFORE */}
-        <div className="flex justify-center w-full mb-6">
-          <div className="w-full bg-white py-4 relative overflow-hidden text-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="flex justify-center w-full mb-6"
+        >
+          <div className="w-full bg-white py-4 relative overflow-hidden text-center rounded-lg shadow-sm">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
-            <p className="text-gray-700 text-xs md:text-[15px] leading-relaxed font-normal">
+            <p className="text-gray-700 text-xs md:text-[15px] leading-relaxed font-normal px-4">
               Our initiatives focus on creating meaningful change through{" "}
               <span className="font-medium text-[#DF562C]">service</span>,{" "}
               <span className="font-medium text-[#1e7ed3]">awareness</span>, and{" "}
@@ -127,7 +146,7 @@ const WhatPeople = () => {
               .
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* LOADING STATE */}
         {loading ? (
@@ -148,39 +167,47 @@ const WhatPeople = () => {
         ) : (
           <Slider ref={sliderRef} {...sliderSettings}>
             {testimonials.map((person) => (
-              <motion.div
-                key={person._id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                viewport={{ once: true }}
-                className="px-2"
-              >
-                <div className="bg-white rounded-2xl border border-gray-100 shadow-md p-4 flex flex-col items-center transition-all duration-500">
-                  <div className="relative w-full h-56 rounded-md overflow-hidden">
-                    <Image
-                      src={
-                        person.image?.startsWith("http")
-                          ? person.image
-                          : `${
-                              process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""
-                            }${person.image}`
-                      }
-                      alt={person.image_alt || person.name}
-                      fill
-                      className="object-cover"
-                    />
+              <div key={person._id} className="px-2 py-4 h-full">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="group bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 h-full flex flex-col"
+                >
+                  {/* Image Section */}
+                  <div className="relative w-full h-56 overflow-hidden bg-gray-100">
+                    <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+                    {person.image && (
+                      <Image
+                        src={
+                          person.image.startsWith("http")
+                            ? person.image
+                            : `${
+                                process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""
+                              }${person.image}`
+                        }
+                        alt={person.image_alt || person.name}
+                        fill
+                        className="object-contain p-1 transition-transform duration-700 group-hover:scale-105"
+                      />
+                    )}
                   </div>
 
-                  <h1 className="mt-2 text-sm font-medium text-gray-900 text-center">
-                    {person.name}
-                  </h1>
-
-                  <p className="text-xs text-gray-600 text-center line-clamp-3">
-                    {stripHtmlTags(person.desc)}
-                  </p>
-                </div>
-              </motion.div>
+                  {/* Content Section */}
+                  <div className="p-4 flex-1 flex flex-col relative text-center">
+                    <h1 className="text-sm md:text-base font-bold text-gray-900 mb-2">
+                      {person.name}
+                    </h1>
+                    <div className="absolute top-3 right-4 text-gray-100 group-hover:text-orange-50 transition-colors duration-300 -z-0">
+                      <Quote size={40} fill="currentColor" />
+                    </div>
+                    <p className="text-xs md:text-sm text-gray-600 text-center line-clamp-3 leading-relaxed relative z-10">
+                      {stripHtmlTags(person.desc)}
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
             ))}
           </Slider>
         )}
