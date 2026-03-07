@@ -47,12 +47,6 @@ const OurAchievement = () => {
     fetchAchievements();
   }, []);
 
-  const stripHtmlTags = (html: string = ""): string => {
-    if (typeof window === "undefined") return html;
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    return doc.body.textContent || "";
-  };
-
   return (
     <section className="w-full relative py-1.5 md:py-3 bg-gray-50 overflow-hidden">
       <div className="px-2 lg:px-12 md:px-12">
@@ -84,10 +78,13 @@ const OurAchievement = () => {
         >
           <div className="w-full py-2 relative overflow-hidden text-center rounded-lg">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
-            <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
-              Each milestone achieved by our Trust is a step toward creating a
-              more compassionate and environmentally balanced society.
-            </p>
+           <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
+  Each milestone achieved by our Trust is a step toward creating a more 
+  compassionate and environmentally balanced society. We believe that true 
+  progress is measured not just by the initiatives we launch, but by the 
+  meaningful impact they create in the lives of people and the preservation 
+  of our natural world. 
+</p>
           </div>
         </motion.div>
 
@@ -157,13 +154,27 @@ const OurAchievement = () => {
                   viewport={{ once: true }}
                   className="flex-1 text-center md:text-left"
                 >
-                  <h1 className="text-base md:text-xl font-normal text-gray-900">
+                  <h2 className="text-base md:text-xl font-normal text-gray-900">
                     {activity.title}
-                  </h1>
+                  </h2>
 
-                  <p className="text-gray-700 py-0 md:py-4 text-justify text-xs md:text-sm lg:text-sm leading-relaxed">
-                    {stripHtmlTags(activity.desc)}
-                  </p>
+                  <div
+                    className="
+                      text-gray-700 py-0 md:py-4 text-justify text-xs md:text-sm lg:text-sm leading-relaxed font-normal
+                      [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mb-3
+                      [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mb-3
+                      [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:mb-2
+                      [&_h4]:text-base [&_h4]:font-semibold [&_h4]:mb-2
+                      [&_h5]:text-sm [&_h5]:font-semibold [&_h5]:mb-2
+                      [&_h6]:text-xs [&_h6]:font-semibold [&_h6]:mb-2
+                      [&_p]:mb-3 [&_p]:leading-relaxed
+                      [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-3
+                      [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-3
+                      [&_strong]:font-semibold
+                      [&_a]:text-blue-600 [&_a]:underline
+                    "
+                    dangerouslySetInnerHTML={{ __html: activity.desc || "" }}
+                  />
 
                   {activity.link && activity.link.trim() !== "" && (
                     <Link href={activity.link}>

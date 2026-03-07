@@ -154,10 +154,10 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="max-w-7xl mx-auto px-4 text-center text-white"
           >
-            <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-wider drop-shadow-lg">
+            <h1 className="text-2xl md:text-4xl font-bold uppercase tracking-wider drop-shadow-lg">
               {slug.replace(/-/g, " ")}
-            </h2>
-            <p className="text-sm md:text-lg mt-3 font-light tracking-wide">
+            </h1>
+            <p className="text-sm md:text-lg mt-2 font-light tracking-wide">
               <Link
                 href="/"
                 className="text-[#DF562C] font-medium hover:text-orange-400 transition-colors"
@@ -174,20 +174,20 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
       </div>
 
       {/* ================= CONTENT ================= */}
-      <div className="w-full px-4 md:px-12 lg:px-12 py-8 md:py-12 text-center">
+      <div className="w-full px-4 md:px-12 lg:px-12 py-2 md:py-8 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
+          <h2 className="text-lg md:text-xl lg:text-xl font-medium text-gray-900 leading-tight">
             {slug
               .replace(/-/g, " ")
               .replace(/\b\w/g, (char) => char.toUpperCase())}
-          </h1>
+          </h2>
 
-          <p className="text-gray-600 text-sm md:text-base italic leading-relaxed mt-2 max-w-3xl mx-auto">
+          <p className="text-gray-600 text-sm md:text-[15px] italic leading-relaxed mt-1 ">
             “The embodies the spirit of selfless service, guiding individuals
             toward inner peace, spiritual growth, and compassionate living.”
           </p>
@@ -198,7 +198,7 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
           whileInView={{ scaleX: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
-          className="w-full h-1 mt-4 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full"
+          className="w-full h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full"
         />
 
         {/* ===== OBJECTIVE DESCRIPTION ===== */}
@@ -207,9 +207,9 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
-          className="py-6 md:py-8"
+          className="w-full py-2 md:py-3 leading-relaxed space-y-4 text-justify"
         >
-          <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed font-normal">
+          <p className="text-gray-700 text-sm md:text-[15px] text-justify leading-relaxed font-normal">
             {stripHtmlTags(objective?.desc || "")}
           </p>
         </motion.div>
@@ -260,16 +260,16 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
                         ? item.image
                         : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${item.image}`
                     }
-                    width={300}
-                    height={300}
+                    width={100}
+                    height={100}
                     alt={item.logo_alt || item.title}
                     className="object-contain w-full h-full
                     transition-transform duration-500
-                    group-hover:scale-110"
+                    group-hover:scale-105"
                   />
                 </div>
 
-                <div className="p-5 flex flex-col flex-1 text-center">
+                {/* <div className="p-5 flex flex-col flex-1 text-center">
                   <h3 className="text-gray-900 font-bold text-lg mb-2 line-clamp-1 group-hover:text-[#DF562C] transition-colors">
                     {item.title}
                   </h3>
@@ -291,6 +291,45 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
                         </span>
                       </span>
                       <div className="absolute inset-0 bg-gradient-to-r from-[#DF562C] to-[#f89a36] opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
+                    </div>
+                  </Link>
+                </div> */}
+                <div className="flex flex-col flex-1 py-1 md:py-2 px-2 text-center">
+                  <h3 className="text-gray-900 font-normal text-sm md:text-base mb-1 line-clamp-1">
+                    {item.title}
+                  </h3>
+
+                  <div
+                    className="
+                                    text-gray-600 text-xs md:text-[13px] leading-relaxed line-clamp-3 mb-4 text-justify
+                                    [&_h1]:text-lg [&_h1]:font-bold [&_h1]:mb-1
+                                    [&_h2]:text-base [&_h2]:font-semibold [&_h2]:mb-1
+                                    [&_h3]:text-sm [&_h3]:font-semibold [&_h3]:mb-1
+                                    [&_p]:mb-1 [&_p]:leading-relaxed
+                                    [&_ul]:list-disc [&_ul]:pl-4 [&_ul]:mb-1
+                                    [&_ol]:list-decimal [&_ol]:pl-4 [&_ol]:mb-1
+                                    [&_strong]:font-semibold
+                                    [&_a]:text-blue-600 [&_a]:underline
+                                  "
+                    dangerouslySetInnerHTML={{
+                      __html: item?.description || "",
+                    }}
+                  />
+
+                  {/* CTA */}
+                  <Link href={item.link} className="mt-auto">
+                    <div
+                      className="
+                              relative w-full text-center py-1 md:py-1 rounded-lg overflow-hidden
+                             text-xs md:text-sm font-medium text-[#0C55A0]
+                              border border-[#0C55A0]/30
+                              group/btn cursor-pointer transition-all duration-300 hover:border-[#0C55A0]
+                            "
+                    >
+                      <span className="relative text-xs z-10 transition-colors duration-300 group-hover/btn:text-white">
+                        Explore →
+                      </span>
+                      <div className="absolute inset-y-0 left-0 w-0 bg-[#0C55A0] transition-all duration-500 ease-out group-hover/btn:w-full" />
                     </div>
                   </Link>
                 </div>

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { CalendarDays } from "lucide-react";
 import { motion } from "framer-motion";
 import axiosClient from "@/lib/axiosClient";
@@ -110,7 +111,13 @@ const NewsUpdate = () => {
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
             <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal py-2">
               Stay informed with the latest updates, highlights, and impactful
-              stories from our Trust.
+              stories from our Trust. We are committed to maintaining
+              transparency and keeping our stakeholders, community members, and
+              supporters engaged with regular communications about our ongoing
+              projects, achievements, and initiatives. Through comprehensive
+              reporting and meaningful narratives, we showcase how our work
+              directly contributes to environmental conservation, social
+              welfare, and sustainable development.
             </p>
           </div>
         </motion.div>
@@ -200,6 +207,28 @@ const NewsUpdate = () => {
             ))}
           </motion.div>
         )}
+
+        {/* View More Button */}
+        {/* {blogs.length > 0 && !loading && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="flex justify-center mt-10 md:mt-12"
+          >
+            <Link href="/communication/blog">
+              <button
+                className="relative overflow-hidden px-6 md:px-8 py-2 md:py-2.5 rounded text-sm md:text-base text-white font-medium
+                bg-gradient-to-r from-[#0C55A0] to-[#1e7ed3] 
+                hover:from-[#08467c] hover:to-[#1562aa]
+                hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+              >
+                View More →
+              </button>
+            </Link>
+          </motion.div>
+        )} */}
       </div>
     </section>
   );

@@ -121,7 +121,7 @@ const ObjectiveOfTrust = () => {
                 transition: { staggerChildren: 0.15 },
               },
             }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-1 md:gap-3"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-1 md:gap-2"
           >
             {objectives.map((item, i) => (
               <motion.div
@@ -149,12 +149,12 @@ const ObjectiveOfTrust = () => {
                   </div>
                 </div>
 
-                <h1 className="text-sm md:text-base font-medium text-gray-900 md:py-2 py-1 tracking-wide">
+                <h2 className="text-sm md:text-base font-medium text-gray-900 md:py-2 py-1 tracking-wide">
                   {item.title}
-                </h1>
+                </h2>
 
                 <div
-                  className="text-gray-600 text-xs md:text-sm leading-relaxed text-justify line-clamp-4
+                  className="text-gray-600 text-xs md:text-sm text-center  line-clamp-4
                  [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mb-3
   [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mb-3
   [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:mb-2

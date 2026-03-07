@@ -36,8 +36,6 @@ const AboutNamoGange = () => {
 
         const data: TrustBody[] = res?.data?.data || [];
 
-        const parser = new DOMParser();
-
         const activeItems: TrustBodyCard[] = data
           .filter((item) => item.status === "Active")
           .sort(
@@ -46,15 +44,10 @@ const AboutNamoGange = () => {
               new Date(b.createdAt || "").getTime(),
           )
           .map((item) => {
-            const decoded = parser.parseFromString(
-              item.description || "",
-              "text/html",
-            );
-
             return {
               id: item._id,
               title: item.name,
-              text: decoded.body.textContent || "",
+              text: item.description || "",
               image: item.image,
               image_alt: item.image_alt,
             };
@@ -70,12 +63,6 @@ const AboutNamoGange = () => {
 
     fetchTrustBodies();
   }, []);
-
-  const stripHtmlTags = (html: string = ""): string => {
-    if (typeof window === "undefined") return html;
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    return doc.body.textContent || "";
-  };
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800">
@@ -96,7 +83,7 @@ const AboutNamoGange = () => {
             className="w-full px-4 text-center"
           >
             <h2 className="text-2xl md:text-4xl font-bold text-white tracking-wide drop-shadow-lg">
-              About Us
+              ABOUT US
             </h2>
 
             <p className="text-sm md:text-lg text-white mt-2 font-light tracking-wider">
@@ -112,7 +99,7 @@ const AboutNamoGange = () => {
         </div>
       </div>
 
-      <div className="w-full px-4 md:px-12 lg:px-12 py-8 md:py-12">
+      <div className="w-full px-4 md:px-12 lg:px-12 py-2 md:py-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -120,11 +107,11 @@ const AboutNamoGange = () => {
           viewport={{ once: true }}
           className="w-full text-center"
         >
-          <h2 className="text-xl md:text-3xl font-bold text-gray-900 leading-tight">
+          <h2 className="text-lg md:text-xl font-medium text-gray-900 leading-tight">
             About <span className="text-[#DF562C]">Namo Gange</span>
           </h2>
 
-          <p className="text-sm md:text-base text-gray-600 italic mt-2">
+          <p className="text-sm md:text-[15px] text-gray-600 italic mt-1">
             “We serve communities through wellness, culture, women empowerment,
             compassionate service, and environmental care.”
           </p>
@@ -135,11 +122,11 @@ const AboutNamoGange = () => {
           whileInView={{ scaleX: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
-          className="w-full h-1 mt-4 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full"
+          className="w-full h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full"
         />
 
-        <motion.div className="w-full py-6 md:py-8 leading-relaxed space-y-4 text-justify">
-          <p className="text-gray-700 text-sm md:text-base leading-relaxed font-normal">
+        <motion.div className="w-full py-2 md:py-3 leading-relaxed space-y-4 text-justify">
+          <p className="text-gray-700 text-sm md:text-[15px] leading-relaxed font-normal">
             The Trust Bodies guided by{" "}
             <span className="font-medium text-[#DF562C]">
               Acharya Jagdishji Maharaj
@@ -169,11 +156,11 @@ const AboutNamoGange = () => {
           viewport={{ once: true }}
           className="w-full py-2 text-center"
         >
-          <h2 className="text-xl md:text-3xl font-bold text-gray-900 leading-tight">
+          <h2 className="text-lg md:text-xl font-medium text-gray-900 leading-tight">
             Trust <span className="text-[#DF562C]">Bodies</span>
           </h2>
 
-          <p className="text-sm md:text-base text-gray-600 italic mt-1">
+          <p className="text-sm md:text-[15px] text-gray-600 italic mt-1">
             “Organizations united in service, spirituality, and social
             upliftment.”
           </p>
@@ -184,8 +171,17 @@ const AboutNamoGange = () => {
           whileInView={{ scaleX: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
-          className="w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full mb-8"
+          className="w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full "
         />
+        <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal py-2">
+          The Trust Bodies form the backbone of our organizational structure,
+          comprising dedicated professionals, visionary leaders, and committed
+          individuals who collectively steer our mission towards meaningful
+          impact. Each member brings unique expertise, experience, and
+          perspectives that enrich our decision-making processes and strategic
+          planning. Our governance framework ensures transparency,
+          accountability, and ethical practices in all our endeavors.
+        </p>
 
         {/* Loading */}
         {loading ? (
@@ -215,7 +211,7 @@ const AboutNamoGange = () => {
                 key={activity.id}
                 className={`flex flex-col w-full ${
                   i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
-                } items-center gap-8 md:gap-12 lg:gap-16`}
+                } items-center gap-4 md:gap-12 lg:gap-16`}
               >
                 <motion.div
                   initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
@@ -235,7 +231,7 @@ const AboutNamoGange = () => {
                       }
                       fill
                       alt={activity.image_alt || activity.title}
-                      className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
+                      className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
                     />
                     {/* Shine Effect */}
                     <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
@@ -249,13 +245,34 @@ const AboutNamoGange = () => {
                   viewport={{ once: true }}
                   className="flex flex-col w-full md:w-[60%] text-center md:text-left"
                 >
-                  <h1 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 relative inline-block">
+                  <h1 className="text-lg md:text-xl font-medium text-gray-900 mb-4 relative inline-block">
                     {activity.title}
-                    <span className="absolute bottom-0 left-0 w-1/3 h-1 bg-[#DF562C] rounded-full"></span>
+                    <span className="absolute bottom-0 left-0 w-1/3 h-[2px] bg-[#DF562C] rounded-full"></span>
                   </h1>
-                  <p className="text-gray-600 text-justify text-sm md:text-base leading-relaxed">
+                  <div
+                    className="
+  text-xs md:text-[15px] text-gray-700 font-normal text-justify
+
+  [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mb-3
+  [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mb-3
+  [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:mb-2
+  [&_h4]:text-base [&_h4]:font-semibold [&_h4]:mb-2
+  [&_h5]:text-sm [&_h5]:font-semibold [&_h5]:mb-2
+  [&_h6]:text-xs [&_h6]:font-semibold [&_h6]:mb-2
+
+  [&_p]:mb-3 [&_p]:leading-relaxed
+
+  [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-3
+  [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-3
+
+  [&_strong]:font-semibold
+  [&_a]:text-blue-600 [&_a]:underline
+  "
+                    dangerouslySetInnerHTML={{ __html: activity?.text || "" }}
+                  />
+                  {/* <p className="text-gray-600 text-justify text-sm md:text-base leading-relaxed">
                     {stripHtmlTags(activity.text)}
-                  </p>
+                  </p> */}
                 </motion.div>
               </div>
             ))}
