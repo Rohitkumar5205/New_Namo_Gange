@@ -319,7 +319,7 @@ export default function SignupPage() {
         </form>
 
         {/* LOGIN LINK */}
-        <p className="text-center text-sm mt-4 text-gray-700">
+        {/* <p className="text-center text-sm mt-4 text-gray-700">
           Already Registered?{" "}
           <Link
             href="/auth/login"
@@ -327,7 +327,7 @@ export default function SignupPage() {
           >
             Login here
           </Link>
-        </p>
+        </p> */}
       </div>
       {/* ================= 2. DATA/SIDEBAR SECTION (20% on Desktop) ================= */}
       <div className="w-full md:w-[25%] space-y-6 order-1 md:order-2  self-start sticky top-4">

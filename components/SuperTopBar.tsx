@@ -1,6 +1,14 @@
 "use client";
 import React, { useState } from "react";
-import { Mail, Phone, User, ChevronDown } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  User,
+  ChevronDown,
+  HeartHandshake,
+  Star,
+  UserPlus,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import SpeakerButton from "./SpeakerButton";
 
@@ -10,9 +18,13 @@ const SuperTopBar = () => {
   const [openSewa, setOpenSewa] = useState(false);
   const [openJoin, setOpenJoin] = useState(false);
 
-  const handleLogin = () => {
-    router.push("/auth/login");
-  };
+    
+    const handleLogin = () => {
+      // router.push("/auth/login");
+      const url = process.env.NEXT_PUBLIC_ADMIN_APP_URL;
+      window.open(url, "_blank", "noopener,noreferrer");
+    };
+
 
   const dropdownBase =
     // "absolute right-0 mt-[2px] w-44 bg-white text-gray-800 rounded-md shadow-xl z-60 overflow-hidden border border-gray-100";
@@ -88,15 +100,26 @@ const SuperTopBar = () => {
               <div className={`${dropdownBase} animate-fadeIn`}>
                 <button
                   onClick={() => router.push("/join/volunteer")}
-                  className={dropdownItem}
+                  className={`${dropdownItem} flex items-center gap-2`}
                 >
-                  🤍 Join as Volunteer
+                  <HeartHandshake size={18} className="text-pink-500" />
+                  Join as Volunteer
                 </button>
+
                 <button
                   onClick={() => router.push("/join/member")}
-                  className={dropdownItem}
+                  className={`${dropdownItem} flex items-center gap-2`}
                 >
-                  ⭐ Become a Member
+                  <Star size={18} className="text-yellow-500" />
+                  Become a Member
+                </button>
+
+                <button
+                  onClick={() => router.push("/auth/signup")}
+                  className={`${dropdownItem} flex items-center gap-2`}
+                >
+                  <UserPlus size={18} className="text-blue-500" />
+                  Associate
                 </button>
               </div>
             )}
@@ -108,7 +131,7 @@ const SuperTopBar = () => {
             className="flex items-center gap-1 px-3 py-1 rounded-xl border border-[#DF562C] text-[#DF562C] hover:bg-[#DF562C] hover:text-white text-xs transition"
           >
             <User size={14} />
-            Login
+            Admin
           </button>
 
           <SpeakerButton />
