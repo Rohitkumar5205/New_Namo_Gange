@@ -51,6 +51,13 @@ const ObjectiveOfTrust = () => {
     fetchObjectives();
   }, []);
 
+  const truncateHTML = (html?: string, limit: number = 135): string => {
+    if (!html) return "";
+    const div = document.createElement("div");
+    div.innerHTML = html;
+    const text = div.textContent || div.innerText || "";
+    return text.substring(0, limit);
+  };
   return (
     <section className="relative py-2 md:py-6 lg:py-6 bg-gradient-to-b from-white via-gray-50 to-[#f8fafc] overflow-hidden">
       <div className="w-full mx-auto px-2 md:px-12 lg:px-12 text-center">
@@ -174,7 +181,7 @@ const ObjectiveOfTrust = () => {
 
                 {/* Description */}
                 <div
-                  className="relative z-10 px-4 py-2 text-gray-600 text-xs md:text-sm text-center overflow-hidden"
+                  className="relative z-10 px-1 py-2 text-gray-600 text-xs md:text-sm text-center overflow-hidden"
                   style={{
                     display: "-webkit-box",
                     WebkitLineClamp: 4,
@@ -198,7 +205,8 @@ const ObjectiveOfTrust = () => {
   [&_strong]:font-semibold [&_strong]:text-gray-900
   [&_a]:text-blue-600 [&_a]:underline [&_a]:hover:text-blue-800"
                     dangerouslySetInnerHTML={{
-                      __html: item?.description || "",
+                      // __html: item?.description || "",
+                      __html: truncateHTML(item?.description, 135),
                     }}
                   />
                 </div>
