@@ -17,6 +17,10 @@ interface SEOData {
   banner_alt?: string;
   h1tag?: string;
 }
+interface SocialMediaData {
+  mail: string;
+  callNumber: string;
+} 
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -29,6 +33,8 @@ const Contact: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [seoData, setSeoData] = useState<SEOData | null>(null);
   const [seoLoading, setSeoLoading] = useState(true);
+     const [socialData, setSocialData] = useState<SocialMediaData | null>(null);
+
 
   useEffect(() => {
     const fetchSEOData = async () => {
@@ -52,6 +58,21 @@ const Contact: React.FC = () => {
     };
     fetchSEOData();
   }, []);
+
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const res = await axiosClient.get("/social-media/get");
+          // setSocialData(res.data.data);
+          setSocialData(res.data.data[0]);
+        } catch (error) {
+          console.error("Failed to fetch social media data", error);
+        }
+      };
+  
+      fetchData();
+    }, []);
 
   /* ================= HANDLE CHANGE ================= */
   const handleChange = (
@@ -178,7 +199,6 @@ const Contact: React.FC = () => {
                     Phone
                   </p>
                   <p className="text-sm opacity-90">+91 96549 00525</p>
-                  <p className="text-sm opacity-90">+91 78302 41288</p>
                 </div>
               </div>
 

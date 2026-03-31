@@ -87,20 +87,13 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
               item.objective_catagory &&
               toSlug(item.objective_catagory) === slug,
           )
-          .map((item) => {
-            const decoded = parser.parseFromString(
-              item.desc || "",
-              "text/html",
-            );
-
-            return {
-              title: item.title,
-              image: item.image,
-              description: decoded.body.textContent?.trim() || "",
-              link: item.slug ? `/initiatives/${item.slug}` : "#",
-              logo_alt: item.logo_alt,
-            };
-          });
+          .map((item) => ({
+            title: item.title,
+            image: item.image,
+            description: item.desc || "",
+            link: item.slug ? `/initiatives/${item.slug}` : "#",
+            logo_alt: item.logo_alt,
+          }));
 
         setInitiatives(filteredInitiatives);
 
@@ -209,9 +202,10 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
           viewport={{ once: true }}
           className="w-full py-2 md:py-3 leading-relaxed space-y-4 text-justify"
         >
-          <p className="text-gray-700 text-sm md:text-[15px] text-justify leading-relaxed font-normal">
-            {stripHtmlTags(objective?.desc || "")}
-          </p>
+          <div
+            className="text-gray-700 text-sm md:text-[15px] leading-relaxed font-normal"
+            dangerouslySetInnerHTML={{ __html: objective?.desc || "" }}
+          />
         </motion.div>
 
         {/* ================= GRID ================= */}
@@ -220,122 +214,90 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
             No initiatives available for this category.
           </p>
         ) : (
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-6"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: { staggerChildren: 0.15 },
-              },
-            }}
-          >
-            {initiatives.map((item, i) => (
-              <motion.div
-                key={i}
-                variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.5, ease: "easeOut" },
-                  },
-                }}
-                whileHover={{ y: -10, transition: { duration: 0.3 } }}
-                className="group bg-white rounded-2xl shadow-md border border-gray-100
-                hover:shadow-2xl transition-all duration-300
-                flex flex-col overflow-hidden relative"
-              >
-                {/* Shine Effect on Card */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
+          <div className="space-y-12 md:space-y-16 py-8">
+            {initiatives.map((item, index) => {
+              const isEven = index % 2 === 0;
 
-                <div className="w-full h-48 bg-gray-50 flex items-center justify-center p-4 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <Image
-                    src={
-                      item.image?.startsWith("http")
-                        ? item.image
-                        : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${item.image}`
-                    }
-                    width={100}
-                    height={100}
-                    alt={item.logo_alt || item.title}
-                    className="object-contain w-full h-full
-                    transition-transform duration-500
-                    group-hover:scale-105"
-                  />
-                </div>
+              return (
+                <div
+                  key={index}
+                  className={`w-full flex flex-col ${
+                    isEven ? "md:flex-row" : "md:flex-row-reverse"
+                  } items-center gap-5 md:gap-10 lg:gap-10 mb-8`}
+                >
+                  {/* TEXT SIDE */}
+                  <motion.div
+                    initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    viewport={{ once: true }}
+                    className="flex-1 text-center md:text-left"
+                  >
+                    <h3 className="text-lg md:text-xl font-medium text-gray-900 mb-2 leading-tight">
+                      {item.title}
+                    </h3>
 
-                {/* <div className="p-5 flex flex-col flex-1 text-center">
-                  <h3 className="text-gray-900 font-bold text-lg mb-2 line-clamp-1 group-hover:text-[#DF562C] transition-colors">
-                    {item.title}
-                  </h3>
-
-                  <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 mb-4 flex-1">
-                    {item.description}
-                  </p>
-
-                  <Link href={item.link} className="w-full mt-auto">
-                    <div
-                      className="relative w-full text-center py-2 rounded-lg overflow-hidden
-                        text-sm font-medium text-white bg-[#0C55A0]
-                        group/btn cursor-pointer shadow-md hover:shadow-lg transition-all duration-300"
-                    >
-                      <span className="relative z-10 flex items-center justify-center gap-2">
-                        Read More{" "}
-                        <span className="transition-transform group-hover/btn:translate-x-1">
-                          →
-                        </span>
-                      </span>
-                      <div className="absolute inset-0 bg-gradient-to-r from-[#DF562C] to-[#f89a36] opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
-                    </div>
-                  </Link>
-                </div> */}
-                <div className="flex flex-col flex-1 py-1 md:py-2 px-2 text-center">
-                  <h3 className="text-gray-900 font-normal text-sm md:text-base mb-1 line-clamp-1">
-                    {item.title}
-                  </h3>
-
-                  <div
-                    className="
-                                    text-gray-600 text-xs md:text-[13px] leading-relaxed line-clamp-3 mb-4 text-justify
-                                    [&_h1]:text-lg [&_h1]:font-bold [&_h1]:mb-1
-                                    [&_h2]:text-base [&_h2]:font-semibold [&_h2]:mb-1
-                                    [&_h3]:text-sm [&_h3]:font-semibold [&_h3]:mb-1
-                                    [&_p]:mb-1 [&_p]:leading-relaxed
-                                    [&_ul]:list-disc [&_ul]:pl-4 [&_ul]:mb-1
-                                    [&_ol]:list-decimal [&_ol]:pl-4 [&_ol]:mb-1
-                                    [&_strong]:font-semibold
-                                    [&_a]:text-blue-600 [&_a]:underline
-                                  "
-                    dangerouslySetInnerHTML={{
-                      __html: item?.description || "",
-                    }}
-                  />
-
-                  {/* CTA */}
-                  <Link href={item.link} className="mt-auto">
                     <div
                       className="
-                              relative w-full text-center py-1 md:py-1 rounded-lg overflow-hidden
-                             text-xs md:text-sm font-medium text-[#0C55A0]
-                              border border-[#0C55A0]/30
-                              group/btn cursor-pointer transition-all duration-300 hover:border-[#0C55A0]
-                            "
-                    >
-                      <span className="relative text-xs z-10 transition-colors duration-300 group-hover/btn:text-white">
-                        Read More →
-                      </span>
-                      <div className="absolute inset-y-0 left-0 w-0 bg-[#0C55A0] transition-all duration-500 ease-out group-hover/btn:w-full" />
-                    </div>
-                  </Link>
+                        text-gray-700 text-xs md:text-[14px] leading-relaxed font-normal text-justify
+                        [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mb-3
+                        [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mb-3
+                        [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:mb-2
+                        [&_h4]:text-base [&_h4]:font-semibold [&_h4]:mb-2
+                        [&_h5]:text-sm [&_h5]:font-semibold [&_h5]:mb-2
+                        [&_h6]:text-xs [&_h6]:font-semibold [&_h6]:mb-2
+                        [&_p]:mb-3 [&_p]:leading-relaxed
+                        [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-3
+                        [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-3
+                        [&_strong]:font-semibold
+                        [&_a]:text-blue-600 [&_a]:underline
+                      "
+                      dangerouslySetInnerHTML={{ __html: item.description || "" }}
+                    />
+
+                    {item.link && item.link !== "#" && (
+                      <Link href={item.link}>
+                        <button className="mt-2 md:mt-4 relative overflow-hidden px-4 py-1 rounded md:px-6 md:py-1.5 text-xs md:text-sm text-white font-medium shadow-md bg-[#DF562C] hover:bg-orange-600 hover:shadow-lg transition-all duration-300">
+                          Read More
+                        </button>
+                      </Link>
+                    )}
+                  </motion.div>
+
+                  {/* IMAGE SIDE */}
+                  <motion.div
+                    initial={{ opacity: 0, x: isEven ? 50 : -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    viewport={{ once: true }}
+                    className="flex-1 relative w-full"
+                  >
+                    {item.image && (
+                      <div className="overflow-hidden rounded shadow-lg hover:shadow-xl transition-all duration-500 group relative bg-white aspect-video flex items-center justify-center p-4">
+                        <Image
+                          src={
+                            item.image.startsWith("http")
+                              ? item.image
+                              : `${
+                                  process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""
+                                }${item.image}`
+                          }
+                          alt={item.logo_alt || item.title}
+                          width={600}
+                          height={400}
+                          className="max-w-full max-h-full object-contain transform transition-transform duration-700 ease-in-out group-hover:scale-105"
+                        />
+                        {/* Shine Effect */}
+                        <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                      </div>
+                    )}
+
+                    <div className="absolute -inset-3 bg-gradient-to-r from-[#DF562C]/20 via-transparent to-[#1e7ed3]/20 blur-2xl rounded-3xl -z-10 opacity-70"></div>
+                  </motion.div>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
+              );
+            })}
+          </div>
         )}
       </div>
     </section>
