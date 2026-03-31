@@ -1,7 +1,8 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone } from "lucide-react";
+import axiosClient from "@/lib/axiosClient";
 
 /* CUSTOM WHATSAPP SVG ICON */
 function WhatsappSVG(props) {
@@ -16,20 +17,38 @@ function WhatsappSVG(props) {
 export default function FloatingContactWidget() {
   const ICON_SIZE = 22;
 
+  const [socialData, setSocialData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axiosClient.get("/social-media/get");
+        // Assuming the API returns an array and we need the first item
+        setSocialData(res.data.data[0]);
+      } catch (error) {
+        console.error(
+          "Failed to fetch social media data for FloatingContactWidget",
+          error,
+        );
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="hidden md:flex fixed left-2 top-1/2 -translate-y-1/2 z-50 flex-col gap-4">
       <SocialIcon
         label="Mail_Us"
-        href="mailto:info@namogange.org"
+        href={`mailto:${socialData?.mail || "info@namogange.org"}`}
         Icon={Mail}
         color="text-blue-600"
         size={ICON_SIZE}
         delay={0}
       />
-
       <SocialIcon
         label="Call_Us"
-        href="tel:+919654900525"
+        href={`tel:${socialData?.callNumber || "+919654900525"}`}
         Icon={Phone}
         color="text-green-600"
         size={ICON_SIZE}
@@ -38,7 +57,7 @@ export default function FloatingContactWidget() {
 
       <SocialIcon
         label="Whatsapp"
-        href="https://wa.me/919654900525"
+        href={`https://wa.me/${socialData?.whatsappNumber?.replace(/\s/g, "") || "919654900525"}?text=${encodeURIComponent(socialData?.whatsappMessage || "Hello Namo Gange")}`}
         Icon={WhatsappSVG}
         color="text-green-500"
         size={ICON_SIZE}
@@ -80,6 +99,9 @@ function SocialIcon({
 
       {/* Icon Button */}
       <a
+        href={href}
+        target="_blank"
+        rel="noreferrer"
         className="rounded-full bg-white/90 backdrop-blur-sm shadow-xl border border-gray-200 
              flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300"
         style={{

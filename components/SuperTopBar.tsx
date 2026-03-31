@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from "react";
+import { useEffect } from "react";
+import axiosClient from "@/lib/axiosClient";
 import {
   Mail,
   Phone,
@@ -12,22 +14,42 @@ import {
 import { useRouter } from "next/navigation";
 import SpeakerButton from "./SpeakerButton";
 
+interface SocialMediaData {
+  mail: string;
+  callNumber: string;
+}
+
 const SuperTopBar = () => {
   const router = useRouter();
 
   const [openSewa, setOpenSewa] = useState(false);
   const [openJoin, setOpenJoin] = useState(false);
+  const [socialData, setSocialData] = useState<SocialMediaData | null>(null);
 
-    
-    const handleLogin = () => {
-      // router.push("/auth/login");
-      const url = process.env.NEXT_PUBLIC_ADMIN_APP_URL;
-      window.open(url, "_blank", "noopener,noreferrer");
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axiosClient.get("/social-media/get");
+        // setSocialData(res.data.data);
+        setSocialData(res.data.data[0]);
+      } catch (error) {
+        console.error("Failed to fetch social media data", error);
+      }
     };
 
+    fetchData();
+  }, []);
+
+  const handleLogin = () => {
+    const url = process.env.NEXT_PUBLIC_ADMIN_APP_URL;
+    if (url) {
+      window.open(url, "_blank", "noopener,noreferrer");
+    } else {
+      router.push("/auth/login");
+    }
+  };
 
   const dropdownBase =
-    // "absolute right-0 mt-[2px] w-44 bg-white text-gray-800 rounded-md shadow-xl z-60 overflow-hidden border border-gray-100";
     "absolute right-0 mt-[2px] w-44 bg-white text-gray-800 rounded-md shadow-xl z-[60] overflow-hidden border border-gray-100";
 
   const dropdownItem =
@@ -40,11 +62,12 @@ const SuperTopBar = () => {
         <div className="flex items-center gap-5">
           <div className="flex items-center gap-2">
             <Mail size={14} className="text-gray-400" />
-            <span>info@namogange.org</span>
+            {/* <span>info@namogange.org</span> */}
+            <span>{socialData?.mail}</span>
           </div>
           <div className="flex items-center gap-2">
             <Phone size={14} className="text-gray-400" />
-            <span>+91 96549 00525</span>
+            <span>{socialData?.callNumber}</span>
           </div>
         </div>
 

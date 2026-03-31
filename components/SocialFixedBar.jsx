@@ -1,15 +1,31 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
+import axiosClient from "@/lib/axiosClient";
 
 export default function SocialFixedBar() {
+  const [socialData, setSocialData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axiosClient.get("/social-media/get");
+        setSocialData(res.data.data[0]);
+      } catch (error) {
+        console.error("Failed to fetch social media data", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="hidden md:flex fixed right-2 top-1/2 -translate-y-1/2 z-50 flex-col gap-4">
       {/* FACEBOOK */}
       <SocialIcon
         label="Facebook"
-        href="https://www.facebook.com/NamogangeTrust/"
+        href={socialData?.facebook || "#"}
         Icon={Facebook}
         color="text-blue-600"
         delay={0}
@@ -18,7 +34,7 @@ export default function SocialFixedBar() {
       {/* INSTAGRAM */}
       <SocialIcon
         label="Instagram"
-        href="https://www.instagram.com/namogangetrust/?hl=en"
+        href={socialData?.instagram || "#"}
         Icon={Instagram}
         color="text-pink-500"
         delay={0.3}
@@ -27,7 +43,7 @@ export default function SocialFixedBar() {
       {/* TWITTER */}
       <SocialIcon
         label="Twitter"
-        href="https://x.com/namogange"
+        href={socialData?.twitter || "#"}
         Icon={Twitter}
         color="text-sky-500"
         delay={0.6}
@@ -36,7 +52,7 @@ export default function SocialFixedBar() {
       {/* LINKEDIN */}
       <SocialIcon
         label="LinkedIn"
-        href="https://www.linkedin.com/company/namo-gange-trust/"
+        href={socialData?.linkedin || "#"}
         Icon={Linkedin}
         color="text-blue-700"
         delay={0.9}
@@ -45,7 +61,7 @@ export default function SocialFixedBar() {
       {/* YOUTUBE */}
       <SocialIcon
         label="YouTube"
-        href="https://www.youtube.com/channel/UCkAQ_M8x5l3DvrH_VtuoiSA"
+        href={socialData?.youtube || "#"}
         Icon={Youtube}
         color="text-red-600"
         delay={1.2}
