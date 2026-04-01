@@ -1,11 +1,33 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 import Logo from "@/public/footer-logo.png"; // 👈 logo path check kar lena
+import React, { useState, useEffect } from "react";
+import axiosClient from "@/lib/axiosClient";
+
+interface SocialMediaData {
+  mail: string;
+  callNumber: string;
+  address: string;
+}
 
 export default function Footer() {
+  const [socialData, setSocialData] = useState<SocialMediaData | null>(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axiosClient.get("/social-media/get");
+        // setSocialData(res.data.data);
+        setSocialData(res.data.data[0]);
+      } catch (error) {
+        console.error("Failed to fetch social media data", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <footer className="bg-[#0b0b0b] text-gray-300 border-t border-white/10">
       {/* ================= MAIN FOOTER ================= */}
@@ -83,25 +105,27 @@ export default function Footer() {
             <li className="flex items-start gap-1">
               <MapPin className="w-15 h-15 text-[#DF562C] mt-1" />
               <span className="text-gray-400 leading-relaxed text-justify">
-                12/52, Site-2, Sunrise Industrial Area, Mohan Nagar, Sahibabad,
-                Ghaziabad, Uttar Pradesh – 201007
+                {socialData?.address || ""}
               </span>
             </li>
 
             <li className="flex items-center gap-3">
               <Mail className="w-5 h-5 text-[#1e7ed3]" />
               <a
-                href="mailto:info@namogange.org"
+                href={socialData?.mail || "#"}
                 className="hover:text-[#DF562C]"
               >
-                info@namogange.org
+                {socialData?.mail || ""}
               </a>
             </li>
 
             <li className="flex items-center gap-3">
               <Phone className="w-5 h-5 text-[#1e7ed3]" />
-              <a href="tel:+919654900525" className="hover:text-[#DF562C]">
-                +91 96549 00525
+              <a
+                href={socialData?.callNumber || "#"}
+                className="hover:text-[#DF562C]"
+              >
+                {socialData?.callNumber || ""}
               </a>
             </li>
           </ul>

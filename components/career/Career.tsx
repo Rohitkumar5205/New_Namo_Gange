@@ -147,7 +147,7 @@ const Career = () => {
         </p>
       </div>
       {/* ===== NO CURRENT VACANCY MESSAGE ===== */}
-      <div className="w-full py-6 px-6">
+      <div className="w-full py-1.5 md:py-3 px-2 md:px-12  lg:px-12">
         <div className="bg-[#0C55A0] rounded-xl py-8 px-6 md:px-12 text-center">
           <h2 className="text-lg md:text-2xl font-medium md:font-semibold text-white">
             Career Opportunities
@@ -176,7 +176,7 @@ const Career = () => {
       </div>
 
       {/* ================= job crads ================= */}
-      <div className="w-full px-6 mt-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="w-full py-1.5 md:py-3 px-2 md:px-12  lg:px-12 mt-4 grid grid-cols-1 md:grid-cols-4 gap-8">
         {jobs.map((job, index) => (
           <div
             key={index}

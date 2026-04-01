@@ -20,7 +20,8 @@ interface SEOData {
 interface SocialMediaData {
   mail: string;
   callNumber: string;
-} 
+  address: string;
+}
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -33,8 +34,7 @@ const Contact: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [seoData, setSeoData] = useState<SEOData | null>(null);
   const [seoLoading, setSeoLoading] = useState(true);
-     const [socialData, setSocialData] = useState<SocialMediaData | null>(null);
-
+  const [socialData, setSocialData] = useState<SocialMediaData | null>(null);
 
   useEffect(() => {
     const fetchSEOData = async () => {
@@ -59,20 +59,19 @@ const Contact: React.FC = () => {
     fetchSEOData();
   }, []);
 
-  
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const res = await axiosClient.get("/social-media/get");
-          // setSocialData(res.data.data);
-          setSocialData(res.data.data[0]);
-        } catch (error) {
-          console.error("Failed to fetch social media data", error);
-        }
-      };
-  
-      fetchData();
-    }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axiosClient.get("/social-media/get");
+        // setSocialData(res.data.data);
+        setSocialData(res.data.data[0]);
+      } catch (error) {
+        console.error("Failed to fetch social media data", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   /* ================= HANDLE CHANGE ================= */
   const handleChange = (
@@ -198,7 +197,9 @@ const Contact: React.FC = () => {
                   <p className="text-[15px] md:text-lg font-normal md:font-medium">
                     Phone
                   </p>
-                  <p className="text-sm opacity-90">+91 96549 00525</p>
+                  <p className="text-sm opacity-90">
+                    {socialData?.callNumber || ""}
+                  </p>
                 </div>
               </div>
 
@@ -208,7 +209,9 @@ const Contact: React.FC = () => {
                   <p className="text-[15px] md:text-lg font-normal md:font-medium">
                     Email
                   </p>
-                  <p className="text-sm opacity-90">info@namogange.org</p>
+                  <p className="text-sm opacity-90">
+                    {socialData?.mail || ""}
+                  </p>
                 </div>
               </div>
 
@@ -219,8 +222,7 @@ const Contact: React.FC = () => {
                     Office Address
                   </p>
                   <p className="text-sm opacity-90 leading-relaxed">
-                    12/52, Site-2, Sunrise Industrial Area, Mohan Nagar,
-                    Sahibabad, Ghaziabad, Uttar Pradesh – 201007
+                    {socialData?.address || ""}
                   </p>
                 </div>
               </div>
