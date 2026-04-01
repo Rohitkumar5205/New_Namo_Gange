@@ -72,33 +72,33 @@ const Career = () => {
   // ];
 
   const handleChange = (e) => {
-  const { name, value } = e.target;
-  setFormData((prev) => ({ ...prev, [name]: value }));
-};
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-const handleSubmit = async () => {
-  try {
-    await axiosClient.post("/job-apply/create", formData);
+  const handleSubmit = async () => {
+    try {
+      await axiosClient.post("/job-apply/create", formData);
 
-    alert("Application submitted successfully");
+      alert("Application submitted successfully");
 
-    setOpenModal(false);
+      setOpenModal(false);
 
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      city: "",
-      state: "",
-      currentLocation: "",
-      role: "",
-      message: "",
-    });
-  } catch (error) {
-    console.error("Apply error:", error);
-    alert("Something went wrong");
-  }
-};
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        city: "",
+        state: "",
+        currentLocation: "",
+        role: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Apply error:", error);
+      alert("Something went wrong");
+    }
+  };
   useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -237,27 +237,27 @@ const handleSubmit = async () => {
           >
             {/* Job Title */}
             <h3 className="text-sm md:text-lg font-medium md:font-semibold text-[#0C55A0] mb-2">
-              {job.title}
+              {job?.title}
             </h3>
 
             {/* Job Info */}
             <div className="text-sm text-gray-700 space-y-1 border-b pb-3">
               <p className="flex items-center gap-2">
-                <Briefcase size={16} /> {job.exp}
+                <Briefcase size={16} /> {job?.exp}
               </p>
 
               <p className="flex items-center gap-2">
-                <span className="ml-1">₹</span> {job.salary}
+                <span className="ml-1">₹</span> {job?.salary}
               </p>
 
               <p className="flex items-center gap-2">
-                <MapPin size={16} /> {job.location}
+                <MapPin size={16} /> {job?.location}
               </p>
             </div>
 
             {/* Description */}
             <div className="mt-3 text-xs md:text-sm text-gray-700 text-justify space-y-1 leading-relaxed flex-1">
-              {job.desc.map((line, i) => (
+              {job?.desc?.map((line, i) => (
                 <p key={i}>• {line}</p>
               ))}
             </div>
@@ -358,6 +358,9 @@ const handleSubmit = async () => {
                       Your Name
                     </label>
                     <input
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
                       type="text"
                       placeholder="Full Name"
                       className="border rounded px-4 py-2 text-sm focus:ring-0 focus:ring-[#0C55A0] outline-none"
@@ -368,6 +371,9 @@ const handleSubmit = async () => {
                   <div className="flex flex-col">
                     <label className="text-sm font-medium mb-1">Email</label>
                     <input
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       type="email"
                       placeholder="Email Address"
                       className="border rounded px-4 py-2 text-sm focus:ring-0 focus:ring-[#0C55A0] outline-none"
@@ -380,6 +386,9 @@ const handleSubmit = async () => {
                       Phone Number
                     </label>
                     <input
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
                       type="text"
                       placeholder="Enter mobile number"
                       className="border rounded px-4 py-2 text-sm focus:ring-0 focus:ring-[#0C55A0] outline-none"
@@ -390,6 +399,9 @@ const handleSubmit = async () => {
                   <div className="flex flex-col">
                     <label className="text-sm font-medium mb-1">City</label>
                     <input
+                      name="city"
+                      value={formData.city}
+                      onChange={handleChange}
                       type="text"
                       placeholder="City"
                       className="border rounded px-4 py-2 text-sm focus:ring-0 focus:ring-[#0C55A0] outline-none"
@@ -400,6 +412,9 @@ const handleSubmit = async () => {
                   <div className="flex flex-col">
                     <label className="text-sm font-medium mb-1">State</label>
                     <input
+                      name="state"
+                      value={formData.state}
+                      onChange={handleChange}
                       type="text"
                       placeholder="State"
                       className="border rounded px-4 py-2 text-sm focus:ring-0 focus:ring-[#0C55A0] outline-none"
@@ -412,6 +427,9 @@ const handleSubmit = async () => {
                       Current Location
                     </label>
                     <input
+                      name="currentLocation"
+                      value={formData.currentLocation}
+                      onChange={handleChange}
                       type="text"
                       placeholder="Current Location"
                       className="border rounded px-4 py-2 text-sm focus:ring-0 focus:ring-[#0C55A0] outline-none"
@@ -424,6 +442,8 @@ const handleSubmit = async () => {
                       Role Applying For
                     </label>
                     <input
+                      name="role"
+                      value={formData.role}
                       type="text"
                       readOnly
                       className="border rounded px-4 py-2 text-sm bg-gray-100 focus:ring-0 focus:ring-[#0C55A0] outline-none"
@@ -436,6 +456,9 @@ const handleSubmit = async () => {
                       Your Message
                     </label>
                     <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
                       placeholder="Write your message..."
                       className="border rounded px-4 py-2 text-sm h-28 focus:ring-0 focus:ring-[#0C55A0] outline-none"
                     ></textarea>
