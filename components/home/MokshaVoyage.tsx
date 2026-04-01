@@ -98,7 +98,7 @@ const MokshaVoyage = () => {
             />
 
             {/* Read More Button */}
-            <Link href={hero?.link || "#"}>
+            {hero?.link ? <Link href={hero?.link || "#"}>
               <button
                 className="mt-2 md:mt-5 lg:mt-5 relative rounded overflow-hidden px-4 md:px-6 py-1 text-[12px] md:text-sm text-white font-normal 
                 shadow-md bg-[#0C55A0] cursor-pointer
@@ -106,7 +106,7 @@ const MokshaVoyage = () => {
               >
                 Read More...
               </button>
-            </Link>
+            </Link> : ""}
           </div>
         </div>
 
