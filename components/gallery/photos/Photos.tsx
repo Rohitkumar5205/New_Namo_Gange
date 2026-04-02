@@ -230,7 +230,7 @@ const Photos = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
+          {/* <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
             Acharya Jagdishji Maharaj is a revered spiritual guide whose life
             and teachings continue to inspire countless individuals on the path
             of inner awakening and self-realization. Blessed by the divine grace
@@ -244,7 +244,21 @@ const Photos = () => {
             eloquent Bhagwat Kathavachak, Acharya Ji has dedicated his life to
             spreading the timeless values of Sanatan Dharma through
             wisdom-filled discourses and soulful storytelling.
-          </p>
+          </p> */}
+
+          <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
+  Our Photos & Gallery beautifully capture the spirit of devotion, service, and
+  cultural heritage reflected through various activities and events. Each image
+  tells a story of dedication, compassion, and collective effort in preserving
+  traditions and serving society. From spiritual gatherings and charitable
+  initiatives to cultural celebrations, these moments highlight the essence of
+  our mission and values.
+  <span className="text-[#DF562C] text-medium">
+    {" "}
+    These glimpses showcase our journey of faith, unity, and meaningful impact
+    on the community.
+  </span>
+</p>
         </motion.div>
 
         {/* ================= LOADING STATE ================= */}

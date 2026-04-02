@@ -178,15 +178,19 @@ const NewsLetter = () => {
             className="py-1 md:py-2"
           >
             <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
-              This initiative reflects a deep commitment to spiritual awareness,
-              cultural values, and selfless service. Rooted in the eternal grace
-              of
-              <strong> Maa Gange and Lord Krishna</strong>, it seeks to inspire
-              individuals toward inner awakening, compassion, and conscious
-              living. Through thoughtful guidance, reflective teachings, and
-              value-based initiatives, this journey encourages people to
-              reconnect with the timeless wisdom of Sanatan Dharma and apply it
-              meaningfully in everyday life.
+              Our Newsletter keeps you connected with the latest updates,
+              events, and initiatives, reflecting our ongoing journey of
+              service, spirituality, and community engagement. It brings
+              together inspiring stories, important announcements, and
+              highlights of activities that showcase our commitment to
+              meaningful impact and cultural values. Through regular updates,
+              readers can stay informed and inspired by the work being carried
+              forward with dedication and purpose.
+              <strong>
+                {" "}
+                Subscribe to stay connected and be a part of our mission of
+                spreading awareness, positivity, and collective growth.
+              </strong>
             </p>
           </motion.div>
         </div>

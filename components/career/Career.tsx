@@ -189,8 +189,7 @@ const Career = () => {
               </span>
             </span>
           </h2>
-          <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
-            "Explore meaningful career opportunities where passion meets
+<p className="text-gray-600 text-[13px] md:text-sm italic leading-relaxed">            "Explore meaningful career opportunities where passion meets
             purpose, and contribute to impactful social, cultural,
             environmental, and community-driven initiatives."
           </p>

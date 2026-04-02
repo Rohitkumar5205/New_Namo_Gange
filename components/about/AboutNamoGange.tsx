@@ -177,7 +177,7 @@ const AboutNamoGange = () => {
           <p className="text-gray-700 text-sm md:text-[15px] leading-relaxed font-normal">
             The Trust Bodies guided by{" "}
             <span className="font-medium text-[#DF562C]">
-              Acharya Jagdishji Maharaj
+              Acharya Jagdish ji Maharaj
             </span>{" "}
             work with a shared vision of spiritual growth and social
             responsibility. Inspired by the divine blessings of{" "}

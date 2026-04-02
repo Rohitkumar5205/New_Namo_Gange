@@ -137,7 +137,7 @@ const Videos = () => {
 
         <div className="w-full h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
         <div>
-          <p className="mt-1 text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
+          {/* <p className="mt-1 text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
             Acharya Jagdishji Maharaj is a revered spiritual guide whose life
             and teachings continue to inspire countless individuals on the path
             of inner awakening and self-realization. Blessed by the divine grace
@@ -148,7 +148,21 @@ const Videos = () => {
             Kathavachak, Acharya Ji has dedicated his life to spreading the
             timeless values of Sanatan Dharma through wisdom-filled discourses
             and soulful storytelling.
-          </p>
+          </p> */}
+
+          <p className="mt-1 text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
+  Our Videos Gallery presents a collection of inspiring moments captured through
+  visual storytelling, reflecting the essence of devotion, service, and cultural
+  values. These videos offer a deeper insight into spiritual discourses,
+  community initiatives, and meaningful events that bring people together with a
+  shared purpose. Through each frame, viewers can experience the dedication,
+  positivity, and transformative impact of our journey.
+  <strong>
+    {" "}
+    This gallery serves as a window into our mission, showcasing faith, unity,
+    and the spirit of selfless service in action.
+  </strong>
+</p>
         </div>
 
         {/* ================= VIDEO GRID ================= */}

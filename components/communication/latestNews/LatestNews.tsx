@@ -302,7 +302,7 @@ export default function LatestNewsPage() {
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <p className="text-gray-700 mt-2 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
+          {/* <p className="text-gray-700 mt-2 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
             This initiative reflects a deep commitment to spiritual awareness,
             cultural values, and selfless service. Rooted in the eternal grace
             of
@@ -315,7 +315,19 @@ export default function LatestNewsPage() {
             reflective teachings, and value-based initiatives, this journey
             encourages people to reconnect with the timeless wisdom of Sanatan
             Dharma and apply it meaningfully in everyday life.
-          </p>
+          </p> */}
+          <p className="text-gray-700 mt-2 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
+  Stay informed with our Latest News & Updates, where we share important
+  announcements, recent activities, and ongoing initiatives that reflect our
+  commitment to service, culture, and community development. This section brings
+  you closer to the impactful work being carried out, highlighting key moments,
+  achievements, and events that shape our journey.
+  <strong className="text-[#DF562C]">
+    {" "}
+    Explore updates to stay connected, informed, and inspired by our continuous
+    efforts toward positive change and meaningful contribution.
+  </strong>
+</p>
         </motion.div>
 
         {/* ---------- FILTERS ---------- */}

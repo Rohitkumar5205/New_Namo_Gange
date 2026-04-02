@@ -267,7 +267,7 @@ const Blog = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
+          {/* <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
             Acharya Jagdishji Maharaj is a revered spiritual guide whose life
             and teachings continue to inspire countless individuals on the path
             of inner awakening and self-realization. Blessed by the divine grace
@@ -278,6 +278,21 @@ const Blog = () => {
             Kathavachak, Acharya Ji has dedicated his life to spreading the
             timeless values of Sanatan Dharma through wisdom-filled discourses
             and soulful storytelling.
+          </p> */}
+
+          <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
+            Our Blogs section offers thoughtful insights, inspiring stories, and
+            knowledge-rich articles that reflect our values of spirituality,
+            culture, and selfless service. Through engaging content, we aim to
+            share meaningful perspectives on life, traditions, and personal
+            growth, helping readers connect with deeper wisdom and conscious
+            living. Each blog is crafted to inform, inspire, and encourage a
+            positive outlook rooted in timeless principles.
+            <strong>
+              {" "}
+              Explore our blogs to discover ideas that nurture awareness, enrich
+              understanding, and guide you on a path of purpose and growth.
+            </strong>
           </p>
         </motion.div>
 
