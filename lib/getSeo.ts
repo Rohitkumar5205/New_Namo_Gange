@@ -1,4 +1,6 @@
-export async function getSeo(path: string) {
+import { cache } from "react";
+
+export const getSeo = cache(async (path: string) => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/seo/page/${encodeURIComponent(path)}`,
@@ -12,7 +14,7 @@ export async function getSeo(path: string) {
   } catch (error) {
     return null;
   }
-}
+});
 
 export const cleanHtmlString = (htmlStr?: string) => {
   if (!htmlStr) return "";
@@ -58,8 +60,14 @@ export const parseOpenGraph = (htmlStr?: string) => {
       const propMatch = attrs.match(regexProperty);
       const contentMatch = attrs.match(regexContent);
       if (propMatch && contentMatch) {
-          tags[propMatch[1]] = contentMatch[1];
+          tags[propMatch[1]] = contentMatch[1].trim();
       }
   }
+
+  // Next.js requires a valid OG type. Default to "website" if missing or empty.
+  if (!tags.type || tags.type === "") {
+    tags.type = "website";
+  }
+
   return tags;
 };

@@ -30,43 +30,72 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
     ? slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
     : "Gallery";
 
-  /* ================= FETCH GALLERY BY SLUG ================= */
+  /* ================= FETCH ALL DATA BY SLUG ================= */
   useEffect(() => {
+    let isMounted = true;
     if (!slug) return;
 
-    const fetchGallery = async () => {
+    const fetchData = async () => {
       try {
-        const res = await axiosClient.get("/galleryImage");
+        if (isMounted) setLoading(true);
 
-        const gallery = res?.data?.gallery || [];
+        const currentSlug = slug.trim().toLowerCase();
+        const galleryPath = `/galleryImage?t=${Date.now()}`;
+        const fullSEOPath = `/gallery/photos/${currentSlug}`;
 
-        const filtered = gallery.filter(
-          (item: GalleryItem) => item.slug === slug && item.status === "Active",
-        );
+        const [galleryRes, seoRes] = await Promise.all([
+          axiosClient.get(galleryPath).catch(() => null),
+          axiosClient.get(`/seo/page/${encodeURIComponent(fullSEOPath)}?t=${Date.now()}`).catch(() => null)
+        ]);
 
-        console.log("✅ Slug:", slug);
-        console.log("✅ Filtered Gallery:", filtered);
+        if (!isMounted) return;
 
-        setData(filtered);
-      } catch (error) {
-        console.error("❌ Gallery API Error:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+        // Process Gallery Data
+        if (galleryRes) {
+          const rawData = galleryRes.data?.data || galleryRes.data?.gallery || galleryRes.data;
+          const galleryArray = Array.isArray(rawData) ? rawData : (rawData ? [rawData] : []);
 
-    fetchGallery();
-  }, [slug]);
+          const matchedCategory = galleryArray.find(
+            (item: any) =>
+              item && 
+              item.slug?.trim().toLowerCase() === currentSlug &&
+              item.status === "Active"
+          );
 
-  // Separate useEffect for SEO data
-  useEffect(() => {
-    const fetchSEOData = async () => {
-      try {
-        const res = await axiosClient.get(
-          `/seo/page/${encodeURIComponent("/gallery/photos")}`,
-        );
-        const seo = res?.data?.data;
-        if (seo) {
+          if (matchedCategory && Array.isArray(matchedCategory.images) && matchedCategory.images.length > 0) {
+            const formattedImages = matchedCategory.images.map((img: any, index: number) => {
+              const url = typeof img === "string" ? img : img.url;
+              const alt = typeof img === "object" ? img.alt : null;
+
+              const imageUrl = url.startsWith("http")
+                ? url
+                : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${url}`;
+
+              return {
+                _id: `${matchedCategory._id}-${index}`,
+                title: alt || matchedCategory.category || matchedCategory.image_alt || "Gallery Image",
+                image: imageUrl,
+                slug: matchedCategory.slug,
+                status: matchedCategory.status
+              };
+            });
+            setData(formattedImages);
+          } else {
+            console.warn(`❌ No matching Active gallery found for slug: ${currentSlug}`);
+            setData([]);
+          }
+        }
+
+        // Process SEO Data
+        let seo = seoRes?.data?.data;
+        if (!seo) {
+          try {
+            const baseSeoRes = await axiosClient.get(`/seo/page/${encodeURIComponent("/gallery/photos")}`);
+            seo = baseSeoRes.data?.data;
+          } catch (err) {}
+        }
+
+        if (seo && isMounted) {
           setSeoData({
             page_banner: seo.page_banner,
             banner_alt: seo.banner_alt,
@@ -74,11 +103,15 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
           });
         }
       } catch (error) {
-        console.error("Error fetching SEO data for photos:", error);
+        console.error("❌ Data Fetch Error:", error);
+      } finally {
+        if (isMounted) setLoading(false);
       }
     };
-    fetchSEOData();
-  }, []);
+
+    fetchData();
+    return () => { isMounted = false; };
+  }, [slug]);
 
   return (
     <section className="bg-gray-50 min-h-screen">
@@ -86,7 +119,7 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
       <div
         className="w-full bg-cover bg-center bg-no-repeat relative"
         style={{
-          backgroundImage: `url('${seoData?.page_banner || "/ourActivities/ourActivities5.jpg"}')`,
+          backgroundImage: `url('${seoData?.page_banner || "/ourActivities/ourActivities.jpg"}')`,
           backgroundAttachment: "fixed",
         }}
       >
@@ -147,8 +180,7 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
         <motion.div
           className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
+          animate={!loading && data.length > 0 ? "visible" : "hidden"}
           variants={{
             hidden: { opacity: 0 },
             visible: {
@@ -157,7 +189,7 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
             },
           }}
         >
-          {data.map((item) => (
+          {data.map((item, idx) => (
             <motion.div
               key={item._id}
               variants={{
@@ -176,13 +208,22 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
               {/* Shine Effect */}
               <div className="absolute inset-0 bg-gradient-to-tr from-white/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
 
-              <div className="relative w-full aspect-square overflow-hidden">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
+              <div className="relative w-full aspect-square overflow-hidden bg-gray-100">
+                {item.image ? (
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    unoptimized
+                    priority={idx < 8}
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-gray-300">
+                    <span className="text-[10px] uppercase font-bold">No Image</span>
+                  </div>
+                )}
                 <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <span className="text-white bg-black/40 backdrop-blur-md border border-white/30 px-4 py-1.5 rounded-full text-sm font-medium tracking-wide">
                     View Image

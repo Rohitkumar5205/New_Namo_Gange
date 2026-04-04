@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import AppWrapper from "@/components/LayoutWrapper";
 import FloatingContactWidget from "../components/FloatingContactWidget";
 import SocialFixedBar from "../components/SocialFixedBar";
+import logo from "@/public/logo.png";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,6 +15,9 @@ export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_CLIENT_URL || "http://localhost:3000"),
   alternates: {
     canonical: "/",
+  },
+  icons: {
+    icon: logo.src,
   },
 };
 export default function RootLayout({

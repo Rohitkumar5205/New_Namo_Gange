@@ -140,7 +140,7 @@ const NavBar: React.FC = () => {
                 setOpenDropdown(null);
               }}
             >
-              <Image src={logo} alt="Namo Gange" width={170} priority />
+              <Image src={logo} alt="Namo Gange" width={170} style={{ height: "auto" }} priority />
             </Link>
 
             {/* MENU */}
@@ -196,7 +196,7 @@ const NavBar: React.FC = () => {
       {/* ================= MOBILE ================= */}
       <nav className="md:hidden bg-white shadow-sm">
         <div className="flex items-center justify-between px-2 py-1">
-          <Image src={logo} width={100} alt="logo" />
+          <Image src={logo} width={100} style={{ height: "auto" }} alt="logo" />
           <SpeakerButton />
           <button
             onClick={() => setMobileOpen(true)}
@@ -211,7 +211,7 @@ const NavBar: React.FC = () => {
           <div className="fixed inset-0 bg-black/40 z-50">
             <div className="w-[80%] bg-white h-full px-4 py-1 overflow-y-auto">
               <div className="flex justify-between items-center  mb-2">
-                <Image src={logo} width={100} alt="logo" />
+                <Image src={logo} width={100} style={{ height: "auto" }} alt="logo" />
                 <button onClick={() => setMobileOpen(false)}>
                   <X size={22} />
                 </button>
