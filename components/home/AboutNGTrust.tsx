@@ -120,6 +120,7 @@ const AboutNGTrust = () => {
                     // sizes="(max-width: 768px) 100vw, (max-width: 1024px) 30vw, 40vw"
                     priority={false}
                     className="w-full h-auto lg:h-85 md:h-70 object-cover transform transition-transform duration-700 ease-in-out group-hover:scale-102"
+                    className="w-full h-auto lg:h-[340px] md:h-[280px] object-cover transform transition-transform duration-700 ease-in-out group-hover:scale-105"
                   />
                   {/* Shine Effect */}
                   <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />

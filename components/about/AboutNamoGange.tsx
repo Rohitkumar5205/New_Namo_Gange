@@ -109,7 +109,7 @@ const AboutNamoGange = () => {
   console.log("Current seoData state:", seoData); // This will show the updated state
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800">
+    <div className="min-h-screen bg-gray-50 text-gray-800 overflow-x-hidden">
       {/* Header with dynamic SEO data */}
       <div
         className="w-full bg-cover bg-center bg-no-repeat relative"
@@ -196,7 +196,7 @@ const AboutNamoGange = () => {
       <AboutNGTrust />
 
       {/* Trust Bodies */}
-      <div className="w-full py-8 md:py-12 px-4 md:px-12 lg:px-12 bg-white">
+      <div className="w-full py-8 md:py-12 px-4 md:px-12 lg:px-12 bg-white overflow-hidden">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
