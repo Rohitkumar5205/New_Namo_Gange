@@ -128,7 +128,7 @@ const NavBar: React.FC = () => {
   return (
     <>
       {/* ================= DESKTOP ================= */}
-      <nav className="hidden md:block bg-white shadow-sm">
+      <nav className="hidden lg:block bg-white shadow-sm">
         <div className="w-full px-10">
           <div className="flex items-center justify-between h-20 text-sm font-medium">
             {/* LOGO */}
@@ -194,7 +194,7 @@ const NavBar: React.FC = () => {
       </nav>
 
       {/* ================= MOBILE ================= */}
-      <nav className="md:hidden bg-white shadow-sm">
+      <nav className="lg:hidden  bg-white shadow-sm">
         <div className="flex items-center justify-between px-2 py-1">
           <Image src={logo} width={100} style={{ height: "auto" }} alt="logo" />
           <SpeakerButton />
@@ -353,6 +353,12 @@ const NavBar: React.FC = () => {
                         >
                           Become a Member
                         </button>
+                        <button
+                          onClick={() => handleNavigate("/auth/signup", "JOIN")}
+                          className="px-6 py-1 text-left hover:bg-gray-100"
+                        >
+                          Associate
+                        </button>
                       </div>
                     )}
                   </div>
@@ -367,7 +373,7 @@ const NavBar: React.FC = () => {
     transition
   "
                   >
-                    Login
+                    Admin Login
                   </button>
                 </div>
               </div>

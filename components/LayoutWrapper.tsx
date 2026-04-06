@@ -12,6 +12,7 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
   const [hideTop, setHideTop] = useState(false);
   const [topHeight, setTopHeight] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
 
   const topRef = useRef<HTMLDivElement | null>(null);
 
@@ -31,10 +32,12 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
     return () => observer.disconnect();
   }, []);
 
-  /* ================= DETECT MOBILE / DESKTOP ================= */
+  /* ================= DETECT MOBILE / TABLET / DESKTOP ================= */
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768); // Tailwind md breakpoint
+      const width = window.innerWidth;
+      setIsMobile(width < 768); // < 768px = mobile
+      setIsTablet(width >= 768 && width < 1024); // 768px to 1023px = tablet
     };
 
     handleResize(); // initial
@@ -84,7 +87,9 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
         style={{
           paddingTop: isMobile
             ? topHeight + 50 // 📱 Mobile
-            : topHeight + 80, // 💻 Desktop
+            : isTablet
+              ? topHeight + 50 // 📱 Tablet
+              : topHeight + 80, // 💻 Desktop
         }}
       >
         {children}

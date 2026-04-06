@@ -115,13 +115,13 @@ const AboutNamoGange = () => {
         className="w-full bg-cover bg-center bg-no-repeat relative"
         style={{
           backgroundImage: `url('${seoData?.page_banner || "/about/about1.jpg"}')`,
-          backgroundAttachment: "fixed",
+          backgroundAttachment: "scroll", // ✅ Changed from "fixed" to "scroll"
         }}
       >
         {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 bg-black/20" />
 
-        <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
+        <div className="relative w-full h-40 md:h-48 lg:h-56 flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -160,8 +160,8 @@ const AboutNamoGange = () => {
           </h2>
 
           <p className="text-sm md:text-[15px] text-gray-600 italic mt-1">
-            “We serve communities through wellness, culture, women empowerment,
-            compassionate service, and environmental care.”
+            "We serve communities through wellness, culture, women empowerment,
+            compassionate service, and environmental care."
           </p>
         </motion.div>
 
@@ -209,8 +209,8 @@ const AboutNamoGange = () => {
           </h2>
 
           <p className="text-sm md:text-[15px] text-gray-600 italic mt-1">
-            “Organizations united in service, spirituality, and social
-            upliftment.”
+            "Organizations united in service, spirituality, and social
+            upliftment."
           </p>
         </motion.div>
 
@@ -253,23 +253,22 @@ const AboutNamoGange = () => {
             No trust bodies available.
           </p>
         ) : (
-          <div className="space-y-12 md:space-y-16 py-4">
+          <div className="space-y-4 md:space-y-6 lg:space-y-8">
             {trustBodies.map((activity, i) => (
               <div
                 key={activity.id}
                 className={`flex flex-col w-full ${
-                  i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
-                } items-center gap-4 md:gap-12 lg:gap-16`}
+                  i % 2 === 1 ? "lg:flex-row-reverse" : "lg:flex-row"
+                } items-center gap-4 md:gap-6 lg:gap-12`}
               >
+                {/* IMAGE SIDE */}
                 <motion.div
                   initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
                   viewport={{ once: true }}
-                  className="flex w-full md:w-[40%] relative group"
+                  className="w-full md:w-[70%] lg:w-[45%] relative group" // ✅ Fixed: md:w-[80] → md:w-[70%]
                 >
-                  <div className="absolute -inset-3 bg-gradient-to-r from-[#f36b2a]/20 to-[#1e7ed3]/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
-
                   <div className="relative overflow-hidden rounded-xl shadow-lg bg-white border border-gray-100 w-full aspect-video">
                     <Image
                       src={
@@ -278,40 +277,42 @@ const AboutNamoGange = () => {
                           : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${activity.image}`
                       }
                       fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 70vw, 45vw" // ✅ Fixed: Added better breakpoints for tablet
                       alt={activity.image_alt || activity.title}
-                      className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
+                      priority={false}
+                      className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105" // ✅ Fixed: Removed invalid classes (lg:h-85, md:h-70, scale-102)
                     />
                     {/* Shine Effect */}
                     <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                   </div>
                 </motion.div>
 
+                {/* TEXT SIDE */}
                 <motion.div
                   initial={{ opacity: 0, x: i % 2 === 0 ? 50 : -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
                   viewport={{ once: true }}
-                  className="flex flex-col w-full md:w-[60%] text-center md:text-left"
+                  className="flex flex-col w-full lg:w-[55%]"
                 >
-                  <h3 className="text-lg md:text-xl font-medium text-gray-900 mb-4 relative inline-block">
+                  <h3 className="text-lg md:text-xl font-medium text-gray-900 mb-4 relative pb-2 border-b-2 border-[#DF562C]">
                     {activity.title}
-                    <span className="absolute bottom-0 left-0 w-1/3 h-[2px] bg-[#DF562C] rounded-full"></span>
                   </h3>
                   <div
                     className="
-                      text-xs md:text-[15px] text-gray-700 font-normal text-justify
-                      [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mb-3
-                      [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mb-3
-                      [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:mb-2
-                      [&_h4]:text-base [&_h4]:font-semibold [&_h4]:mb-2
-                      [&_h5]:text-sm [&_h5]:font-semibold [&_h5]:mb-2
-                      [&_h6]:text-xs [&_h6]:font-semibold [&_h6]:mb-2
-                      [&_p]:mb-3 [&_p]:leading-relaxed
-                      [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-3
-                      [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-3
-                      [&_strong]:font-semibold
-                      [&_a]:text-blue-600 [&_a]:underline
-                    "
+            text-xs md:text-[15px] text-gray-700 font-normal text-justify leading-relaxed
+            [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mb-3
+            [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mb-3
+            [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:mb-2
+            [&_h4]:text-base [&_h4]:font-semibold [&_h4]:mb-2
+            [&_h5]:text-sm [&_h5]:font-semibold [&_h5]:mb-2
+            [&_h6]:text-xs [&_h6]:font-semibold [&_h6]:mb-2
+            [&_p]:mb-3 [&_p]:leading-relaxed
+            [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-3
+            [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-3
+            [&_strong]:font-semibold
+            [&_a]:text-blue-600 [&_a]:underline [&_a]:hover:text-blue-800
+          "
                     dangerouslySetInnerHTML={{ __html: activity?.text || "" }}
                   />
                 </motion.div>

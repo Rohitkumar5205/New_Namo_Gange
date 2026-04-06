@@ -59,9 +59,9 @@ const MokshaVoyage = () => {
 
   return (
     <section className="relative bg-gradient-to-b from-white via-gray-100 to-[#f8fafc] overflow-hidden">
-      <div className="w-full px-4 md:px-12 lg:px-12 py-6 md:py-12 flex flex-col md:flex-row items-center gap-2 md:gap-8 md:justify-between">
+      <div className="w-full px-4 md:px-12 lg:px-12 py-4 md:py-6 flex flex-col lg:flex-row  gap-2 lg:gap-8 md:justify-between">
         {/* ================= LEFT SIDE TEXT ================= */}
-        <div className=" flex-1 md:w-[60%]">
+        <div className=" flex-1 lg:w-[60%]">
           <div className=" text-center">
             <h1 className="text-sm md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
               {hero?.title}
@@ -98,15 +98,19 @@ const MokshaVoyage = () => {
             />
 
             {/* Read More Button */}
-            {hero?.link ? <Link href={hero?.link || "#"}>
-              <button
-                className="mt-2 md:mt-5 lg:mt-5 relative rounded overflow-hidden px-4 md:px-6 py-1 text-[12px] md:text-sm text-white font-normal 
+            {hero?.link ? (
+              <Link href={hero?.link || "#"}>
+                <button
+                  className="mt-2 md:mt-5 lg:mt-5 relative rounded overflow-hidden px-4 md:px-6 py-1 text-[12px] md:text-sm text-white font-normal 
                 shadow-md bg-[#0C55A0] cursor-pointer
                 hover:bg-sky-700 hover:shadow-lg transition-all duration-300"
-              >
-                Read More...
-              </button>
-            </Link> : ""}
+                >
+                  Read More...
+                </button>
+              </Link>
+            ) : (
+              ""
+            )}
           </div>
         </div>
 
@@ -116,7 +120,7 @@ const MokshaVoyage = () => {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="md:w-[40%] relative flex justify-end items-end"
+          className="lg:w-[40%] w-full relative flex md:justify-center justify-end items-end"
         >
           {/* Decorative Background */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-[#DF562C]/10 via-transparent to-[#1e7ed3]/10 blur-3xl rounded-full -z-10" />
@@ -135,7 +139,7 @@ const MokshaVoyage = () => {
                 alt={hero?.alt_text || hero?.title || "Hero Image"}
                 height={100}
                 width={100}
-                className="w-full h-64 md:h-[400px] object-cover transform transition-transform duration-700 ease-in-out group-hover:scale-105"
+                className="w-full h-auto objective-cover md:object-contain transform transition-transform duration-700 ease-in-out group-hover:scale-102"
               />
             )}
           </div>

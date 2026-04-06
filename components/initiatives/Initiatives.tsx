@@ -86,18 +86,27 @@ const Initiatives = () => {
   }, []);
 
   return (
-    <>
+    <div className="min-h-screen bg-gray-50 text-gray-800">
+      {/* ✅ FIXED BANNER - Responsive for all devices */}
       <div
         className="w-full bg-cover bg-center bg-no-repeat relative"
         style={{
-          backgroundImage: `url('${seoData?.page_banner || "/OurInitiatives/initbanner.jpg"}')`,
-          backgroundAttachment: "fixed",
+          backgroundImage: `url('${
+            seoData?.page_banner
+              ? seoData.page_banner.startsWith("http")
+                ? seoData.page_banner
+                : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${seoData.page_banner}`
+              : "/OurInitiatives/initbanner.jpg"
+          }')`,
+          backgroundAttachment: "scroll",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 bg-black/20" />
 
-        <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
+        <div className="relative w-full h-40 md:h-48 lg:h-56 flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -106,11 +115,11 @@ const Initiatives = () => {
             className="w-full px-4 text-center z-10"
           >
             {/* Dynamic H1 from SEO data */}
-            <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
+            <h1 className="text-lg md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
               {seoData?.h1tag || "Our Initiatives"}
             </h1>
 
-            <p className="text-sm md:text-lg text-white mt-2 font-light tracking-wider">
+            <p className="text-xs md:text-base lg:text-lg text-white mt-1 md:mt-2 font-light tracking-wider">
               <Link
                 href="/"
                 className="text-[#DF562C] font-medium hover:text-orange-400 transition-colors"
@@ -122,22 +131,23 @@ const Initiatives = () => {
           </motion.div>
         </div>
       </div>
-      <section className="relative py-1.5 md:py-3 px-2 md:px-12 lg:px-12 bg-white overflow-hidden">
+
+      <section className="relative py-4 md:py-6 lg:py-8 px-4 sm:px-6 md:px-8 lg:px-12 bg-transparent overflow-hidden">
         <div className="w-full text-center">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <h2 className="text-lg md:text-xl font-medium text-gray-900 leading-tight">
+            <h2 className="text-base md:text-xl lg:text-2xl font-medium text-gray-900 leading-tight">
               Our{" "}
               <span className="bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] bg-clip-text text-transparent">
                 Initiatives
               </span>
             </h2>
-            <p className="text-gray-600 text-[13px] md:text-sm italic leading-relaxed">
-              “Creating positive change through service, awareness, and
-              sustainable community development.”
+            <p className="text-gray-600 text-[12px] md:text-sm lg:text-base italic leading-relaxed mt-2">
+              "Creating positive change through service, awareness, and
+              sustainable community development."
             </p>
           </motion.div>
 
@@ -145,17 +155,17 @@ const Initiatives = () => {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="flex justify-center w-full mt-2"
+            className="flex justify-center w-full mt-3 md:mt-4"
           >
-            <div className="w-full bg-white relative overflow-hidden text-center">
+            <div className="w-full relative overflow-hidden text-center">
               <motion.div
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="w-full h-1  bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full"
+                className="w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full"
               />
-              <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
+              <p className="text-gray-700 text-xs md:text-[14px] lg:text-[15px] text-justify leading-relaxed font-normal mt-3 md:mt-4 px-2">
                 Our initiatives focus on creating meaningful change through
                 service, awareness, and community support. Each program is
                 designed to uplift society, protect culture, and promote
@@ -176,13 +186,13 @@ const Initiatives = () => {
           </motion.div>
 
           {loading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-3 md:py-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-3 md:py-4 mt-6 md:mt-8">
               {[...Array(6)].map((_, i) => (
                 <div
                   key={i}
-                  className="bg-white rounded-xl border border-gray-200 shadow-sm p-2 animate-pulse h-64"
+                  className="bg-white rounded-xl border border-gray-200 shadow-sm p-2 animate-pulse h-56 sm:h-64"
                 >
-                  <div className="w-full h-28 bg-gray-200 rounded mb-2"></div>
+                  <div className="w-full h-24 sm:h-28 bg-gray-200 rounded mb-2"></div>
                   <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto mb-2"></div>
                   <div className="h-3 bg-gray-200 rounded w-full mb-1"></div>
                   <div className="h-3 bg-gray-200 rounded w-5/6 mx-auto"></div>
@@ -191,7 +201,7 @@ const Initiatives = () => {
             </div>
           ) : (
             <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 md:py-4 gap-2 md:gap-3"
+              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 md:py-4 gap-2 md:gap-3 mt-6 md:mt-8"
               initial="hidden"
               animate="visible"
               variants={{
@@ -213,60 +223,42 @@ const Initiatives = () => {
                       transition: { duration: 0.6, ease: "easeOut" },
                     },
                   }}
-                  whileHover={{ y: -10, transition: { duration: 0.3 } }}
+                  whileHover={{ y: -8, transition: { duration: 0.3 } }}
                   className="group relative bg-white rounded-xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-500 flex flex-col overflow-hidden h-full"
                 >
                   <Link href={item.link} className="flex flex-col h-full">
                     {/* IMAGE */}
-                    <div className="w-full h-32 md:h-40 flex items-center justify-center bg-gray-50 overflow-hidden">
+                    <div className="w-full h-24 sm:h-28 md:h-36 lg:h-40 relative flex items-center justify-center bg-gray-50 overflow-hidden">
                       <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        transition={{ type: "tween", duration: 0.2 }}
-                        className="w-full flex items-center justify-center"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ type: "tween", duration: 0.3 }}
+                        className="w-full h-full relative flex items-center justify-center p-2 sm:p-3"
                       >
                         <Image
-                          src={item.image}
-                          alt={item.title}
-                          width={100}
-                          height={100}
-                          className="object-contain h-16 md:h-32 w-auto transition-transform duration-300"
+                          src={
+                            item.image?.startsWith("http")
+                              ? item.image
+                              : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${item.image}`
+                          }
+                          alt={item.image_alt || item.title}
+                          fill
+                          sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 16vw"
+                          className="object-contain transition-transform duration-300"
+                          priority={false}
                         />
                       </motion.div>
                     </div>
 
                     {/* CONTENT */}
-                    <div className="flex flex-col flex-1 py-2 px-3 text-center">
+                    <div className="flex flex-col flex-1 py-2 px-2 sm:px-3 text-center">
                       <motion.h3
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.1 }}
-                        className="text-gray-900 font-normal text-sm md:text-base mb-1 line-clamp-1"
+                        className="text-gray-900 font-normal text-xs sm:text-sm md:text-base mb-1 line-clamp-2"
                       >
                         {item.title}
                       </motion.h3>
-
-                      {/* <div
-                      className="text-gray-600 text-xs md:text-[13px] leading-relaxed line-clamp-3 mb-3 text-justify
-                        [&_h1]:text-lg [&_h1]:font-bold [&_h1]:mb-1
-                        [&_h2]:text-base [&_h2]:font-semibold [&_h2]:mb-1
-                        [&_h3]:text-sm [&_h3]:font-semibold [&_h3]:mb-1
-                        [&_p]:mb-1 [&_p]:leading-relaxed
-                        [&_ul]:list-disc [&_ul]:pl-4 [&_ul]:mb-1
-                        [&_ol]:list-decimal [&_ol]:pl-4 [&_ol]:mb-1
-                        [&_strong]:font-semibold
-                        [&_a]:text-blue-600 [&_a]:underline hover:opacity-90"
-                      dangerouslySetInnerHTML={{ __html: item.desc || "" }}
-                    /> */}
-
-                      {/* <div className="mt-auto">
-                      <motion.div
-                        whileHover={{ scale: 1.04 }}
-                        transition={{ type: "tween", duration: 0.2 }}
-                        className="relative w-full text-center py-1 rounded-lg overflow-hidden text-xs md:text-sm font-normal text-white bg-gradient-to-r from-[#0C55A0] to-[#1e7ed3] shadow-md hover:shadow-lg transition-shadow duration-300"
-                      >
-                        Read More →
-                      </motion.div>
-                    </div> */}
                     </div>
                   </Link>
                 </motion.div>
@@ -275,7 +267,7 @@ const Initiatives = () => {
           )}
         </div>
       </section>
-    </>
+    </div>
   );
 };
 

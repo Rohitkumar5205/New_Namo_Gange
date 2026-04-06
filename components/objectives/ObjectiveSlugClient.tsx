@@ -62,7 +62,13 @@ const toSlug = (value: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
-const InitiativeItem = ({ item, index }: { item: Initiative; index: number }) => {
+const InitiativeItem = ({
+  item,
+  index,
+}: {
+  item: Initiative;
+  index: number;
+}) => {
   const isEven = index % 2 === 0;
   // Start with float layout by default so large text wraps correctly
   const [isLongText, setIsLongText] = useState(true);
@@ -111,7 +117,9 @@ const InitiativeItem = ({ item, index }: { item: Initiative; index: number }) =>
         className={
           isLongText
             ? `w-full md:w-[30%] lg:w-[28%] relative mb-5 md:mb-2 md:mt-1 ${
-                isEven ? "md:float-right md:ml-6 lg:ml-8" : "md:float-left md:mr-6 lg:mr-8"
+                isEven
+                  ? "md:float-right md:ml-6 lg:ml-8"
+                  : "md:float-left md:mr-6 lg:mr-8"
               }`
             : `w-full md:col-span-3 relative ${isEven ? "md:order-2" : "md:order-1"}`
         }
@@ -262,12 +270,12 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
     <section className="bg-gray-50 min-h-screen">
       {/* ================= BANNER ================= */}
       <div
-        className="w-full bg-cover bg-center bg-no-repeat"
+        className="w-full bg-cover bg-center bg-no-repeat relative"
         style={{
           backgroundImage: objective?.image
             ? `url(${objective.image})`
             : "url('/objectives/moksha1.jpg')",
-          backgroundAttachment: "fixed",
+          backgroundAttachment: "scroll",
         }}
       >
         <div className="bg-black/30 w-full h-42 md:h-56 flex items-center justify-center">

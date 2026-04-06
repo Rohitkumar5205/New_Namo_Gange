@@ -56,7 +56,7 @@ const SuperTopBar = () => {
     "w-full text-left px-4 py-2.5 text-xs font-medium hover:bg-[#0CACE3]/10 hover:text-[#0CACE3] transition";
 
   return (
-    <div className="hidden md:block w-full bg-[#0b1220] text-gray-200 text-sm">
+    <div className="hidden lg:block w-full bg-[#0b1220] text-gray-200 text-sm">
       <div className="w-full p-2 md:px-12 lg:py-1.5 flex flex-col md:flex-row items-center justify-between gap-2">
         {/* LEFT */}
         <div className="flex items-center gap-5">

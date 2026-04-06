@@ -66,86 +66,98 @@ const HomeSlider = () => {
       <div className="relative w-full overflow-hidden z-0">
         {loading ? (
           <div className="flex items-center justify-center w-full h-[190px] md:h-[530px] bg-gray-100">
-            <div className="w-12 h-12 border-4 border-gray-300 border-t-[#DF562C] rounded-full animate-spin" />
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              className="w-12 h-12 border-4 border-gray-300 border-t-[#DF562C] rounded-full"
+            />
           </div>
         ) : (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
+            transition={{ duration: 0.8 }}
           >
             <Slider ref={sliderRef} {...settings}>
               {banners.map((item, i) => (
                 <div key={i}>
-                  <div className="relative w-full h-[190px] md:h-[530px] overflow-hidden">
-                    <Link
-                      href={item.link || "#"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="absolute inset-0 z-10"
-                    >
-                      <motion.div
-                        className="w-full h-full"
-                        initial={{ scale: 1 }}
-                        animate={{ scale: 1.1 }}
-                        transition={{
-                          duration: 12,
-                          repeat: Infinity,
-                          repeatType: "mirror",
-                          ease: "easeInOut",
-                        }}
-                      >
-                        <Image
-                          src={item.image}
-                          alt={item.alt_text || item.title || `slide-${i}`}
-                          fill
-                          priority
-                          sizes="100vw"
-                          className="object-cover"
-                        />
-                      </motion.div>
-                    </Link>
-                  </div>
+                  <Link
+                    href={item.link || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative w-full h-full  block overflow-hidden bg-gray-200"
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.alt_text || item.title || `slide-${i}`}
+                      className="w-full h-full object-contain md:object-cover lg:object-contain"
+                      loading="lazy"
+                    />
+                  </Link>
                 </div>
               ))}
 
-              {/* {banners.length === 0 && (
-                <div className="flex items-center justify-center w-full h-[190px] md:h-[530px]">
-                  <p className="text-gray-500">No active banners found</p>
-                </div>
-              )} */}
               {banners.length === 0 && (
-                <div className="flex flex-col items-center text-center justify-center w-full h-[190px] md:h-[530px] bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
-
-                  {/* Glow Background Effect */}
-                  <div className="absolute w-72 h-72 bg-orange-200 rounded-full blur-3xl opacity-30 top-[-50px] left-[-50px]" />
-                  <div className="absolute w-72 h-72 bg-blue-200 rounded-full blur-3xl opacity-30 bottom-[-50px] right-[-50px]" />
+                <motion.div
+                  className="flex flex-col items-center text-center justify-center w-full h-[190px] sm:h-[280px] md:h-[400px] lg:h-[530px] bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8 }}
+                >
+                  {/* Animated Background */}
+                  <motion.div
+                    className="absolute w-72 h-72 bg-orange-200 rounded-full blur-3xl opacity-30"
+                    animate={{ y: [0, 30, 0], x: [0, 20, 0] }}
+                    transition={{ duration: 5, repeat: Infinity }}
+                    style={{ top: "10%", left: "10%" }}
+                  />
+                  <motion.div
+                    className="absolute w-72 h-72 bg-blue-200 rounded-full blur-3xl opacity-30"
+                    animate={{ y: [0, -30, 0], x: [0, -20, 0] }}
+                    transition={{ duration: 6, repeat: Infinity, delay: 0.5 }}
+                    style={{ bottom: "10%", right: "10%" }}
+                  />
 
                   {/* Content */}
-                  <div className="z-10 flex flex-col items-center text-center px-4">
-
+                  <motion.div
+                    className="z-10 flex flex-col items-center text-center px-4"
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.6 }}
+                  >
                     {/* Icon */}
-                    <div className="text-5xl mb-3">📢</div>
+                    <motion.div
+                      className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-2 sm:mb-3"
+                      animate={{ scale: [1, 1.1, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      📢
+                    </motion.div>
 
                     {/* Title */}
-                    <h2 className="text-lg md:text-2xl font-semibold text-gray-700">
+                    <h2 className="text-base sm:text-lg md:text-2xl lg:text-3xl font-semibold text-gray-700">
                       No Active Banners
                     </h2>
 
                     {/* Subtitle */}
-                    <p className="text-sm md:text-base text-gray-500 mt-1">
+                    <p className="text-xs sm:text-sm md:text-base text-gray-500 mt-1 px-2">
                       Currently there are no banners to display.
                     </p>
 
-                    {/* Optional Button */}
-                    <button
+                    {/* Button */}
+                    <motion.button
                       onClick={() => window.location.reload()}
-                      className="mt-4 px-4 py-2 text-sm bg-[#DF562C] text-white rounded-md hover:bg-[#c94c26] transition"
+                      className="mt-3 sm:mt-4 md:mt-6 px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm md:text-base bg-[#DF562C] text-white rounded-lg font-semibold transition-all"
+                      whileHover={{
+                        scale: 1.08,
+                        boxShadow: "0 10px 25px rgba(223, 86, 44, 0.4)",
+                      }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      Refresh
-                    </button>
-                  </div>
-                </div>
+                      🔄 Refresh
+                    </motion.button>
+                  </motion.div>
+                </motion.div>
               )}
             </Slider>
           </motion.div>
@@ -153,21 +165,21 @@ const HomeSlider = () => {
       </div>
 
       {/* ================= GLASS INFO CARDS ================= */}
-      <div className="relative -mt-1 md:-mt-14 left-1/2 -translate-x-1/2 w-full px-2 md:px-12 z-30">
+      <div className="relative -mt-1 lg:-mt-14 left-1/2 -translate-x-1/2 w-full px-2 md:px-12 z-30">
         <div
-          className="bg-orange-600 text-white grid grid-cols-1 md:grid-cols-3 rounded-xs overflow-hidden"
-        // className="
-        // grid grid-cols-1 md:grid-cols-3
-        // rounded-md
-        // overflow-hidden
-        //  bg-gradient-to-r from-orange-100/50 via-cyan-100/50 to-blue-100/50
-        // shadow-md
-        // border border-white/30
-        // text-gray-700
-        // "
+          className="bg-[#DF562C] text-white grid grid-cols-1 lg:grid-cols-3 rounded-xs overflow-hidden"
+          // className="
+          // grid grid-cols-1 md:grid-cols-3
+          // rounded-md
+          // overflow-hidden
+          //  bg-gradient-to-r from-orange-100/50 via-cyan-100/50 to-blue-100/50
+          // shadow-md
+          // border border-white/30
+          // text-gray-700
+          // "
         >
           {/* CSR HEADS */}
-          <div className="px-4 py-1 md:px-6 border-b md:border-b-0 md:border-r border-gray-200">
+          <div className="px-4 py-1 md:px-6 border-b lg:border-b-0 lg:border-r border-gray-200">
             <div className="flex gap-4 items-start">
               <div className="text-2xl md:text-3xl">🤝</div>
               <div>
@@ -184,7 +196,7 @@ const HomeSlider = () => {
           </div>
 
           {/* NGOs */}
-          <div className="px-4 py-1 md:px-6 border-b md:border-b-0 md:border-r border-gray-200">
+          <div className="px-4 py-1 md:px-6 border-b lg:border-b-0 lg:border-r border-gray-200">
             <div className="flex gap-4 items-start">
               <div className="text-2xl md:text-3xl">💼</div>
               <div>

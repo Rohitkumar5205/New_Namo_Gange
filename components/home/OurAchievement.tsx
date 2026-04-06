@@ -78,13 +78,13 @@ const OurAchievement = () => {
         >
           <div className="w-full py-2 relative overflow-hidden text-center rounded-lg">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
-           <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
-  Each milestone achieved by our Trust is a step toward creating a more 
-  compassionate and environmentally balanced society. We believe that true 
-  progress is measured not just by the initiatives we launch, but by the 
-  meaningful impact they create in the lives of people and the preservation 
-  of our natural world. 
-</p>
+            <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
+              Each milestone achieved by our Trust is a step toward creating a
+              more compassionate and environmentally balanced society. We
+              believe that true progress is measured not just by the initiatives
+              we launch, but by the meaningful impact they create in the lives
+              of people and the preservation of our natural world.
+            </p>
           </div>
         </motion.div>
 
@@ -116,7 +116,7 @@ const OurAchievement = () => {
               <div
                 key={activity._id}
                 className={`flex flex-col ${
-                  i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
+                  i % 2 === 1 ? "lg:flex-row-reverse" : "lg:flex-row"
                 } items-center gap-1 md:gap-10 lg:gap-10`}
               >
                 {/* IMAGE */}
