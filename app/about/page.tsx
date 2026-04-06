@@ -33,7 +33,6 @@ export async function generateMetadata() {
 }
 const page = async () => {
   const seo = await getSeo("/about");
-  console.log(" __html: extractSchemaScript(seo.schemaMarkup)", { __html: extractSchemaScript(seo.schemaMarkup) })
   return (
     <>
       <AboutNamoGange />
