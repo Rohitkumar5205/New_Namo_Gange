@@ -138,7 +138,7 @@ const SuperTopBar = () => {
                 </button>
 
                 <button
-                  onClick={() => router.push("/auth/signup")}
+                  onClick={() => router.push("/auth/singup")}
                   className={`${dropdownItem} flex items-center gap-2`}
                 >
                   <UserPlus size={18} className="text-blue-500" />
