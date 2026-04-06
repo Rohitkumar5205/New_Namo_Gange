@@ -14,6 +14,7 @@ export default function ToastProvider() {
       pauseOnHover
       draggable
       theme="light"
+      style={{ zIndex: 99999 }}
     />
   );
 }

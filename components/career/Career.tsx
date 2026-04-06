@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import axiosClient from "@/lib/axiosClient";
+import { showSuccess, showError } from "@/utils/toast";
 
 interface SEOData {
   page_banner?: string;
@@ -85,14 +86,124 @@ const Career = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async () => {
+  /* ================= OTP STATES ================= */
+  const [isPhoneVerified, setIsPhoneVerified] = useState(false);
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const [isPhoneOtpSent, setIsPhoneOtpSent] = useState(false);
+  const [isEmailOtpSent, setIsEmailOtpSent] = useState(false);
+
+  const [phoneOtp, setPhoneOtp] = useState("");
+  const [emailOtp, setEmailOtp] = useState("");
+
+  const [phoneTimer, setPhoneTimer] = useState(0);
+  const [emailTimer, setEmailTimer] = useState(0);
+
+  const [loading, setLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  useEffect(() => {
+    let pInterval: NodeJS.Timeout;
+    if (phoneTimer > 0) {
+      pInterval = setInterval(() => setPhoneTimer((prev) => prev - 1), 1000);
+    }
+    return () => clearInterval(pInterval);
+  }, [phoneTimer]);
+
+  useEffect(() => {
+    let eInterval: NodeJS.Timeout;
+    if (emailTimer > 0) {
+      eInterval = setInterval(() => setEmailTimer((prev) => prev - 1), 1000);
+    }
+    return () => clearInterval(eInterval);
+  }, [emailTimer]);
+
+  const handleSendPhoneOtp = async () => {
+    const phoneRegex = /^\d{10}$/;
+    if (!phoneRegex.test(formData.phone)) {
+      showError("Please enter a valid 10-digit phone number.");
+      return;
+    }
+    try {
+      const res = await axiosClient.post("/otp/send-mobile-otp", { mobile: formData.phone });
+      if (res.data.success) {
+        setIsPhoneOtpSent(true);
+        setPhoneTimer(30);
+        showSuccess("OTP sent to your WhatsApp successfully!");
+      } else {
+        showError(res.data.message || "Failed to send OTP");
+      }
+    } catch (error: any) {
+      showError(error.response?.data?.message || "Something went wrong while sending mobile OTP.");
+    }
+  };
+
+  const handleSendEmailOtp = async () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      showError("Please enter a valid email address.");
+      return;
+    }
+    try {
+      const res = await axiosClient.post("/otp/send-email-otp", { email: formData.email });
+      if (res.data.success) {
+        setIsEmailOtpSent(true);
+        setEmailTimer(30);
+        showSuccess("OTP sent to your Email successfully!");
+      } else {
+        showError(res.data.message || "Failed to send OTP");
+      }
+    } catch (error: any) {
+      showError(error.response?.data?.message || "Something went wrong while sending email OTP.");
+    }
+  };
+
+  const handleVerifyPhoneOtp = async () => {
+    if (phoneOtp.length !== 6) {
+      showError("Please enter a 6-digit OTP.");
+      return;
+    }
+    try {
+      const res = await axiosClient.post("/otp/verify-otp", { mobile: formData.phone, otp: phoneOtp });
+      if (res.data.success) {
+        setIsPhoneVerified(true);
+        showSuccess("Phone Verified Successfully!");
+      } else {
+        showError(res.data.message || "Invalid OTP");
+      }
+    } catch (error: any) {
+      showError(error.response?.data?.message || "Verification failed. Please check the OTP.");
+    }
+  };
+
+  const handleVerifyEmailOtp = async () => {
+    if (emailOtp.length !== 6) {
+      showError("Please enter a 6-digit OTP.");
+      return;
+    }
+    try {
+      const res = await axiosClient.post("/otp/verify-otp", { email: formData.email, otp: emailOtp });
+      if (res.data.success) {
+        setIsEmailVerified(true);
+        showSuccess("Email Verified Successfully!");
+      } else {
+        showError(res.data.message || "Invalid OTP");
+      }
+    } catch (error: any) {
+      showError(error.response?.data?.message || "Verification failed. Please check the OTP.");
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isPhoneVerified || !isEmailVerified) {
+      showError("Please verify your phone and email first.");
+      return;
+    }
+
+    setLoading(true);
     try {
       await axiosClient.post("/job-apply/create", formData);
-
-      alert("Application submitted successfully");
-
-      setOpenModal(false);
-
+      setIsSuccess(true);
       setFormData({
         name: "",
         email: "",
@@ -100,12 +211,20 @@ const Career = () => {
         city: "",
         state: "",
         currentLocation: "",
-        role: "",
+        role: formData.role,
         message: "",
       });
+      setIsPhoneVerified(false);
+      setIsEmailVerified(false);
+      setIsPhoneOtpSent(false);
+      setIsEmailOtpSent(false);
+      setPhoneOtp("");
+      setEmailOtp("");
     } catch (error) {
       console.error("Apply error:", error);
-      alert("Something went wrong");
+      showError("Something went wrong. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -189,7 +308,7 @@ const Career = () => {
               </span>
             </span>
           </h2>
-<p className="text-gray-600 text-[13px] md:text-sm italic leading-relaxed">            "Explore meaningful career opportunities where passion meets
+          <p className="text-gray-600 text-[13px] md:text-sm italic leading-relaxed">            "Explore meaningful career opportunities where passion meets
             purpose, and contribute to impactful social, cultural,
             environmental, and community-driven initiatives."
           </p>
@@ -343,152 +462,190 @@ const Career = () => {
               </div>
             </div>
 
-            {/* RIGHT FORM SECTION */}
-            <div className="w-full md:w-[60%] flex flex-col p-8">
-              {/* Title */}
-              <h2 className="text-2xl font-semibold text-gray-900 mb-2">
-                Fill the form
-              </h2>
-              <p className="italic text-sm md:text-[15px] w-full text-gray-700 text-center mb-2">
-                “This form is intended for individuals who wish to associate
-                with us through a spirit of selfless service and sincere
-                dedication. We encourage you to proceed only if your intent is
-                guided by seva (service), compassion, and a desire to contribute
-                meaningfully — not by commercial expectations or personal gain.”
-              </p>
-
-              {/* Scrollable Form Area */}
-              <div className="flex-1 overflow-y-auto pr-2">
-                <form className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  {/* NAME */}
-                  <div className="flex flex-col">
-                    <label className="text-sm font-medium mb-1">
-                      Your Name
-                    </label>
-                    <input
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      type="text"
-                      placeholder="Full Name"
-                      className="border rounded px-4 py-2 text-sm focus:ring-0 focus:ring-[#0C55A0] outline-none"
-                    />
+              {/* FORM SECTION */}
+              <div className="w-full md:w-[60%] flex flex-col p-8 relative">
+                {isSuccess ? (
+                  <div className="flex-1 flex flex-col items-center justify-center text-center space-y-4">
+                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                      <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-800">Application Submitted!</h3>
+                    <p className="text-sm text-gray-600">
+                      Thank you for applying. We will review your profile and get back to you soon.
+                    </p>
+                    <button
+                      onClick={() => {
+                        setIsSuccess(false);
+                        setOpenModal(false);
+                      }}
+                      className="bg-[#0C55A0] text-white px-8 py-2 rounded shadow-md text-sm font-semibold hover:bg-[#08467c]"
+                    >
+                      Close
+                    </button>
                   </div>
+                ) : (
+                  <>
+                    <h2 className="text-xl font-semibold text-gray-900 mb-1">
+                      Join Our Team
+                    </h2>
+                    <p className="italic text-xs text-gray-600 mb-6">
+                      Enter your details and verify your contact to apply for this role.
+                    </p>
 
-                  {/* EMAIL */}
-                  <div className="flex flex-col">
-                    <label className="text-sm font-medium mb-1">Email</label>
-                    <input
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      type="email"
-                      placeholder="Email Address"
-                      className="border rounded px-4 py-2 text-sm focus:ring-0 focus:ring-[#0C55A0] outline-none"
-                    />
-                  </div>
+                    <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar">
+                      <form onSubmit={handleSubmit} className="space-y-4 pb-4">
+                        <div className="flex flex-col">
+                          <label className="text-xs font-semibold text-gray-700 mb-1 uppercase tracking-wider">Your Name</label>
+                          <input
+                            required
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            type="text"
+                            placeholder="Full Name"
+                            className="bg-[#edf3ff] rounded-sm px-4 py-3 text-sm focus:ring-1 focus:ring-blue-200 outline-none transition-all text-gray-800 placeholder:text-gray-400"
+                          />
+                        </div>
 
-                  {/* PHONE */}
-                  <div className="flex flex-col">
-                    <label className="text-sm font-medium mb-1">
-                      Phone Number
-                    </label>
-                    <input
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      type="text"
-                      placeholder="Enter mobile number"
-                      className="border rounded px-4 py-2 text-sm focus:ring-0 focus:ring-[#0C55A0] outline-none"
-                    />
-                  </div>
+                        <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
+                          <div className="flex flex-col">
+                            <label className="text-xs font-semibold text-gray-700 mb-1 uppercase tracking-wider">Email Address</label>
+                            <div className="flex gap-2">
+                              <input
+                                required
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                type="email"
+                                disabled={isEmailVerified}
+                                placeholder="Email Address"
+                                className={`flex-1 bg-[#edf3ff] rounded-sm px-4 py-3 text-sm outline-none transition-all ${isEmailVerified ? "text-green-600 font-semibold italic" : "text-gray-800 placeholder:text-gray-400"}`}
+                              />
+                              {!isEmailVerified && (
+                                <button
+                                  type="button"
+                                  onClick={handleSendEmailOtp}
+                                  disabled={emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)}
+                                  className={`whitespace-nowrap px-3 py-1.5 text-[10px] font-bold rounded-md uppercase transition-all flex items-center justify-center ${(emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) ? "bg-[#edf3ff] text-blue-300 cursor-not-allowed" : "bg-[#DF562C] text-white hover:bg-[#c54d21]"}`}
+                                >
+                                  {isEmailOtpSent ? (emailTimer > 0 ? `RESEND IN ${emailTimer}S` : "RESEND OTP") : "SEND OTP"}
+                                </button>
+                              )}
+                              {isEmailVerified && <span className="text-green-600 text-[10px] font-bold flex items-center px-2">VERIFIED ✓</span>}
+                            </div>
+                            {isEmailOtpSent && !isEmailVerified && (
+                              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="mt-2 flex gap-2">
+                                <div className="flex-1 bg-[#fff9f4] border border-[#fca5a5]/50 px-4 py-2 rounded-sm flex items-center">
+                                  <input
+                                    type="text"
+                                    maxLength={6}
+                                    placeholder="EMAIL OTP"
+                                    value={emailOtp}
+                                    onChange={(e) => setEmailOtp(e.target.value.replace(/[^0-9]/g, ""))}
+                                    className="w-full bg-transparent outline-none text-[#f1a06a] text-sm text-center font-bold tracking-[0.2em] placeholder:text-[#f1a06a]/50 placeholder:font-normal placeholder:tracking-normal"
+                                  />
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={handleVerifyEmailOtp}
+                                  className="px-4 py-1.5 bg-[#DF562C] text-white text-[10px] font-bold rounded-md shadow-sm hover:bg-[#c54d21] active:scale-95 transition-all"
+                                >
+                                  VERIFY
+                                </button>
+                              </motion.div>
+                            )}
+                          </div>
 
-                  {/* CITY */}
-                  <div className="flex flex-col">
-                    <label className="text-sm font-medium mb-1">City</label>
-                    <input
-                      name="city"
-                      value={formData.city}
-                      onChange={handleChange}
-                      type="text"
-                      placeholder="City"
-                      className="border rounded px-4 py-2 text-sm focus:ring-0 focus:ring-[#0C55A0] outline-none"
-                    />
-                  </div>
+                          <div className="flex flex-col">
+                            <label className="text-xs font-semibold text-gray-700 mb-1 uppercase tracking-wider">Mobile Number</label>
+                            <div className="flex gap-2">
+                              <input
+                                required
+                                name="phone"
+                                value={formData.phone}
+                                onChange={handleChange}
+                                type="tel"
+                                maxLength={10}
+                                disabled={isPhoneVerified}
+                                placeholder="10-digit Mobile"
+                                className={`flex-1 bg-[#edf3ff] rounded-sm px-4 py-3 text-sm outline-none transition-all ${isPhoneVerified ? "text-green-600 font-semibold italic" : "text-gray-800 placeholder:text-gray-400"}`}
+                              />
+                              {!isPhoneVerified && (
+                                <button
+                                  type="button"
+                                  onClick={handleSendPhoneOtp}
+                                  disabled={phoneTimer > 0 || formData.phone.length !== 10}
+                                  className={`whitespace-nowrap px-3 py-1.5 text-[10px] font-bold rounded-md uppercase transition-all flex items-center justify-center ${(phoneTimer > 0 || formData.phone.length !== 10) ? "bg-[#edf3ff] text-blue-300 cursor-not-allowed" : "bg-[#DF562C] text-white hover:bg-[#c54d21]"}`}
+                                >
+                                  {isPhoneOtpSent ? (phoneTimer > 0 ? `RESEND IN ${phoneTimer}S` : "RESEND OTP") : "SEND OTP"}
+                                </button>
+                              )}
+                              {isPhoneVerified && <span className="text-green-600 text-[10px] font-bold flex items-center px-2">VERIFIED ✓</span>}
+                            </div>
+                            {isPhoneOtpSent && !isPhoneVerified && (
+                              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="mt-2 flex gap-2">
+                                <div className="flex-1 bg-[#fff9f4] border border-[#fca5a5]/50 px-4 py-2 rounded-sm flex items-center">
+                                  <input
+                                    type="text"
+                                    maxLength={6}
+                                    placeholder="MOBILE OTP"
+                                    value={phoneOtp}
+                                    onChange={(e) => setPhoneOtp(e.target.value.replace(/[^0-9]/g, ""))}
+                                    className="w-full bg-transparent outline-none text-[#f1a06a] text-sm text-center font-bold tracking-[0.2em] placeholder:text-[#f1a06a]/50 placeholder:font-normal placeholder:tracking-normal"
+                                  />
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={handleVerifyPhoneOtp}
+                                  className="px-4 py-1.5 bg-[#DF562C] text-white text-[10px] font-bold rounded-md shadow-sm hover:bg-[#c54d21] active:scale-95 transition-all"
+                                >
+                                  VERIFY
+                                </button>
+                              </motion.div>
+                            )}
+                          </div>
+                        </div>
 
-                  {/* STATE */}
-                  <div className="flex flex-col">
-                    <label className="text-sm font-medium mb-1">State</label>
-                    <input
-                      name="state"
-                      value={formData.state}
-                      onChange={handleChange}
-                      type="text"
-                      placeholder="State"
-                      className="border rounded px-4 py-2 text-sm focus:ring-0 focus:ring-[#0C55A0] outline-none"
-                    />
-                  </div>
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="flex flex-col">
+                            <label className="text-xs font-semibold text-gray-700 mb-1 uppercase tracking-wider">City</label>
+                            <input required name="city" value={formData.city} onChange={handleChange} type="text" placeholder="City" className="bg-[#edf3ff] rounded-sm px-4 py-3 text-sm outline-none text-gray-800" />
+                          </div>
+                          <div className="flex flex-col">
+                            <label className="text-xs font-semibold text-gray-700 mb-1 uppercase tracking-wider">State</label>
+                            <input required name="state" value={formData.state} onChange={handleChange} type="text" placeholder="State" className="bg-[#edf3ff] rounded-sm px-4 py-3 text-sm outline-none text-gray-800" />
+                          </div>
+                        </div>
 
-                  {/* CURRENT LOCATION */}
-                  <div className="flex flex-col">
-                    <label className="text-sm font-medium mb-1">
-                      Current Location
-                    </label>
-                    <input
-                      name="currentLocation"
-                      value={formData.currentLocation}
-                      onChange={handleChange}
-                      type="text"
-                      placeholder="Current Location"
-                      className="border rounded px-4 py-2 text-sm focus:ring-0 focus:ring-[#0C55A0] outline-none"
-                    />
-                  </div>
+                        <div className="flex flex-col">
+                          <label className="text-xs font-semibold text-gray-700 mb-1 uppercase tracking-wider">Role Applying For</label>
+                          <input name="role" value={formData.role} type="text" readOnly className="bg-[#edf3ff] rounded-sm px-4 py-3 text-sm outline-none text-gray-500 font-medium" />
+                        </div>
 
-                  {/* ROLE */}
-                  <div className="flex flex-col md:col-span-2">
-                    <label className="text-sm font-medium mb-1">
-                      Role Applying For
-                    </label>
-                    <input
-                      name="role"
-                      value={formData.role}
-                      type="text"
-                      readOnly
-                      className="border rounded px-4 py-2 text-sm bg-gray-100 focus:ring-0 focus:ring-[#0C55A0] outline-none"
-                    />
-                  </div>
+                        <div className="flex flex-col">
+                          <label className="text-xs font-semibold text-gray-700 mb-1 uppercase tracking-wider">Your Message</label>
+                          <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Briefly describe your experience..." className="bg-[#edf3ff] rounded-sm px-4 py-3 text-sm h-24 outline-none resize-none text-gray-800" />
+                        </div>
 
-                  {/* MESSAGE */}
-                  <div className="flex flex-col md:col-span-2">
-                    <label className="text-sm font-medium mb-1">
-                      Your Message
-                    </label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      placeholder="Write your message..."
-                      className="border rounded px-4 py-2 text-sm h-28 focus:ring-0 focus:ring-[#0C55A0] outline-none"
-                    ></textarea>
-                  </div>
-                </form>
-              </div>
-
-              {/* FIXED BUTTON (Always bottom) */}
-              <div className="mt-4 border-t pt-4 flex justify-center">
-                <button
-                  onClick={handleSubmit}
-                  className="bg-[#0C55A0] hover:bg-[#08467c] text-white px-8 py-2 rounded shadow-md text-sm flex items-center gap-2"
-                >
-                  Submit →
-                </button>
+                        <button
+                          type="submit"
+                          disabled={loading || !isPhoneVerified || !isEmailVerified}
+                          className="w-full bg-[#1c411c] hover:opacity-90 text-white py-4 rounded-md shadow-md text-sm font-bold uppercase tracking-widest transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                        >
+                          {loading ? "Submitting..." : "Apply Now →"}
+                        </button>
+                      </form>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
-        </div>
-      )}
-    </>
-  );
-};
+        )}
+      </>
+    );
+  };
 
 export default Career;

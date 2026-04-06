@@ -28,8 +28,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter?.className}>
+        <ToastProvider />
         <AppWrapper>
-          <ToastProvider />
           {children}
           <SocialFixedBar />
           <FloatingContactWidget />

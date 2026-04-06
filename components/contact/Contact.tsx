@@ -4,6 +4,7 @@ import { Mail, MapPin, Phone, Send, User, MessageSquare } from "lucide-react";
 import axiosClient from "@/lib/axiosClient";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { showSuccess, showError } from "@/utils/toast";
 
 interface ContactFormData {
   name: string;
@@ -83,30 +84,139 @@ const Contact: React.FC = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  /* ================= HANDLE SUBMIT ================= */
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
-    setLoading(true);
+  /* ================= OTP STATES ================= */
+  const [isPhoneVerified, setIsPhoneVerified] = useState(false);
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const [isPhoneOtpSent, setIsPhoneOtpSent] = useState(false);
+  const [isEmailOtpSent, setIsEmailOtpSent] = useState(false);
 
+  const [phoneOtp, setPhoneOtp] = useState("");
+  const [emailOtp, setEmailOtp] = useState("");
+
+  const [phoneTimer, setPhoneTimer] = useState(0);
+  const [emailTimer, setEmailTimer] = useState(0);
+
+  useEffect(() => {
+    let pInterval: NodeJS.Timeout;
+    if (phoneTimer > 0) {
+      pInterval = setInterval(() => setPhoneTimer((prev) => prev - 1), 1000);
+    }
+    return () => clearInterval(pInterval);
+  }, [phoneTimer]);
+
+  useEffect(() => {
+    let eInterval: NodeJS.Timeout;
+    if (emailTimer > 0) {
+      eInterval = setInterval(() => setEmailTimer((prev) => prev - 1), 1000);
+    }
+    return () => clearInterval(eInterval);
+  }, [emailTimer]);
+
+  /* ================= HANDLE SEND OTP ================= */
+  const handleSendPhoneOtp = async () => {
+    const phoneRegex = /^\d{10}$/;
+    if (!phoneRegex.test(formData.phone)) {
+      showError("Please enter a valid 10-digit phone number.");
+      return;
+    }
+    try {
+      const res = await axiosClient.post("/otp/send-mobile-otp", { mobile: formData.phone });
+      if (res.data.success) {
+        setIsPhoneOtpSent(true);
+        setPhoneTimer(30);
+        showSuccess("OTP sent to your WhatsApp successfully!");
+      } else {
+        showError(res.data.message || "Failed to send OTP");
+      }
+    } catch (error: any) {
+      showError(error.response?.data?.message || "Something went wrong while sending mobile OTP.");
+    }
+  };
+
+  const handleSendEmailOtp = async () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      showError("Please enter a valid email address.");
+      return;
+    }
+    try {
+      const res = await axiosClient.post("/otp/send-email-otp", { email: formData.email });
+      if (res.data.success) {
+        setIsEmailOtpSent(true);
+        setEmailTimer(30);
+        showSuccess("OTP sent to your Email successfully!");
+      } else {
+        showError(res.data.message || "Failed to send OTP");
+      }
+    } catch (error: any) {
+      showError(error.response?.data?.message || "Something went wrong while sending email OTP.");
+    }
+  };
+
+  const handleVerifyPhoneOtp = async () => {
+    if (phoneOtp.length !== 6) {
+      showError("Please enter a 6-digit OTP.");
+      return;
+    }
+    try {
+      const res = await axiosClient.post("/otp/verify-otp", { mobile: formData.phone, otp: phoneOtp });
+      if (res.data.success) {
+        setIsPhoneVerified(true);
+        showSuccess("Phone Verified Successfully!");
+      } else {
+        showError(res.data.message || "Invalid OTP");
+      }
+    } catch (error: any) {
+      showError(error.response?.data?.message || "Verification failed. Please check the OTP.");
+    }
+  };
+
+  const handleVerifyEmailOtp = async () => {
+    if (emailOtp.length !== 6) {
+      showError("Please enter a 6-digit OTP.");
+      return;
+    }
+    try {
+      const res = await axiosClient.post("/otp/verify-otp", { email: formData.email, otp: emailOtp });
+      if (res.data.success) {
+        setIsEmailVerified(true);
+        showSuccess("Email Verified Successfully!");
+      } else {
+        showError(res.data.message || "Invalid OTP");
+      }
+    } catch (error: any) {
+      showError(error.response?.data?.message || "Verification failed. Please check the OTP.");
+    }
+  };
+
+  /* ================= HANDLE SUBMIT ================= */
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!isPhoneVerified || !isEmailVerified) {
+      showError("Please verify your phone and email first.");
+      return;
+    }
+
+    setLoading(true);
     try {
       await axiosClient.post("/enquire-list/create", {
         name: formData.name,
         email: formData.email,
-        mobile: formData.phone, // 👈 backend expects "mobile"
+        mobile: formData.phone,
         message: formData.message,
       });
 
-      alert("Thank you! Your message has been sent successfully.");
-
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-      });
+      showSuccess("Thank you! Your message has been sent successfully.");
+      setFormData({ name: "", email: "", phone: "", message: "" });
+      setIsPhoneVerified(false);
+      setIsEmailVerified(false);
+      setIsPhoneOtpSent(false);
+      setIsEmailOtpSent(false);
+      setPhoneOtp("");
+      setEmailOtp("");
     } catch (error) {
       console.error("❌ Enquiry API Error:", error);
-      alert("Something went wrong. Please try again later.");
+      showError("Something went wrong. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -247,42 +357,132 @@ const Contact: React.FC = () => {
 
               <div className="space-y-4">
                 <div className="relative">
-                  <User className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Your Full Name"
-                    className="w-full border border-gray-300 pl-10 pr-3 py-2 text-sm outline-none"
+                    className="w-full bg-[#edf3ff] px-4 py-3 text-sm outline-none rounded-sm text-gray-800 placeholder:text-gray-400"
                     required
                   />
                 </div>
 
-                <div className="relative">
-                  <Mail className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Email Address"
-                    className="w-full border border-gray-300 pl-10 pr-3 py-2 text-sm outline-none"
-                    required
-                  />
+                <div>
+                  <div className="relative">
+                    <div className="flex gap-2">
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="Email Address"
+                        disabled={isEmailVerified}
+                        className={`w-full bg-[#edf3ff] px-4 py-3 text-sm outline-none rounded-sm transition-all ${isEmailVerified ? "text-green-600 font-semibold italic" : "text-gray-800 placeholder:text-gray-400"}`}
+                        required
+                      />
+                      {!isEmailVerified && (
+                        <button
+                          type="button"
+                          onClick={handleSendEmailOtp}
+                          disabled={emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)}
+                          className={`whitespace-nowrap px-3 py-1.5 text-[10px] font-bold rounded-md uppercase transition-all flex items-center justify-center ${(emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) ? "bg-[#edf3ff] text-blue-300 cursor-not-allowed" : "bg-[#DF562C] text-white hover:bg-[#c54d21]"}`}
+                        >
+                          {isEmailOtpSent ? (emailTimer > 0 ? `RESEND IN ${emailTimer}S` : "RESEND OTP") : "SEND OTP"}
+                        </button>
+                      )}
+                      {isEmailVerified && (
+                        <div className="flex items-center text-green-600 text-[10px] font-bold px-2 whitespace-nowrap">
+                          VERIFIED ✓
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {isEmailOtpSent && !isEmailVerified && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="mt-2 flex gap-2 items-center"
+                    >
+                      <div className="flex-1 bg-[#fff9f4] border border-[#fca5a5]/50 px-4 py-2 rounded-sm flex items-center">
+                        <input
+                          type="text"
+                          maxLength={6}
+                          placeholder="EMAIL OTP"
+                          value={emailOtp}
+                          onChange={(e) => setEmailOtp(e.target.value.replace(/[^0-9]/g, ""))}
+                          className="w-full bg-transparent outline-none text-[#f1a06a] text-sm text-center font-bold tracking-[0.2em] placeholder:text-[#f1a06a]/50 placeholder:font-normal placeholder:tracking-normal"
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        onClick={handleVerifyEmailOtp}
+                        className="px-4 py-1.5 bg-[#DF562C] text-white text-[10px] font-bold rounded-md shadow-sm hover:bg-[#c54d21] active:scale-95 transition-all"
+                      >
+                        VERIFY
+                      </button>
+                    </motion.div>
+                  )}
                 </div>
 
-                <div className="relative">
-                  <Phone className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="Phone Number"
-                    className="w-full border border-gray-300 pl-10 pr-3 py-2 text-sm outline-none"
-                    required
-                  />
+                <div>
+                  <div className="relative">
+                    <div className="flex gap-2">
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="Phone Number"
+                        disabled={isPhoneVerified}
+                        maxLength={10}
+                        className={`w-full bg-[#edf3ff] px-4 py-3 text-sm outline-none rounded-sm transition-all ${isPhoneVerified ? "text-green-600 font-semibold italic" : "text-gray-800 placeholder:text-gray-400"}`}
+                        required
+                      />
+                      {!isPhoneVerified && (
+                        <button
+                          type="button"
+                          onClick={handleSendPhoneOtp}
+                          disabled={phoneTimer > 0 || formData.phone.length !== 10}
+                          className={`whitespace-nowrap px-3 py-1.5 text-[10px] font-bold rounded-md uppercase transition-all flex items-center justify-center ${(phoneTimer > 0 || formData.phone.length !== 10) ? "bg-[#edf3ff] text-blue-300 cursor-not-allowed" : "bg-[#DF562C] text-white hover:bg-[#c54d21]"}`}
+                        >
+                          {isPhoneOtpSent ? (phoneTimer > 0 ? `RESEND IN ${phoneTimer}S` : "RESEND OTP") : "SEND OTP"}
+                        </button>
+                      )}
+                      {isPhoneVerified && (
+                        <div className="flex items-center text-green-600 text-[10px] font-bold px-2 whitespace-nowrap">
+                          VERIFIED ✓
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {isPhoneOtpSent && !isPhoneVerified && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="mt-2 flex gap-2 items-center"
+                    >
+                      <div className="flex-1 bg-[#fff9f4] border border-[#fca5a5]/50 px-4 py-2 rounded-sm flex items-center">
+                        <input
+                          type="text"
+                          maxLength={6}
+                          placeholder="MOBILE OTP"
+                          value={phoneOtp}
+                          onChange={(e) => setPhoneOtp(e.target.value.replace(/[^0-9]/g, ""))}
+                          className="w-full bg-transparent outline-none text-[#f1a06a] text-sm text-center font-bold tracking-[0.2em] placeholder:text-[#f1a06a]/50 placeholder:font-normal placeholder:tracking-normal"
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        onClick={handleVerifyPhoneOtp}
+                        className="px-4 py-1.5 bg-[#DF562C] text-white text-[10px] font-bold rounded-md shadow-sm hover:bg-[#c54d21] active:scale-95 transition-all"
+                      >
+                        VERIFY
+                      </button>
+                    </motion.div>
+                  )}
                 </div>
 
                 <div className="relative">
@@ -301,11 +501,11 @@ const Contact: React.FC = () => {
 
               <button
                 type="submit"
-                disabled={loading}
-                className="mt-6 flex items-center justify-center gap-2 bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] text-white font-semibold py-2 hover:opacity-90 transition-all duration-300 shadow-md disabled:opacity-60"
+                disabled={loading || !isPhoneVerified || !isEmailVerified}
+                className="mt-6 flex items-center justify-center gap-2 bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] text-white font-semibold py-2 hover:opacity-90 transition-all duration-300 shadow-md disabled:opacity-40 disabled:cursor-not-allowed uppercase tracking-wider"
               >
                 <Send className="w-4 h-4" />
-                {loading ? "Sending..." : "Send Message"}
+                {loading ? "Sending..." : "Submit Enquiry"}
               </button>
             </form>
           </div>
