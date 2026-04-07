@@ -154,7 +154,7 @@ const page = () => {
 
               {/* Button */}
               <div className="flex items-center gap-2 text-[#0C55A0] font-medium text-sm group-hover:pl-1 transition-all">
-                Read More <ArrowRight size={15} />
+                Read More...
               </div>
             </Link>
           ))}

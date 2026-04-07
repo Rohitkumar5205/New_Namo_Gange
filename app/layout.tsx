@@ -12,7 +12,7 @@ import ToastProvider from "./providers/ToastProvider";
 export const metadata = {
   title: "Namo Gange – Official Website",
   description: "Clean Ganga, Green India",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_CLIENT_URL || "http://localhost:3000"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_CLIENT_URL || "https://panchkarmaa.in" || "https://namogange.org"),
   alternates: {
     canonical: "/",
   },

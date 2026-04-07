@@ -107,11 +107,18 @@ export default function BlogSlugClient({ slug }: { slug: string }) {
       <div
         className="w-full bg-cover bg-center bg-no-repeat relative"
         style={{
-          backgroundImage: `url('${seoData?.page_banner || "/home/blog.jpeg"}')`,
-          backgroundAttachment: "fixed",
+          backgroundImage: `url('${seoData?.page_banner
+            ? seoData.page_banner.startsWith("http")
+              ? seoData.page_banner
+              : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${seoData.page_banner}`
+            : "/home/blog.jpeg"
+            }')`,
+          backgroundAttachment: "scroll",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-black/30" />
         <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
           <div className="w-full px-4 text-center z-10 text-white">
             <h1 className="text-xl md:text-2xl lg:text-3xl font-medium tracking-wide drop-shadow-lg">
@@ -142,6 +149,7 @@ export default function BlogSlugClient({ slug }: { slug: string }) {
             alt={blog.title}
             width={1200}
             height={700}
+            unoptimized
             className="w-full h-full object-cover"
             priority
           />

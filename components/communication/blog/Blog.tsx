@@ -202,11 +202,18 @@ const Blog = () => {
       <div
         className="w-full bg-cover bg-center bg-no-repeat relative"
         style={{
-          backgroundImage: `url('${seoData?.page_banner || "/home/blog.jpeg"}')`,
-          backgroundAttachment: "fixed",
+          backgroundImage: `url('${seoData?.page_banner
+            ? seoData.page_banner.startsWith("http")
+              ? seoData.page_banner
+              : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${seoData.page_banner}`
+            : "/home/blog.jpeg"
+            }')`,
+          backgroundAttachment: "scroll",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-black/30" />
         <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -393,6 +400,7 @@ const Blog = () => {
                       }
                       alt={blog?.image_alt || blog.title || "Blog image"}
                       fill
+                      unoptimized
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                       onError={() => handleImageError(blog._id)}
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

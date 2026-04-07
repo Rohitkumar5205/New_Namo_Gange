@@ -114,14 +114,19 @@ const AboutNamoGange = () => {
       <div
         className="w-full bg-cover bg-center bg-no-repeat relative"
         style={{
-          backgroundImage: `url('${seoData?.page_banner || "/about/about1.jpg"}')`,
-          backgroundAttachment: "scroll", // ✅ Changed from "fixed" to "scroll"
+          backgroundImage: `url('${seoData?.page_banner
+            ? seoData.page_banner.startsWith("http")
+              ? seoData.page_banner
+              : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${seoData.page_banner}`
+            : "/about/about1.jpg"
+            }')`,
+          backgroundAttachment: "scroll",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
-        {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/20" />
-
-        <div className="relative w-full h-40 md:h-48 lg:h-56 flex items-center justify-center">
+        <div className="absolute inset-0 bg-black/30" />
+        <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

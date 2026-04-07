@@ -220,8 +220,7 @@ const ObjectiveOfTrust = () => {
                       transition={{ type: "tween", duration: 0.2 }}
                       className="w-full inline-flex items-center justify-center gap-2 px-5 py-1 rounded-lg bg-gradient-to-r from-[#0C55A0] via-[#1073C0] to-[#1e7ed3] text-white font-normal hover:font-medium text-sm shadow-md hover:shadow-lg transition-shadow duration-200 group"
                     >
-                      <span className="relative">Read More</span>
-                      <ArrowRight size={18} className="text-white" />
+                      <span className="relative">Read More...</span>
                     </motion.button>
                   </Link>
                 </div>

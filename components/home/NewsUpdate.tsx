@@ -205,7 +205,7 @@ const NewsUpdate = () => {
                     className="mt-auto pt-2 border-t border-gray-100 text-right block"
                   >
                     <span className="text-sm font-medium text-[#0C55A0] group-hover:text-[#f36b2a] transition-colors duration-300">
-                      Read More →
+                      Read More...
                     </span>
                   </Link>
                 </div>

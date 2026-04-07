@@ -167,7 +167,7 @@ const page = () => {
                 href={item.link}
                 className="flex items-center justify-center gap-2 text-[#0C55A0] hover:gap-3 transition text-sm font-medium"
               >
-                Read More <ArrowRight size={15} />
+                Read More...
               </Link>
             </div>
           ))}

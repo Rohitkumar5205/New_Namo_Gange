@@ -104,9 +104,9 @@ const Initiatives = () => {
         }}
       >
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 bg-black/30" />
 
-        <div className="relative w-full h-40 md:h-48 lg:h-56 flex items-center justify-center">
+        <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

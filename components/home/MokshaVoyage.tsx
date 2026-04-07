@@ -139,6 +139,7 @@ const MokshaVoyage = () => {
                 alt={hero?.alt_text || hero?.title || "Hero Image"}
                 height={100}
                 width={100}
+                unoptimized
                 className="w-full h-auto objective-cover md:object-contain transform transition-transform duration-700 ease-in-out group-hover:scale-102"
               />
             )}

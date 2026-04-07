@@ -227,13 +227,18 @@ const Contact: React.FC = () => {
       <div
         className="w-full bg-cover bg-center bg-no-repeat relative"
         style={{
-          backgroundImage: `url('${seoData?.page_banner || "/home/contact.jpg"}')`,
-          backgroundAttachment: "fixed",
+          backgroundImage: `url('${seoData?.page_banner
+            ? seoData.page_banner.startsWith("http")
+              ? seoData.page_banner
+              : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${seoData.page_banner}`
+            : "/home/contact.jpg"
+            }')`,
+          backgroundAttachment: "scroll",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
-        {/* Overlay */}
         <div className="absolute inset-0 bg-black/30" />
-
         <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

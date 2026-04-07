@@ -165,11 +165,18 @@ const Photos = () => {
       <div
         className="w-full bg-cover bg-center bg-no-repeat relative"
         style={{
-          backgroundImage: `url('${seoData?.page_banner || "/home/image1.jpg"}')`,
-          backgroundAttachment: "fixed",
+          backgroundImage: `url('${seoData?.page_banner
+            ? seoData.page_banner.startsWith("http")
+              ? seoData.page_banner
+              : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${seoData.page_banner}`
+            : "/home/image1.jpg"
+            }')`,
+          backgroundAttachment: "scroll",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-black/30" />
         <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -331,8 +338,8 @@ const Photos = () => {
                             : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${cat.image || ""}`
                         }
                         alt={cat?.image_alt || cat.title || "Gallery category"}
-                        width={100}
-                        height={100}
+                        fill
+                        unoptimized
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         onError={() => handleImageError(cat._id)}
                         sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"

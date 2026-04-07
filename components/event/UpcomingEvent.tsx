@@ -96,6 +96,7 @@ const UpcomingEventItem = ({ item, index }: { item: EventType; index: number }) 
               alt={item.image_alt || item.title}
               width={800}
               height={400}
+              unoptimized
               onLoad={() => {
                 if (textRef.current && imgRef.current) {
                   const textH = textRef.current.offsetHeight;
@@ -107,7 +108,7 @@ const UpcomingEventItem = ({ item, index }: { item: EventType; index: number }) 
                   }
                 }
               }}
-              className="w-full h-auto object-contain transform transition-transform duration-700 ease-in-out group-hover:scale-105 rounded-xl"
+              className="w-full h-auto object-cover object-top transform transition-transform duration-700 ease-in-out group-hover:scale-102 rounded-xl"
             />
             {/* Shine Effect */}
             <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
@@ -295,8 +296,15 @@ const UpcomingEvent = () => {
       <div
         className="w-full bg-cover bg-center bg-no-repeat relative"
         style={{
-          backgroundImage: `url('${seoData?.page_banner || "/home/events.jpg"}')`,
-          backgroundAttachment: "fixed",
+          backgroundImage: `url('${seoData?.page_banner
+            ? seoData.page_banner.startsWith("http")
+              ? seoData.page_banner
+              : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${seoData.page_banner}`
+            : "/home/events.jpg"
+            }')`,
+          backgroundAttachment: "scroll",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
         {/* Overlay */}

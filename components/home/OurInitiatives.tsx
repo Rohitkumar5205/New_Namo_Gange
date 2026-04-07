@@ -226,7 +226,7 @@ const OurInitiatives = () => {
                     transition={{ type: "tween", duration: 0.2 }}
                     className="relative w-full text-center py-1 rounded-lg overflow-hidden text-xs md:text-sm font-normal text-white bg-gradient-to-r from-[#0C55A0] to-[#1e7ed3] shadow-md hover:shadow-xl transition-shadow duration-300"
                   >
-                    Read More →
+                    Read More...
                   </motion.div>
                 </Link>
               </div>
