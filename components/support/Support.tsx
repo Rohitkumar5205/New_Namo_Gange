@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axiosClient from "@/lib/axiosClient";
+import NextImage from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { showSuccess, showError } from "@/utils/toast";
@@ -232,22 +233,27 @@ const Support = () => {
 
   return (
     <section>
-      <div
-        className="w-full bg-cover bg-center bg-no-repeat relative"
-        style={{
-          backgroundImage: `url('${seoData?.page_banner
-            ? seoData.page_banner.startsWith("http")
-              ? seoData.page_banner
-              : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${seoData.page_banner}`
-            : "/banner/support.png"
-            }')`,
-          backgroundAttachment: "scroll",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="absolute inset-0 bg-black/30" />
-        <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
+      <div className="w-full relative overflow-hidden">
+        {/* Banner Image */}
+        <div className="relative w-full h-42 md:h-56">
+          <NextImage
+            src={seoData?.page_banner
+              ? seoData.page_banner.startsWith("http")
+                ? seoData.page_banner
+                : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${seoData.page_banner}`
+              : "/banner/support.png"
+            }
+            alt={seoData?.banner_alt || "Support Banner"}
+            fill
+            priority
+            unoptimized
+            className="object-cover object-center"
+          />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/30" />
+
+          {/* Content */}
+          <div className="relative w-full h-full flex items-center justify-center z-10 px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -270,6 +276,7 @@ const Support = () => {
           </motion.div>
         </div>
       </div>
+    </div>
       <div className="w-full px-2 md:px-12 lg:px-12 relative py-4 md:py-6 overflow-hidden">
         <div className="w-full lg:px-0">
           <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">

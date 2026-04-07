@@ -116,22 +116,27 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
   return (
     <section className="bg-gray-50 min-h-screen">
       {/* ===== HEADER ===== */}
-      <div
-        className="w-full bg-cover bg-center bg-no-repeat relative"
-        style={{
-          backgroundImage: `url('${seoData?.page_banner
-            ? seoData.page_banner.startsWith("http")
-              ? seoData.page_banner
-              : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${seoData.page_banner}`
-            : "/ourActivities/ourActivities.jpg"
-            }')`,
-          backgroundAttachment: "scroll",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="absolute inset-0 bg-black/30" />
-        <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
+      <div className="w-full relative overflow-hidden">
+        {/* Banner Image */}
+        <div className="relative w-full h-42 md:h-56">
+          <Image
+            src={seoData?.page_banner
+              ? seoData.page_banner.startsWith("http")
+                ? seoData.page_banner
+                : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${seoData.page_banner}`
+              : "/ourActivities/ourActivities.jpg"
+            }
+            alt={seoData?.banner_alt || "Photo Gallery Banner"}
+            fill
+            priority
+            unoptimized
+            className="object-cover object-center"
+          />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/30" />
+
+          {/* Content */}
+          <div className="relative w-full h-full flex items-center justify-center z-10 px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -158,6 +163,7 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
           </motion.div>
         </div>
       </div>
+    </div>
 
       {/* ===== CONTENT ===== */}
       <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">

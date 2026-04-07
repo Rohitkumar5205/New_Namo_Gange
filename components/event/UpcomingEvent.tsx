@@ -167,10 +167,7 @@ const UpcomingEventItem = ({ item, index }: { item: EventType; index: number }) 
                 shadow-md hover:shadow-lg transition-all duration-300 group/btn"
             >
               <span className="relative z-10 flex items-center gap-2">
-                Learn More{" "}
-                <span className="transition-transform group-hover/btn:translate-x-1">
-                  →
-                </span>
+                Learn More...
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-[#DF562C] to-[#f89a36] opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
             </div>
@@ -293,45 +290,49 @@ const UpcomingEvent = () => {
   return (
     <section className="bg-[#f6f6f9] pb-8">
       {/* ----------- STATIC DESIGN SAME ----------- */}
-      <div
-        className="w-full bg-cover bg-center bg-no-repeat relative"
-        style={{
-          backgroundImage: `url('${seoData?.page_banner
-            ? seoData.page_banner.startsWith("http")
-              ? seoData.page_banner
-              : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${seoData.page_banner}`
-            : "/home/events.jpg"
-            }')`,
-          backgroundAttachment: "scroll",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/30" />
+      <div className="w-full relative overflow-hidden">
+        {/* Banner Image */}
+        <div className="relative w-full h-42 md:h-56">
+          <Image
+            src={seoData?.page_banner
+              ? seoData.page_banner.startsWith("http")
+                ? seoData.page_banner
+                : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${seoData.page_banner}`
+              : "/home/events.jpg"
+            }
+            alt={seoData?.banner_alt || "Upcoming Events Banner"}
+            fill
+            priority
+            unoptimized
+            className="object-cover object-center"
+          />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/30" />
 
-        <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
-            className="w-full px-4 text-center z-10"
-          >
-            <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
-              {seoData?.h1tag || "Upcoming Events"}
-            </h1>
+          {/* Content */}
+          <div className="relative w-full h-full flex items-center justify-center z-10 px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
+                {seoData?.h1tag || "Upcoming Events"}
+              </h1>
 
-            <p className="text-sm md:text-lg text-white mt-2 font-light tracking-wider">
-              <Link
-                href="/"
-                className="text-[#DF562C] font-medium hover:text-orange-400 transition-colors"
-              >
-                Home
-              </Link>{" "}
-              - {seoData?.h1tag || "Upcoming Events"}
-            </p>
-          </motion.div>
+              <p className="text-sm md:text-lg text-white mt-2 font-light tracking-wider">
+                <Link
+                  href="/"
+                  className="text-[#DF562C] font-medium hover:text-orange-400 transition-colors"
+                >
+                  Home
+                </Link>{" "}
+                - {seoData?.h1tag || "Upcoming Events"}
+              </p>
+            </motion.div>
+          </div>
         </div>
       </div>
 

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import NextImage from "next/image";
 import axiosClient from "@/lib/axiosClient";
 
 interface ApiVideo {
@@ -89,22 +90,27 @@ const Videos = () => {
   return (
     <section className="bg-gray-50">
       {/* ================= HERO ================= */}
-      <div
-        className="w-full bg-cover bg-center bg-no-repeat relative"
-        style={{
-          backgroundImage: `url('${seoData?.page_banner
-            ? seoData.page_banner.startsWith("http")
-              ? seoData.page_banner
-              : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${seoData.page_banner}`
-            : "/home/video2.jpg"
-            }')`,
-          backgroundAttachment: "scroll",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="absolute inset-0 bg-black/30" />
-        <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
+      <div className="w-full relative overflow-hidden">
+        {/* Banner Image */}
+        <div className="relative w-full h-42 md:h-56">
+          <NextImage
+            src={seoData?.page_banner
+              ? seoData.page_banner.startsWith("http")
+                ? seoData.page_banner
+                : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${seoData.page_banner}`
+              : "/home/video2.jpg"
+            }
+            alt={seoData?.banner_alt || "Videos Banner"}
+            fill
+            priority
+            unoptimized
+            className="object-cover object-center"
+          />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/30" />
+
+          {/* Content */}
+          <div className="relative w-full h-full flex items-center justify-center z-10 px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -127,6 +133,7 @@ const Videos = () => {
           </motion.div>
         </div>
       </div>
+    </div>
 
       {/* ================= CONTENT ================= */}
       <div className="relative py-1.5 md:py-3 px-2 md:px-12  lg:px-12  bg-white text-center">
