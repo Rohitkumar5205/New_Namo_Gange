@@ -253,29 +253,29 @@ const Support = () => {
 
           {/* Content */}
           <div className="relative w-full h-full flex items-center justify-center z-10 px-4">
-          <div
+            <div
 
 
 
 
-            className="w-full px-4 text-center z-10"
-          >
-            <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
-              {seoData?.h1tag || "Our Support"}
-            </h1>
-            <p className="text-sm md:text-lg text-white mt-2 font-light tracking-wider">
-              <Link
-                href="/"
-                className="text-[#DF562C] font-medium hover:text-orange-400 transition-colors"
-              >
-                Home
-              </Link>{" "}
-              - {seoData?.h1tag || "Our Support"}
-            </p>
+              className="w-full px-4 text-center z-10"
+            >
+              <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
+                {seoData?.h1tag || "Our Support"}
+              </h1>
+              <p className="text-sm md:text-lg text-white mt-2 font-light tracking-wider">
+                <Link
+                  href="/"
+                  className="text-[#DF562C] font-medium hover:text-orange-400 transition-colors"
+                >
+                  Home
+                </Link>{" "}
+                - {seoData?.h1tag || "Our Support"}
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
       <div className="w-full px-2 md:px-12 lg:px-12 relative py-4 md:py-6 overflow-hidden">
         <div className="w-full lg:px-0">
           <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
@@ -333,18 +333,18 @@ const Support = () => {
                 <>
                   <div className="flex flex-col">
                     <label className="text-sm font-medium text-gray-700 mb-1">Full Name <span className="text-red-500">*</span></label>
-                    <input type="text" name="name" value={form.name} onChange={handleChange} required className="bg-[#edf3ff] px-4 py-3 text-sm outline-none rounded-sm text-gray-800 placeholder:text-gray-400" placeholder="Full Name" />
+                    <input type="text" name="name" value={form.name} onChange={handleChange} required className="border border-gray-300 rounded px-4 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-2 focus:ring-[#1e7ed3]/20 outline-none transition-all duration-200" placeholder="Full Name" />
                   </div>
                   <div className="flex flex-col">
                     <label className="text-sm font-medium text-gray-700 mb-1">Email ID <span className="text-red-500">*</span></label>
                     <div className="flex gap-2">
-                      <input type="email" name="email" value={form.email} onChange={handleChange} required disabled={isEmailVerified} className={`flex-1 bg-[#edf3ff] px-4 py-3 text-sm outline-none rounded-sm transition-all ${isEmailVerified ? "text-green-600 font-semibold italic" : "text-gray-800 placeholder:text-gray-400"}`} placeholder="Email Address" />
+                      <input type="email" name="email" value={form.email} onChange={handleChange} required disabled={isEmailVerified} className={`flex-1 border border-gray-300 rounded px-4 py-1.5 text-sm outline-none rounded-sm transition-all ${isEmailVerified ? "text-green-600 font-semibold italic" : "text-gray-800 placeholder:text-gray-400"}`} placeholder="Email Address" />
                       {!isEmailVerified && (
                         <button
                           type="button"
                           onClick={handleSendEmailOtp}
                           disabled={emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)}
-                          className={`whitespace-nowrap px-3 py-1.5 text-[10px] font-bold rounded-md uppercase transition-all flex items-center justify-center ${(emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) ? "bg-[#edf3ff] text-blue-300 cursor-not-allowed" : "bg-[#DF562C] text-white hover:bg-[#c54d21]"}`}
+                          className={`whitespace-nowrap px-3 py-1.5 text-[10px] font-bold rounded-md uppercase transition-all flex items-center justify-center ${(emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) ? "border border-gray-300 rounded text-blue-300 cursor-not-allowed" : "bg-[#DF562C] text-white hover:bg-[#c54d21]"}`}
                         >
                           {isEmailOtpSent ? (emailTimer > 0 ? `RESEND IN ${emailTimer}S` : "RESEND OTP") : "SEND OTP"}
                         </button>
@@ -363,13 +363,13 @@ const Support = () => {
                   <div className="flex flex-col">
                     <label className="text-sm font-medium text-gray-700 mb-1">Mobile <span className="text-red-500">*</span></label>
                     <div className="flex gap-2">
-                      <input type="tel" name="mobile" maxLength={10} value={form.mobile} onChange={handlePhoneChange} required disabled={isPhoneVerified} className={`flex-1 bg-[#edf3ff] px-4 py-3 text-sm outline-none rounded-sm transition-all ${isPhoneVerified ? "text-green-600 font-semibold italic" : "text-gray-800 placeholder:text-gray-400"}`} placeholder="Mobile Number" />
+                      <input type="tel" name="mobile" maxLength={10} value={form.mobile} onChange={handlePhoneChange} required disabled={isPhoneVerified} className={`flex-1 border border-gray-300 rounded px-4 py-1.5 text-sm outline-none rounded-sm transition-all ${isPhoneVerified ? "text-green-600 font-semibold italic" : "text-gray-800 placeholder:text-gray-400"}`} placeholder="Mobile Number" />
                       {!isPhoneVerified && (
                         <button
                           type="button"
                           onClick={handleSendPhoneOtp}
                           disabled={phoneTimer > 0 || form.mobile.length !== 10}
-                          className={`whitespace-nowrap px-3 py-1.5 text-[10px] font-bold rounded-md uppercase transition-all flex items-center justify-center ${(phoneTimer > 0 || form.mobile.length !== 10) ? "bg-[#edf3ff] text-blue-300 cursor-not-allowed" : "bg-[#DF562C] text-white hover:bg-[#c54d21]"}`}
+                          className={`whitespace-nowrap px-3 py-1.5 text-[10px] font-bold rounded-md uppercase transition-all flex items-center justify-center ${(phoneTimer > 0 || form.mobile.length !== 10) ? "border border-gray-300 rounded text-blue-300 cursor-not-allowed" : "bg-[#DF562C] text-white hover:bg-[#c54d21]"}`}
                         >
                           {isPhoneOtpSent ? (phoneTimer > 0 ? `RESEND IN ${phoneTimer}S` : "RESEND OTP") : "SEND OTP"}
                         </button>
@@ -387,31 +387,31 @@ const Support = () => {
                   </div>
                   <div className="flex flex-col">
                     <label className="text-sm font-medium text-gray-700 mb-1">Gender <span className="text-red-500">*</span></label>
-                    <select name="gender" value={form.gender} onChange={handleChange} required className="bg-[#edf3ff] px-4 py-3 text-sm outline-none rounded-sm text-gray-800"><option value="">Select</option><option value="Male">Male</option><option value="Female">Female</option></select>
+                    <select name="gender" value={form.gender} onChange={handleChange} required className="border border-gray-300 rounded px-4 py-1.5 text-sm outline-none rounded-sm text-gray-800"><option value="">Select</option><option value="Male">Male</option><option value="Female">Female</option></select>
                   </div>
                   <div className="flex flex-col">
                     <label className="text-sm font-medium text-gray-700 mb-1">DOB <span className="text-red-500">*</span></label>
-                    <input type="date" name="dob" value={form.dob} onChange={handleChange} required className="bg-[#edf3ff] px-4 py-3 text-sm outline-none rounded-sm text-gray-800" />
+                    <input type="date" name="dob" value={form.dob} onChange={handleChange} required className="border border-gray-300 rounded px-4 py-1.5 text-sm outline-none rounded-sm text-gray-800" />
                   </div>
                   <div className="flex flex-col">
                     <label className="text-sm font-medium text-gray-700 mb-1">State <span className="text-red-500">*</span></label>
-                    <select name="state" value={form.state} onChange={handleChange} required className="bg-[#edf3ff] px-4 py-3 text-sm outline-none rounded-sm text-gray-800"><option value="">State</option><option value="Delhi">Delhi</option></select>
+                    <select name="state" value={form.state} onChange={handleChange} required className="border border-gray-300 rounded px-4 py-1.5 text-sm outline-none rounded-sm text-gray-800"><option value="">State</option><option value="Delhi">Delhi</option></select>
                   </div>
                   <div className="flex flex-col">
                     <label className="text-sm font-medium text-gray-700 mb-1">City <span className="text-red-500">*</span></label>
-                    <select name="city" value={form.city} onChange={handleChange} required className="bg-[#edf3ff] px-4 py-3 text-sm outline-none rounded-sm text-gray-800"><option value="">Select</option><option value="Delhi">Delhi</option></select>
+                    <select name="city" value={form.city} onChange={handleChange} required className="border border-gray-300 rounded px-4 py-1.5 text-sm outline-none rounded-sm text-gray-800"><option value="">Select</option><option value="Delhi">Delhi</option></select>
                   </div>
                   <div className="flex flex-col">
                     <label className="text-sm font-medium text-gray-700 mb-1">Contribution <span className="text-red-500">*</span></label>
-                    <select name="prefferedContribution" value={form.prefferedContribution} onChange={handleChange} required className="bg-[#edf3ff] px-4 py-3 text-sm outline-none rounded-sm text-gray-800"><option value="">Select</option><option value="Time">Time</option><option value="Financial">Financial</option></select>
+                    <select name="prefferedContribution" value={form.prefferedContribution} onChange={handleChange} required className="border border-gray-300 rounded px-4 py-1.5 text-sm outline-none rounded-sm text-gray-800"><option value="">Select</option><option value="Time">Time</option><option value="Financial">Financial</option></select>
                   </div>
                   <div className="flex flex-col md:col-span-2">
                     <label className="text-sm font-medium text-gray-700 mb-1">Address <span className="text-red-500">*</span></label>
-                    <input type="text" name="fullAddress" value={form.fullAddress} onChange={handleChange} required className="bg-[#edf3ff] px-4 py-3 text-sm outline-none rounded-sm text-gray-800 placeholder:text-gray-400" placeholder="Full Address" />
+                    <input type="text" name="fullAddress" value={form.fullAddress} onChange={handleChange} required className="border border-gray-300 rounded px-4 py-1.5 text-sm outline-none rounded-sm text-gray-800 placeholder:text-gray-400" placeholder="Full Address" />
                   </div>
                   <div className="flex flex-col md:col-span-2">
                     <label className="text-sm font-medium text-gray-700 mb-1">Message <span className="text-red-500">*</span></label>
-                    <textarea name="message" value={form.message} onChange={handleChange} required rows={3} className="bg-[#edf3ff] px-4 py-3 text-sm outline-none rounded-sm resize-none text-gray-800 placeholder:text-gray-400"></textarea>
+                    <textarea name="message" value={form.message} onChange={handleChange} required rows={3} className="border border-gray-300 rounded px-4 py-1.5 text-sm outline-none rounded-sm resize-none text-gray-800 placeholder:text-gray-400"></textarea>
                   </div>
                   <div className="md:col-span-2 flex justify-center mt-4">
                     <button

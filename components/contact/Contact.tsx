@@ -262,7 +262,7 @@ const Contact: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="relative bg-gray-50 py-1.5 md:py-3 px-2 md:px-12  lg:px-12  bg-white overflow-hidden">
+      <div className="relative bg-gray-50 py-1.5 md:py-1.5 px-2 md:px-12  lg:px-12  bg-white overflow-hidden">
         <div className="w-full  text-center">
           <div>
             <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
@@ -294,8 +294,8 @@ const Contact: React.FC = () => {
             <div className="bg-gradient-to-r from-[#4141b8] to-[#063D8E] text-white rounded p-6 md:p-8 shadow-xl text-left">
               <div className="flex items-center gap-4 mb-5">
                 <Image
-                                      width={100}
-                                      height={100}
+                  width={100}
+                  height={100}
                   src="/logo.png"
                   alt="Namo Gange Trust"
                   className="w-18 h-18 bg-white rounded-full p-2 object-contain"
@@ -364,13 +364,14 @@ const Contact: React.FC = () => {
 
               <div className="space-y-4">
                 <div className="relative">
+                  <User className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Your Full Name"
-                    className="w-full bg-[#edf3ff] px-4 py-3 text-sm outline-none rounded-sm text-gray-800 placeholder:text-gray-400"
+                    className="w-full border border-gray-300 pl-10 pr-3 py-2 text-sm outline-none"
                     required
                   />
                 </div>
@@ -378,6 +379,7 @@ const Contact: React.FC = () => {
                 <div>
                   <div className="relative">
                     <div className="flex gap-2">
+                      <Mail className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
                       <input
                         type="email"
                         name="email"
@@ -385,7 +387,7 @@ const Contact: React.FC = () => {
                         onChange={handleChange}
                         placeholder="Email Address"
                         disabled={isEmailVerified}
-                        className={`w-full bg-[#edf3ff] px-4 py-3 text-sm outline-none rounded-sm transition-all ${isEmailVerified ? "text-green-600 font-semibold italic" : "text-gray-800 placeholder:text-gray-400"}`}
+                        className={`w-full border border-gray-300 pl-10 pr-3 py-2 text-sm outline-none ${isEmailVerified ? "text-green-600 font-semibold italic" : "text-gray-800 placeholder:text-gray-400"}`}
                         required
                       />
                       {!isEmailVerified && (
@@ -436,6 +438,7 @@ const Contact: React.FC = () => {
                 <div>
                   <div className="relative">
                     <div className="flex gap-2">
+                      <Phone className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
                       <input
                         type="tel"
                         name="phone"
@@ -444,7 +447,7 @@ const Contact: React.FC = () => {
                         placeholder="Phone Number"
                         disabled={isPhoneVerified}
                         maxLength={10}
-                        className={`w-full bg-[#edf3ff] px-4 py-3 text-sm outline-none rounded-sm transition-all ${isPhoneVerified ? "text-green-600 font-semibold italic" : "text-gray-800 placeholder:text-gray-400"}`}
+                        className={`w-full border border-gray-300 pl-10 pr-3 py-2 text-sm outline-none ${isPhoneVerified ? "text-green-600 font-semibold italic" : "text-gray-800 placeholder:text-gray-400"}`}
                         required
                       />
                       {!isPhoneVerified && (

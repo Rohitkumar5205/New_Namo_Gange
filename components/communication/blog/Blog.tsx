@@ -430,10 +430,7 @@ const Blog = () => {
                     className="mt-auto inline-block"
                   >
                     <span className="text-sm font-semibold text-[#DF562C] hover:text-[#0C55A0] flex items-center gap-1 transition-colors group/link">
-                      READ MORE{" "}
-                      <span className="transition-transform group-hover/link:translate-x-1">
-                        →
-                      </span>
+                      READ MORE...
                     </span>
                   </Link>
                 </div>
@@ -461,10 +458,9 @@ const Blog = () => {
                 key={i + 1}
                 onClick={() => setCurrentPage(i + 1)}
                 className={`w-10 h-10 flex items-center justify-center rounded-full font-medium transition-all duration-300 shadow-sm
-                  ${
-                    currentPage === i + 1
-                      ? "bg-[#0C55A0] text-white border border-[#0C55A0] scale-110"
-                      : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 hover:border-gray-300"
+                  ${currentPage === i + 1
+                    ? "bg-[#0C55A0] text-white border border-[#0C55A0] scale-110"
+                    : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 hover:border-gray-300"
                   }`}
                 aria-label={`Go to page ${i + 1}`}
                 aria-current={currentPage === i + 1 ? "page" : undefined}

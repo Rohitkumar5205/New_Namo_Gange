@@ -54,9 +54,8 @@ const AboutNGTrust = () => {
         return (
           <div
             key={item._id}
-            className={`w-full flex flex-col ${
-              isEven ? "lg:flex-row justify-between" : "lg:flex-row-reverse"
-            } items-center gap-5 lg:gap-10 lg:mb-4 mb-4`} // ✅ Fixed: mb:4 → mb-4
+            className={`w-full flex flex-col ${isEven ? "lg:flex-row justify-between" : "lg:flex-row-reverse"
+              } items-center gap-5 lg:gap-10 lg:mb-4 mb-4`} // ✅ Fixed: mb:4 → mb-4
           >
             {/* TEXT SIDE */}
             <div
@@ -114,12 +113,11 @@ const AboutNGTrust = () => {
                         : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${item.image}`
                     }
                     alt={item.image_alt || item.title}
-                    width={500} 
-                    height={400} 
+                    width={500}
+                    height={400}
                     // sizes="(max-width: 768px) 100vw, (max-width: 1024px) 30vw, 40vw"
                     priority={false}
                     className="w-full h-auto lg:h-85 md:h-70 object-cover transform transition-transform duration-700 ease-in-out group-hover:scale-102"
-                    className="w-full h-auto lg:h-[340px] md:h-[280px] object-cover transform transition-transform duration-700 ease-in-out group-hover:scale-105"
                   />
                   {/* Shine Effect */}
                   <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
