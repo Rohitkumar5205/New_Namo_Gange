@@ -12,7 +12,7 @@ export async function generateStaticParams() {
             slug: objective.slug,
         }));
     } catch (error) {
-        console.error("Error generating static params for objectives:", error);
+        console.warn("[Build] Warning: Could not fetch static params for objectives. Fallback rendering will be used.");
         return [];
     }
 }
