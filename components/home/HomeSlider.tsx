@@ -87,11 +87,11 @@ const HomeSlider = () => {
                     rel="noopener noreferrer"
                     className="relative w-full h-full  block overflow-hidden bg-gray-200"
                   >
-                    <img
+                    <Image
+                      fill
                       src={item.image}
                       alt={item.alt_text || item.title || `slide-${i}`}
                       className="w-full h-full object-contain md:object-cover lg:object-contain"
-                      loading="lazy"
                     />
                   </Link>
                 </div>

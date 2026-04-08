@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { showSuccess, showError } from "@/utils/toast";
+import Image from "next/image";
+
 
 export default function LoginPage() {
   const router = useRouter();
@@ -68,7 +70,9 @@ export default function LoginPage() {
           </p>
 
           <div className="flex justify-center mt-4">
-            <img
+            <Image
+                       width={100}
+                       height={100}
               src="/logo.png"
               alt="Organization Logo"
               className="w-56 opacity-95 drop-shadow-xl rounded-xl"

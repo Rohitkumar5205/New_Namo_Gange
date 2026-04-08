@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function NotFound() {
   return (
@@ -40,7 +41,9 @@ export default function NotFound() {
 
         {/* RIGHT: ILLUSTRATION */}
         <div className="w-full md:w-1/2 flex justify-center">
-          <img
+          <Image
+            width={600}
+            height={400}
             src="https://cdn.pixabay.com/photo/2017/06/08/17/32/not-found-2384304_1280.jpg"
             alt="404 Illustration"
             className=" drop-shadow-md rounded-xl"

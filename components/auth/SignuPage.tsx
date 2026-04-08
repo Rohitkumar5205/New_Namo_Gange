@@ -16,7 +16,7 @@ import {
 import Link from "next/link";
 import { showSuccess, showError } from "@/utils/toast";
 import axiosClient from "@/lib/axiosClient";
-
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 export default function SignuPage() {
@@ -572,7 +572,9 @@ export default function SignuPage() {
               />
 
               {previewImage && (
-                <img
+             <Image
+                                    width={100}
+                                    height={100}
                   src={previewImage}
                   alt="preview"
                   className="w-24 h-24 mt-3 object-cover border rounded"
@@ -637,7 +639,9 @@ export default function SignuPage() {
           <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-all duration-700" />
 
           <div className="flex justify-center mb-4">
-            <img
+           <Image
+                                  width={100}
+                                  height={100}
               src="/home/volunteer-icons.png"
               alt="corporator"
               className="w-32 h-auto drop-shadow-xl"

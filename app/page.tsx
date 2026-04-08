@@ -8,7 +8,7 @@ import OurInitiatives from "@/components/home/OurInitiatives";
 import SpecialPage from "@/components/home/SpecialPage";
 import WhatPeople from "@/components/home/WhatPeople";
 import React from "react";
-import LatestVideos from "@/components/home/LatestVideos";
+// import LatestVideos from "@/components/home/LatestVideos";
 import { getSeo, parseOpenGraph, cleanHtmlString, extractSchemaScript } from "@/lib/getSeo";
 
 export async function generateMetadata() {
@@ -53,7 +53,7 @@ const page = async () => {
       <WhatPeople />
       <OurAchievement />
       {/* <SpecialPage /> */}
-      <LatestVideos />
+      {/* <LatestVideos /> */}
       <NewsUpdate />
       {seo?.schemaMarkup && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: extractSchemaScript(seo.schemaMarkup) }} />

@@ -1,5 +1,6 @@
 import React from "react";
 import { User, Phone, Mail, Calendar, MapPin } from "lucide-react";
+import Image from "next/image";
 
 const VolunteerRegistrationForm = () => {
   return (
@@ -1035,7 +1036,9 @@ const VolunteerRegistrationForm = () => {
           {/* VOLUNTEER CTA */}
           <div className="bg-[#2d70c8] rounded shadow-[0_0_20px_rgba(0,0,0,0.1)] p-5 text-center text-white">
             <div className="flex justify-center mb-3">
-              <img
+              <Image
+                                       width={100}
+                                       height={100}
                 src="/home/volunteer-icons.png"
                 alt="volunteer"
                 className="w-40 h-42"

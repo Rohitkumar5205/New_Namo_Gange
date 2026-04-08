@@ -5,6 +5,7 @@ import axiosClient from "@/lib/axiosClient";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { showSuccess, showError } from "@/utils/toast";
+import Image from "next/image";
 
 interface ContactFormData {
   name: string;
@@ -293,7 +294,9 @@ const Contact: React.FC = () => {
             {/* -------- CONTACT INFO CARD -------- */}
             <div className="bg-gradient-to-r from-[#4141b8] to-[#063D8E] text-white rounded p-6 md:p-8 shadow-xl text-left">
               <div className="flex items-center gap-4 mb-5">
-                <img
+                <Image
+                                      width={100}
+                                      height={100}
                   src="/logo.png"
                   alt="Namo Gange Trust"
                   className="w-18 h-18 bg-white rounded-full p-2 object-contain"
