@@ -366,75 +366,79 @@ const Career = () => {
         {jobs.map((job, index) => (
           <div
             key={index}
-            className="bg-white border border-gray-200 shadow-sm rounded-lg p-2 md:px-6 md:py-4 hover:shadow-md 
-                 transition-all flex flex-col justify-between h-full"
+            className="relative rounded-2xl p-[2px] shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full group"
+            style={{
+              background: "linear-gradient(135deg, #0C55A0, #f89a36, #DF562C)",
+            }}
           >
-            {/* Job Title */}
-            <h3 className="text-sm md:text-lg font-medium md:font-semibold text-[#0C55A0] mb-2">
-              {job?.title}
-            </h3>
-
-            {/* Job Info */}
-            <div className="text-sm text-gray-700 space-y-1 border-b pb-3">
-              <p className="flex items-center gap-2">
-                <Briefcase size={16} /> {job?.exp}
-              </p>
-
-              <p className="flex items-center gap-2">
-                <span className="ml-1">₹</span> {job?.salary}
-              </p>
-
-              <p className="flex items-center gap-2">
-                <MapPin size={16} /> {job?.location}
-              </p>
+            <div className="bg-white rounded-[14px] p-4 md:px-6 md:py-5 flex flex-col justify-between h-full w-full">
+              {/* Job Title */}
+              <h3 className="text-base md:text-lg font-bold text-[#0C55A0] mb-3 group-hover:text-[#DF562C] transition-colors">
+                {job?.title}
+              </h3>
+  
+              {/* Job Info */}
+              <div className="text-sm text-gray-700 space-y-2 border-b border-gray-100 pb-4">
+                <p className="flex items-center gap-2.5 font-medium">
+                  <Briefcase size={16} className="text-[#DF562C]" /> {job?.exp}
+                </p>
+  
+                <p className="flex items-center gap-2.5 font-medium">
+                  <span className="ml-1 font-bold text-[#DF562C]">₹</span> {job?.salary}
+                </p>
+  
+                <p className="flex items-center gap-2.5 font-medium">
+                  <MapPin size={16} className="text-[#DF562C]" /> {job?.location}
+                </p>
+              </div>
+  
+              {/* Description */}
+              <div className="mt-4 text-xs md:text-sm text-gray-600 text-justify space-y-1.5 leading-relaxed flex-1">
+                {job?.desc?.map((line, i) => (
+                  <p key={i}>• {line}</p>
+                ))}
+              </div>
+  
+              {/* BUTTON */}
+              <button
+                onClick={() => {
+                  setSelectedJob(job);
+                  setFormData((prev) => ({
+                    ...prev,
+                    role: job?.title, // 👈 auto fill role
+                  }));
+                  setOpenModal(true);
+                }}
+                className="
+                  w-full
+                  mt-4 md:mt-6
+                  py-2.5
+                  text-xs md:text-sm
+                  font-bold tracking-wider uppercase
+                  rounded-xl
+                  bg-gradient-to-r from-[#0C55A0] to-[#1e7ed3]
+                  text-white
+                  shadow-md
+                  transition-all duration-300
+                  hover:shadow-lg hover:from-[#08467c] hover:to-[#0C55A0]
+                  active:scale-[0.98]
+                "
+              >
+                Apply Now
+              </button>
             </div>
-
-            {/* Description */}
-            <div className="mt-3 text-xs md:text-sm text-gray-700 text-justify space-y-1 leading-relaxed flex-1">
-              {job?.desc?.map((line, i) => (
-                <p key={i}>• {line}</p>
-              ))}
-            </div>
-
-            {/* BUTTON */}
-            <button
-              onClick={() => {
-                setSelectedJob(job);
-                setFormData((prev) => ({
-                  ...prev,
-                  role: job?.title, // 👈 auto fill role
-                }));
-                setOpenModal(true);
-              }}
-              className="
-    w-1/2 md:w-full
-    mx-auto md:mx-0
-    mt-3 md:mt-5
-    py-1 md:py-1.5
-    text-xs md:text-sm
-    font-medium
-    rounded-md
-    bg-[#0C55A0]
-    text-white
-    shadow-sm
-    transition-all duration-300
-    hover:bg-[#08467c]
-    hover:shadow-md
-    active:scale-[0.98]
-    focus:outline-none
-    focus:ring-2 focus:ring-[#0C55A0]/40
-  "
-            >
-              Apply Now
-            </button>
           </div>
         ))}
       </div>
 
       {/* ========= POPUP MODAL ========= */}
       {openModal && (
-        <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-          <div className="bg-white w-[95%] md:w-[90%] lg:w-[90%] h-[95vh] rounded-xl shadow-xl overflow-hidden relative flex">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 p-2 md:p-6">
+          <div 
+            className="w-full max-w-5xl h-[95vh] md:h-[90vh] rounded-3xl p-[2px] shadow-[0_10px_40px_rgba(0,0,0,0.2)] relative flex"
+            style={{ background: "linear-gradient(135deg, #0C55A0, #f89a36, #DF562C)" }}
+          >
+            <div className="bg-white w-full h-full rounded-[22px] overflow-hidden relative flex">
             {/* Close Button */}
             <button
               onClick={() => setOpenModal(false)}
@@ -512,21 +516,21 @@ const Career = () => {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         {/* NAME */}
                         <div className="flex flex-col">
-                          <label className="text-sm font-medium mb-1 text-gray-700">Your Name</label>
+                          <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">Your Name</label>
                           <input
                             required
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
                             type="text"
-                            placeholder="Full Name"
-                            className="border rounded px-4 py-2 text-sm focus:ring-1 focus:ring-[#0C55A0] outline-none"
+                            placeholder="E.g. John Doe"
+                            className="w-full bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-gray-900 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/15 transition-all duration-300"
                           />
                         </div>
 
                         {/* EMAIL */}
                         <div className="flex flex-col">
-                          <label className="text-sm font-medium mb-1 text-gray-700">Email</label>
+                          <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">Email</label>
                           <div className="flex gap-2">
                             <input
                               required
@@ -535,15 +539,15 @@ const Career = () => {
                               onChange={handleChange}
                               type="email"
                               disabled={isEmailVerified}
-                              placeholder="Email Address"
-                              className={`flex-1 border rounded px-4 py-2 text-sm focus:ring-1 focus:ring-[#0C55A0] outline-none transition-all ${isEmailVerified ? "text-green-600 font-semibold italic" : "text-gray-800 placeholder:text-gray-400"}`}
+                              placeholder="E.g. john@example.com"
+                              className={`flex-1 bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/15 transition-all duration-300 ${isEmailVerified ? "text-green-700 font-semibold bg-green-50/50 border-green-400" : "text-gray-900 placeholder:text-gray-400"}`}
                             />
                             {!isEmailVerified && (
                               <button
                                 type="button"
                                 onClick={handleSendEmailOtp}
                                 disabled={emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)}
-                                className={`whitespace-nowrap px-3 py-1.5 text-[10px] font-bold rounded-md uppercase transition-all flex items-center justify-center ${(emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) ? "bg-gray-100 text-gray-400 cursor-not-allowed" : "bg-[#DF562C] text-white hover:bg-[#c54d21]"}`}
+                                className={`whitespace-nowrap px-4 py-2 text-[10px] font-bold rounded-xl uppercase transition-all flex items-center justify-center ${(emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) ? "bg-gray-100 text-gray-400 cursor-not-allowed" : "bg-[#0C55A0]/10 text-[#0C55A0] hover:bg-[#0C55A0] hover:text-white"}`}
                               >
                                 {isEmailOtpSent ? (emailTimer > 0 ? `RESEND IN ${emailTimer}S` : "RESEND OTP") : "SEND OTP"}
                               </button>
@@ -559,13 +563,13 @@ const Career = () => {
                                   placeholder="EMAIL OTP"
                                   value={emailOtp}
                                   onChange={(e) => setEmailOtp(e.target.value.replace(/[^0-9]/g, ""))}
-                                  className="w-full bg-transparent outline-none text-[#f1a06a] text-sm text-center font-bold tracking-[0.2em] placeholder:text-[#f1a06a]/50 placeholder:font-normal placeholder:tracking-normal"
+                                  className="w-full bg-[#f8faff] border border-blue-200 rounded-xl px-4 py-2.5 outline-none text-[#0C55A0] text-sm text-center font-bold tracking-[0.3em] placeholder:text-blue-300 placeholder:font-medium placeholder:tracking-normal focus:ring-2 focus:ring-blue-500/20 transition-all"
                                 />
                               </div>
                               <button
                                 type="button"
                                 onClick={handleVerifyEmailOtp}
-                                className="px-4 py-1.5 bg-[#DF562C] text-white text-[10px] font-bold rounded-md shadow-sm hover:bg-[#c54d21] active:scale-95 transition-all"
+                                className="px-5 py-2.5 bg-[#0C55A0] text-white text-[11px] tracking-wider font-bold rounded-xl shadow-md hover:bg-[#08467c] hover:shadow-lg active:scale-95 transition-all"
                               >
                                 VERIFY
                               </button>
@@ -575,7 +579,7 @@ const Career = () => {
 
                         {/* PHONE */}
                         <div className="flex flex-col">
-                          <label className="text-sm font-medium mb-1 text-gray-700">Phone Number</label>
+                          <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">Phone Number</label>
                           <div className="flex gap-2">
                             <input
                               required
@@ -586,14 +590,14 @@ const Career = () => {
                               maxLength={10}
                               disabled={isPhoneVerified}
                               placeholder="Enter mobile number"
-                              className={`flex-1 border rounded px-4 py-2 text-sm focus:ring-1 focus:ring-[#0C55A0] outline-none transition-all ${isPhoneVerified ? "text-green-600 font-semibold italic" : "text-gray-800 placeholder:text-gray-400"}`}
+                              className={`flex-1 bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/15 transition-all duration-300 ${isPhoneVerified ? "text-green-700 font-semibold bg-green-50/50 border-green-400" : "text-gray-900 placeholder:text-gray-400"}`}
                             />
                             {!isPhoneVerified && (
                               <button
                                 type="button"
                                 onClick={handleSendPhoneOtp}
                                 disabled={phoneTimer > 0 || formData.phone.length !== 10}
-                                className={`whitespace-nowrap px-3 py-1.5 text-[10px] font-bold rounded-md uppercase transition-all flex items-center justify-center ${(phoneTimer > 0 || formData.phone.length !== 10) ? "bg-gray-100 text-gray-400 cursor-not-allowed" : "bg-[#DF562C] text-white hover:bg-[#c54d21]"}`}
+                                className={`whitespace-nowrap px-4 py-2 text-[10px] font-bold rounded-xl uppercase transition-all flex items-center justify-center ${(phoneTimer > 0 || formData.phone.length !== 10) ? "bg-gray-100 text-gray-400 cursor-not-allowed" : "bg-[#0C55A0]/10 text-[#0C55A0] hover:bg-[#0C55A0] hover:text-white"}`}
                               >
                                 {isPhoneOtpSent ? (phoneTimer > 0 ? `RESEND IN ${phoneTimer}S` : "RESEND OTP") : "SEND OTP"}
                               </button>
@@ -609,13 +613,13 @@ const Career = () => {
                                   placeholder="MOBILE OTP"
                                   value={phoneOtp}
                                   onChange={(e) => setPhoneOtp(e.target.value.replace(/[^0-9]/g, ""))}
-                                  className="w-full bg-transparent outline-none text-[#f1a06a] text-sm text-center font-bold tracking-[0.2em] placeholder:text-[#f1a06a]/50 placeholder:font-normal placeholder:tracking-normal"
+                                  className="w-full bg-[#f8faff] border border-blue-200 rounded-xl px-4 py-2.5 outline-none text-[#0C55A0] text-sm text-center font-bold tracking-[0.3em] placeholder:text-blue-300 placeholder:font-medium placeholder:tracking-normal focus:ring-2 focus:ring-blue-500/20 transition-all"
                                 />
                               </div>
                               <button
                                 type="button"
                                 onClick={handleVerifyPhoneOtp}
-                                className="px-4 py-1.5 bg-[#DF562C] text-white text-[10px] font-bold rounded-md shadow-sm hover:bg-[#c54d21] active:scale-95 transition-all"
+                                className="px-5 py-2.5 bg-[#0C55A0] text-white text-[11px] tracking-wider font-bold rounded-xl shadow-md hover:bg-[#08467c] hover:shadow-lg active:scale-95 transition-all"
                               >
                                 VERIFY
                               </button>
@@ -624,7 +628,7 @@ const Career = () => {
                         </div>
                         {/* City */}
                         <div className="flex flex-col">
-                          <label className="text-sm font-medium mb-1 text-gray-700">City</label>
+                          <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">City</label>
                           <input
                             required
                             name="city"
@@ -632,12 +636,12 @@ const Career = () => {
                             onChange={handleChange}
                             type="text"
                             placeholder="City"
-                            className="border rounded px-4 py-2 text-sm focus:ring-1 focus:ring-[#0C55A0] outline-none"
+                            className="w-full bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-gray-900 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/15 transition-all duration-300"
                           />
                         </div>
                         {/* STATE */}
                         <div className="flex flex-col">
-                          <label className="text-sm font-medium mb-1 text-gray-700">State</label>
+                          <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">State</label>
                           <input
                             required
                             name="state"
@@ -645,13 +649,13 @@ const Career = () => {
                             onChange={handleChange}
                             type="text"
                             placeholder="State"
-                            className="border rounded px-4 py-2 text-sm focus:ring-1 focus:ring-[#0C55A0] outline-none"
+                            className="w-full bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-gray-900 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/15 transition-all duration-300"
                           />
                         </div>
 
                         {/* CURRENT LOCATION */}
                         <div className="flex flex-col">
-                          <label className="text-sm font-medium mb-1 text-gray-700">Current Location</label>
+                          <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">Current Location</label>
                           <input
                             required
                             name="currentLocation"
@@ -659,31 +663,31 @@ const Career = () => {
                             onChange={handleChange}
                             type="text"
                             placeholder="Current Location"
-                            className="border rounded px-4 py-2 text-sm focus:ring-1 focus:ring-[#0C55A0] outline-none"
+                            className="w-full bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-gray-900 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/15 transition-all duration-300"
                           />
                         </div>
 
                         {/* ROLE */}
                         <div className="flex flex-col md:col-span-2">
-                          <label className="text-sm font-medium mb-1 text-gray-700">Role Applying For</label>
+                          <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">Role Applying For</label>
                           <input
                             name="role"
                             value={formData.role}
                             type="text"
                             readOnly
-                            className="border rounded px-4 py-2 text-sm bg-gray-100 focus:ring-0 outline-none text-gray-500 font-medium"
+                            className="w-full bg-gray-100 border border-gray-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-gray-600 rounded-xl px-4 py-2.5 text-sm outline-none cursor-not-allowed font-medium"
                           />
                         </div>
 
                         {/* MESSAGE */}
                         <div className="flex flex-col md:col-span-2">
-                          <label className="text-sm font-medium mb-1 text-gray-700">Your Message</label>
+                          <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">Your Message</label>
                           <textarea
                             name="message"
                             value={formData.message}
                             onChange={handleChange}
                             placeholder="Write your message..."
-                            className="border rounded px-4 py-2 text-sm h-28 focus:ring-1 focus:ring-[#0C55A0] outline-none resize-none"
+                            className="w-full bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-gray-900 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/15 transition-all duration-300 h-28 resize-none"
                           />
                         </div>
                       </div>
@@ -694,7 +698,7 @@ const Career = () => {
                       <button
                         type="submit"
                         disabled={loading || !isPhoneVerified || !isEmailVerified}
-                        className="bg-[#0C55A0] hover:bg-[#08467c] text-white px-8 py-2.5 rounded shadow-md text-sm font-medium flex items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
+                        className="w-full md:w-auto bg-gradient-to-r from-[#DF562C] to-[#f89a36] hover:from-[#c54d21] hover:to-[#e6831d] text-white px-10 py-3 rounded-xl shadow-lg hover:shadow-orange-500/30 text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all duration-300 disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed active:scale-95"
                       >
                         {loading ? "Submitting..." : "Apply Now"}
                       </button>
@@ -703,6 +707,7 @@ const Career = () => {
                 </>
               )}
             </div>
+          </div>
           </div>
         </div>
       )}

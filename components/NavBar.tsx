@@ -39,7 +39,7 @@ const NAV_ITEMS: NavItem[] = [
     dropdown: [
       { label: "News Letters", href: "/communication/newsLetter" },
       { label: "Our Blogs", href: "/communication/blog" },
-      { label: "Resent Updates", href: "/communication/latestNews" },
+      { label: "Recent Updates", href: "/communication/latestNews" },
     ],
   },
   {

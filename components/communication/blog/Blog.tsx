@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Search, MessageCircle, Loader2 } from "lucide-react";
+import { Search, CalendarDays } from "lucide-react";
 import fetchClient from "@/lib/fetchClient";
 
 interface Blog {
@@ -26,7 +26,7 @@ interface SEOData {
 }
 
 const Blog = () => {
-  const itemsPerPage = 3;
+  const itemsPerPage = 12; // Increased to show more blogs in the grid
 
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
@@ -184,8 +184,8 @@ const Blog = () => {
             </div>
 
             {/* Blog Grid Skeleton */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mt-4">
-              {[1, 2, 3].map((i) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
+              {[...Array(8)].map((_, i) => (
                 <BlogSkeleton key={i} />
               ))}
             </div>
@@ -329,8 +329,8 @@ const Blog = () => {
 
         {/* ================= LOADING STATE ================= */}
         {loading && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mt-4">
-            {[1, 2, 3].map((i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
+            {[...Array(8)].map((_, i) => (
               <BlogSkeleton key={i} />
             ))}
           </div>
@@ -361,22 +361,14 @@ const Blog = () => {
 
         {/* ================= BLOG GRID ================= */}
         {!loading && filteredBlogs.length > 0 && (
-          <div
-            className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mt-4"
-
-
-
-
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
             {currentBlogs.map((blog) => (
               <div
                 key={blog._id}
-
-
-                className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col relative"
+                className="group relative bg-gray-50 rounded-xl border border-gray-100 overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-400 flex flex-col"
               >
                 {/* IMAGE */}
-                <div className="relative w-full h-48 md:h-56 overflow-hidden bg-gray-100">
+                <div className="relative w-full h-48 sm:h-56 bg-white border-b border-gray-50 overflow-hidden">
                   {!imageErrors[blog._id] ? (
                     <Image
                       src={
@@ -386,10 +378,9 @@ const Blog = () => {
                       }
                       alt={blog?.image_alt || blog.title || "Blog image"}
                       fill
-                      unoptimized
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-contain object-center transition-transform duration-700 ease-in-out group-hover:scale-101 p-1"
                       onError={() => handleImageError(blog._id)}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-gray-200">
@@ -398,39 +389,37 @@ const Blog = () => {
                       </span>
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
-
-                  <span className="absolute top-3 left-3 bg-[#DF562C] text-white text-xs font-bold px-3 py-1 rounded-full shadow-md uppercase tracking-wide">
-                    {blog.category || "Uncategorized"}
-                  </span>
                 </div>
 
                 {/* CONTENT */}
-                <div className="p-5 text-left flex flex-col flex-1">
-                  <div className="text-xs text-gray-500 flex justify-between items-center mb-3 font-medium">
-                    <span className="bg-gray-100 px-2 py-1 rounded text-gray-600">
-                      {blog.author || "Krishnayan Team"}
-                    </span>
-                    <span className="flex items-center gap-1 text-gray-400">
-                      <MessageCircle size={14} /> 0
+                <div className="p-4 md:p-5 text-left flex flex-col flex-1 bg-white relative z-10">
+                  <div className="flex items-center gap-1.5 text-[#f36b2a] text-[11px] md:text-xs font-semibold mb-2 md:mb-3 uppercase tracking-wider">
+                    <CalendarDays className="w-3.5 h-3.5" />
+                    <span>
+                      {new Date(blog.createdAt || "").toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
                     </span>
                   </div>
 
-                  <h2 className="text-gray-900 font-normal text-base md:text-lg mb-2 line-clamp-2 group-hover:text-[#0C55A0] transition-colors">
+                  <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-[#1e7ed3] transition-colors duration-300 leading-snug">
                     {blog.title || "Untitled"}
-                  </h2>
+                  </h3>
 
-                  <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 mb-4 flex-1 text-justify">
+                  <p className="text-gray-600 text-justify text-xs md:text-sm line-clamp-3 leading-relaxed mb-4">
                     {stripHtmlTags(blog.description) ||
                       "No description available."}
                   </p>
 
                   <Link
                     href={`/communication/blog/${blog.slug || "#"}`}
-                    className="mt-auto inline-block"
+                    className="mt-auto pt-1 border-t border-gray-100 flex items-center justify-between group/link"
+                    aria-label={`Read more about ${blog.title}`}
                   >
-                    <span className="text-sm font-semibold text-[#DF562C] hover:text-[#0C55A0] flex items-center gap-1 transition-colors group/link">
-                      READ MORE...
+                    <span className="text-xs md:text-sm font-semibold text-[#0C55A0] group-hover/link:text-[#f36b2a] transition-colors duration-300">
+                      Read More..
                     </span>
                   </Link>
                 </div>
