@@ -6,14 +6,13 @@ export function generateStaticParams() {
   return [{}];
 }
 
-const CLIENT_URL = process.env.NEXT_PUBLIC_CLIENT_URL || "http://localhost:3000";
+const CLIENT_URL = process.env.NEXT_PUBLIC_CLIENT_URL || "https://panchkarmaa.in";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/auth/", "/api/"], // Protecting sensitive paths
     },
     sitemap: `${CLIENT_URL}/sitemap.xml`,
   };

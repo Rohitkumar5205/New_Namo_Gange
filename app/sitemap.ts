@@ -10,7 +10,7 @@ export function generateStaticParams() {
 
 // Backend base URL for slug fetching
 const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api/v1";
-const CLIENT_URL = process.env.NEXT_PUBLIC_CLIENT_URL || "http://localhost:3000";
+const CLIENT_URL = process.env.NEXT_PUBLIC_CLIENT_URL || "https://panchkarmaa.in";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 1. Define Default Static Routes (Fallback)

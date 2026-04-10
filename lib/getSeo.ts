@@ -30,21 +30,21 @@ export const cleanHtmlString = (htmlStr?: string) => {
     .replace(/<a\b[^>]*href="([^"]*)"[^>]*>.*?<\/a>/gi, '$1');
 };
 
-export const extractSchemaScript = (htmlStr?: string) => {
-  if (!htmlStr) return "";
+export const extractSchemaScript = (htmlStr?: string): string[] => {
+  if (!htmlStr) return [];
   
   // First un-escape any HTML entities in case the script tag itself was escaped
   const cleaned = cleanHtmlString(htmlStr);
   
   // Match only the content inside <script> tags for application/ld+json
   const scriptRegex = /<script\b[^>]*>([\s\S]*?)<\/script>/gi;
-  const scripts = [];
+  const scripts: string[] = [];
   let match;
   while ((match = scriptRegex.exec(cleaned)) !== null) {
-    scripts.push(match[1]);
+    scripts.push(match[1].trim());
   }
   
-  return scripts.length > 0 ? scripts.join('\n') : "";
+  return scripts;
 };
 
 export const parseOpenGraph = (htmlStr?: string) => {

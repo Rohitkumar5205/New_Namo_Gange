@@ -36,9 +36,24 @@ const page = async () => {
   const seo = await getSeo("/event/upcoming");
   return (
     <div>
+      {/* Header SEO Code & Schema */}
+      {seo?.seo_header_code && (
+        <div dangerouslySetInnerHTML={{ __html: cleanHtmlString(seo.seo_header_code) }} />
+      )}
+      {seo?.schemaMarkup &&
+        extractSchemaScript(seo.schemaMarkup).map((script, index) => (
+          <script
+            key={index}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: script }}
+          />
+        ))}
+
       <UpcomingEvent />
-      {seo?.schemaMarkup && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: extractSchemaScript(seo.schemaMarkup) }} />
+
+      {/* Footer SEO Code */}
+      {seo?.seo_footer_code && (
+        <div dangerouslySetInnerHTML={{ __html: cleanHtmlString(seo.seo_footer_code) }} />
       )}
     </div>
   );
