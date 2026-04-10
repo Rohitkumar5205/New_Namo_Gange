@@ -10,7 +10,7 @@ export async function generateStaticParams() {
       slug: objective.slug,
     }));
   } catch (error) {
-    console.error("Error generating static params for blog:", error);
+    console.warn("[Build] Warning: Could not fetch static params for blog updates. Proceeding with dynamic rendering.");
     return [];
   }
 }

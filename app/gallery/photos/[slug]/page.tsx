@@ -14,7 +14,7 @@ export async function generateStaticParams() {
         slug: photo.slug,
       }));
   } catch (error) {
-    console.error("Error generating static params for gallery photos:", error);
+    console.warn("[Build] Warning: Could not fetch static params for gallery photos. Proceeding with dynamic rendering.");
     return [];
   }
 }

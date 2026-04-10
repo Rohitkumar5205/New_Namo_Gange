@@ -107,7 +107,7 @@ export default function Footer() {
 
           <ul className="space-y-4 text-sm">
             <li className="flex items-start gap-1">
-              <MapPin className="w-5 h-5 text-[#DF562C] mt-1" />
+              <MapPin className="w-12 h-12 text-[#DF562C] mt-1" />
               <span className="text-gray-400 leading-relaxed text-justify">
                 {socialData?.address || ""}
               </span>

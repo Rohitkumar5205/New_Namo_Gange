@@ -262,8 +262,8 @@ const Contact: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="relative bg-gray-50 py-1.5 md:py-1.5 px-2 md:px-12  lg:px-12  bg-white overflow-hidden">
-        <div className="w-full  text-center">
+      <div className="relative bg-gray-50 py-8 md:py-12 px-4 md:px-12 lg:px-12 overflow-hidden">
+        <div className="w-full text-center">
           <div>
             <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
               Let’s{" "}
@@ -289,97 +289,126 @@ const Contact: React.FC = () => {
           </p>
 
           {/* ================= CONTACT SECTION ================= */}
-          <div className="w-full mt-2 md:mt-5 grid grid-cols-1 lg:grid-cols-2 gap-2 g md:gap-10">
+          <div className="w-full mt-8 md:mt-10 mb-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 max-w-7xl mx-auto">
             {/* -------- CONTACT INFO CARD -------- */}
-            <div className="bg-gradient-to-r from-[#4141b8] to-[#063D8E] text-white rounded p-6 md:p-8 shadow-xl text-left">
-              <div className="flex items-center gap-4 mb-5">
-                <Image
-                  width={100}
-                  height={100}
-                  src="/logo.png"
-                  alt="Namo Gange Trust"
-                  className="w-18 h-18 bg-white rounded-full p-2 object-contain"
-                />
+            <div className="lg:col-span-5 relative bg-gradient-to-br from-[#0C55A0] to-[#063D8E] text-white rounded-3xl p-8 md:p-10 shadow-2xl text-left overflow-hidden flex flex-col justify-center border border-blue-800">
+              {/* Decorative Background Elements */}
+              <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 rounded-full bg-white/10 blur-3xl pointer-events-none"></div>
+              <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-48 h-48 rounded-full bg-[#DF562C]/30 blur-3xl pointer-events-none"></div>
+
+              <div className="relative z-10 flex items-center gap-5 mb-10">
+                <div className="bg-white rounded-full p-2.5 shadow-xl">
+                  <Image
+                    width={70}
+                    height={70}
+                    src="/logo.png"
+                    alt="Namo Gange Trust"
+                    className="w-14 h-14 object-contain"
+                  />
+                </div>
                 <div>
-                  <h3 className="text-lg font-medium md:text-xl md:font-semibold">
+                  <h3 className="text-xl md:text-2xl font-bold tracking-wide">
                     Namo Gange Trust
                   </h3>
-                  <p className="text-sm opacity-90">
+                  <p className="text-sm md:text-base text-blue-200 mt-1 font-medium tracking-wide">
                     Service • Compassion • Commitment
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 mb-4">
-                <Phone className="w-5 h-5 mt-1 opacity-90" />
-                <div>
-                  <p className="text-[15px] md:text-lg font-normal md:font-medium">
-                    Phone
-                  </p>
-                  <p className="text-sm opacity-90">
-                    {socialData?.callNumber || ""}
-                  </p>
-                  {socialData?.callNumber2 ? <p className="text-sm opacity-90">
-                    {socialData?.callNumber2 || ""}
-                  </p> : ""}
+              <div className="relative z-10 space-y-8">
+                <div className="flex items-start gap-4 group">
+                  <div className="bg-white/10 p-3 rounded-2xl group-hover:bg-[#DF562C] shadow-sm transition-colors duration-400">
+                    <Phone className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs md:text-sm text-blue-200 font-medium mb-1 tracking-wider uppercase">
+                      Call Us
+                    </p>
+                    <p className="text-base md:text-lg font-semibold">
+                      {socialData?.callNumber || ""}
+                    </p>
+                    {socialData?.callNumber2 && (
+                      <p className="text-base md:text-lg font-semibold mt-0.5">
+                        {socialData?.callNumber2 || ""}
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-start gap-3 mb-4">
-                <Mail className="w-5 h-5 mt-1 opacity-90" />
-                <div>
-                  <p className="text-[15px] md:text-lg font-normal md:font-medium">
-                    Email
-                  </p>
-                  <p className="text-sm opacity-90">
-                    {socialData?.mail || ""}
-                  </p>
-                  {socialData?.mail2 ? <p className="text-sm opacity-90">
-                    {socialData?.mail2 || ""}
-                  </p> : ""}
+                <div className="flex items-start gap-4 group">
+                  <div className="bg-white/10 p-3 rounded-2xl group-hover:bg-[#DF562C] shadow-sm transition-colors duration-400">
+                    <Mail className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs md:text-sm text-blue-200 font-medium mb-1 tracking-wider uppercase">
+                      Email Us
+                    </p>
+                    <p className="text-base md:text-lg font-semibold">
+                      {socialData?.mail || ""}
+                    </p>
+                    {socialData?.mail2 && (
+                      <p className="text-base md:text-lg font-semibold mt-0.5">
+                        {socialData?.mail2 || ""}
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 mt-1 opacity-90" />
-                <div>
-                  <p className="text-[15px] md:text-lg font-normal md:font-medium">
-                    Office Address
-                  </p>
-                  <p className="text-sm opacity-90 leading-relaxed">
-                    {socialData?.address || ""}
-                  </p>
+                <div className="flex items-start gap-4 group">
+                  <div className="bg-white/10 p-3 rounded-2xl group-hover:bg-[#DF562C] shadow-sm transition-colors duration-400">
+                    <MapPin className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs md:text-sm text-blue-200 font-medium mb-1 tracking-wider uppercase">
+                      Visit Us
+                    </p>
+                    <p className="text-base font-medium leading-relaxed max-w-xs pr-4">
+                      {socialData?.address || ""}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* -------- FORM -------- */}
+            <div
+            className="lg:col-span-7 rounded-3xl p-[2px] shadow-2xl shadow-[#0C55A0]/15 transition-all duration-300"
+            style={{
+              background: "linear-gradient(135deg, #0C55A0, #f89a36, #DF562C)",
+            }}
+          >
             <form
               onSubmit={handleSubmit}
-              className="bg-white/80 backdrop-blur-lg border border-white/40 shadow-xl rounded p-8 flex flex-col justify-between"
+              className="w-full h-full bg-white rounded-[22px] p-8 md:p-10 flex flex-col justify-between relative z-10"
             >
-              <h3 className="text-lg md:text-xl font-normal md:font-medium text-gray-800 mb-4">
-                Send Us a Message
-              </h3>
+              <div className="mb-6 md:mb-8 text-left">
+                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 tracking-tight">
+                  Send Us a Message
+                </h3>
+                <p className="text-gray-500 text-sm">
+                  We'd love to hear from you. Please fill out the form below.
+                </p>
+              </div>
 
-              <div className="space-y-4">
-                <div className="relative">
-                  <User className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
+              <div className="space-y-5">
+                <div className="relative group">
+                  <User className="absolute left-4 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-[#0C55A0] transition-colors" />
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Your Full Name"
-                    className="w-full border border-gray-300 pl-10 pr-3 py-2 text-sm outline-none"
+                    className="w-full bg-white border border-gray-400 shadow-sm text-gray-800 rounded-xl pl-12 pr-4 py-3.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/10 transition-all duration-300"
                     required
                   />
                 </div>
 
                 <div>
-                  <div className="relative">
-                    <div className="flex gap-2">
-                      <Mail className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
+                  <div className="relative group">
+                    <div className="relative flex items-center">
+                      <Mail className="absolute left-4 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-[#0C55A0] transition-colors z-10" />
                       <input
                         type="email"
                         name="email"
@@ -387,47 +416,44 @@ const Contact: React.FC = () => {
                         onChange={handleChange}
                         placeholder="Email Address"
                         disabled={isEmailVerified}
-                        className={`w-full border border-gray-300 pl-10 pr-3 py-2 text-sm outline-none ${isEmailVerified ? "text-green-600 font-semibold italic" : "text-gray-800 placeholder:text-gray-400"}`}
+                        className={`w-full bg-white border border-gray-400 shadow-sm rounded-xl pl-12 pr-28 py-3.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/10 transition-all duration-300 ${isEmailVerified ? "text-green-700 font-semibold bg-green-50 border-green-400" : "text-gray-800"}`}
                         required
                       />
-                      {!isEmailVerified && (
-                        <button
-                          type="button"
-                          onClick={handleSendEmailOtp}
-                          disabled={emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)}
-                          className={`whitespace-nowrap px-3 py-1.5 text-[10px] font-bold rounded-md uppercase transition-all flex items-center justify-center ${(emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) ? "bg-[#edf3ff] text-blue-300 cursor-not-allowed" : "bg-[#DF562C] text-white hover:bg-[#c54d21]"}`}
-                        >
-                          {isEmailOtpSent ? (emailTimer > 0 ? `RESEND IN ${emailTimer}S` : "RESEND OTP") : "SEND OTP"}
-                        </button>
-                      )}
-                      {isEmailVerified && (
-                        <div className="flex items-center text-green-600 text-[10px] font-bold px-2 whitespace-nowrap">
-                          VERIFIED ✓
-                        </div>
-                      )}
+                      <div className="absolute right-2">
+                        {!isEmailVerified ? (
+                          <button
+                            type="button"
+                            onClick={handleSendEmailOtp}
+                            disabled={emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)}
+                            className={`px-3 py-2 text-[10px] font-bold rounded-lg uppercase tracking-wider transition-all flex items-center justify-center ${
+                              (emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "bg-[#0C55A0]/10 text-[#0C55A0] hover:bg-[#0C55A0] hover:text-white"
+                            }`}
+                          >
+                            {isEmailOtpSent ? (emailTimer > 0 ? `IN ${emailTimer}S` : "RESEND") : "SEND OTP"}
+                          </button>
+                        ) : (
+                          <div className="flex items-center px-3 text-green-600 text-[11px] font-bold tracking-wider">
+                            VERIFIED ✓
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
 
                   {isEmailOtpSent && !isEmailVerified && (
-                    <div
-
-
-                      className="mt-2 flex gap-2 items-center"
-                    >
-                      <div className="flex-1 bg-[#fff9f4] border border-[#fca5a5]/50 px-4 py-2 rounded-sm flex items-center">
-                        <input
-                          type="text"
-                          maxLength={6}
-                          placeholder="EMAIL OTP"
-                          value={emailOtp}
-                          onChange={(e) => setEmailOtp(e.target.value.replace(/[^0-9]/g, ""))}
-                          className="w-full bg-transparent outline-none text-[#f1a06a] text-sm text-center font-bold tracking-[0.2em] placeholder:text-[#f1a06a]/50 placeholder:font-normal placeholder:tracking-normal"
-                        />
-                      </div>
+                    <div className="mt-3 flex gap-3 transform transition-all duration-300 ease-in-out">
+                      <input
+                        type="text"
+                        maxLength={6}
+                        placeholder="ENTER EMAIL OTP"
+                        value={emailOtp}
+                        onChange={(e) => setEmailOtp(e.target.value.replace(/[^0-9]/g, ""))}
+                        className="w-full bg-blue-50/50 border border-blue-400 shadow-sm rounded-xl px-4 py-3 outline-none text-[#0C55A0] text-sm text-center font-bold tracking-[0.3em] placeholder:text-blue-300 placeholder:font-medium placeholder:tracking-normal focus:ring-2 focus:ring-blue-500/20 transition-all"
+                      />
                       <button
                         type="button"
                         onClick={handleVerifyEmailOtp}
-                        className="px-4 py-1.5 bg-[#DF562C] text-white text-[10px] font-bold rounded-md shadow-sm hover:bg-[#c54d21] active:scale-95 transition-all"
+                        className="px-6 py-3 bg-[#0C55A0] text-white text-[11px] tracking-wider font-bold rounded-xl shadow-md hover:bg-[#08467c] hover:shadow-lg active:scale-95 transition-all"
                       >
                         VERIFY
                       </button>
@@ -436,9 +462,9 @@ const Contact: React.FC = () => {
                 </div>
 
                 <div>
-                  <div className="relative">
-                    <div className="flex gap-2">
-                      <Phone className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
+                  <div className="relative group">
+                    <div className="relative flex items-center">
+                      <Phone className="absolute left-4 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-[#0C55A0] transition-colors z-10" />
                       <input
                         type="tel"
                         name="phone"
@@ -447,47 +473,44 @@ const Contact: React.FC = () => {
                         placeholder="Phone Number"
                         disabled={isPhoneVerified}
                         maxLength={10}
-                        className={`w-full border border-gray-300 pl-10 pr-3 py-2 text-sm outline-none ${isPhoneVerified ? "text-green-600 font-semibold italic" : "text-gray-800 placeholder:text-gray-400"}`}
+                        className={`w-full bg-white border border-gray-400 shadow-sm rounded-xl pl-12 pr-28 py-3.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/10 transition-all duration-300 ${isPhoneVerified ? "text-green-700 font-semibold bg-green-50 border-green-400" : "text-gray-800"}`}
                         required
                       />
-                      {!isPhoneVerified && (
-                        <button
-                          type="button"
-                          onClick={handleSendPhoneOtp}
-                          disabled={phoneTimer > 0 || formData.phone.length !== 10}
-                          className={`whitespace-nowrap px-3 py-1.5 text-[10px] font-bold rounded-md uppercase transition-all flex items-center justify-center ${(phoneTimer > 0 || formData.phone.length !== 10) ? "bg-[#edf3ff] text-blue-300 cursor-not-allowed" : "bg-[#DF562C] text-white hover:bg-[#c54d21]"}`}
-                        >
-                          {isPhoneOtpSent ? (phoneTimer > 0 ? `RESEND IN ${phoneTimer}S` : "RESEND OTP") : "SEND OTP"}
-                        </button>
-                      )}
-                      {isPhoneVerified && (
-                        <div className="flex items-center text-green-600 text-[10px] font-bold px-2 whitespace-nowrap">
-                          VERIFIED ✓
-                        </div>
-                      )}
+                      <div className="absolute right-2">
+                        {!isPhoneVerified ? (
+                          <button
+                            type="button"
+                            onClick={handleSendPhoneOtp}
+                            disabled={phoneTimer > 0 || formData.phone.length !== 10}
+                            className={`px-3 py-2 text-[10px] font-bold rounded-lg uppercase tracking-wider transition-all flex items-center justify-center ${
+                              (phoneTimer > 0 || formData.phone.length !== 10) ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "bg-[#0C55A0]/10 text-[#0C55A0] hover:bg-[#0C55A0] hover:text-white"
+                            }`}
+                          >
+                            {isPhoneOtpSent ? (phoneTimer > 0 ? `IN ${phoneTimer}S` : "RESEND") : "SEND OTP"}
+                          </button>
+                        ) : (
+                          <div className="flex items-center px-3 text-green-600 text-[11px] font-bold tracking-wider">
+                            VERIFIED ✓
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
 
                   {isPhoneOtpSent && !isPhoneVerified && (
-                    <div
-
-
-                      className="mt-2 flex gap-2 items-center"
-                    >
-                      <div className="flex-1 bg-[#fff9f4] border border-[#fca5a5]/50 px-4 py-2 rounded-sm flex items-center">
-                        <input
-                          type="text"
-                          maxLength={6}
-                          placeholder="MOBILE OTP"
-                          value={phoneOtp}
-                          onChange={(e) => setPhoneOtp(e.target.value.replace(/[^0-9]/g, ""))}
-                          className="w-full bg-transparent outline-none text-[#f1a06a] text-sm text-center font-bold tracking-[0.2em] placeholder:text-[#f1a06a]/50 placeholder:font-normal placeholder:tracking-normal"
-                        />
-                      </div>
+                    <div className="mt-3 flex gap-3 transform transition-all duration-300 ease-in-out">
+                      <input
+                        type="text"
+                        maxLength={6}
+                        placeholder="ENTER MOBILE OTP"
+                        value={phoneOtp}
+                        onChange={(e) => setPhoneOtp(e.target.value.replace(/[^0-9]/g, ""))}
+                        className="w-full bg-blue-50/50 border border-blue-300 shadow-sm rounded-xl px-4 py-3 outline-none text-[#0C55A0] text-sm text-center font-bold tracking-[0.3em] placeholder:text-blue-300 placeholder:font-medium placeholder:tracking-normal focus:ring-2 focus:ring-blue-500/20 transition-all"
+                      />
                       <button
                         type="button"
                         onClick={handleVerifyPhoneOtp}
-                        className="px-4 py-1.5 bg-[#DF562C] text-white text-[10px] font-bold rounded-md shadow-sm hover:bg-[#c54d21] active:scale-95 transition-all"
+                        className="px-6 py-3 bg-[#0C55A0] text-white text-[11px] tracking-wider font-bold rounded-xl shadow-md hover:bg-[#08467c] hover:shadow-lg active:scale-95 transition-all"
                       >
                         VERIFY
                       </button>
@@ -495,15 +518,15 @@ const Contact: React.FC = () => {
                   )}
                 </div>
 
-                <div className="relative">
-                  <MessageSquare className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
+                <div className="relative group">
+                  <MessageSquare className="absolute left-4 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-[#0C55A0] transition-colors" />
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Write your message..."
                     rows={4}
-                    className="w-full border border-gray-300 pl-10 pr-3 py-2 text-sm outline-none resize-none"
+                    className="w-full bg-white border border-gray-400 shadow-sm text-gray-800 rounded-xl pl-12 pr-4 py-3.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/10 transition-all duration-300 resize-none"
                     required
                   />
                 </div>
@@ -512,12 +535,25 @@ const Contact: React.FC = () => {
               <button
                 type="submit"
                 disabled={loading || !isPhoneVerified || !isEmailVerified}
-                className="mt-6 flex items-center justify-center gap-2 bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] text-white font-semibold py-2 hover:opacity-90 transition-all duration-300 shadow-md disabled:opacity-40 disabled:cursor-not-allowed uppercase tracking-wider"
+                className="mt-8 w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#DF562C] to-[#f89a36] hover:from-[#c54d21] hover:to-[#e6831d] text-white font-bold py-3.5 rounded-xl shadow-lg hover:shadow-orange-500/30 transition-all duration-300 uppercase tracking-widest disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed"
               >
-                <Send className="w-4 h-4" />
-                {loading ? "Sending..." : "Submit Enquiry"}
+                {loading ? (
+                  <span className="flex items-center gap-2">
+                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Sending...
+                  </span>
+                ) : (
+                  <>
+                    <Send className="w-5 h-5" />
+                    Submit Enquiry
+                  </>
+                )}
               </button>
             </form>
+            </div>
           </div>
 
           {/* MAP */}

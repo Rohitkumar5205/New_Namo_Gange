@@ -4,14 +4,7 @@ import Image from "next/image";
 import { Play, Users, Gift } from "lucide-react";
 import Link from "next/link";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  show: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, delay: i * 0.18, ease: easeOut },
-  }),
-};
+
 
 export default function SpecialPage() {
   return (

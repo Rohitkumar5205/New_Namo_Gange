@@ -56,7 +56,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       routesToUse = staticRoutes;
     }
   } catch (error) {
-    console.error("Error fetching SEO routes for sitemap:", error);
+    console.warn("[Build] Warning: Could not fetch SEO routes for sitemap. Using default static routes.");
     routesToUse = staticRoutes;
   }
 

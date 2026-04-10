@@ -47,7 +47,7 @@ const NewsUpdate = () => {
               new Date(b.createdAt || "").getTime() -
               new Date(a.createdAt || "").getTime(),
           )
-          .slice(0, 3)
+          .slice(0, 4)
           .map((item) => {
             let description = item.description || "";
             const decoded = parser.parseFromString(description, "text/html");
@@ -126,8 +126,8 @@ const NewsUpdate = () => {
 
         {/* Loading */}
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(3)].map((_, i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[...Array(4)].map((_, i) => (
               <div
                 key={i}
                 className="bg-white rounded-xl shadow-md p-4 animate-pulse"
@@ -145,7 +145,7 @@ const NewsUpdate = () => {
           </p>
         ) : (
           <div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
 
 
 
@@ -156,11 +156,11 @@ const NewsUpdate = () => {
                 key={item.id}
 
 
-                className="group relative bg-white rounded-xl border border-gray-100 overflow-hidden shadow-md 
+                className="group relative bg-gray-50 rounded-xl border border-gray-100 overflow-hidden shadow-xl
                 hover:shadow-2xl transition-shadow duration-400 flex flex-col"
               >
                 {/* Image */}
-                <div className="relative overflow-hidden">
+                <div className="relative w-full h-48 sm:h-56 bg-white border-b border-gray-50 overflow-hidden">
                   <Image
                     src={
                       item.image?.startsWith("http")
@@ -168,21 +168,20 @@ const NewsUpdate = () => {
                         : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${item.image}`
                     }
                     alt={item.image_alt || item.title}
-                    width={600}
-                    height={400}
-                    className="w-full h-48 object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-contain object-center transition-transform duration-700 ease-in-out group-hover:scale-101 p-1"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
                 </div>
 
                 {/* Content */}
-                <div className="p-5 text-left flex flex-col flex-1">
-                  <div className="flex items-center gap-2 text-[#f36b2a] text-xs md:text-sm lg:text-sm mb-2">
-                    <CalendarDays className="w-4 h-4" />
+                <div className="p-4 md:p-5 text-left flex flex-col flex-1 bg-white relative z-10">
+                  <div className="flex items-center gap-1.5 text-[#f36b2a] text-[11px] md:text-xs font-semibold mb-2 md:mb-3 uppercase tracking-wider">
+                    <CalendarDays className="w-3.5 h-3.5" />
                     <span>{item.date}</span>
                   </div>
 
-                  <h3 className="text-sm md:text-lg lg:text-lg font-medium text-gray-900 mb-2 line-clamp-2 hover:text-[#1e7ed3] transition-colors duration-300">
+                  <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-[#1e7ed3] transition-colors duration-300 leading-snug">
                     {item.title}
                   </h3>
 
@@ -192,12 +191,13 @@ const NewsUpdate = () => {
 
                   <Link
                     href={`/communication/blog/${item?.slug || "#"}`}
-                    className="mt-auto pt-2 border-t border-gray-100 text-right block"
+                    className="mt-auto pt-1 border-t border-gray-100 flex items-center justify-between group/link"
                     aria-label={`Read more about ${item.title}`}
                   >
-                    <span className="text-sm font-medium text-[#0C55A0] group-hover:text-[#f36b2a] transition-colors duration-300">
-                      Read More...
+                    <span className="text-xs md:text-sm font-semibold text-[#0C55A0] group-hover/link:text-[#f36b2a] transition-colors duration-300">
+                      Read More..
                     </span>
+                 
                   </Link>
                 </div>
               </div>
@@ -205,27 +205,6 @@ const NewsUpdate = () => {
           </div>
         )}
 
-        {/* View More Button */}
-        {/* {blogs.length > 0 && !loading && (
-          <div
-
-
-
-
-            className="flex justify-center mt-10 md:mt-12"
-          >
-            <Link href="/communication/blog">
-              <button
-                className="relative overflow-hidden px-6 md:px-8 py-2 md:py-2.5 rounded text-sm md:text-base text-white font-medium
-                bg-gradient-to-r from-[#0C55A0] to-[#1e7ed3] 
-                hover:from-[#08467c] hover:to-[#1562aa]
-                hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-              >
-                View More →
-              </button>
-            </Link>
-          </div>
-        )} */}
       </div>
     </section>
   );
