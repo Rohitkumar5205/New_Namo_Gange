@@ -27,7 +27,7 @@ const LoadingSpinner = () => (
 export default function PhotoSlugClient({ slug }: { slug: string }) {
   const [data, setData] = useState<GalleryItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [seoData, setSeoData] = useState<SEOData | null>(null);
   const [categoryNotFound, setCategoryNotFound] = useState(false);
 
@@ -121,6 +121,44 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
     fetchData();
     return () => { isMounted = false; };
   }, [slug]);
+
+  // --- LIGHTBOX SCROLL LOCK & KEYBOARD NAV ---
+  const handleNext = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (selectedIndex !== null && data.length > 0) {
+      setSelectedIndex((selectedIndex + 1) % data.length);
+    }
+  };
+
+  const handlePrev = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (selectedIndex !== null && data.length > 0) {
+      setSelectedIndex((selectedIndex - 1 + data.length) % data.length);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedIndex !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [selectedIndex]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedIndex === null) return;
+      if (e.key === "Escape") setSelectedIndex(null);
+      if (e.key === "ArrowRight") handleNext();
+      if (e.key === "ArrowLeft") handlePrev();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedIndex, data]);
+
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -205,24 +243,17 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
           </p>
         )}
 
-        <div
-          className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
-
-
-
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 mt-6">
           {data.map((item, idx) => (
             <div
               key={item._id}
-
-
-              onClick={() => setSelected(item.image)}
-              className="cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white border border-gray-100 group relative"
+              onClick={() => setSelectedIndex(idx)}
+              className="cursor-pointer overflow-hidden rounded-3xl shadow-sm hover:shadow-xl transition-all duration-500 bg-white border border-gray-100 group relative"
             >
               {/* Shine Effect */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-white/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-10" />
 
-              <div className="relative w-full aspect-square overflow-hidden bg-gray-100">
+              <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-50 flex items-center justify-center p-2 rounded-3xl">
                 {item.image ? (
                   <Image
                     src={item.image}
@@ -231,15 +262,17 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
                     unoptimized
                     priority={idx < 8}
                     sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="object-cover p-2 md:p-3 transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-105"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-gray-300">
-                    <span className="text-[10px] uppercase font-bold">No Image</span>
+                    <span className="text-xs uppercase font-medium tracking-widest">No Image</span>
                   </div>
                 )}
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <span className="text-white bg-black/40 backdrop-blur-md border border-white/30 px-4 py-1.5 rounded-full text-sm font-medium tracking-wide">
+
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center z-20">
+                  <span className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500 text-white bg-black/30 backdrop-blur-md border border-white/20 px-6 py-2 rounded-full text-sm font-medium tracking-wide shadow-lg">
                     View Image
                   </span>
                 </div>
@@ -249,46 +282,76 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
         </div>
       </div>
 
-      {/* ===== LIGHTBOX ===== */}
-      <>
-        {selected && (
-          <div
-
-
-
-
-            className="fixed inset-0 bg-black/95 flex items-center justify-center z-50 backdrop-blur-sm"
-            onClick={() => setSelected(null)}
-          >
+      {/* ===== PROFESSIONAL LIGHTBOX ===== */}
+      {selectedIndex !== null && data[selectedIndex] && (
+        <div
+          className="fixed inset-0 bg-black/95 flex items-center justify-center z-[9999] backdrop-blur-xl"
+          onClick={() => setSelectedIndex(null)}
+        >
+          {/* Top Bar with Counter & Close */}
+          <div className="absolute top-0 left-0 w-full p-4 md:p-6 flex justify-between items-center z-50">
+            <div className="text-white/80 font-medium tracking-widest text-sm bg-black/50 px-4 py-1.5 rounded-full border border-white/10 backdrop-blur-md">
+              {selectedIndex + 1} / {data.length}
+            </div>
             <button
-
-
-
-
-              className="absolute top-6 right-6 text-white/80 hover:text-[#DF562C] text-4xl transition-colors z-50"
-              onClick={() => setSelected(null)}
+              className="w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-[#DF562C] hover:scale-110 text-white rounded-full transition-all duration-300 backdrop-blur-md shadow-lg"
+              onClick={(e) => { e.stopPropagation(); setSelectedIndex(null); }}
+              aria-label="Close"
             >
-              ✕
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </button>
+          </div>
 
-            <div
+          {/* Previous Button */}
+          <button
+            className="absolute left-2 md:left-6 w-12 h-12 md:w-16 md:h-16 flex items-center justify-center bg-white/10 hover:bg-white/20 hover:scale-110 border border-white/10 text-white rounded-full transition-all duration-300 z-50 backdrop-blur-md shadow-lg"
+            onClick={handlePrev}
+            aria-label="Previous"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
 
+          {/* Next Button */}
+          <button
+            className="absolute right-2 md:right-6 w-12 h-12 md:w-16 md:h-16 flex items-center justify-center bg-white/10 hover:bg-white/20 hover:scale-110 border border-white/10 text-white rounded-full transition-all duration-300 z-50 backdrop-blur-md shadow-lg"
+            onClick={handleNext}
+            aria-label="Next"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
 
-
-
-              className="relative w-[90vw] max-w-6xl h-[85vh]"
-              onClick={(e) => e.stopPropagation()}
-            >
+          {/* Image Container */}
+          <div
+            className="relative w-full h-full p-4 sm:p-12 md:p-20 flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="relative w-full h-full max-w-7xl max-h-[85vh]">
               <Image
-                src={selected}
-                alt="Selected"
+                src={data[selectedIndex].image}
+                alt={data[selectedIndex].title || "Gallery Image"}
                 fill
+                unoptimized
                 className="object-contain drop-shadow-2xl"
               />
             </div>
+
+            {/* Optional Title/Caption Below Image */}
+            {data[selectedIndex].title && data[selectedIndex].title.trim() !== "" && data[selectedIndex].title.toLowerCase() !== "test" && data[selectedIndex].title.toLowerCase() !== "test2" && (
+              <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 p-3 z-50">
+                <span className="text-white text-sm md:text-base font-medium px-6 py-2 bg-black/60 rounded-full backdrop-blur-xl border border-white/10 shadow-2xl tracking-wide max-w-xl text-center inline-block">
+                  {data[selectedIndex].title}
+                </span>
+              </div>
+            )}
           </div>
-        )}
-      </>
+        </div>
+      )}
     </section>
   );
 }
